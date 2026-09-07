@@ -387,7 +387,8 @@
 .footer__stack li + li { margin-top: 18px; }
 .footer .dot { background: var(--footer-ink); }
 .footer__about { position: absolute; left: -1px; top: 20px; width: 308px; font: 400 10px/12px var(--font-body); text-box-trim: trim-both; text-box-edge: cap alphabetic; }
-.footer__brand { position: absolute; left: 0; top: 1616px; width: 1280px; height: 126px; opacity: .1; }
+.footer__brand { position: absolute; left: 0; top: 1616px; width: 1280px; height: 126px; }
+.footer__brand img { opacity: .1; }
 .footer__mark { position: absolute; left: 0; top: 0; }
 .footer__word { position: absolute; left: 648px; top: 0; }
 .footer__legal { position: absolute; left: 0; top: 1762px; width: 1280px; }
