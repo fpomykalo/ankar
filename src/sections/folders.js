@@ -1,13 +1,15 @@
 import { gsap } from '../lib/scroll.js';
 import { industries, people, quotes } from '../data/content.js';
 
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const LOGO_SIZES = {
   palantir: [92, 22], helsing: [97, 23], nlo: [55, 27], gsk: [70, 21], 'astra-zeneca': [142, 36],
   loreal: [122, 22], valeo: [84, 37], antheros: [122, 25],
 };
 const logoImg = (name) => {
   const [w, h] = LOGO_SIZES[name];
-  return `<img src="/assets/svg/logos/${name}-white.svg" width="${w}" height="${h}" alt="${name}" />`;
+  return `<img src="${BASE}/assets/svg/logos/${name}-white.svg" width="${w}" height="${h}" alt="${name}" />`;
 };
 const shade = () => '<div class="fcard__shade"></div><div class="fcard__grad"></div><div class="fcard__grad-bottom"></div><div class="noise"></div>';
 const label = (t) => `<div class="tab-label"><span class="tab-label__text">${t}</span><span class="tab-label__dot"></span></div>`;
