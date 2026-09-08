@@ -60,7 +60,7 @@ export function initBios() {
 
   track.innerHTML = people.map((c, i) => `
     <article class="fcard folder${i === 0 ? ' is-open' : ''}">
-      <img class="fcard__img" src="${c.image}" alt="" draggable="false" />
+      <img class="fcard__img" src="${c.image}" alt="" draggable="false"${c.focus ? ` style="object-position:${c.focus}"` : ''} />
       ${shade()}
       <div class="fcard__ui">
       ${label(c.label)}

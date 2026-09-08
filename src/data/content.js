@@ -176,6 +176,7 @@ const advisors = [
   {
     name: 'Kimiya<br>Shams',
     image: `${BASE}/assets/images/people/kimiya-shams.avif`,
+    focus: '50% 20%', // tall portrait: keep her head centred in the wide open card
     role: 'General Counsel, Devialet<br>Ankar Patent Expert Panel',
     logos: [],
     bio: P(
