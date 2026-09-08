@@ -27,9 +27,12 @@ document.addEventListener('click', (e) => {
   const href = a.getAttribute('href');
   if (href.length < 2) { e.preventDefault(); return; } // placeholder links stay put instead of jumping to the top
   const named = anchorTargets[href.slice(1)];
-  const target = named ? named() : document.querySelector(href);
+  let target = named ? named() : document.querySelector(href);
   if (target == null) return;
   e.preventDefault();
+  // a pinned stage reports the viewport top as its position while it is pinned, so aim at its trigger's start instead
+  const pinned = target instanceof Element && ScrollTrigger.getAll().find((t) => t.pin === target);
+  if (pinned) target = pinned.start;
   const offset = Number(a.dataset.offset || 0); // positive values land the section's content 120px under the top, like the pinned scenes
   lenis.scrollTo(target, { offset, duration: 1.4, force: true, lock: true });
 });
