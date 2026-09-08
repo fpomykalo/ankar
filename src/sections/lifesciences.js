@@ -34,7 +34,7 @@ export function initLifeSciences() {
   };
   const H = () => stage.clientHeight;
   const W = () => stage.clientWidth;
-  const HOLD = () => Math.round(window.innerHeight * 0.5); // half a viewport before the take-over begins
+  const HOLD = () => Math.round(window.innerHeight * 1.0); // a full viewport of hover time before the take-over begins
   const DUR = 1400 + 260;
   // geometry of the Life sciences card in its open state (layout offsets, no transforms)
   const rect = () => {

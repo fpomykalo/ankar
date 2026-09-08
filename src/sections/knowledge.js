@@ -210,7 +210,7 @@ export function initKnowledge() {
   setPhase(0, true);
 
   const st = tl.scrollTrigger;
-  skip.addEventListener('click', () => lenis.scrollTo(st.start + T_REVEAL + 20, { duration: 1.4 }));
+  skip.addEventListener('click', () => lenis.scrollTo(st.start + T_PHASES, { duration: 1.4 })); // lands on What Ankar makes possible, fully revealed
   ScrollTrigger.create({
     trigger: stage,
     start: 'top top',

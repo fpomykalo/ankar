@@ -72,11 +72,29 @@ export function initBios() {
         <p class="t-body fcard__excerpt">${c.bio.split('<br>')[0]}</p>
         <p class="t-mono fcard__more"><u>Click for full Bio</u></p>
         <div class="t-body fcard__full" data-lenis-prevent>${c.bio}</div>
+        <div class="fcard__scroll"><div class="fcard__thumb"></div></div>
       </div>
       <div class="fcard__closed"><h3 class="t-h3 fcard__vtitle">${c.name}</h3></div>
       </div>
     </article>`).join('');
   const cards = Array.from(track.children);
+  // custom scrollbar for the full bio
+  cards.forEach((c) => {
+    const full = c.querySelector('.fcard__full');
+    const thumb = c.querySelector('.fcard__thumb');
+    const update = () => {
+      const trackH = 253;
+      const ratio = full.clientHeight / full.scrollHeight;
+      const h = ratio >= 1 ? trackH : Math.max(30, Math.round(trackH * ratio));
+      const maxScroll = full.scrollHeight - full.clientHeight;
+      const top = maxScroll > 0 ? Math.round((trackH - h) * (full.scrollTop / maxScroll)) : 0;
+      thumb.style.height = `${h}px`;
+      thumb.style.transform = `translateY(${top}px)`;
+    };
+    full.addEventListener('scroll', update);
+    c.addEventListener('transitionend', update);
+    update();
+  });
   dotsEl.innerHTML = Array.from({ length: pageCount }, (_, p) => `<button class="bios__dot${p === 0 ? ' is-active' : ''}" aria-label="Page ${p + 1}"></button>`).join('');
   const dots = Array.from(dotsEl.children);
 
