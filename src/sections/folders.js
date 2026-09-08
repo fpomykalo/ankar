@@ -158,6 +158,7 @@ export function initBios() {
   let startX = 0;
   let startPos = 0;
   let downCard = null; // pointer capture retargets the release to the track, so remember the card
+  let inBio = false;   // a press inside the open bio never drags the strip; a plain click there closes the bio
   const maxX = () => -pageOffset(pageCount - 1);
   const snap = () => {
     let best = 0;
@@ -166,7 +167,7 @@ export function initBios() {
     showPage(best, 0.6);
   };
   track.addEventListener('pointerdown', (e) => {
-    if (e.target.closest('.fcard__full')) return; // let the bio scroll
+    inBio = !!e.target.closest('.fcard__full');
     downCard = e.target.closest('.fcard');
     dragging = true; moved = false; startX = e.clientX; startPos = pos.x;
     track.setPointerCapture(e.pointerId); gsap.killTweensOf(pos);
@@ -174,8 +175,8 @@ export function initBios() {
   track.addEventListener('pointermove', (e) => {
     if (!dragging) return;
     const dx = e.clientX - startX;
-    if (Math.abs(dx) > 6) { moved = true; track.classList.add('is-dragging'); }
-    if (!moved) return;
+    if (Math.abs(dx) > 6) { moved = true; if (!inBio) track.classList.add('is-dragging'); }
+    if (!moved || inBio) return;
     pos.x = Math.min(0, Math.max(maxX() - 100, startPos + dx));
     apply();
   });
@@ -183,7 +184,7 @@ export function initBios() {
     if (!dragging) return;
     dragging = false;
     track.classList.remove('is-dragging');
-    if (moved) { snap(); return; }
+    if (moved) { if (!inBio) snap(); return; }
     // click: open the card, or toggle its full bio when it is already open
     const card = downCard;
     if (!card) return;
