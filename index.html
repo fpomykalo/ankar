@@ -9,23 +9,59 @@
   <script>document.documentElement.classList.remove('no-js');</script>
 </head>
 <body>
+<header class="nav" id="nav" data-reveal data-reveal-delay="0.1">
+  <a class="nav__logo" href="/" aria-label="Ankar home"><img src="/assets/svg/ankar-black.svg" width="102" height="16" alt="Ankar" /></a>
+  <nav class="nav__menu t-mono" aria-label="Primary">
+    <a href="#">Product</a>
+    <a href="#">Careers</a>
+    <a href="#">Security</a>
+    <a href="#">Resources</a>
+  </nav>
+  <a class="btn btn--black nav__cta" href="#"><span>Book a Demo</span></a>
+
+  <div class="nav__panel" id="nav-panel" aria-hidden="true">
+    <div class="nav__col nav__col--product">
+      <div class="nav__line"></div>
+      <p class="eyebrow t-mono nav__head"><span class="dot"></span>Product</p>
+      <div class="t-mono nav__list">&gt; R&amp;D Workflows<br><br>&nbsp;&nbsp;&gt; Whitespace Analysis<br>&nbsp;&nbsp;&gt; Experiment Design<br>&nbsp;&nbsp;&gt; Competitive Analysis<br>&nbsp;&nbsp;&nbsp;&nbsp;/ Landscaping<br>&nbsp;&nbsp;&nbsp;&nbsp;<u>View all</u></div>
+      <div class="t-mono nav__list nav__list--2">&gt; IP Workflows<br><br>&nbsp;&nbsp;&gt; Patent Drafting<br>&nbsp;&nbsp;&gt; Office Actions / Prosecution<br>&nbsp;&nbsp;&gt; Cross-jurisdiction Prosecution<br>&nbsp;&nbsp;&nbsp;&nbsp;<u>View all</u></div>
+    </div>
+    <div class="nav__col nav__col--pages">
+      <div class="nav__row"><div class="nav__line"></div><p class="eyebrow t-mono nav__head"><span class="dot"></span>Careers</p></div>
+      <div class="nav__row"><div class="nav__line"></div><p class="eyebrow t-mono nav__head"><span class="dot"></span>Security</p></div>
+      <div class="nav__row"><div class="nav__line"></div><p class="eyebrow t-mono nav__head"><span class="dot"></span>Resources</p></div>
+    </div>
+    <div class="nav__col nav__col--cases">
+      <div class="nav__line"></div>
+      <p class="eyebrow t-mono nav__head"><span class="dot"></span>Use Cases</p>
+      <a class="t-mono nav__viewall" href="#"><u>View all &gt;</u></a>
+      <a class="nav__case" href="#">
+        <img class="nav__case-img" src="/assets/images/industries/semiconductors.jpg" alt="" />
+        <div class="nav__case-shade"></div><div class="noise"></div>
+        <img class="nav__case-logo" src="/assets/svg/logos/tel-white.svg" width="151" height="13" alt="Tokyo Electron Limited" />
+        <div class="nav__case-line"></div>
+        <p class="nav__case-title">Emerging technology assessment success.</p>
+        <p class="eyebrow t-mono nav__case-link"><span class="dot"></span><u>View Use Case &gt;</u></p>
+      </a>
+      <a class="nav__case nav__case--2" href="#">
+        <img class="nav__case-img" src="/assets/images/industries/aerospace.jpg" alt="" />
+        <div class="nav__case-shade nav__case-shade--60"></div><div class="noise"></div>
+        <img class="nav__case-logo" src="/assets/svg/logos/safran-white.svg" width="86" height="18" alt="Safran" />
+        <div class="nav__case-line"></div>
+        <p class="nav__case-title">Structured materials research sprint.</p>
+        <p class="eyebrow t-mono nav__case-link"><span class="dot"></span><u>View Use Case &gt;</u></p>
+      </a>
+    </div>
+  </div>
+</header>
 <main id="main">
 
   <!-- ================================================================ HERO -->
-  <section class="hero" id="hero">
+  <section class="hero" id="hero" data-nav-dark>
     <video class="hero__video" src="/assets/videos/hero-wip-1.mp4" autoplay muted loop playsinline preload="auto" poster="/assets/images/industries/semiconductors.jpg"></video>
     <div class="hero__shade"></div>
+    <div class="noise"></div>
 
-    <header class="nav container" data-reveal data-reveal-delay="0.1">
-      <a class="nav__logo" href="/" aria-label="Ankar home"><img src="/assets/svg/ankar-black.svg" width="102" height="16" alt="Ankar" /></a>
-      <nav class="nav__menu t-mono" aria-label="Primary">
-        <a href="#">Product</a>
-        <a href="#">Careers</a>
-        <a href="#">Security</a>
-        <a href="#">Resources</a>
-      </nav>
-      <a class="btn btn--black nav__cta" href="#"><span>Book a Demo</span></a>
-    </header>
 
     <div class="container hero__copy">
       <div class="rule rule--light hero__rule" data-reveal></div>
@@ -56,60 +92,54 @@
     <svg class="hero__tab" width="250" height="25" viewBox="0 0 250 25" aria-hidden="true"><path d="M250 25C246.405 25 243.064 23.1506 241.159 20.105L231.645 4.89501C229.74 1.84936 226.399 0 222.804 0L27.1959 0C23.6013 0 20.2597 1.84936 18.3548 4.89501L8.84114 20.105C6.93617 23.1506 3.59459 25 0 25L250 25Z" fill="#EEF2F6"/></svg>
   </section>
 
-  <!-- =========================================================== CHALLENGE -->
+  <!-- ================================================ CHALLENGE + EVIDENCE -->
   <section class="sec challenge" id="challenge">
-    <div class="container">
-      <div class="rule" data-reveal></div>
-      <p class="eyebrow t-mono sec__eyebrow" data-reveal><span class="dot"></span>The R&amp;D challenge</p>
-      <h2 class="t-h2 sec__title nowrap" data-reveal data-reveal-delay="0.1">Innovation has<br>outgrown the<br>systems behind it.</h2>
-      <div class="t-body sec__body challenge__body" data-reveal data-reveal-delay="0.2">R&amp;D teams have more information than ever. But the knowledge behind the next breakthrough is scattered across experiments, technical documents, scientific literature, patents, specialist systems and the people who carry critical context in their heads.<br><br>Breakthroughs often happen between disciplines. Yet teams still spend enormous amounts of time finding information, reconciling different sources and recreating work that has already been done. Legacy tools can store individual pieces of the puzzle, but they were not built to connect the full context—or help teams act on it.<br><br>The cost is bigger than inefficiency. It is slower iteration, repeated work, knowledge that disappears between projects and the risk of missing the technology that could define what an organization becomes next.</div>
+    <div class="challenge__stage" id="challenge-stage">
+      <div class="container">
+        <div class="rule" data-reveal></div>
+        <p class="eyebrow t-mono sec__eyebrow" id="challenge-eb1" data-reveal><span class="dot"></span>The R&amp;D challenge</p>
+        <p class="eyebrow t-mono sec__eyebrow is-muted" id="challenge-eb1-muted"><span class="dot dot--ring-blue"></span>The R&amp;D challenge</p>
+        <p class="eyebrow t-mono sec__eyebrow evidence__eyebrow2" id="challenge-eb2"><span class="dot"></span>Supporting evidence</p>
+        <h2 class="t-h2 sec__title nowrap" data-reveal data-reveal-delay="0.1">Innovation has<br>outgrown the<br>systems behind it.</h2>
+        <div class="t-body sec__body challenge__body" id="challenge-body" data-reveal data-reveal-delay="0.2">R&amp;D teams have more information than ever. But the knowledge behind the next breakthrough is scattered across experiments, technical documents, scientific literature, patents, specialist systems and the people who carry critical context in their heads.<br><br>Breakthroughs often happen between disciplines. Yet teams still spend enormous amounts of time finding information, reconciling different sources and recreating work that has already been done. Legacy tools can store individual pieces of the puzzle, but they were not built to connect the full context—or help teams act on it.<br><br>The cost is bigger than inefficiency. It is slower iteration, repeated work, knowledge that disappears between projects and the risk of missing the technology that could define what an organization becomes next.</div>
 
-      <!-- Insight callout: rotates 90° counter-clockwise into the first evidence card -->
-      <div class="callout" id="callout" data-reveal data-reveal-delay="0.3">
-        <div class="callout__shape folder--top"></div>
-        <p class="eyebrow t-mono callout__label"><span class="dot dot--ring"></span>Insight</p>
-        <p class="t-body callout__text nowrap">In a more competitive world, innovation is the difference<br>between leading what comes next and being left behind.</p>
-      </div>
-    </div>
-  </section>
+        <!-- Insight callout: rotates 90° counter-clockwise into the first evidence card -->
+        <div class="callout" id="callout" data-reveal data-reveal-delay="0.3">
+          <div class="callout__shape folder--top"></div>
+          <p class="eyebrow t-mono callout__label"><span class="dot dot--ring"></span>Insight</p>
+          <p class="t-body callout__text nowrap">In a more competitive world, innovation is the difference<br>between leading what comes next and being left behind.</p>
+        </div>
 
-  <!-- ============================================================ EVIDENCE -->
-  <section class="sec evidence" id="evidence">
-    <div class="container">
-      <div class="rule" data-reveal></div>
-      <p class="eyebrow t-mono sec__eyebrow is-muted" data-reveal><span class="dot dot--ring-blue"></span>The R&amp;D challenge</p>
-      <p class="eyebrow t-mono sec__eyebrow evidence__eyebrow2" data-reveal data-reveal-delay="0.1"><span class="dot"></span>Supporting evidence</p>
+        <div class="evidence__cards" id="evidence-cards">
+          <div class="ecard-morph" id="ecard-morph"><div class="ecard-morph__shape folder--top"></div></div>
 
-      <div class="evidence__cards">
-        <!-- morphing shape: starts as the Insight callout, lands as card 1 -->
-        <div class="ecard-morph" id="ecard-morph"><div class="ecard-morph__shape folder--top"></div></div>
+          <article class="ecard ecard--one" id="ecard-1">
+            <div class="ecard__bg folder"></div>
+            <div class="ecard__content">
+              <div class="tab-label"><span class="tab-label__text">Sup.E. — 1</span><span class="tab-label__dot"></span></div>
+              <div class="ecard__line ecard__line--top"></div>
+              <div class="t-num ecard__num">2x</div>
+              <p class="t-lead ecard__lead ecard__lead--quote">“AI-augmented areas of R&amp;D would increase the rate of productivity growth by up to 2x”</p>
+              <p class="t-mono ecard__source ecard__source--top">Besiroglu, Emery-Xu &amp; Thompson,<br>Research Policy, 2024.</p>
+              <div class="ecard__line ecard__line--mid"></div>
+              <p class="t-lead ecard__lead ecard__lead--bottom">The effect compounds when AI is applied directly to R&amp;D. Economic modelling suggests widespread AI augmentation could increase R&amp;D productivity growth by up to 2x versus its historical rate.</p>
+            </div>
+          </article>
 
-        <article class="ecard ecard--one" id="ecard-1">
-          <div class="ecard__bg folder"></div>
-          <div class="ecard__content">
-            <div class="tab-label"><span class="tab-label__text">Sup.E. — 1</span><span class="tab-label__dot"></span></div>
-            <div class="ecard__line ecard__line--top"></div>
-            <div class="t-num ecard__num">2x</div>
-            <p class="t-lead ecard__lead ecard__lead--quote">“AI-augmented areas of R&amp;D would increase the rate of productivity growth by up to 2x”</p>
-            <p class="t-mono ecard__source ecard__source--top">Besiroglu, Emery-Xu &amp; Thompson,<br>Research Policy, 2024.</p>
-            <div class="ecard__line ecard__line--mid"></div>
-            <p class="t-lead ecard__lead ecard__lead--bottom">The effect compounds when AI is applied directly to R&amp;D. Economic modelling suggests widespread AI augmentation could increase R&amp;D productivity growth by up to 2x versus its historical rate.</p>
-          </div>
-        </article>
-
-        <article class="ecard ecard--two" id="ecard-2">
-          <div class="ecard__bg folder"></div>
-          <div class="ecard__content">
-            <div class="tab-label"><span class="tab-label__text">Sup.E. — 2</span><span class="tab-label__dot"></span></div>
-            <div class="ecard__line ecard__line--top"></div>
-            <div class="t-num ecard__num">40%</div>
-            <p class="t-lead ecard__lead ecard__lead--right">Increase in researcher capacity to spend on delivering technical breakthroughs vs. administrative legwork.</p>
-            <div class="ecard__line ecard__line--mid"></div>
-            <p class="t-body ecard__bold"><b>Cut the time spent turning information into action, and focus it on delivering technical breakthroughs.</b></p>
-            <div class="t-body ecard__copy">In a controlled experiment with 453 professionals, generative AI reduced task completion time by 40%. For R&amp;D teams,<br>that means 40% less time lost searching, synthesizing, comparing and documenting technical knowledge, and more researcher capacity directed toward experiments, technical decisions and advancing programs.<br><br><b>The value is getting more research throughput from the same technical team.</b></div>
-            <p class="t-mono ecard__source ecard__source--bottom">Source:<br>Noy &amp; Zhang, Science, 2023</p>
-          </div>
-        </article>
+          <article class="ecard ecard--two" id="ecard-2">
+            <div class="ecard__bg folder"></div>
+            <div class="ecard__content">
+              <div class="tab-label"><span class="tab-label__text">Sup.E. — 2</span><span class="tab-label__dot"></span></div>
+              <div class="ecard__line ecard__line--top"></div>
+              <div class="t-num ecard__num">40%</div>
+              <p class="t-lead ecard__lead ecard__lead--right">Increase in researcher capacity to spend on delivering technical breakthroughs vs. administrative legwork.</p>
+              <div class="ecard__line ecard__line--mid"></div>
+              <p class="t-body ecard__bold"><b>Cut the time spent turning information into action, and focus it on delivering technical breakthroughs.</b></p>
+              <div class="t-body ecard__copy">In a controlled experiment with 453 professionals, generative AI reduced task completion time by 40%. For R&amp;D teams,<br>that means 40% less time lost searching, synthesizing, comparing and documenting technical knowledge, and more researcher capacity directed toward experiments, technical decisions and advancing programs.<br><br><b>The value is getting more research throughput from the same technical team.</b></div>
+              <p class="t-mono ecard__source ecard__source--bottom">Source:<br>Noy &amp; Zhang, Science, 2023</p>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -134,16 +164,16 @@
   <section class="knowledge" id="knowledge">
     <div class="knowledge__stage" id="knowledge-stage">
       <!-- gradient background: rises from below at 80%, takes over, then shrinks into the illustration panel -->
-      <div class="tk-bg" id="tk-bg">
+      <div class="tk-bg" id="tk-bg" data-nav-dark>
         <img class="tk-bg__img" src="/assets/images/gradients/gradient-2-landscape.jpg" alt="" />
         <div class="noise"></div>
+        <div class="tk-titles" id="tk-titles"></div>
+        <a class="btn btn--white tk-cta" id="tk-cta" href="#"><span>Explore the platform</span></a>
         <div class="illus" id="illus"><div class="illus__item is-on" data-illus="0"></div><div class="illus__item" data-illus="1"></div><div class="illus__item" data-illus="2"></div></div>
       </div>
 
       <div class="tk-content" id="tk-content">
         <div class="tk-pills" id="tk-pills"></div>
-        <div class="tk-titles" id="tk-titles"></div>
-        <a class="btn btn--glass tk-cta" id="tk-cta" href="#"><span>Explore the platform</span></a>
       </div>
 
       <div class="container possible" id="possible">
@@ -184,7 +214,7 @@
       <h2 class="t-h2 sec__title nowrap" data-reveal data-reveal-delay="0.1">From first question<br>to protected invention.</h2>
       <p class="t-body sec__body lifecycle__body" data-reveal data-reveal-delay="0.2">Ankar carries technical context forward across the research and innovation lifecycle, helping teams explore what is possible, develop stronger ideas, learn through experimentation and protect what they create.</p>
     </div>
-    <div class="wheel-wrap" data-reveal data-reveal-delay="0.3">
+    <div class="wheel-wrap" data-reveal data-reveal-delay="0.3" data-nav-dark>
       <div class="wheel container" id="wheel"></div>
     </div>
     <div class="container wheel-nav" data-reveal data-reveal-delay="0.4">
@@ -200,14 +230,14 @@
       <p class="eyebrow t-mono sec__eyebrow" data-reveal><span class="dot"></span>Built for consequential R&amp;D</p>
       <h2 class="t-h2 sec__title nowrap" data-reveal data-reveal-delay="0.1">For the teams shaping<br>what comes next.</h2>
       <div class="t-body sec__body industries__body" data-reveal data-reveal-delay="0.2">From new medicines and mobility systems to semiconductor capacity, advanced materials and high-trust technologies, the next generation of products will be built by teams that can turn complex knowledge into action.<br><br>Ankar helps research and innovation teams work across that complexity.</div>
-      <div class="folders folders--industries" id="industries-folders" data-reveal data-reveal-delay="0.3"></div>
+      <div class="folders folders--industries" id="industries-folders" data-reveal data-reveal-delay="0.3" data-nav-dark></div>
     </div>
   </section>
 
   <!-- ================================================ LIFE SCIENCES TAKEOVER -->
   <section class="ls" id="life-sciences">
     <div class="ls__stage" id="ls-stage">
-      <div class="ls__photo" id="ls-photo">
+      <div class="ls__photo" id="ls-photo" data-nav-dark>
         <img src="/assets/images/industries/life-sciences.jpg" alt="" />
         <div class="ls__photo-shade"></div>
         <div class="noise"></div>
@@ -269,10 +299,12 @@
         <div class="bios__dots" id="bios-dots"></div>
       </div>
 
-      <div class="bios__viewport" data-reveal data-reveal-delay="0.3">
-        <div class="bios__pages" id="bios-pages"></div>
+      <div class="bios__viewport" data-reveal data-reveal-delay="0.3" data-nav-dark>
+        <div class="bios__track folders folders--bios" id="bios-track"></div>
       </div>
-      <div class="t-body bios__bio" id="bios-bio"></div>
+      <div class="rule bios__rule" data-reveal data-reveal-delay="0.35"></div>
+      <p class="t-mono bios__role" id="bios-role" data-reveal data-reveal-delay="0.4">Co-Founder</p>
+      <div class="t-body bios__bio" id="bios-bio" data-reveal data-reveal-delay="0.4"></div>
     </div>
   </section>
 
@@ -281,9 +313,10 @@
     <div class="container">
       <div class="rule" data-reveal></div>
       <h2 class="t-h2 video__title" data-reveal data-reveal-delay="0.1">View our latest<br>customer success story.</h2>
-      <div class="video__box" id="video-box" data-reveal data-reveal-delay="0.2">
+      <div class="video__box" id="video-box" data-reveal data-reveal-delay="0.2" data-nav-dark>
         <video src="/assets/videos/hero-wip-1.mp4" muted loop playsinline preload="metadata" poster="/assets/images/industries/semiconductors.jpg"></video>
         <div class="video__shade"></div>
+        <div class="noise"></div>
         <button class="video__play" aria-label="Play video"><svg width="46" height="53" viewBox="0 0 46 53"><path d="M45.75 26.4141L0 52.8281V0L45.75 26.4141Z" fill="#fff"/></svg></button>
       </div>
     </div>
@@ -294,7 +327,7 @@
     <div class="container">
       <div class="rule" data-reveal></div>
       <h2 class="t-h2 quotes__title" data-reveal data-reveal-delay="0.1">From our customers</h2>
-      <div class="folders folders--quotes" id="quotes-folders" data-reveal data-reveal-delay="0.2"></div>
+      <div class="folders folders--quotes" id="quotes-folders" data-reveal data-reveal-delay="0.2" data-nav-dark></div>
     </div>
   </section>
 
@@ -315,15 +348,15 @@
   </section>
 
   <!-- ============================================================== FOOTER -->
-  <footer class="footer" id="footer">
+  <footer class="footer" id="footer" data-nav-dark>
     <img class="footer__bg" src="/assets/images/gradients/gradient-1.jpg" alt="" />
     <div class="noise"></div>
     <div class="container footer__inner">
-      <div class="final">
+      <div class="footer__hero"><div class="final" id="final">
         <h2 class="t-display final__word final__word--left" data-reveal>Invention</h2>
         <a class="final__cta" href="#" data-reveal data-reveal-delay="0.15"><span class="t-mono-lg">Book a Demo</span></a>
         <h2 class="t-display final__word final__word--right" data-reveal data-reveal-delay="0.1">reinvented.</h2>
-      </div>
+      </div></div>
 
       <div class="footer__cols">
         <div class="footer__col" data-reveal>

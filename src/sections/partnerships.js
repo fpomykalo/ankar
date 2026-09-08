@@ -17,15 +17,13 @@ export function initPartnerships() {
 
   grid.querySelectorAll('.pgrid__col').forEach((col) => {
     const rows = Array.from(col.querySelectorAll('.prow'));
+    const set = (row, open) => {
+      row.classList.toggle('is-open', open);
+      gsap.to(row.querySelector('.prow__panel'), { height: open ? row.querySelector('.prow__body').offsetHeight : 0, duration: 0.45, ease: 'power3.inOut', overwrite: true });
+    };
     rows.forEach((row) => {
-      row.addEventListener('mouseenter', () => {
-        rows.forEach((r) => {
-          const open = r === row;
-          r.classList.toggle('is-open', open);
-          const panel = r.querySelector('.prow__panel');
-          gsap.to(panel, { height: open ? r.querySelector('.prow__body').offsetHeight : 0, duration: 0.55, ease: 'power3.inOut' });
-        });
-      });
+      row.addEventListener('mouseenter', () => rows.forEach((r) => set(r, r === row)));
+      row.addEventListener('mouseleave', () => set(row, false));
     });
   });
 }

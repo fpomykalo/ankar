@@ -46,7 +46,7 @@ export function initLifecycle() {
       const y = state.e * FAN_Y * k * k;
       const rot = state.e * FAN_ROT * k;
       el.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px) rotate(${rot.toFixed(3)}deg)`;
-      el.style.zIndex = String(10 - Math.round(Math.abs(k)));
+      el.style.zIndex = String(10 + Math.round(k)); // cards to the right sit above, so their tab overlaps the middle card
     });
   }
   layout();

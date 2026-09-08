@@ -13,7 +13,8 @@ export function initLifeSciences() {
   const H = () => stage.clientHeight;
 
   gsap.set(photo, { left: 55, top: () => (H() - 480) / 2, width: 557, height: 480, borderRadius: 30 });
-  gsap.set(panel, { x: 820 });
+  // the blue folder starts on the left (where the industry card's folder was) and travels to the right half
+  gsap.set(panel, { x: -632, opacity: 0 });
 
   gsap.timeline({
     defaults: { ease: 'none' },
@@ -28,6 +29,7 @@ export function initLifeSciences() {
     },
   })
     .to(photo, { left: 0, top: 0, width: 786, height: () => H(), borderRadius: 0, duration: 0.5, ease: 'power2.inOut' }, 0)
-    .to(panel, { x: 0, duration: 0.42, ease: 'power3.out' }, 0.32)
+    .to(panel, { opacity: 1, duration: 0.12 }, 0.12)
+    .to(panel, { x: 0, duration: 0.5, ease: 'power3.inOut' }, 0.18)
     .to(copy, { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, ease: 'power3.out' }, 0.55);
 }

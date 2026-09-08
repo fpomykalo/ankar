@@ -17,6 +17,7 @@
 .btn > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .btn:hover { transform: translateY(-1px); }
 .btn--blue  { background: var(--blue); color: var(--ink); }
+.btn--blue:hover { background: #fff; }
 .btn--white { background: #fff; color: var(--ink); }
 .btn--black { background: var(--ink); color: #fff; }
 .btn--glass {

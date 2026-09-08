@@ -60,8 +60,9 @@ export function initKnowledge() {
     });
     return { title, pills };
   });
-  gsap.set(titlesEl.children, { xPercent: -50, yPercent: -50 });
-  gsap.set(cta, { xPercent: -50 });
+  gsap.set(titlesEl.children, { xPercent: -50, yPercent: -100 }); // titles sit 50% higher than centre
+  gsap.set(cta, { xPercent: -50, opacity: 1 });
+  gsap.set(groups[0].title, { opacity: 1, scale: 0.8 }); // title + CTA are on the shape from the moment it rises (scaled to the 80% shape)
 
   const vw = () => stage.clientWidth;
   const vh = () => window.innerHeight;
@@ -99,8 +100,7 @@ export function initKnowledge() {
   tl.to(bg, { top: () => vh() * 0.1, duration: RISE, ease: 'power1.out' }, 0);
   // 2. expand
   tl.to(bg, { left: 0, top: 0, width: () => vw(), height: () => vh(), borderRadius: 0, duration: EXPAND, ease: 'power1.inOut' }, T_EXPAND);
-  tl.to(groups[0].title, { opacity: 1, duration: 200 }, T_EXPAND + 200);
-  tl.to(cta, { opacity: 1, duration: 200 }, T_EXPAND + 260);
+  tl.to(groups[0].title, { scale: 1, duration: EXPAND, ease: 'power1.inOut' }, T_EXPAND);
   // 3. title swaps between groups
   groups.forEach((g, i) => {
     if (i === 0) return;
@@ -152,7 +152,7 @@ export function initKnowledge() {
       const oOut = d < -60 ? Math.max(0, 1 - (-d - 60) / 320) : 1;
       p.el.style.opacity = (oIn * oOut * fade).toFixed(3);
       p.el.style.filter = blur > 0.15 ? `blur(${blur.toFixed(2)}px)` : 'none';
-      p.el.style.zIndex = String(Math.round(s * 100));
+      p.el.classList.toggle('is-front', s > 0.78); // only the nearly-arrived pills pass in front of the title
       p.el.style.transform = `translate(${(cx + p.ox * s).toFixed(1)}px, ${(cy + p.oy * s).toFixed(1)}px) translate(-50%, -50%) scale(${s.toFixed(4)})`;
     });
   }

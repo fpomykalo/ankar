@@ -8,7 +8,7 @@ export function initClosing() {
   if (!closing || !mock) return;
 
   gsap.to(mock, {
-    scale: 1280 / 880,
+    scale: 1000 / 880, // grows from 880px to 1000px wide
     ease: 'none',
     scrollTrigger: { trigger: mock, start: 'top 95%', end: 'top 25%', scrub: 0.5 },
   });

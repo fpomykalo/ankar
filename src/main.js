@@ -10,6 +10,7 @@ import './styles/sections.css';
 import { ScrollTrigger } from './lib/scroll.js';
 import { initReveal } from './lib/reveal.js';
 import { initHero } from './sections/hero.js';
+import { initNav } from './sections/nav.js';
 import { initEvidence } from './sections/evidence.js';
 import { initKnowledge } from './sections/knowledge.js';
 import { initLifecycle } from './sections/lifecycle.js';
@@ -33,6 +34,7 @@ function boot() {
   initLifeSciences();
   initClosing();
   initReveal();
+  initNav();
 
   ScrollTrigger.refresh();
 }

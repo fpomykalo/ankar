@@ -45,57 +45,64 @@ export function initIndustries() {
   bindAccordion(root);
 }
 
-// --- bios (12 people, pages of 4) -------------------------------------------
+// --- bios (12 people in one viewport-wide strip, paged by 4) ----------------
 export function initBios() {
-  const pagesEl = document.getElementById('bios-pages');
+  const track = document.getElementById('bios-track');
   const bioEl = document.getElementById('bios-bio');
+  const roleEl = document.getElementById('bios-role');
   const counter = document.getElementById('bios-counter');
   const dotsEl = document.getElementById('bios-dots');
-  if (!pagesEl) return;
+  if (!track) return;
   const PER = 4;
   const pageCount = Math.ceil(people.length / PER);
 
-  pagesEl.innerHTML = Array.from({ length: pageCount }, (_, p) => `
-    <div class="folders folders--bios" data-page="${p}">${people.slice(p * PER, p * PER + PER).map((c, j) => `
-      <article class="fcard folder${j === 0 ? ' is-open' : ''}">
-        <img class="fcard__img" src="${c.image}" alt="" />
-        ${shade()}
-        ${label(c.label)}
-        <div class="fcard__line"></div>
-        <div class="fcard__open">
-          <h3 class="t-h3 fcard__title">${c.name}</h3>
-          <p class="t-mono fcard__meta">${c.role}</p>
-          <div class="fcard__logos">${c.logos.map(logoImg).join('')}</div>
-        </div>
-        <div class="fcard__closed"><h3 class="t-h3 fcard__vtitle">${c.name}</h3></div>
-      </article>`).join('')}
-    </div>`).join('');
+  track.innerHTML = people.map((c, i) => `
+    <article class="fcard folder${i === 0 ? ' is-open' : ''}">
+      <img class="fcard__img" src="${c.image}" alt="" />
+      ${shade()}
+      ${label(c.label)}
+      <div class="fcard__line"></div>
+      <div class="fcard__open">
+        <h3 class="t-h3 fcard__title">${c.name}</h3>
+        <p class="t-mono fcard__meta">${c.role}</p>
+        <div class="fcard__logos">${c.logos.map(logoImg).join('')}</div>
+      </div>
+      <div class="fcard__closed"><h3 class="t-h3 fcard__vtitle">${c.name}</h3></div>
+    </article>`).join('');
+  const cards = Array.from(track.children);
 
   dotsEl.innerHTML = Array.from({ length: pageCount }, (_, p) => `<button class="bios__dot${p === 0 ? ' is-active' : ''}" aria-label="Page ${p + 1}"></button>`).join('');
   const dots = Array.from(dotsEl.children);
-  const pages = Array.from(pagesEl.children);
-  const openers = pages.map((pg, p) => bindAccordion(pg, (j) => setActive(p * PER + j, false)));
 
   let active = 0;
   let page = 0;
+  const pageOffset = (p) => {
+    // the first card of a page lands where card 1 sits (25px left of the container)
+    let x = 0;
+    for (let i = 0; i < p * PER; i += 1) x += (cards[i].classList.contains('is-open') ? 744 : 212) - 25;
+    return x;
+  };
   function showPage(p) {
     page = p;
-    gsap.to(pagesEl, { x: -p * 1305, duration: 0.9, ease: 'power3.inOut' });
+    gsap.to(track, { x: -pageOffset(p), duration: 0.9, ease: 'power3.inOut' });
     dots.forEach((d, i) => d.classList.toggle('is-active', i === p));
   }
-  function setActive(i, openCard = true) {
+  function setActive(i, fromHover = false) {
     active = (i + people.length) % people.length;
+    cards.forEach((c, j) => c.classList.toggle('is-open', j === active));
     const p = Math.floor(active / PER);
-    if (p !== page) showPage(p);
-    if (openCard) openers[p](pages[p].children[active % PER]);
+    if (p !== page || !fromHover) showPage(p);
     counter.textContent = `${active + 1} / ${people.length}`;
-    gsap.to(bioEl, { opacity: 0, duration: 0.2, onComplete: () => {
+    gsap.to([bioEl, roleEl], { opacity: 0, duration: 0.2, onComplete: () => {
       bioEl.innerHTML = people[active].bio;
-      gsap.to(bioEl, { opacity: 1, duration: 0.4 });
+      roleEl.innerHTML = people[active].role.split('<br>')[0];
+      gsap.to([bioEl, roleEl], { opacity: 1, duration: 0.4 });
     } });
   }
   bioEl.innerHTML = people[0].bio;
+  roleEl.innerHTML = people[0].role.split('<br>')[0];
 
+  cards.forEach((c, i) => c.addEventListener('mouseenter', () => { if (i !== active) setActive(i, true); }));
   document.getElementById('bios-prev')?.addEventListener('click', () => setActive(active - 1));
   document.getElementById('bios-next')?.addEventListener('click', () => setActive(active + 1));
   dots.forEach((d, p) => d.addEventListener('click', () => setActive(p * PER)));
