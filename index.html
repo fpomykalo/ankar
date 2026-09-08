@@ -111,7 +111,7 @@
         </div>
 
         <div class="evidence__cards" id="evidence-cards">
-          <div class="ecard-morph" id="ecard-morph"><div class="ecard-morph__shape folder--top"></div><div class="ecard-morph__label t-mono"><span class="dot dot--ring"></span><span class="ecard-morph__words"><span class="ecard-morph__w1">Insight</span><span class="ecard-morph__w2">Sup.E. — 1</span></span></div></div>
+          <div class="ecard-morph" id="ecard-morph"><div class="ecard-morph__shape folder--top"></div><div class="ecard-morph__label t-mono"><span class="dot dot--ring"></span><span class="ecard-morph__word">Insight</span></div></div>
 
           <article class="ecard ecard--one" id="ecard-1">
             <div class="ecard__bg folder"></div>
@@ -220,19 +220,17 @@
 
   <!-- ========================================================== INDUSTRIES -->
   <section class="sec industries" id="industries">
-    <div class="container">
-      <div class="rule" data-reveal></div>
-      <p class="eyebrow t-mono sec__eyebrow" data-reveal><span class="dot"></span>Built for consequential R&amp;D</p>
-      <h2 class="t-h2 sec__title nowrap" data-reveal data-reveal-delay="0.1">For the teams shaping<br>what comes next.</h2>
-      <div class="t-body sec__body industries__body" data-reveal data-reveal-delay="0.2">From new medicines and mobility systems to semiconductor capacity, advanced materials and high-trust technologies, the next generation of products will be built by teams that can turn complex knowledge into action.<br><br>Ankar helps research and innovation teams work across that complexity.</div>
-      <div class="folders folders--industries" id="industries-folders" data-reveal data-reveal-delay="0.3" data-nav-dark></div>
-    </div>
-  </section>
+    <div class="industries__stage" id="industries-stage">
+      <div class="container">
+        <div class="rule" data-reveal data-ind-fade></div>
+        <p class="eyebrow t-mono sec__eyebrow" data-reveal data-ind-fade><span class="dot"></span>Built for consequential R&amp;D</p>
+        <h2 class="t-h2 sec__title nowrap" data-reveal data-reveal-delay="0.1" data-ind-fade>For the teams shaping<br>what comes next.</h2>
+        <div class="t-body sec__body industries__body" data-reveal data-reveal-delay="0.2" data-ind-fade>From new medicines and mobility systems to semiconductor capacity, advanced materials and high-trust technologies, the next generation of products will be built by teams that can turn complex knowledge into action.<br><br>Ankar helps research and innovation teams work across that complexity.</div>
+        <div class="folders folders--industries" id="industries-folders" data-reveal data-reveal-delay="0.3" data-nav-dark></div>
+      </div>
 
-  <!-- ================================================ LIFE SCIENCES TAKEOVER -->
-  <section class="ls" id="life-sciences">
-    <div class="ls__stage" id="ls-stage">
-      <div class="ls__photo" id="ls-photo" data-nav-dark>
+      <!-- the life-sciences photo grows out of its card to take the left of the viewport -->
+      <div class="ls__photo folder" id="ls-photo" data-nav-dark>
         <img src="/assets/images/industries/life-sciences.jpg" alt="" />
         <div class="ls__photo-shade"></div>
         <div class="noise"></div>

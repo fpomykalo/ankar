@@ -73,15 +73,15 @@
 .hero__tab { position: absolute; left: calc(50% - 125px); bottom: 0; }
 
 /* ============================================================= CHALLENGE */
-.challenge { padding-top: 100px; }
+.challenge { padding-top: 80px; } /* 80 + the stage's 120 lock offset = 200 under the hero */
 .challenge__stage { position: relative; height: 758px; padding-top: 120px; }
 .challenge__stage > .container { height: 638px; }
 .challenge__body { left: 648px; width: 632px; }
 .callout {
   position: absolute; left: 0; top: 294px; width: 505px; height: 118px;
 }
-.callout__shape { position: absolute; inset: 0; background: var(--blue); }
-.callout__label { position: absolute; left: 89px; top: 10px; }
+.callout__shape { --tab-left: 267px; position: absolute; inset: 0; background: var(--blue); }
+.callout__label { position: absolute; left: 294px; top: 10px; }
 .callout__text { position: absolute; left: 26px; top: 55px; }
 
 /* ============================================================== EVIDENCE */
@@ -188,7 +188,7 @@
 
 /* ============================================================= LIFECYCLE */
 .lifecycle { padding-top: 200px; }
-.lifecycle > .container { height: 244px; }
+.lifecycle > .container:not(.wheel-nav) { height: 244px; }
 .lifecycle__body { left: 864px; top: 85px; width: 416px; }
 .wheel-wrap { position: relative; width: 100%; height: 479px; overflow-x: clip; overflow-y: visible; }
 .wheel { height: 479px; touch-action: pan-y; user-select: none; cursor: grab; }
@@ -212,8 +212,9 @@
 .wheel-nav #wheel-next { left: 705px; }
 
 /* ============================================================ INDUSTRIES */
-.industries { padding-top: 200px; }
-.industries > .container { height: 724px; }
+.industries { padding-top: 80px; } /* 80 + 120 lock offset = 200 under the lifecycle */
+.industries__stage { position: relative; height: max(100vh, 900px); padding-top: 120px; overflow: hidden; }
+.industries__stage > .container { height: 724px; }
 .industries__body { left: 740px; width: 541px; }
 
 /* folder accordion (industries, bios pages, quotes) */
@@ -261,20 +262,18 @@
 .folders--quotes .fcard.is-open .fcard__line { right: 45px; }
 
 /* ========================================================= LIFE SCIENCES */
-.ls { position: relative; margin-top: 200px; }
-.ls__stage { position: relative; height: max(100vh, 900px); width: 100%; overflow: hidden; background: var(--bg); }
-.ls__photo { position: absolute; left: 0; top: 0; width: 50vw; height: 100%; overflow: hidden; border-radius: 0; }
+.ls__photo { position: absolute; left: 0; top: 0; width: 50vw; height: 100%; overflow: hidden; visibility: hidden; z-index: 5; }
 .ls__photo > img:first-child { width: 100%; height: 100%; object-fit: cover; }
-.ls__photo-shade { position: absolute; inset: 0; background: rgba(0,0,0,.3); }
-.ls__brand { position: absolute; left: calc(50% - 207px); top: 50%; margin-top: -40px; }
-.ls__panel { --tab-top: 129px; position: absolute; left: calc(50% - 25px); top: 0; width: calc(50% + 25px); height: 100%; background: var(--blue); color: #000; }
+.ls__photo-shade { position: absolute; inset: 0; background: rgba(0,0,0,.2); }
+.ls__brand { position: absolute; left: calc(25vw - 12.5px + 55px); top: 50%; margin: -40px 0 0 -195px; opacity: 0; } /* centred in the visible left area (0 to 50vw - 25px), photo starts at -55px */
+.ls__panel { --tab-top: 129px; position: absolute; left: calc(50% - 25px); top: 0; width: calc(50% + 65px); height: 100%; background: var(--blue); color: #000; z-index: 6; }
 .ls__label { --label-bottom: 259px; --dot-top: 269px; color: #000; }
 .ls__eyebrow { position: absolute; left: 113px; top: 129px; }
 .ls__title { position: absolute; left: 113px; top: 177px; width: 560px; }
 .ls__rule { position: absolute; left: 113px; top: 567px; width: 560px; }
 .ls__body { position: absolute; left: 113px; top: 587px; width: 452px; }
 .ls__cta { position: absolute; left: 113px; top: 820px; }
-.ls [data-ls] { opacity: 0; transform: translate3d(0, 40px, 0); }
+.ls__panel [data-ls] { opacity: 0; transform: translate3d(0, 40px, 0); }
 
 /* ========================================================== PARTNERSHIPS */
 .partnerships { padding-top: 200px; }
@@ -473,12 +472,14 @@
 
 /* ==================================================== v3 additions */
 /* pinned sections lock 40px under the navigation (nav bottom = 80px) */
-.ecard-morph__label { position: absolute; left: calc(var(--tab-left) + 31px); top: 9px; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
-.ecard-morph__words { position: relative; display: inline-block; }
-.ecard-morph__w2 { position: absolute; left: 0; top: 0; opacity: 0; }
+.ecard-morph__label { --label-off: 27px; position: absolute; left: calc(var(--tab-left) + var(--label-off)); top: 9px; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.ecard-morph__word { display: inline-block; min-width: 70px; }
 .ecard-morph__label .t-mono, .ecard-morph__label span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .bios__name { position: absolute; left: 0; top: 882px; white-space: nowrap; }
 .bios__role { top: 940px; }
 .bios__track { cursor: grab; touch-action: pan-y; user-select: none; }
 .bios__track.is-dragging { cursor: grabbing; }
 .fcard__logos { top: auto; bottom: 40px; align-items: center; }
+
+/* takeover: section number above each title */
+.tk-title__n { position: absolute; left: 50%; top: -38px; transform: translateX(-50%); font: 400 12px/14px var(--font-mono); letter-spacing: 0; text-box-trim: trim-both; text-box-edge: cap alphabetic; }

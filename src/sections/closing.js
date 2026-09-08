@@ -24,9 +24,11 @@ export function initClosing() {
 
   // keep the CTA 40px under the nav (nav bottom = 80px) once it would scroll past
   const LOCK = 120;
+  const mockWrap = mock.parentElement;
   gsap.ticker.add(() => {
     const natural = ctaWrap.getBoundingClientRect().top - (Number(gsap.getProperty(ctaWrap, 'y')) || 0);
-    gsap.set(ctaWrap, { y: Math.max(0, LOCK - natural) });
+    const shift = Math.max(0, LOCK - natural);
+    gsap.set([ctaWrap, mockWrap], { y: shift }); // the image locks together with the button
   });
 
   const box = document.getElementById('video-box');

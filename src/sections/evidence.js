@@ -24,18 +24,27 @@ export function initEvidence() {
   // the callout text rides along and fades during the first part of the turn
   const text = callout.querySelector('.callout__text').cloneNode(true);
   morph.appendChild(text);
-  const w1 = morph.querySelector('.ecard-morph__w1');
-  const w2 = morph.querySelector('.ecard-morph__w2');
+  const word = morph.querySelector('.ecard-morph__word');
+  const FROM = 'Insight';
+  const TO = 'Sup.E. — 1';
+  // "Insight" is deleted and "Sup.E. — 1" typed out while the box turns
+  const typeLabel = (t) => {
+    const steps = FROM.length + TO.length;
+    const k = Math.round(Math.min(1, Math.max(0, t)) * steps);
+    word.textContent = k <= FROM.length ? FROM.slice(0, FROM.length - k) || '\u00a0' : TO.slice(0, k - FROM.length);
+  };
 
   const bg1 = card1.querySelector('.ecard__bg');
   const content1 = card1.querySelector('.ecard__content');
 
   // callout and card slot share the same top (294px under the rule): no offset, no jump
-  gsap.set(morph, { left: 25, top: callout.offsetTop - cards.offsetTop, width: 505, height: 118, rotation: 0, '--tab-left': '58px' });
+  gsap.set(morph, { left: 25, top: callout.offsetTop - cards.offsetTop, width: 505, height: 118, rotation: 0, '--tab-left': '267px' });
+  gsap.set(morph.querySelector('.ecard-morph__label'), { '--label-off': '27px' });
   gsap.set(content1, { opacity: 0 });
   gsap.set(card2, { x: 360, opacity: 0 });
   gsap.set(bg1, { visibility: 'hidden' });
 
+  let shown = false;
   const tl = gsap.timeline({
     defaults: { ease: 'none' },
     scrollTrigger: {
@@ -46,10 +55,15 @@ export function initEvidence() {
       scrub: 0.6,
       invalidateOnRefresh: true,
       onUpdate: (st) => {
-        const active = st.progress > 0.001 && st.progress < 0.999;
-        callout.style.visibility = st.progress > 0.001 ? 'hidden' : '';
+        const p = st.progress;
+        const active = p > 0.001 && p < 0.985;
+        callout.style.visibility = p > 0.001 ? 'hidden' : '';
         morph.style.visibility = active ? 'visible' : 'hidden';
-        bg1.style.visibility = st.progress >= 0.999 ? '' : 'hidden';
+        bg1.style.visibility = p >= 0.985 ? '' : 'hidden';
+        typeLabel((p - 0.18) / 0.45);
+        // the card's own label and copy only appear once the box is in position
+        const landed = p >= 0.985;
+        if (landed !== shown) { shown = landed; gsap.to(content1, { opacity: landed ? 1 : 0, duration: landed ? 0.45 : 0.1, overwrite: true }); }
       },
     },
   });
@@ -59,14 +73,12 @@ export function initEvidence() {
     .to(eb1, { opacity: 0, duration: 0.25 }, 0.05)
     .to(eb1m, { opacity: 1, duration: 0.25 }, 0.05)
     .to(eb2, { opacity: 1, duration: 0.3 }, 0.15)
-    .to(w1, { opacity: 0, duration: 0.2 }, 0.3)
-    .to(w2, { opacity: 1, duration: 0.2 }, 0.4)
     .to(cards, { top: 58, duration: 1, ease: 'power1.inOut' }, 0)   // the whole slot rides up as the headline leaves
     .to(morph, {
       left: 0, top: 580, width: 580, height: 665, rotation: -90, '--tab-left': '342px',
       duration: 1, ease: 'power1.inOut',
     }, 0)
-    .to(content1, { opacity: 1, duration: 0.3 }, 0.7)
+    .to(morph.querySelector('.ecard-morph__label'), { '--label-off': '31px', duration: 1, ease: 'power1.inOut' }, 0)
     .to(card2, { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.35);
 
   [card1, card2].forEach((card) => {

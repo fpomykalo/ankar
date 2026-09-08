@@ -16,8 +16,9 @@ import wf3 from '../illustrations/wf3.html?raw';
  *   5. the three accordion phases are scrubbed (and clickable), then release
  */
 const RISE = 600;
+let HOLD_INTRO = 225; // a quarter viewport to read the three columns before the takeover
 const EXPAND = 400;
-const GROUP = 1100;
+const GROUP = 800;
 const SHRINK = 800;
 const REVEAL = 350;
 const PHASE = 600;
@@ -25,11 +26,11 @@ const HOLD = 300;
 const LOCK = 120;     // 40px under the 80px navigation
 
 const OFFSETS = [
-  [-60, 110], [300, -40], [-560, -190], [220, 250], [-330, 90],
-  [480, -250], [-120, -280], [560, 120], [-620, 280], [140, 60], [-260, -120], [420, 40],
+  [-80, 130], [340, -60], [-600, -220], [250, 280], [-360, 100], [520, -280], [-140, -320], [600, 150],
+  [-660, 300], [160, 70], [-280, -140], [460, 50], [-500, 220], [80, -260], [620, -120], [-200, 320],
 ];
 const F = 640;
-const DZ = 520;
+const DZ = 300;   // closer spacing: more pills on screen at once
 
 export function initKnowledge() {
   const stage = document.getElementById('knowledge-stage');
@@ -53,7 +54,7 @@ export function initKnowledge() {
   pillGroups.forEach((g, gi) => {
     const title = document.createElement('h2');
     title.className = 'tk-title';
-    title.textContent = g.title;
+    title.innerHTML = `<span class="tk-title__n">${String(gi + 1).padStart(2, '0')}</span>${g.title}`;
     titlesEl.appendChild(title);
     titles.push(title);
     g.items.forEach((label, i) => {
@@ -64,7 +65,7 @@ export function initKnowledge() {
       pillsEl.appendChild(el);
       const idx = pills.length;
       const [ox, oy] = OFFSETS[idx % OFFSETS.length];
-      pills.push({ el, ox, oy, gi, z: F * 0.3 + idx * DZ });
+      pills.push({ el, ox, oy, gi, z: F * 1.4 + idx * DZ });
     });
   });
   gsap.set(titles, { xPercent: -50, yPercent: -100, y: 20 }); // 50% higher than centre, then 20px down
@@ -80,16 +81,23 @@ export function initKnowledge() {
   };
 
   // "What Ankar makes possible" must fit the viewport under the navigation
+  const lifecycle = document.getElementById('lifecycle');
   const fitPossible = () => {
     const need = 244 + 484 + 40;
     const avail = vh() - LOCK;
-    gsap.set(possible, { scale: Math.min(1, avail / need), transformOrigin: '0 0' });
+    const scale = Math.min(1, avail / need);
+    gsap.set(possible, { scale, transformOrigin: '0 0' });
+    // keep exactly 200px between the accordion's end and the next section's rule
+    const contentBottom = LOCK + (244 + 484) * scale;
+    if (lifecycle) lifecycle.style.marginTop = `${contentBottom + 200 - 200 - stage.clientHeight}px`;
   };
+  HOLD_INTRO = Math.round(vh() * 0.25);
   fitPossible();
   ScrollTrigger.addEventListener('refreshInit', fitPossible);
 
-  const T_EXPAND = RISE;
-  const T_GROUPS = RISE + EXPAND;
+  const T_RISE = HOLD_INTRO;
+  const T_EXPAND = T_RISE + RISE;
+  const T_GROUPS = T_EXPAND + EXPAND;
   const SPAN = GROUP * pillGroups.length;
   const T_SHRINK = T_GROUPS + SPAN;
   const T_REVEAL = T_SHRINK + SHRINK;
@@ -117,7 +125,7 @@ export function initKnowledge() {
   });
 
   // 1. rise over the intro layer
-  tl.to(bg, { top: () => vh() * 0.1, duration: RISE, ease: 'power1.out' }, 0);
+  tl.to(bg, { top: () => vh() * 0.1, duration: RISE, ease: 'power1.out' }, T_RISE);
   // 2. expand; the intro layer goes, the light stage background comes
   tl.to(bg, { left: 0, top: 0, width: () => vw(), height: () => vh(), borderRadius: 0, duration: EXPAND, ease: 'power1.inOut' }, T_EXPAND);
   tl.to(titles[0], { scale: 1, duration: EXPAND, ease: 'power1.inOut' }, T_EXPAND);
@@ -154,7 +162,8 @@ export function initKnowledge() {
     }
     if (!inStream) return;
     const cam = camAt(px);
-    const fade = px > T_SHRINK ? Math.max(0, 1 - (px - T_SHRINK) / 200) : 1;
+    const streamIn = Math.min(1, (px - T_GROUPS) / 260); // the first pills fade in instead of popping
+    const fade = (px > T_SHRINK ? Math.max(0, 1 - (px - T_SHRINK) / 200) : 1) * streamIn;
     const cx = vw() / 2;
     const cy = vh() / 2;
     pills.forEach((p) => {
