@@ -50,10 +50,12 @@ export function initNav() {
   const openHome = () => {
     closeMega();
     nav.classList.add('is-home');
+    homeWrap.classList.add('is-open');
     home.setAttribute('aria-expanded', 'true');
   };
   const closeHome = () => {
     nav.classList.remove('is-home');
+    homeWrap.classList.remove('is-open');
     home.setAttribute('aria-expanded', 'false');
   };
   const closeAll = () => { closeMega(); closeHome(); };
@@ -64,6 +66,7 @@ export function initNav() {
   home.addEventListener('mouseenter', () => { hold(); openHome(); });
   home.addEventListener('click', () => (nav.classList.contains('is-home') ? closeHome() : openHome()));
   homeWrap.addEventListener('mouseenter', hold);
+  homeWrap.addEventListener('mouseleave', () => { leaveTimer = setTimeout(closeAll, 120); }); // the list is a sibling of the bar, so it needs its own leave
   homeWrap.addEventListener('click', (e) => { if (e.target.closest('a')) closeHome(); }); // picking an anchor folds the list away
   nav.querySelector('.nav__panel').addEventListener('mouseenter', hold);
   // leaving the whole bar closes whichever dropdown is showing

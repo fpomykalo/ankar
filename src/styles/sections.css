@@ -522,9 +522,9 @@
 .nav__menu .nav__home { padding-right: 9.46px; } /* 3px gap + chevron; beats the generic link padding */
 .nav__chev { position: absolute; right: 0; top: 13px; display: block; width: 6.46px; height: 4.55px; transition: transform .3s var(--ease-out); } /* 10px link padding + 3px */
 .nav.is-home .nav__chev { transform: rotate(180deg); }
-.nav.is-home { overflow: visible; }
-.nav__home-wrap { position: absolute; left: 409px; top: 60px; padding-top: 10px; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity .25s var(--ease-out), transform .25s var(--ease-out); }
-.nav.is-home .nav__home-wrap { opacity: 1; pointer-events: auto; transform: none; }
+/* sits beside the bar, not inside it: a backdrop-filter nested in the bar's own filter could only blur the bar */
+.nav__home-wrap { position: fixed; left: calc(50% - 640px + 409px); top: 80px; z-index: 1000; padding-top: 10px; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity .25s var(--ease-out), transform .25s var(--ease-out); }
+.nav__home-wrap.is-open { opacity: 1; pointer-events: auto; transform: none; }
 .nav__home-panel {
   display: flex; flex-direction: column; gap: 20px; width: 163px; padding: 20px; border-radius: 20px; box-sizing: border-box;
   background: rgba(255, 255, 255, 0.5);
