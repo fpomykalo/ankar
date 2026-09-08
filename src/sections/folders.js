@@ -11,7 +11,7 @@ const logoImg = (name) => {
   const [w, h] = LOGO_SIZES[name];
   return `<img src="${BASE}/assets/svg/logos/${name}-white.svg" width="${w}" height="${h}" alt="${name}" />`;
 };
-const shade = () => '<div class="fcard__shade"></div><div class="fcard__grad"></div><div class="fcard__grad-bottom"></div><div class="noise"></div>';
+const shade = ({ noise = true } = {}) => `<div class="fcard__shade"></div><div class="fcard__grad"></div><div class="fcard__grad-bottom"></div>${noise ? '<div class="noise"></div>' : ''}`;
 const label = (t) => `<div class="tab-label"><span class="tab-label__text">${t}</span><span class="tab-label__dot"></span></div>`;
 
 /** Accordion behaviour: hovering a card opens it; the card hovered last stays open. */
@@ -32,7 +32,7 @@ export function initIndustries() {
   root.innerHTML = industries.map((c, i) => `
     <article class="fcard folder${i === 0 ? ' is-open' : ''}">
       <img class="fcard__img" src="${c.image}" alt="" />
-      ${shade()}
+      ${shade({ noise: false })}
       <div class="fcard__ui">
       ${label(c.label)}
       <div class="fcard__line"></div>
