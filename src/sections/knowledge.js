@@ -1,4 +1,4 @@
-import { gsap, ScrollTrigger, lenis } from '../lib/scroll.js';
+import { gsap, ScrollTrigger, lenis, anchorTargets } from '../lib/scroll.js';
 import { pillGroups } from '../data/content.js';
 import wf1 from '../illustrations/wf1.html?raw';
 import wf2 from '../illustrations/wf2.html?raw';
@@ -210,6 +210,7 @@ export function initKnowledge() {
   setPhase(0, true);
 
   const st = tl.scrollTrigger;
+  anchorTargets.possible = () => st.start + T_PHASES; // nav "Our Value": What Ankar makes possible, fully revealed
   skip.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();

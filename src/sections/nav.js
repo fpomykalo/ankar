@@ -29,21 +29,43 @@ export function initNav() {
   lenis.on('scroll', updateTheme);
   gsap.ticker.add(updateTheme);
 
-  // --- dropdown -------------------------------------------------------------
+  // --- dropdowns ------------------------------------------------------------
+  // Product / Careers / Security / Resources open the mega-menu on hover.
+  // Home opens the small anchor list on hover (or click); the two never show together.
+  const home = document.getElementById('nav-home');
+  const homeWrap = document.getElementById('nav-home-wrap');
   let openTl;
-  const open = () => {
+  const openMega = () => {
+    closeHome();
     nav.classList.add('is-open');
     openTl?.kill();
     openTl = gsap.to(nav, { height: 410, duration: 0.55, ease: 'power3.out' });
   };
-  const close = () => {
+  const closeMega = () => {
+    if (!nav.classList.contains('is-open')) return;
     nav.classList.remove('is-open');
     openTl?.kill();
     openTl = gsap.to(nav, { height: 60, duration: 0.45, ease: 'power3.inOut' });
   };
+  const openHome = () => {
+    closeMega();
+    nav.classList.add('is-home');
+    home.setAttribute('aria-expanded', 'true');
+  };
+  const closeHome = () => {
+    nav.classList.remove('is-home');
+    home.setAttribute('aria-expanded', 'false');
+  };
+  const closeAll = () => { closeMega(); closeHome(); };
+
   let leaveTimer;
-  // only the menu links open the dropdown; leaving the whole bar closes it
-  nav.querySelector('.nav__menu').addEventListener('mouseenter', () => { clearTimeout(leaveTimer); open(); });
-  nav.querySelector('.nav__panel').addEventListener('mouseenter', () => clearTimeout(leaveTimer));
-  nav.addEventListener('mouseleave', () => { leaveTimer = setTimeout(close, 120); });
+  const hold = () => clearTimeout(leaveTimer);
+  nav.querySelectorAll('.nav__menu a[data-mega]').forEach((a) => a.addEventListener('mouseenter', () => { hold(); openMega(); }));
+  home.addEventListener('mouseenter', () => { hold(); openHome(); });
+  home.addEventListener('click', () => (nav.classList.contains('is-home') ? closeHome() : openHome()));
+  homeWrap.addEventListener('mouseenter', hold);
+  homeWrap.addEventListener('click', (e) => { if (e.target.closest('a')) closeHome(); }); // picking an anchor folds the list away
+  nav.querySelector('.nav__panel').addEventListener('mouseenter', hold);
+  // leaving the whole bar closes whichever dropdown is showing
+  nav.addEventListener('mouseleave', () => { leaveTimer = setTimeout(closeAll, 120); });
 }

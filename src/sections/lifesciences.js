@@ -1,4 +1,4 @@
-import { gsap } from '../lib/scroll.js';
+import { gsap, anchorTargets } from '../lib/scroll.js';
 
 /**
  * "Built for consequential R&D" locks 40px under the navigation. After a
@@ -57,6 +57,7 @@ export function initLifeSciences() {
     },
   });
   if (tl.scrollTrigger.progress > 0.001) stage.setAttribute('data-skip-reveal', '');
+  anchorTargets['life-sciences'] = () => tl.scrollTrigger.start + HOLD() + DUR; // nav "Our Impact": the case study fully taken over
   const t0 = HOLD();
   // the photo layer starts exactly on the card and only swaps in when the take-over begins
   gsap.set(photo, { left: () => rect().left, top: () => rect().top, width: () => rect().width, height: () => rect().height, '--tab-top': '58px' });
