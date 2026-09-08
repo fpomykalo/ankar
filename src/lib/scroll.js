@@ -19,7 +19,8 @@ gsap.ticker.lagSmoothing(0);
 // in-page anchors go through Lenis
 document.addEventListener('click', (e) => {
   const a = e.target.closest('a[href^="#"]');
-  if (!a || a.getAttribute('href').length < 2) return;
+  if (!a) return;
+  if (a.getAttribute('href').length < 2) { e.preventDefault(); return; } // placeholder links stay put instead of jumping to the top
   const target = document.querySelector(a.getAttribute('href'));
   if (!target) return;
   e.preventDefault();

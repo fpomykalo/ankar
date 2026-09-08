@@ -507,7 +507,7 @@
 .folders--bios .fcard { cursor: pointer; }
 
 /* takeover: skip control 40px above the bottom edge */
-.tk-skip { position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); z-index: 120; cursor: pointer; padding: 12px 20px; margin-bottom: -12px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: #fff; pointer-events: auto; opacity: 0; }
+.tk-skip { position: absolute; left: 50%; bottom: 40px; z-index: 120; cursor: pointer; padding: 12px 20px; margin-bottom: -12px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: #fff; pointer-events: auto; opacity: 0; }
 .tk-skip span { text-box-trim: trim-both; text-box-edge: cap alphabetic; text-transform: uppercase; }
 .tk-skip svg { display: block; transition: transform .3s var(--ease-out); }
 .tk-skip:hover svg { transform: translateY(3px); }
