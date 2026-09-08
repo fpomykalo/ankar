@@ -114,7 +114,7 @@ export function initBios() {
   function setActive(i, { paging = true } = {}) {
     const prev = active;
     active = (i + n) % n;
-    cards.forEach((c, j) => { c.classList.toggle('is-open', j === active); if (j !== active) c.classList.remove('is-expanded'); });
+    cards.forEach((c, j) => { c.classList.toggle('is-open', j === active); if (j !== active) { c.classList.remove('is-expanded'); c.removeAttribute('data-lenis-prevent'); } });
     counter.textContent = `${active + 1} / ${n}`;
     const p = pageOf(active);
     if (paging && p !== page) showPage(p);
@@ -164,12 +164,20 @@ export function initBios() {
     if (!card) return;
     const i = cards.indexOf(card);
     if (i !== active) setActive(i, { paging: false });
-    else card.classList.toggle('is-expanded');
+    else { card.classList.toggle('is-expanded'); card.toggleAttribute('data-lenis-prevent', card.classList.contains('is-expanded')); }
   };
   track.addEventListener('pointerup', endDrag);
   track.addEventListener('pointercancel', () => { dragging = false; track.classList.remove('is-dragging'); if (moved) snap(); });
   let wheelTimer;
   track.addEventListener('wheel', (e) => {
+    // inside an expanded card the wheel scrolls the bio, never the page
+    const expanded = e.target.closest('.fcard.is-expanded');
+    if (expanded && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) {
+      e.preventDefault();
+      e.stopPropagation();
+      expanded.querySelector('.fcard__full').scrollTop += e.deltaY;
+      return;
+    }
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
     e.preventDefault();
     gsap.killTweensOf(pos);
@@ -177,7 +185,7 @@ export function initBios() {
     apply();
     clearTimeout(wheelTimer);
     wheelTimer = setTimeout(snap, 140);
-  }, { passive: false });
+  }, { passive: false, capture: true });
 }
 
 // --- quotes -----------------------------------------------------------------
