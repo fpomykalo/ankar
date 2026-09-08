@@ -116,12 +116,14 @@ export const industries = [
   {
     label: 'Case Study — 4',
     title: 'Consumer R&amp;D,<br>cosmetics<br>and materials',
+    openTitle: 'Consumer R&amp;D,<br>cosmetics and materials',
     image: `${BASE}/assets/images/industries/consumer.jpg`,
     caption: 'A client uses Ankar to continuously monitor its technology landscape, with around <b>64 potential infringement signals</b> identified annually.',
   },
   {
     label: 'Case Study — 5',
     title: 'Automotive<br>and industrials',
+    openTitle: 'Automotive<br>and industrials',
     image: `${BASE}/assets/images/industries/automotive.jpg`,
     caption: 'During a live evaluation, a client used Ankar to surface <b>relevant prior art</b> that its incumbent external research provider had missed.',
   },

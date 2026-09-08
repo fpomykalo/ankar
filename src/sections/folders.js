@@ -36,7 +36,7 @@ export function initIndustries() {
       ${label(c.label)}
       <div class="fcard__line"></div>
       <div class="fcard__open">
-        <h3 class="t-h3 fcard__title">${c.title.replace(/<br>/g, ' ')}</h3>
+        <h3 class="t-h3 fcard__title">${c.openTitle || c.title.replace(/<br>/g, ' ')}</h3>
         <div class="fcard__line fcard__line--bottom"></div>
         <p class="t-body fcard__caption">${c.caption}</p>
       </div>
