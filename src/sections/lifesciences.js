@@ -25,10 +25,16 @@ export function initLifeSciences() {
   const W = () => stage.clientWidth;
   const HOLD = () => Math.round(window.innerHeight * 0.25);
   const DUR = 1400;
+  // layout position of the card inside the stage (offsets, so reveal transforms never skew it)
   const rect = () => {
-    const r = card().getBoundingClientRect();
-    const s = stage.getBoundingClientRect();
-    return { left: r.left - s.left, top: r.top - s.top, width: r.width, height: r.height };
+    const c = card();
+    const container = folders.offsetParent;
+    return {
+      left: container.offsetLeft + folders.offsetLeft + c.offsetLeft,
+      top: container.offsetTop + folders.offsetTop + c.offsetTop,
+      width: c.offsetWidth,
+      height: c.offsetHeight,
+    };
   };
 
   gsap.set(panel, { x: () => W() + 40 });
@@ -37,19 +43,16 @@ export function initLifeSciences() {
     defaults: { ease: 'none' },
     scrollTrigger: {
       trigger: stage, start: 'top top', end: () => `+=${HOLD() + DUR}`, pin: true, scrub: 0.7, invalidateOnRefresh: true,
-      onUpdate: (st) => {
-        const past = st.progress * (HOLD() + DUR) > HOLD();
-        photo.style.visibility = past ? 'visible' : 'hidden';
-        card().style.visibility = past ? 'hidden' : '';
-      },
     },
   });
   const t0 = HOLD();
+  // the photo layer starts exactly on the card and only swaps in when the take-over begins
+  gsap.set(photo, { left: () => rect().left, top: () => rect().top, width: () => rect().width, height: () => rect().height, '--tab-top': '58px' });
   tl.to(fadeEls(), { opacity: 0, duration: 260, ease: 'power2.in' }, t0)
-    .fromTo(photo, {
-      left: () => rect().left, top: () => rect().top, width: () => rect().width, height: () => rect().height, '--tab-top': '58px',
-    }, {
-      left: -55, top: 0, width: () => W() * 0.6 + 55, height: () => H(), duration: 700, ease: 'power2.inOut', immediateRender: false,
+    .set(photo, { visibility: 'visible' }, t0)
+    .set(card(), { visibility: 'hidden' }, t0)
+    .to(photo, {
+      left: -55, top: 0, width: () => W() * 0.6 + 55, height: () => H(), duration: 700, ease: 'power2.inOut',
     }, t0)
     .to(brand, { opacity: 1, duration: 260, ease: 'power2.out' }, t0 + 420)
     .to(panel, { x: 0, duration: 650, ease: 'power3.inOut' }, t0 + 250)

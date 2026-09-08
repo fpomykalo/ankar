@@ -52,8 +52,7 @@
 
 /* same shape with the tab on the top edge (the "Insight" callout) */
 .folder--top {
-  --tab-left: 58px;
-  position: relative;
+  position: relative; /* --tab-left is declared on the element or inherited from its parent */
   -webkit-mask-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' rx='30'/%3E%3C/svg%3E"),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='25' viewBox='0 0 180 25'%3E%3Cpath d='M0 25C3.5946 25 6.9359 23.1501 8.8408 20.1045L18.3545 4.89453C20.2595 1.84901 23.6018 0 27.1963 0H152.804C156.398 0 159.741 1.84985 161.646 4.89551L171.159 20.1055C173.064 23.1508 176.406 25 180 25Z'/%3E%3C/svg%3E");

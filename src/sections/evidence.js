@@ -40,7 +40,7 @@ export function initEvidence() {
   // callout and card slot share the same top (294px under the rule): no offset, no jump
   gsap.set(morph, { left: 25, top: callout.offsetTop - cards.offsetTop, width: 505, height: 118, rotation: 0, '--tab-left': '267px' });
   gsap.set(morph.querySelector('.ecard-morph__label'), { '--label-off': '27px' });
-  gsap.set(content1, { opacity: 0 });
+  gsap.set(content1, { opacity: 0, y: 18 });
   gsap.set(card2, { x: 360, opacity: 0 });
   gsap.set(bg1, { visibility: 'hidden' });
 
@@ -63,7 +63,7 @@ export function initEvidence() {
         typeLabel((p - 0.18) / 0.45);
         // the card's own label and copy only appear once the box is in position
         const landed = p >= 0.985;
-        if (landed !== shown) { shown = landed; gsap.to(content1, { opacity: landed ? 1 : 0, duration: landed ? 0.45 : 0.1, overwrite: true }); }
+        if (landed !== shown) { shown = landed; gsap.to(content1, { opacity: landed ? 1 : 0, y: landed ? 0 : 18, duration: landed ? 0.55 : 0.1, ease: 'power3.out', overwrite: true }); }
       },
     },
   });

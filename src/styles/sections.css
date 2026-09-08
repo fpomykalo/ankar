@@ -73,7 +73,7 @@
 .hero__tab { position: absolute; left: calc(50% - 125px); bottom: 0; }
 
 /* ============================================================= CHALLENGE */
-.challenge { padding-top: 80px; } /* 80 + the stage's 120 lock offset = 200 under the hero */
+.challenge { padding-top: 0; } /* section moved up 80px: only the stage's 120 lock offset sits under the hero */
 .challenge__stage { position: relative; height: 758px; padding-top: 120px; }
 .challenge__stage > .container { height: 638px; }
 .challenge__body { left: 648px; width: 632px; }
@@ -115,7 +115,7 @@
 .ecard.is-active .ecard__line { background: rgba(255,255,255,.4); }
 
 /* the callout that rotates into card 1 (driven by GSAP) */
-.ecard-morph { position: absolute; left: 25px; top: 0; width: 505px; height: 118px; transform-origin: 0 0; pointer-events: none; z-index: 2; visibility: hidden; }
+.ecard-morph { --tab-left: 267px; position: absolute; left: 25px; top: 0; width: 505px; height: 118px; transform-origin: 0 0; pointer-events: none; z-index: 2; visibility: hidden; }
 .ecard-morph__shape { position: absolute; inset: 0; background: var(--blue); }
 
 /* ================================================================= INTRO */
@@ -414,9 +414,9 @@
   transition: color .4s;
 }
 .nav[data-reveal] { transform: translate3d(-50%, 20px, 0); }
-.nav__logo img { transition: filter .4s; }
+.nav__logo { display: block; color: inherit; }
+.nav__logo-svg { display: block; width: 102px; height: 16px; }
 .nav--dark { color: #fff; }
-.nav--dark .nav__logo img { filter: invert(1); }
 .nav--dark .nav__line { background: rgba(255,255,255,.6); }
 .nav.is-open { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .nav__panel { position: absolute; left: 0; top: 0; width: 1280px; height: 410px; opacity: 0; pointer-events: none; transition: opacity .35s; }
@@ -482,4 +482,5 @@
 .fcard__logos { top: auto; bottom: 40px; align-items: center; }
 
 /* takeover: section number above each title */
-.tk-title__n { position: absolute; left: 50%; top: -38px; transform: translateX(-50%); font: 400 12px/14px var(--font-mono); letter-spacing: 0; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.tk-num { position: absolute; left: 50%; top: 50%; z-index: 55; width: 40px; text-align: center; color: #fff; font: 400 12px/14px var(--font-mono); pointer-events: none; }
+.tk-num span { position: absolute; left: 0; width: 100%; text-box-trim: trim-both; text-box-edge: cap alphabetic; opacity: 0; }

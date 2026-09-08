@@ -41,6 +41,7 @@ export function initKnowledge() {
   const possible = document.getElementById('possible');
   const placeholder = document.getElementById('possible-panel');
   const illus = document.getElementById('illus');
+  const numEl = document.getElementById('tk-num');
   const introLayer = document.getElementById('intro-layer');
   const lightBg = document.getElementById('knowledge-bg');
   if (!stage) return;
@@ -50,11 +51,16 @@ export function initKnowledge() {
 
   // --- titles + one continuous pill stream ------------------------------------
   const titles = [];
+  const nums = [];
   const pills = [];
   pillGroups.forEach((g, gi) => {
     const title = document.createElement('h2');
     title.className = 'tk-title';
-    title.innerHTML = `<span class="tk-title__n">${String(gi + 1).padStart(2, '0')}</span>${g.title}`;
+    title.textContent = g.title;
+    const n = document.createElement('span');
+    n.textContent = String(gi + 1).padStart(2, '0');
+    numEl.appendChild(n);
+    nums.push(n);
     titlesEl.appendChild(title);
     titles.push(title);
     g.items.forEach((label, i) => {
@@ -70,6 +76,9 @@ export function initKnowledge() {
   });
   gsap.set(titles, { xPercent: -50, yPercent: -100, y: 20 }); // 50% higher than centre, then 20px down
   gsap.set(titles[0], { opacity: 1, scale: 0.8 });
+  // number sits 38px above the title's cap top (title top = 50% - 75px + 20px) and never moves
+  gsap.set(numEl, { xPercent: -50, y: -93 });
+  gsap.set(nums[0], { opacity: 1 });
   gsap.set(cta, { xPercent: -50, opacity: 1 });
 
   const vw = () => stage.clientWidth;
@@ -136,11 +145,14 @@ export function initKnowledge() {
   titles.forEach((title, i) => {
     if (i === 0) return;
     const t = groupTime(i);
-    tl.to(titles[i - 1], { y: -100, opacity: 0, duration: 220, ease: 'power2.in' }, t);
-    tl.fromTo(title, { y: 140, opacity: 0 }, { y: 20, opacity: 1, duration: 220, ease: 'power2.out' }, t + 60);
+    tl.to(titles[i - 1], { y: -50, opacity: 0, duration: 220, ease: 'power2.in' }, t);
+    tl.fromTo(title, { y: 90, opacity: 0 }, { y: 20, opacity: 1, duration: 220, ease: 'power2.out' }, t + 60);
+    tl.to(nums[i - 1], { opacity: 0, duration: 120 }, t);
+    tl.to(nums[i], { opacity: 1, duration: 140 }, t + 120);
   });
   // 4. shrink into the illustration panel
-  tl.to(titles[titles.length - 1], { y: -100, opacity: 0, duration: 200, ease: 'power2.in' }, T_SHRINK);
+  tl.to(titles[titles.length - 1], { y: -50, opacity: 0, duration: 200, ease: 'power2.in' }, T_SHRINK);
+  tl.to(nums[nums.length - 1], { opacity: 0, duration: 160 }, T_SHRINK);
   tl.to(cta, { opacity: 0, duration: 160 }, T_SHRINK);
   tl.to(bg, {
     left: () => targetRect().left, top: () => targetRect().top, width: () => targetRect().width, height: () => targetRect().height,
