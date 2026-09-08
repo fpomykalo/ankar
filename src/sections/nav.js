@@ -24,7 +24,11 @@ export function initNav() {
       const r = el.getBoundingClientRect();
       return r.top <= probeY && r.bottom >= probeY && r.left <= x && r.right >= x && getComputedStyle(el).visibility !== 'hidden';
     });
-    if (isDark !== dark) { dark = isDark; nav.classList.toggle('nav--dark', isDark); }
+    if (isDark !== dark) {
+      dark = isDark;
+      nav.classList.toggle('nav--dark', isDark);
+      document.getElementById('nav-home-wrap')?.classList.toggle('is-dark', isDark); // the Home list follows the bar's ink
+    }
   }
   lenis.on('scroll', updateTheme);
   gsap.ticker.add(updateTheme);

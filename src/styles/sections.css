@@ -527,13 +527,14 @@
 .nav__home-wrap.is-open { pointer-events: auto; }
 /* the fade lives on the panel itself: an ancestor at opacity < 1 becomes the backdrop root and the blur would only kick in once the fade ends */
 .nav__home-panel {
-  opacity: 0; transform: translateY(-6px); transition: opacity .25s var(--ease-out), transform .25s var(--ease-out);
+  opacity: 0; transform: translateY(-6px);
   display: flex; flex-direction: column; gap: 20px; width: 163px; padding: 20px; border-radius: 20px; box-sizing: border-box;
   background: rgba(255, 255, 255, 0.5);
   -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
   box-shadow: inset 0 2px 2px rgba(255,255,255,.4), inset 0 -2px 2px rgba(255,255,255,.4);
-  color: #000;
+  color: #000; transition: opacity .25s var(--ease-out), transform .25s var(--ease-out), color .4s;
 }
+.nav__home-wrap.is-dark .nav__home-panel { color: #fff; }
 .nav__home-wrap.is-open .nav__home-panel { opacity: 1; transform: none; }
 .nav__home-panel a { display: block; white-space: nowrap; text-box-trim: trim-both; text-box-edge: cap alphabetic; transition: opacity .3s; }
 .nav__home-panel a:hover { opacity: .6; }
