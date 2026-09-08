@@ -523,14 +523,17 @@
 .nav__chev { position: absolute; right: 0; top: 13px; display: block; width: 6.46px; height: 4.55px; transition: transform .3s var(--ease-out); } /* 10px link padding + 3px */
 .nav.is-home .nav__chev { transform: rotate(180deg); }
 /* sits beside the bar, not inside it: a backdrop-filter nested in the bar's own filter could only blur the bar */
-.nav__home-wrap { position: fixed; left: calc(50% - 640px + 409px); top: 80px; z-index: 1000; padding-top: 10px; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity .25s var(--ease-out), transform .25s var(--ease-out); }
-.nav__home-wrap.is-open { opacity: 1; pointer-events: auto; transform: none; }
+.nav__home-wrap { position: fixed; left: calc(50% - 640px + 409px); top: 80px; z-index: 1000; padding-top: 10px; pointer-events: none; }
+.nav__home-wrap.is-open { pointer-events: auto; }
+/* the fade lives on the panel itself: an ancestor at opacity < 1 becomes the backdrop root and the blur would only kick in once the fade ends */
 .nav__home-panel {
+  opacity: 0; transform: translateY(-6px); transition: opacity .25s var(--ease-out), transform .25s var(--ease-out);
   display: flex; flex-direction: column; gap: 20px; width: 163px; padding: 20px; border-radius: 20px; box-sizing: border-box;
   background: rgba(255, 255, 255, 0.5);
   -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
   box-shadow: inset 0 2px 2px rgba(255,255,255,.4), inset 0 -2px 2px rgba(255,255,255,.4);
   color: #000;
 }
+.nav__home-wrap.is-open .nav__home-panel { opacity: 1; transform: none; }
 .nav__home-panel a { display: block; white-space: nowrap; text-box-trim: trim-both; text-box-edge: cap alphabetic; transition: opacity .3s; }
 .nav__home-panel a:hover { opacity: .6; }
