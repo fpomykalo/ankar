@@ -303,7 +303,7 @@
 
 /* ================================================================== BIOS */
 .bios { padding-top: 200px; }
-.bios > .container { height: 1237px; }
+.bios > .container { height: 822px; }
 .bios__title { width: 721px; }
 .bios__body { left: 864px; top: 103px; width: 433px; }
 .bios__controls { position: absolute; left: 0; top: 302px; width: 1280px; height: 30px; }
@@ -320,7 +320,7 @@
 .bios__bio { position: absolute; left: 0; top: 862px; width: 674px; min-height: 375px; }
 
 /* ================================================================= VIDEO */
-.video { padding-top: 150px; }
+.video { padding-top: 200px; }
 .video > .container { height: 928px; }
 .video__title { position: absolute; left: 0; top: 20px; width: 719px; }
 .video__box { position: absolute; left: 0; top: 206px; width: 1280px; height: 722px; border-radius: 30px; overflow: hidden; background: #000; cursor: pointer; }
@@ -484,3 +484,27 @@
 /* takeover: section number above each title */
 .tk-num { position: absolute; left: 50%; top: 50%; z-index: 55; width: 40px; text-align: center; color: #fff; font: 400 12px/14px var(--font-mono); pointer-events: none; }
 .tk-num span { position: absolute; left: 0; width: 100%; text-box-trim: trim-both; text-box-edge: cap alphabetic; opacity: 0; }
+
+/* people cards: role + logo up top, four-line excerpt, click for the full (scrollable) bio */
+.fcard__ui { position: absolute; inset: 0; }
+.folders--bios .fcard__meta { top: 110px; }
+.folders--bios .fcard__logos { top: 60px; bottom: auto; }
+.fcard__excerpt { position: absolute; left: 45px; top: 323px; width: 261px; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; transition: opacity .35s; }
+.fcard__more { position: absolute; left: 45px; top: 432px; transition: opacity .35s; }
+.fcard__full { position: absolute; left: 45px; top: 187px; width: 654px; height: 253px; overflow-y: auto; padding-right: 16px; opacity: 0; pointer-events: none; transition: opacity .35s; scrollbar-width: thin; scrollbar-color: #fff transparent; }
+.fcard__full::-webkit-scrollbar { width: 3px; }
+.fcard__full::-webkit-scrollbar-thumb { background: #fff; border-radius: 10px; }
+.fcard__full::-webkit-scrollbar-track { background: transparent; }
+.fcard.is-expanded .fcard__full { opacity: 1; pointer-events: auto; transition-delay: .2s; }
+.fcard.is-expanded .fcard__excerpt, .fcard.is-expanded .fcard__more { opacity: 0; }
+.folders--bios .fcard.is-open.is-expanded .fcard__shade { background: rgba(0,0,0,.7); }
+.folders--bios .fcard { cursor: pointer; }
+
+/* takeover: skip control 40px above the bottom edge */
+.tk-skip { position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); z-index: 60; display: flex; flex-direction: column; align-items: center; gap: 10px; color: #fff; pointer-events: auto; opacity: 0; }
+.tk-skip span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.tk-skip svg { display: block; transition: transform .3s var(--ease-out); }
+.tk-skip:hover svg { transform: translateY(3px); }
+
+/* wrapper the pinned stages fade out, so entrance reveals on its children never fight the stage timeline */
+.stage-fade { position: absolute; inset: 0; }

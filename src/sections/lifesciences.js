@@ -18,9 +18,9 @@ export function initLifeSciences() {
   const card = () => folders.querySelector('.fcard');
   const cards = () => Array.from(folders.children);
   const fadeEls = () => [
-    ...stage.querySelectorAll('[data-ind-fade]'),
+    document.getElementById('industries-fade'),
     ...cards().slice(1),
-    ...card().querySelectorAll('.fcard__open, .fcard__closed, .tab-label, .fcard__line, .fcard__grad, .fcard__grad-bottom'),
+    ...card().querySelectorAll('.fcard__ui, .fcard__grad, .fcard__grad-bottom'),
   ];
   // whichever card is active, the take-over first hands the highlight to Life sciences
   const OPEN_W = 557;
@@ -34,7 +34,7 @@ export function initLifeSciences() {
   };
   const H = () => stage.clientHeight;
   const W = () => stage.clientWidth;
-  const HOLD = () => Math.round(window.innerHeight * 0.25);
+  const HOLD = () => Math.round(window.innerHeight * 0.5); // half a viewport before the take-over begins
   const DUR = 1400 + 260;
   // geometry of the Life sciences card in its open state (layout offsets, no transforms)
   const rect = () => {
@@ -56,6 +56,7 @@ export function initLifeSciences() {
       onUpdate: (st) => setTaking(st.progress * (HOLD() + DUR) > HOLD()),
     },
   });
+  if (tl.scrollTrigger.progress > 0.001) stage.setAttribute('data-skip-reveal', '');
   const t0 = HOLD();
   // the photo layer starts exactly on the card and only swaps in when the take-over begins
   gsap.set(photo, { left: () => rect().left, top: () => rect().top, width: () => rect().width, height: () => rect().height, '--tab-top': '58px' });

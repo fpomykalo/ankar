@@ -8,6 +8,7 @@ import { gsap } from './scroll.js';
  */
 export function initReveal(root = document) {
   gsap.utils.toArray(root.querySelectorAll('[data-reveal]')).forEach((el) => {
+    if (el.closest('[data-skip-reveal]')) { el.removeAttribute('data-reveal'); return; } // stage already in progress (reload)
     const delay = parseFloat(el.dataset.revealDelay || '0');
     gsap.to(el, {
       y: 0,

@@ -16,7 +16,7 @@ export function initEvidence() {
   const card2 = document.getElementById('ecard-2');
   const body = document.getElementById('challenge-body');
   const title = stage.querySelector('.sec__title');
-  const eb1 = document.getElementById('challenge-eb1');
+  const fade = document.getElementById('challenge-fade'); // eyebrow + headline + body
   const eb1m = document.getElementById('challenge-eb1-muted');
   const eb2 = document.getElementById('challenge-eb2');
   if (!stage || !callout || !morph) return;
@@ -45,17 +45,18 @@ export function initEvidence() {
   gsap.set(bg1, { visibility: 'hidden' });
 
   let shown = false;
+  const hold = () => Math.round(window.innerHeight * 0.25) / 900;
   const tl = gsap.timeline({
     defaults: { ease: 'none' },
     scrollTrigger: {
       trigger: stage,
       start: 'top top',
-      end: '+=900',
+      end: () => `+=${900 + Math.round(window.innerHeight * 0.25)}`, // both boxes stay a quarter viewport longer
       pin: true,
       scrub: 0.6,
       invalidateOnRefresh: true,
       onUpdate: (st) => {
-        const p = st.progress;
+        const p = Math.min(1, st.progress * (1 + hold()));
         const active = p > 0.001 && p < 0.985;
         callout.style.visibility = p > 0.001 ? 'hidden' : '';
         morph.style.visibility = active ? 'visible' : 'hidden';
@@ -68,9 +69,8 @@ export function initEvidence() {
     },
   });
 
-  tl.to([body, title], { opacity: 0, y: -30, duration: 0.25, ease: 'power2.in' }, 0)
+  tl.to(fade, { opacity: 0, y: -30, duration: 0.25, ease: 'power2.in' }, 0)
     .to(text, { opacity: 0, duration: 0.2 }, 0)
-    .to(eb1, { opacity: 0, duration: 0.25 }, 0.05)
     .to(eb1m, { opacity: 1, duration: 0.25 }, 0.05)
     .to(eb2, { opacity: 1, duration: 0.3 }, 0.15)
     .to(cards, { top: 58, duration: 1, ease: 'power1.inOut' }, 0)   // the whole slot rides up as the headline leaves
@@ -79,7 +79,11 @@ export function initEvidence() {
       duration: 1, ease: 'power1.inOut',
     }, 0)
     .to(morph.querySelector('.ecard-morph__label'), { '--label-off': '31px', duration: 1, ease: 'power1.inOut' }, 0)
-    .to(card2, { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.35);
+    .to(card2, { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.35)
+    .to({}, { duration: 0.001 }, 1 + hold() - 0.001);
+
+  // a reload mid-stage must not replay the entrance reveals over the faded elements
+  if (tl.scrollTrigger.progress > 0.001) stage.setAttribute('data-skip-reveal', '');
 
   [card1, card2].forEach((card) => {
     card.addEventListener('mouseenter', () => {

@@ -42,6 +42,7 @@ export function initKnowledge() {
   const placeholder = document.getElementById('possible-panel');
   const illus = document.getElementById('illus');
   const numEl = document.getElementById('tk-num');
+  const skip = document.getElementById('tk-skip');
   const introLayer = document.getElementById('intro-layer');
   const lightBg = document.getElementById('knowledge-bg');
   if (!stage) return;
@@ -80,6 +81,7 @@ export function initKnowledge() {
   gsap.set(numEl, { xPercent: -50, y: -93 });
   gsap.set(nums[0], { opacity: 1 });
   gsap.set(cta, { xPercent: -50, opacity: 1 });
+  gsap.set(skip, { xPercent: -50, opacity: 1 });
 
   const vw = () => stage.clientWidth;
   const vh = () => window.innerHeight;
@@ -153,7 +155,7 @@ export function initKnowledge() {
   // 4. shrink into the illustration panel
   tl.to(titles[titles.length - 1], { y: -50, opacity: 0, duration: 200, ease: 'power2.in' }, T_SHRINK);
   tl.to(nums[nums.length - 1], { opacity: 0, duration: 160 }, T_SHRINK);
-  tl.to(cta, { opacity: 0, duration: 160 }, T_SHRINK);
+  tl.to([cta, skip], { opacity: 0, duration: 160 }, T_SHRINK);
   tl.to(bg, {
     left: () => targetRect().left, top: () => targetRect().top, width: () => targetRect().width, height: () => targetRect().height,
     borderRadius: 30, duration: SHRINK - 100, ease: 'power2.inOut',
@@ -208,6 +210,7 @@ export function initKnowledge() {
   setPhase(0, true);
 
   const st = tl.scrollTrigger;
+  skip.addEventListener('click', () => lenis.scrollTo(st.start + T_REVEAL + 20, { duration: 1.4 }));
   ScrollTrigger.create({
     trigger: stage,
     start: 'top top',

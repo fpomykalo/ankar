@@ -142,14 +142,14 @@ const basePeople = [
   {
     name: 'Wiem<br>Gharbi',
     image: `${BASE}/assets/images/people/wiem-gharbi.avif`,
-    role: 'Co-Founder<br>Past: Palantir<br>(CEO’s office, Product, Strategy)',
+    role: 'Co-Founder<br>Past: Palantir (CEO’s office, Product, Strategy)',
     logos: ['palantir'],
     bio: 'Wiem Gharbi is Co-Founder of Ankar, an AI platform helping R&D teams make better technology decisions and accelerate innovation.<br><br>An engineer trained in applied mathematics and machine learning at Télécom Paris and École Polytechnique, Wiem spent six years at Palantir, where she worked across product, strategy and the CEO’s office and led complex AI deployments for some of the world’s largest organisations, including teams in life sciences and manufacturing.<br><br>That experience gave her a first-hand view of how difficult it can be for large R&D organisations to turn vast amounts of technical knowledge into better, faster decisions. She co-founded Ankar in 2024 to change that.<br><br>Today, Ankar helps R&D teams understand fast-moving technology landscapes, uncover new opportunities, identify risks earlier and turn day-to-day engineering work into strategic advantage.',
   },
   {
     name: 'Tamar<br>Gomez',
     image: `${BASE}/assets/images/people/tamar-gomez.avif`,
-    role: 'Co-Founder<br>Past: Palantir<br>(CEO’s office, Product, Strategy)',
+    role: 'Co-Founder<br>Past: Palantir, Helsing',
     logos: ['helsing', 'palantir'],
     bio: 'Tamar Gomez is Co-Founder of Ankar, an AI platform helping R&D teams make better technology decisions and accelerate innovation.<br><br>She spent nearly a decade building and deploying advanced AI software for enterprises and governments at Palantir and Helsing, working at the frontier of science, technology and complex decision-making. Tamar holds a PhD in Game Theory from Imperial College London.<br><br>Through that work, she saw first-hand that while technical progress was accelerating, the systems behind innovation remained fragmented, manual and disconnected. She co-founded Ankar in 2024 to change that.<br><br>Today, Ankar connects an organisation’s internal R&D knowledge with external technical change, AI models and purpose-built workflows, helping researchers and innovators explore new possibilities, develop stronger ideas and build on everything their organisation has learned before.',
   },
@@ -169,11 +169,17 @@ const basePeople = [
   },
 ];
 
-// 12 people: the four real bios repeated three times, as requested, until the rest arrive.
-export const people = Array.from({ length: 12 }, (_, i) => ({
-  ...basePeople[i % basePeople.length],
-  label: `People — ${i + 1}`,
+// Ankar's Patent Expert Panel (ankar.ai). The site could not be reached from the
+// build environment, so these nine are placeholders: swap name, role, bio and image.
+const panelPlaceholders = Array.from({ length: 9 }, (_, i) => ({
+  name: `Panel<br>Expert ${i + 1}`,
+  image: basePeople[i % basePeople.length].image,
+  role: 'Patent Expert Panel<br>Role to be added',
+  logos: [],
+  bio: 'Bio to be added from ankar.ai (Ankar’s Patent Expert Panel).',
 }));
+
+export const people = [...basePeople, ...panelPlaceholders].map((p, i) => ({ ...p, label: `People — ${i + 1}` }));
 
 export const quotes = [
   {

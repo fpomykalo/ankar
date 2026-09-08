@@ -99,11 +99,13 @@
     <div class="challenge__stage" id="challenge-stage">
       <div class="container">
         <div class="rule" data-reveal></div>
-        <p class="eyebrow t-mono sec__eyebrow" id="challenge-eb1" data-reveal><span class="dot"></span>The R&amp;D challenge</p>
         <p class="eyebrow t-mono sec__eyebrow is-muted" id="challenge-eb1-muted"><span class="dot dot--ring-blue"></span>The R&amp;D challenge</p>
         <p class="eyebrow t-mono sec__eyebrow evidence__eyebrow2" id="challenge-eb2"><span class="dot"></span>Supporting evidence</p>
+        <div class="stage-fade" id="challenge-fade">
+        <p class="eyebrow t-mono sec__eyebrow" id="challenge-eb1" data-reveal><span class="dot"></span>The R&amp;D challenge</p>
         <h2 class="t-h2 sec__title nowrap" data-reveal data-reveal-delay="0.1">Innovation has<br>outgrown the<br>systems behind it.</h2>
         <div class="t-body sec__body challenge__body" id="challenge-body" data-reveal data-reveal-delay="0.2">R&amp;D teams have more information than ever. But the knowledge behind the next breakthrough is scattered across experiments, technical documents, scientific literature, patents, specialist systems and the people who carry critical context in their heads.<br><br>Breakthroughs often happen between disciplines. Yet teams still spend enormous amounts of time finding information, reconciling different sources and recreating work that has already been done. Legacy tools can store individual pieces of the puzzle, but they were not built to connect the full context—or help teams act on it.<br><br>The cost is bigger than inefficiency. It is slower iteration, repeated work, knowledge that disappears between projects and the risk of missing the technology that could define what an organization becomes next.</div>
+        </div>
 
         <!-- Insight callout: rotates 90° counter-clockwise into the first evidence card -->
         <div class="callout" id="callout">
@@ -170,6 +172,7 @@
         <div class="tk-titles" id="tk-titles"></div>
         <div class="tk-num" id="tk-num"></div>
         <a class="btn btn--white tk-cta" id="tk-cta" href="#"><span>Explore the platform</span></a>
+        <button class="tk-skip t-mono" id="tk-skip" type="button"><span>Skip</span><svg width="18" height="10" viewBox="0 0 18 10" fill="none" aria-hidden="true"><path d="M1 1l8 8 8-8" stroke="currentColor"/></svg></button>
         <div class="illus" id="illus"><div class="illus__item is-on" data-illus="0"></div><div class="illus__item" data-illus="1"></div><div class="illus__item" data-illus="2"></div></div>
       </div>
 
@@ -225,10 +228,12 @@
   <section class="sec industries" id="industries">
     <div class="industries__stage" id="industries-stage">
       <div class="container">
-        <div class="rule" data-reveal data-ind-fade></div>
-        <p class="eyebrow t-mono sec__eyebrow" data-reveal data-ind-fade><span class="dot"></span>Built for consequential R&amp;D</p>
-        <h2 class="t-h2 sec__title nowrap" data-reveal data-reveal-delay="0.1" data-ind-fade>For the teams shaping<br>what comes next.</h2>
-        <div class="t-body sec__body industries__body" data-reveal data-reveal-delay="0.2" data-ind-fade>From new medicines and mobility systems to semiconductor capacity, advanced materials and high-trust technologies, the next generation of products will be built by teams that can turn complex knowledge into action.<br><br>Ankar helps research and innovation teams work across that complexity.</div>
+        <div class="stage-fade" id="industries-fade">
+        <div class="rule" data-reveal></div>
+        <p class="eyebrow t-mono sec__eyebrow" data-reveal><span class="dot"></span>Built for consequential R&amp;D</p>
+        <h2 class="t-h2 sec__title nowrap" data-reveal data-reveal-delay="0.1">For the teams shaping<br>what comes next.</h2>
+        <div class="t-body sec__body industries__body" data-reveal data-reveal-delay="0.2">From new medicines and mobility systems to semiconductor capacity, advanced materials and high-trust technologies, the next generation of products will be built by teams that can turn complex knowledge into action.<br><br>Ankar helps research and innovation teams work across that complexity.</div>
+        </div>
         <div class="folders folders--industries" id="industries-folders" data-reveal data-reveal-delay="0.3" data-nav-dark></div>
       </div>
 
@@ -290,7 +295,7 @@
 
       <div class="bios__controls" data-reveal data-reveal-delay="0.25">
         <button class="arrow arrow--prev" id="bios-prev" aria-label="Previous person"><svg viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9l8 8" stroke="#000"/></svg></button>
-        <span class="t-mono bios__counter" id="bios-counter">1 / 12</span>
+        <span class="t-mono bios__counter" id="bios-counter">1 / 13</span>
         <button class="arrow arrow--next" id="bios-next" aria-label="Next person"><svg viewBox="0 0 10 18" fill="none"><path d="M1 1l8 8-8 8" stroke="#000"/></svg></button>
         <div class="bios__dots" id="bios-dots"></div>
       </div>
@@ -298,10 +303,6 @@
       <div class="bios__viewport" data-reveal data-reveal-delay="0.3" data-nav-dark>
         <div class="bios__track folders folders--bios" id="bios-track"></div>
       </div>
-      <div class="rule bios__rule" data-reveal data-reveal-delay="0.35"></div>
-      <h3 class="t-h4 bios__name" id="bios-name" data-reveal data-reveal-delay="0.4">Wiem Gharbi</h3>
-      <p class="t-mono bios__role" id="bios-role" data-reveal data-reveal-delay="0.4">Co-Founder</p>
-      <div class="t-body bios__bio" id="bios-bio" data-reveal data-reveal-delay="0.4"></div>
     </div>
   </section>
 

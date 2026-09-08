@@ -33,6 +33,7 @@ export function initIndustries() {
     <article class="fcard folder${i === 0 ? ' is-open' : ''}">
       <img class="fcard__img" src="${c.image}" alt="" />
       ${shade()}
+      <div class="fcard__ui">
       ${label(c.label)}
       <div class="fcard__line"></div>
       <div class="fcard__open">
@@ -41,34 +42,39 @@ export function initIndustries() {
         <p class="t-body fcard__caption">${c.caption}</p>
       </div>
       <div class="fcard__closed"><h3 class="t-h3 fcard__vtitle">${c.title}</h3></div>
+      </div>
     </article>`).join('');
   bindAccordion(root);
 }
 
-// --- bios (12 people in one viewport-wide strip, paged by 4) ----------------
+// --- bios (one viewport-wide strip, paged by 4; click a card for the full bio) -----
 export function initBios() {
   const track = document.getElementById('bios-track');
-  const bioEl = document.getElementById('bios-bio');
-  const roleEl = document.getElementById('bios-role');
-  const nameEl = document.getElementById('bios-name');
   const counter = document.getElementById('bios-counter');
   const dotsEl = document.getElementById('bios-dots');
   if (!track) return;
   const PER = 4;
-  const pageCount = Math.ceil(people.length / PER);
+  const n = people.length;
+  const pageCount = Math.ceil(n / PER);
+  const pageStart = (p) => (p === pageCount - 1 ? Math.max(0, n - PER) : p * PER);
 
   track.innerHTML = people.map((c, i) => `
     <article class="fcard folder${i === 0 ? ' is-open' : ''}">
       <img class="fcard__img" src="${c.image}" alt="" draggable="false" />
       ${shade()}
+      <div class="fcard__ui">
       ${label(c.label)}
       <div class="fcard__line"></div>
       <div class="fcard__open">
-        <h3 class="t-h3 fcard__title">${c.name}</h3>
+        <h3 class="t-h3 fcard__title">${c.name.replace('<br>', ' ')}</h3>
         <p class="t-mono fcard__meta">${c.role}</p>
         <div class="fcard__logos">${c.logos.map(logoImg).join('')}</div>
+        <p class="t-body fcard__excerpt">${c.bio.split('<br>')[0]}</p>
+        <p class="t-mono fcard__more"><u>Click for full Bio</u></p>
+        <div class="t-body fcard__full" data-lenis-prevent>${c.bio}</div>
       </div>
       <div class="fcard__closed"><h3 class="t-h3 fcard__vtitle">${c.name}</h3></div>
+      </div>
     </article>`).join('');
   const cards = Array.from(track.children);
   dotsEl.innerHTML = Array.from({ length: pageCount }, (_, p) => `<button class="bios__dot${p === 0 ? ' is-active' : ''}" aria-label="Page ${p + 1}"></button>`).join('');
@@ -78,7 +84,7 @@ export function initBios() {
   let page = 0;
   const pos = { x: 0 };
   const widthOf = (c) => (c.classList.contains('is-open') ? 744 : 212) - 25;
-  const pageOffset = (p) => { let x = 0; for (let i = 0; i < p * PER; i += 1) x += widthOf(cards[i]); return x; };
+  const pageOffset = (p) => { let x = 0; for (let i = 0; i < pageStart(p); i += 1) x += widthOf(cards[i]); return x; };
   const apply = () => { track.style.transform = `translate3d(${pos.x}px,0,0)`; };
   const goTo = (x, dur = 0.9) => gsap.to(pos, { x, duration: dur, ease: 'power3.inOut', onUpdate: apply, overwrite: 'auto' });
   function showPage(p, dur) {
@@ -86,37 +92,27 @@ export function initBios() {
     goTo(-pageOffset(p), dur);
     dots.forEach((d, i) => d.classList.toggle('is-active', i === p));
   }
-  function setText() {
-    gsap.to([bioEl, roleEl, nameEl], { opacity: 0, duration: 0.2, onComplete: () => {
-      bioEl.innerHTML = people[active].bio;
-      nameEl.innerHTML = people[active].name.replace('<br>', ' ');
-      roleEl.innerHTML = people[active].role.split('<br>')[0];
-      gsap.to([bioEl, roleEl, nameEl], { opacity: 1, duration: 0.4 });
-    } });
-  }
+  const pageOf = (i) => Math.min(pageCount - 1, Math.floor(i / PER));
   function setActive(i, { paging = true } = {}) {
-    active = (i + people.length) % people.length;
-    cards.forEach((c, j) => c.classList.toggle('is-open', j === active));
-    counter.textContent = `${active + 1} / ${people.length}`;
-    const p = Math.floor(active / PER);
+    active = (i + n) % n;
+    cards.forEach((c, j) => { c.classList.toggle('is-open', j === active); if (j !== active) c.classList.remove('is-expanded'); });
+    counter.textContent = `${active + 1} / ${n}`;
+    const p = pageOf(active);
     if (paging && p !== page) showPage(p);
     else if (paging) goTo(-pageOffset(page));
-    setText();
   }
-  bioEl.innerHTML = people[0].bio;
-  nameEl.innerHTML = people[0].name.replace('<br>', ' ');
-  roleEl.innerHTML = people[0].role.split('<br>')[0];
 
-  // hover only highlights the card; it never moves the strip
   cards.forEach((c, i) => c.addEventListener('mouseenter', () => { if (i !== active && !dragging) setActive(i, { paging: false }); }));
   document.getElementById('bios-prev')?.addEventListener('click', () => setActive(active - 1));
   document.getElementById('bios-next')?.addEventListener('click', () => setActive(active + 1));
   dots.forEach((d, p) => d.addEventListener('click', () => { showPage(p); }));
 
-  // drag / horizontal wheel moves the strip, snapping to the nearest page
+  // drag / horizontal wheel moves the strip (snapping to pages); a plain click toggles the full bio
   let dragging = false;
+  let moved = false;
   let startX = 0;
   let startPos = 0;
+  let downCard = null; // pointer capture retargets the release to the track, so remember the card
   const maxX = () => -pageOffset(pageCount - 1);
   const snap = () => {
     let best = 0;
@@ -125,17 +121,33 @@ export function initBios() {
     showPage(best, 0.6);
   };
   track.addEventListener('pointerdown', (e) => {
-    dragging = true; startX = e.clientX; startPos = pos.x;
-    track.classList.add('is-dragging'); track.setPointerCapture(e.pointerId); gsap.killTweensOf(pos);
+    if (e.target.closest('.fcard__full')) return; // let the bio scroll
+    downCard = e.target.closest('.fcard');
+    dragging = true; moved = false; startX = e.clientX; startPos = pos.x;
+    track.setPointerCapture(e.pointerId); gsap.killTweensOf(pos);
   });
   track.addEventListener('pointermove', (e) => {
     if (!dragging) return;
-    pos.x = Math.min(0, Math.max(maxX() - 100, startPos + (e.clientX - startX)));
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 6) { moved = true; track.classList.add('is-dragging'); }
+    if (!moved) return;
+    pos.x = Math.min(0, Math.max(maxX() - 100, startPos + dx));
     apply();
   });
-  const endDrag = () => { if (!dragging) return; dragging = false; track.classList.remove('is-dragging'); snap(); };
+  const endDrag = (e) => {
+    if (!dragging) return;
+    dragging = false;
+    track.classList.remove('is-dragging');
+    if (moved) { snap(); return; }
+    // click: open the card, or toggle its full bio when it is already open
+    const card = downCard;
+    if (!card) return;
+    const i = cards.indexOf(card);
+    if (i !== active) setActive(i, { paging: false });
+    else card.classList.toggle('is-expanded');
+  };
   track.addEventListener('pointerup', endDrag);
-  track.addEventListener('pointercancel', endDrag);
+  track.addEventListener('pointercancel', () => { dragging = false; track.classList.remove('is-dragging'); if (moved) snap(); });
   let wheelTimer;
   track.addEventListener('wheel', (e) => {
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
@@ -157,6 +169,7 @@ export function initQuotes() {
     <article class="fcard folder${i === 0 ? ' is-open' : ''}">
       <img class="fcard__img" src="${c.image}" alt="" />
       ${shade()}
+      <div class="fcard__ui">
       ${label(c.label)}
       <div class="fcard__line"></div>
       <div class="fcard__open">
@@ -169,6 +182,7 @@ export function initQuotes() {
       <div class="fcard__closed">
         <h3 class="t-h3 fcard__vtitle">${c.name}</h3>
         <div class="fcard__logo-bottom" style="bottom:${bottoms[c.logo]}px">${logoImg(c.logo)}</div>
+      </div>
       </div>
     </article>`).join('');
   bindAccordion(root);
