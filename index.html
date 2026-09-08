@@ -104,14 +104,14 @@
         <div class="t-body sec__body challenge__body" id="challenge-body" data-reveal data-reveal-delay="0.2">R&amp;D teams have more information than ever. But the knowledge behind the next breakthrough is scattered across experiments, technical documents, scientific literature, patents, specialist systems and the people who carry critical context in their heads.<br><br>Breakthroughs often happen between disciplines. Yet teams still spend enormous amounts of time finding information, reconciling different sources and recreating work that has already been done. Legacy tools can store individual pieces of the puzzle, but they were not built to connect the full context—or help teams act on it.<br><br>The cost is bigger than inefficiency. It is slower iteration, repeated work, knowledge that disappears between projects and the risk of missing the technology that could define what an organization becomes next.</div>
 
         <!-- Insight callout: rotates 90° counter-clockwise into the first evidence card -->
-        <div class="callout" id="callout" data-reveal data-reveal-delay="0.3">
+        <div class="callout" id="callout">
           <div class="callout__shape folder--top"></div>
           <p class="eyebrow t-mono callout__label"><span class="dot dot--ring"></span>Insight</p>
           <p class="t-body callout__text nowrap">In a more competitive world, innovation is the difference<br>between leading what comes next and being left behind.</p>
         </div>
 
         <div class="evidence__cards" id="evidence-cards">
-          <div class="ecard-morph" id="ecard-morph"><div class="ecard-morph__shape folder--top"></div></div>
+          <div class="ecard-morph" id="ecard-morph"><div class="ecard-morph__shape folder--top"></div><div class="ecard-morph__label t-mono"><span class="dot dot--ring"></span><span class="ecard-morph__words"><span class="ecard-morph__w1">Insight</span><span class="ecard-morph__w2">Sup.E. — 1</span></span></div></div>
 
           <article class="ecard ecard--one" id="ecard-1">
             <div class="ecard__bg folder"></div>
@@ -144,9 +144,10 @@
     </div>
   </section>
 
-  <!-- ================================================== SYSTEM / TEXT INTRO -->
-  <section class="sec intro" id="system">
-    <div class="container">
+  <!-- =========================== KNOWLEDGE TAKEOVER + WHAT ANKAR MAKES POSSIBLE -->
+  <section class="knowledge" id="knowledge">
+    <div class="knowledge__stage" id="knowledge-stage">
+      <div class="container intro-layer" id="intro-layer">
       <div class="rule" data-reveal></div>
       <p class="eyebrow t-mono sec__eyebrow" data-reveal><span class="dot"></span>The system where R&amp;D knowledge compounds</p>
       <h2 class="t-h2 sec__title intro__title" data-reveal data-reveal-delay="0.1">Technical knowledge can finally become<br>a compounding system.</h2>
@@ -158,23 +159,17 @@
         <div class="col" data-reveal data-reveal-delay="0.2"><div class="rule"></div><span class="t-mono col__n">3.</span><h3 class="t-h4 col__title">Put intelligence<br>to work</h3><p class="t-body col__body">Move from understanding into action: explore a technical field, develop a concept, evaluate alternative approaches, learn from experiments and capture valuable innovation.</p></div>
       </div>
     </div>
-  </section>
-
-  <!-- =========================== KNOWLEDGE TAKEOVER + WHAT ANKAR MAKES POSSIBLE -->
-  <section class="knowledge" id="knowledge">
-    <div class="knowledge__stage" id="knowledge-stage">
+      <div class="knowledge__bg" id="knowledge-bg"></div>
       <!-- gradient background: rises from below at 80%, takes over, then shrinks into the illustration panel -->
       <div class="tk-bg" id="tk-bg" data-nav-dark>
         <img class="tk-bg__img" src="/assets/images/gradients/gradient-2-landscape.jpg" alt="" />
         <div class="noise"></div>
+        <div class="tk-pills" id="tk-pills"></div>
         <div class="tk-titles" id="tk-titles"></div>
         <a class="btn btn--white tk-cta" id="tk-cta" href="#"><span>Explore the platform</span></a>
         <div class="illus" id="illus"><div class="illus__item is-on" data-illus="0"></div><div class="illus__item" data-illus="1"></div><div class="illus__item" data-illus="2"></div></div>
       </div>
 
-      <div class="tk-content" id="tk-content">
-        <div class="tk-pills" id="tk-pills"></div>
-      </div>
 
       <div class="container possible" id="possible">
         <div class="rule"></div>
@@ -303,6 +298,7 @@
         <div class="bios__track folders folders--bios" id="bios-track"></div>
       </div>
       <div class="rule bios__rule" data-reveal data-reveal-delay="0.35"></div>
+      <h3 class="t-h4 bios__name" id="bios-name" data-reveal data-reveal-delay="0.4">Wiem Gharbi</h3>
       <p class="t-mono bios__role" id="bios-role" data-reveal data-reveal-delay="0.4">Co-Founder</p>
       <div class="t-body bios__bio" id="bios-bio" data-reveal data-reveal-delay="0.4"></div>
     </div>
@@ -338,7 +334,7 @@
       <p class="eyebrow t-mono closing__eyebrow" data-reveal><span class="dot"></span>Work with us</p>
       <h2 class="t-display closing__title" data-reveal data-reveal-delay="0.1">What could your<br>team invent next?</h2>
       <p class="t-body closing__body" data-reveal data-reveal-delay="0.2">Bring your organization’s knowledge, external technical change and AI-native R&amp;D workflows together in one trusted platform.</p>
-      <a class="btn btn--blue closing__cta" href="#" data-reveal data-reveal-delay="0.3"><span>Explore the platform</span></a>
+      <div class="closing__cta-wrap" id="closing-cta-wrap"><a class="btn btn--blue closing__cta" href="#" data-reveal data-reveal-delay="0.3"><span>Explore the platform</span></a></div>
       <div class="closing__mock-wrap">
         <div class="closing__mock" id="closing-mock" data-reveal data-reveal-delay="0.4">
           <img src="/assets/images/ui/ui-1.png" width="880" height="478" alt="Ankar platform interface" />

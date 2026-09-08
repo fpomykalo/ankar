@@ -74,8 +74,8 @@
 
 /* ============================================================= CHALLENGE */
 .challenge { padding-top: 100px; }
-.challenge__stage { position: relative; height: 974px; padding-top: 100px; }
-.challenge__stage > .container { height: 874px; }
+.challenge__stage { position: relative; height: 758px; padding-top: 120px; }
+.challenge__stage > .container { height: 638px; }
 .challenge__body { left: 648px; width: 632px; }
 .callout {
   position: absolute; left: 0; top: 294px; width: 505px; height: 118px;
@@ -91,8 +91,8 @@
 .evidence__cards { position: absolute; left: -25px; top: 294px; width: 1305px; height: 580px; }
 
 .ecard { position: absolute; top: 0; width: 665px; height: 580px; color: #000; }
-.ecard--one { left: 0; }
-.ecard--two { left: 640px; }
+.ecard--one { left: 0; z-index: 1; }
+.ecard--two { left: 640px; z-index: 3; }
 .ecard__bg { position: absolute; inset: 0; background: var(--blue); transition: background-color .5s var(--ease-out); }
 .ecard__content { position: absolute; inset: 0; transition: color .5s var(--ease-out); }
 .ecard__line { position: absolute; left: 45px; width: 575px; height: 1px; background: rgba(0,0,0,.15); transition: background-color .5s; }
@@ -119,24 +119,24 @@
 .ecard-morph__shape { position: absolute; inset: 0; background: var(--blue); }
 
 /* ================================================================= INTRO */
-.intro { padding-top: 120px; }
-.intro > .container { height: 751px; }
+.intro-layer { position: absolute; left: 50%; top: 120px; transform: translateX(-50%); height: 751px; z-index: 1; }
 .intro__title { width: 508px; }
 .intro__body { left: 648px; top: 62px; width: 632px; }
 .intro__cols { top: 504px; }
 .intro__cols .col:nth-child(2) .col__body { width: 326px; }
 
 /* ============================================ KNOWLEDGE (pinned takeover) */
-.knowledge { position: relative; margin-top: 100px; }
+.knowledge { position: relative; margin-top: 0; }
 .knowledge__stage {
   position: relative;
-  height: max(100vh, 970px);
+  height: max(100vh, 900px);
   width: 100%;
   overflow: hidden;
-  background: var(--bg);
+  background: transparent;
 }
+.knowledge__bg { position: absolute; inset: 0; background: var(--bg); opacity: 0; z-index: 2; }
 .tk-bg {
-  position: absolute; left: 10vw; top: 100vh; width: 80vw; height: 80vh;
+  position: absolute; left: 10vw; top: 100vh; width: 80vw; height: 80vh; z-index: 3;
   border-radius: 30px; overflow: hidden; transform: translateZ(0);
   will-change: left, top, width, height;
 }
@@ -150,8 +150,8 @@
 .tk-pills { position: absolute; inset: 0; overflow: hidden; }
 .pill {
   position: absolute; left: 0; top: 0;
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 40px 50px; border-radius: 200px; white-space: nowrap;
+  display: inline-flex; align-items: flex-start; gap: 20px;
+  padding: 30px 50px 30px 30px; border-radius: 200px; white-space: nowrap;
   font: 300 36px/14px var(--font-mono); letter-spacing: -1px; color: #fff;
   background: rgba(255,255,255,.3);
   -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);
@@ -161,6 +161,7 @@
   opacity: 0;
 }
 .pill > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.pill__tag { font: 400 12px/14px var(--font-mono); letter-spacing: 0; }
 .tk-titles { position: absolute; left: 0; right: 0; top: 50%; height: 0; }
 .tk-title {
   position: absolute; left: 50%; top: 0;
@@ -173,7 +174,7 @@
 .tk-cta { position: absolute; left: 50%; top: 50%; margin-top: 72px; pointer-events: auto; opacity: 0; height: 40px; }
 
 /* "What Ankar makes possible" (lives inside the stage, revealed at the end) */
-.possible { position: absolute; left: 50%; top: 200px; transform: translateX(-50%); height: 740px; visibility: hidden; }
+.possible { position: absolute; left: 50%; top: 120px; transform: translateX(-50%); height: 740px; visibility: hidden; z-index: 4; }
 .possible [data-tk-reveal] { opacity: 0; transform: translate3d(0, 40px, 0); }
 .possible__body { position: absolute; left: 864px; top: 111px; width: 416px; }
 .possible__panel { position: absolute; left: 540px; top: 244px; width: 740px; height: 480px; border-radius: 30px; pointer-events: none; }
@@ -236,7 +237,7 @@
   position: absolute; left: 45px; top: 60px; height: 320px;
   writing-mode: vertical-rl; transform: rotate(180deg); text-align: right; white-space: nowrap;
 }
-.fcard__caption { position: absolute; left: 45px; right: 45px; top: 376px; }
+.fcard__caption { position: absolute; left: 45px; width: 467px; top: 376px; }
 .fcard__meta { position: absolute; left: 45px; top: 404px; }
 .fcard__logos { position: absolute; right: 45px; top: 418px; display: flex; gap: 40px; align-items: center; }
 .fcard__quote-mark { position: absolute; left: 396px; top: 71px; font: 200 86px/36px var(--font-display); letter-spacing: -1px; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
@@ -262,11 +263,11 @@
 /* ========================================================= LIFE SCIENCES */
 .ls { position: relative; margin-top: 200px; }
 .ls__stage { position: relative; height: max(100vh, 900px); width: 100%; overflow: hidden; background: var(--bg); }
-.ls__photo { position: absolute; left: 0; top: 0; width: 786px; height: 100%; overflow: hidden; border-radius: 0; }
+.ls__photo { position: absolute; left: 0; top: 0; width: 50vw; height: 100%; overflow: hidden; border-radius: 0; }
 .ls__photo > img:first-child { width: 100%; height: 100%; object-fit: cover; }
 .ls__photo-shade { position: absolute; inset: 0; background: rgba(0,0,0,.3); }
-.ls__brand { position: absolute; left: 161px; top: 50%; margin-top: -40px; }
-.ls__panel { --tab-top: 129px; position: absolute; left: 687px; top: 0; width: 753px; height: 100%; background: var(--blue); color: #000; }
+.ls__brand { position: absolute; left: calc(50% - 207px); top: 50%; margin-top: -40px; }
+.ls__panel { --tab-top: 129px; position: absolute; left: calc(50% - 25px); top: 0; width: calc(50% + 25px); height: 100%; background: var(--blue); color: #000; }
 .ls__label { --label-bottom: 259px; --dot-top: 269px; color: #000; }
 .ls__eyebrow { position: absolute; left: 113px; top: 129px; }
 .ls__title { position: absolute; left: 113px; top: 177px; width: 560px; }
@@ -343,8 +344,8 @@
 .closing__title[data-reveal] { transform: translate3d(-50%, 40px, 0); }
 .closing__body { position: absolute; left: 50%; top: 403px; width: 473px; transform: translateX(-50%); text-align: center; }
 .closing__body[data-reveal] { transform: translate3d(-50%, 40px, 0); }
-.closing__cta { position: absolute; left: 50%; top: 590px; transform: translateX(-50%); }
-.closing__cta[data-reveal] { transform: translate3d(-50%, 40px, 0); }
+.closing__cta-wrap { position: absolute; left: 0; top: 590px; width: 1280px; display: flex; justify-content: center; z-index: 5; }
+.closing__cta { position: relative; }
 .closing__mock-wrap { position: absolute; left: 0; top: 670px; width: 1280px; height: 695px; }
 .closing__mock {
   position: absolute; left: 200px; top: 0; width: 880px; height: 478px;
@@ -362,7 +363,7 @@
 .footer__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .footer__inner { height: 100%; }
 .footer__hero { position: absolute; left: 0; top: 0; width: 1280px; height: 1478px; }
-.final { position: sticky; top: calc(80px + (100vh - 190px) / 2); margin-top: 272px; width: 1280px; height: 110px; }
+.final { position: sticky; top: calc(50vh - 176px); margin-top: 272px; width: 1280px; height: 110px; }
 .final__word { position: absolute; top: 0; white-space: nowrap; }
 .final__word--left { left: 0; }
 .final__word--right { right: 0; text-align: right; }
@@ -469,3 +470,15 @@
 .bios__rule { position: absolute; left: 0; top: 862px; width: 1280px; }
 .bios__role { position: absolute; left: 0; top: 978px; }
 .bios__bio { position: absolute; left: 324px; top: 882px; width: 956px; min-height: 271px; }
+
+/* ==================================================== v3 additions */
+/* pinned sections lock 40px under the navigation (nav bottom = 80px) */
+.ecard-morph__label { position: absolute; left: calc(var(--tab-left) + 31px); top: 9px; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.ecard-morph__words { position: relative; display: inline-block; }
+.ecard-morph__w2 { position: absolute; left: 0; top: 0; opacity: 0; }
+.ecard-morph__label .t-mono, .ecard-morph__label span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.bios__name { position: absolute; left: 0; top: 882px; white-space: nowrap; }
+.bios__role { top: 940px; }
+.bios__track { cursor: grab; touch-action: pan-y; user-select: none; }
+.bios__track.is-dragging { cursor: grabbing; }
+.fcard__logos { top: auto; bottom: 40px; align-items: center; }

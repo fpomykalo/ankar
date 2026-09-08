@@ -42,6 +42,8 @@ export function initNav() {
     openTl = gsap.to(nav, { height: 60, duration: 0.45, ease: 'power3.inOut' });
   };
   let leaveTimer;
-  nav.addEventListener('mouseenter', () => { clearTimeout(leaveTimer); open(); });
+  // only the menu links open the dropdown; leaving the whole bar closes it
+  nav.querySelector('.nav__menu').addEventListener('mouseenter', () => { clearTimeout(leaveTimer); open(); });
+  nav.querySelector('.nav__panel').addEventListener('mouseenter', () => clearTimeout(leaveTimer));
   nav.addEventListener('mouseleave', () => { leaveTimer = setTimeout(close, 120); });
 }
