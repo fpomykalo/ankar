@@ -489,7 +489,9 @@
 /* people cards: role + logo up top, four-line excerpt, click for the full (scrollable) bio */
 .fcard__ui { position: absolute; inset: 0; }
 .folders--bios .fcard__meta { top: 110px; }
-.folders--bios .fcard__logos { top: 60px; bottom: auto; }
+.folders--bios .fcard__logos { top: 60px; bottom: auto; align-items: flex-end; }
+/* AstraZeneca wordmark baseline sits 0.75px above its box bottom at 31px; GSK sits on its box bottom */
+.folders--bios .fcard__logos img[alt="astra-zeneca"] { translate: 0 0.75px; }
 .fcard__excerpt { position: absolute; left: 45px; top: 323px; width: 261px; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; transition: opacity .35s; }
 .fcard__more { position: absolute; left: 45px; top: 432px; transition: opacity .35s; }
 .fcard__full { position: absolute; left: 45px; top: 187px; width: 654px; height: 253px; overflow-y: auto; padding-right: 16px; opacity: 0; pointer-events: none; transition: opacity .35s; scrollbar-width: none; }

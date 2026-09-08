@@ -4,7 +4,7 @@ import { industries, people, quotes } from '../data/content.js';
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const LOGO_SIZES = {
-  palantir: [92, 22], helsing: [97, 23], nlo: [55, 27], gsk: [70, 21], 'astra-zeneca': [142, 36],
+  palantir: [92, 22], helsing: [97, 23], nlo: [55, 27], gsk: [70, 21], 'astra-zeneca': [122, 31],
   loreal: [122, 22], valeo: [84, 37], antheros: [122, 25],
 };
 const logoImg = (name) => {
