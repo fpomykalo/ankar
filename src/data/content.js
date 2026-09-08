@@ -169,17 +169,115 @@ const basePeople = [
   },
 ];
 
-// Ankar's Patent Expert Panel (ankar.ai). The site could not be reached from the
-// build environment, so these nine are placeholders: swap name, role, bio and image.
-const panelPlaceholders = Array.from({ length: 9 }, (_, i) => ({
-  name: `Panel<br>Expert ${i + 1}`,
-  image: basePeople[i % basePeople.length].image,
-  role: 'Patent Expert Panel<br>Role to be added',
-  logos: [],
-  bio: 'Bio to be added from ankar.ai (Ankar’s Patent Expert Panel).',
-}));
+// Ankar's Patent Expert Panel (content supplied by the client). Roles are set in
+// the same sentence case the rest of the build uses for mono labels.
+const P = (...paras) => paras.join('<br><br>');
+const advisors = [
+  {
+    name: 'Kimiya<br>Shams',
+    image: `${BASE}/assets/images/people/kimiya-shams.avif`,
+    role: 'General Counsel, Devialet<br>Ankar Patent Expert Panel',
+    logos: [],
+    bio: P(
+      'Kimiya brings over 15 years of global experience across technology, luxury, entertainment, and highly regulated industries. She has built her career at the intersection of innovation, law, and business strategy; advising cutting-edge companies on intellectual property, product development, regulatory frameworks, AI adoption, and global go-to-market execution.',
+      'A recognized voice in the legal and tech ecosystem, Kimiya has authored multiple publications on AI, emerging technologies, intellectual property, and global regulatory landscapes, shaping industry dialogue on responsible innovation. In parallel, she is deeply committed to education and talent development, serving as a lecturer and guest speaker at HEC Paris, ESCP Business School, EDHEC, and Columbia Law School, where she teaches on topics spanning intellectual property, technology, management and the future of digital regulation.',
+      'Her background includes leadership roles in the U.S. and Europe, guiding organizations through complex legal, compliance, and operational challenges while enabling them to scale responsibly and creatively. Kimiya has worked with major brands and companies in technology, luxury, entertainment and emerging tech innovators, bringing a multi-sector perspective that aligns directly with Ankar AI’s mission.',
+    ),
+  },
+  {
+    name: 'Robert (Bob)<br>Hulse',
+    image: `${BASE}/assets/images/people/robert-hulse.avif`,
+    role: 'Head of Patent Prosecution, Fenwick and West<br>Ankar Patent Expert Panel',
+    logos: [],
+    bio: P(
+      'Bob advises clients in the computer software, electronics, electromechanical and medical devices, digital healthcare and electronic media industries. His holistic approach to building patent portfolios is strengthened by his extensive experience in intellectual property due diligence on both sides of M&A and financing transactions. Companies in the earlier stages rely on Bob to establish strong patent programs as they grow from industry newcomers to household names. He worked alongside Facebook to secure their first patent, on the Newsfeed, and many other fundamental patents such as the Like button, Check-In feature, privacy controls for social media, Social Ads and more. Bob was also the original patent attorney for Instacart and successfully grew their portfolio in the lead-up to their IPO.',
+      'In addition to providing legal services for his clients, Bob has served as an adjunct professor at the University of California College of the Law, San Francisco, teaching patent drafting and prosecution. He is also a member of the faculty at the Practising Law Institute and has lectured on topics related to patent law at the University of Washington School of Law, Dalhousie University and the National University of Singapore.',
+    ),
+  },
+  {
+    name: 'Jean-Christophe<br>Simon',
+    image: `${BASE}/assets/images/people/jean-christophe-simon.avif`,
+    role: 'Former Group Innovation Officer at Groupe SEB<br>Ankar Patent Expert Panel',
+    logos: [],
+    bio: P(
+      'Jean-Christophe brings more than 30 years of leadership experience spanning Research & Development, innovation strategy and intellectual property. His work cuts across a broad range of industries, including defense, cosmetics, consumer goods, custom industrial machines, optics and medical devices, with deep experience in turning technological advances into products that markets actually adopt.',
+      'He has held senior R&D and innovation roles at some of the world’s leading industrial groups, including L’Oréal, Kao Corporation, Essilor-Nikon, Groupe SEB and Thuasne. As Group Innovation Officer at Groupe SEB, he served on the executive committee, built the group’s open innovation and was strongly involved in corporate venture capabilities.',
+      'Earlier in his career, he led international research operations from Japan, an experience that shaped his approach to managing teams and reading global markets across Europe and Asia.',
+      'Today he is the founder of Calsoï, an innovation strategy and R&D advisory firm working with large industrial groups, mid-sized companies and deeptech startups. He advises on innovation roadmaps, fractional R&D management, intellectual property strategy and the sale of technology companies, bringing the dual perspective of a scientist and a senior executive.',
+    ),
+  },
+  {
+    name: 'Tony<br>Shaw',
+    image: `${BASE}/assets/images/people/tony-shaw.avif`,
+    role: 'Partner, Allens Patent & Trade Mark Attorneys<br>Ankar Patent Expert Panel',
+    logos: [],
+    bio: P(
+      'Tony builds global IP assets in a wide range of technologies to provide clients with defensible IP portfolios as a foundation for growth.',
+      'Tony advises clients in biotech, pharma, medtech and digital health. He brings a detailed and global view to building patent portfolios informed by his years leading a research group and over 20 years as a patent attorney with a significant portion of that being contentious work. He also has experience in intellectual property due diligence and technical aspects of patent litigation. With over 15 years in ‘Big Law’ he has also had significant exposure to adjacent areas of law. Early-stage companies and research institutions engage Tony to advise on and build sustainable patent portfolios to support investment and growth. He has worked with some of Australia’s leading research institutions as they commercialise early-stage technologies, has assisted multiple startups from inception through to public listings and represents small to medium sized businesses as well as global biotech and pharma companies.',
+      'In addition to providing patent attorney services for his clients, Tony is actively implementing AI solutions into his team’s daily practice including the adoption of commercially available solutions and developing his own life sciences specific patent tools.',
+      'Tony is recognised in the IAM 1000 and Patent Strategy 300 as a ManagingIP Patent Star. He is a fellow of the Royal Society of Medicine and a fellow of the Australian Institute of Patent and Trade Mark Attorneys.',
+    ),
+  },
+  {
+    name: 'Dan<br>Enebo',
+    image: `${BASE}/assets/images/people/dan-enebo.avif`,
+    role: 'Former Chief IP Counsel at Cargill<br>Ankar Patent Expert Panel',
+    logos: [],
+    bio: P(
+      'Daniel Enebo brings more than 30 years of strategic leadership experience spanning Research & Development and Intellectual Property law. His work encompasses a broad range of technology domains, including medical devices, food chemistry, biotechnology, complex global trading systems, large-scale manufacturing, and the IT platforms that support them.',
+      'He most recently served as Senior Vice President and Chief Intellectual Property Counsel at Cargill, Incorporated, where he led the global IP legal function and guided the company’s enterprise-wide strategy for creating, protecting, and deploying intellectual property. His responsibilities included IP strategy across diverse business units, technology development and licensing, IP leadership in complex M&A and joint venture transactions, freedom-to-operate analysis, enforcement, and numerous initiatives to enhance legal practice efficiency and strengthen outside counsel collaboration through IP-focused IT systems.',
+      'A recognized leader in the IP field, he served for many years on the Intellectual Property Owners Association Board, including roles as an officer and member of its Executive Committee. Earlier in his career, he practiced IP law at Fredrikson & Byron in Minneapolis and served as a Senior Scientist and R&D Team Leader at a multinational medical device company.',
+    ),
+  },
+  {
+    name: 'Helene Laville<br>Fiorucci',
+    image: `${BASE}/assets/images/people/helene-laville-fiorucci.avif`,
+    role: 'Former Lead Patent Counsel at Solvay<br>Ankar Patent Expert Panel',
+    logos: [],
+    bio: P(
+      'Helene Fiorucci is an IP strategist and fractional Chief IP Officer supporting deeptech startups in building strong, investment-ready intellectual property.',
+      'With more than 22 years of experience as a patent attorney, qualified in both European and U.S. patent laws, and a scientific background in biotechnology, pharmacology and organic chemistry, she helps founders secure IP assets that attract investors, protect competitive advantage, and drive long-term growth.',
+      'In 2022, she founded her own patent law practice in the U.S., following several years in a large IP law firm and in industry. She has handled a wide variety of situations, from portfolio strategy and prosecution to pre-litigation and litigation across Germany, China, and the USA.',
+      'Helene advises across the full innovation lifecycle, from early-stage invention harvesting and patent drafting to global portfolio management and IP due diligence. She works closely with scientific teams in biotechnology, advanced materials, polymers, energy storage, and antibody engineering, translating complex R&D into clear, defensible IP positions. She also collaborates with venture capital firms to assess IP strength during due diligence and support informed investment decisions.',
+      'Known for her strategic and pragmatic approach, Helene partners with founders, CTOs and investors to develop IP strategies tailored to both technical realities and business objectives. Her mission is to help deeptech companies build high-value IP that supports commercial success.',
+    ),
+  },
+  {
+    name: 'Stephan<br>Nößner',
+    image: `${BASE}/assets/images/people/stephan-noessner.avif`,
+    role: 'Patent Counsel Lead, Bosch<br>Ankar Patent Expert Panel',
+    logos: [],
+    bio: P(
+      'Stephan Nößner brings over a decade of experience at the intersection of technology, law, and business strategy, with a distinguished career in the intellectual property department of a leading global technology company, Robert Bosch GmbH. He has built his expertise advising on the strategic protection and commercialization of innovation, from initial patent filings to the enforcement and monetization of IP rights.',
+      'A key aspect of Stephan’s work is his profound experience in leveraging Artificial Intelligence for a wide range of patent-related tasks, including patent searches, strategy, prosecution, and litigation preparation. His expertise in applying advanced technology across the IP sector makes him a crucial advisor for innovative startups.',
+      'Stephan’s background is marked by deep technical and legal knowledge, complemented by international research experience at Johns Hopkins University. He holds a PhD in Applied Physics and is a qualified German Patent Attorney, European Patent Attorney, and a Representative before the Unified Patent Court. His specializations include IP pricing, international license negotiations, and managing patent portfolios in high-tech fields such as ADAS, artificial intelligence, sensor technology, and vehicle communication. At Bosch, he has been involved with IP marketing, the licensing of standard-essential patents, and international R&D negotiations.',
+      'In 2024, Stephan founded his own patent law firm, Noessner-IP, which focuses on providing strategic IP services to unlock the full commercial potential of clients’ innovations, with a particular emphasis on supporting startups and investors. His comprehensive perspective, which merges a deep understanding of technology with proven business acumen, enables him to guide companies, particularly emerging ventures, in transforming their intellectual property into powerful, value-generating assets.',
+    ),
+  },
+  {
+    name: 'Carlo<br>Cotrone',
+    image: `${BASE}/assets/images/people/carlo-cotrone.avif`,
+    role: 'Former Chief IP Counsel at Techtronic Industries<br>Ankar Patent Expert Panel',
+    logos: [],
+    bio: P(
+      'Carlo Cotrone is an IP consultant, attorney, and former chief IP counsel and law firm partner with over 25 years’ experience. At Quartal IP, he helps law firms and companies drive enhanced profitability and business outcomes through practice optimization, collaboration and business development strategies, and leadership development.',
+      'A recognized thought leader, Carlo is a prolific author and speaker and serves as Adjunct Professor of Law at University of Houston Law Center.',
+      'He received law and electrical engineering degrees from Marquette University and is a registered patent attorney with the United States Patent and Trademark Office. He is the inventor of two US patents directed to digital sheet music technology.',
+    ),
+  },
+  {
+    name: 'Bart<br>Jansen',
+    image: `${BASE}/assets/images/people/bart-jansen.avif`,
+    role: 'Former Patent Attorney at AAK, Corbion, Zacco<br>Ankar Patent Expert Panel',
+    logos: [],
+    bio: P(
+      'Bart Jansen has over 20 years of experience as a patent attorney, with a focus on life sciences. Qualified as a Dutch and European Patent attorney, Bart has worked for several years in private practice, and was a partner at the international patent firm Zacco, handling hundreds of patents on many different life sciences topics. After private practice, Bart has been an IP manager and patent attorney for over 10 years at innovative multinational companies, including food ingredients company Bunge Loders Croklaan, and biotech company Corbion. Bart studied Chemistry at Utrecht University, and holds a PhD from Leiden University.',
+      'At the core of a patent attorney’s job is the identification of patentable inventions from research and development output, and selecting the appropriate patenting strategy, building a patent portfolio that supports the underlying business strategy. Ankar’s AI tools are a great help in keeping this process efficient and consistent. Bart enjoys contributing to the further improvement of Ankar’s dedicated tools for chemical and life sciences patents.',
+    ),
+  },
+];
 
-export const people = [...basePeople, ...panelPlaceholders].map((p, i) => ({ ...p, label: `People — ${i + 1}` }));
+export const people = [...basePeople, ...advisors].map((p, i) => ({ ...p, label: `People — ${i + 1}` }));
 
 export const quotes = [
   {

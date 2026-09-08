@@ -94,12 +94,14 @@ export function initBios() {
   }
   const pageOf = (i) => Math.min(pageCount - 1, Math.floor(i / PER));
   function setActive(i, { paging = true } = {}) {
+    const prev = active;
     active = (i + n) % n;
     cards.forEach((c, j) => { c.classList.toggle('is-open', j === active); if (j !== active) c.classList.remove('is-expanded'); });
     counter.textContent = `${active + 1} / ${n}`;
     const p = pageOf(active);
     if (paging && p !== page) showPage(p);
-    else if (paging) goTo(-pageOffset(page));
+    // keep the page anchored when a card that sits before it (off to the left) just shrank
+    else if (paging || prev < pageStart(page)) goTo(-pageOffset(page), 0.7);
   }
 
   cards.forEach((c, i) => c.addEventListener('mouseenter', () => { if (i !== active && !dragging) setActive(i, { paging: false }); }));
