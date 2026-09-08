@@ -45,13 +45,13 @@ export function initEvidence() {
   gsap.set(bg1, { visibility: 'hidden' });
 
   let shown = false;
-  const hold = () => Math.round(window.innerHeight * 0.25) / 900;
+  const hold = () => Math.round(window.innerHeight * 0.5) / 900;
   const tl = gsap.timeline({
     defaults: { ease: 'none' },
     scrollTrigger: {
       trigger: stage,
       start: 'top top',
-      end: () => `+=${900 + Math.round(window.innerHeight * 0.25)}`, // both boxes stay a quarter viewport longer
+      end: () => `+=${900 + Math.round(window.innerHeight * 0.5)}`, // both boxes stay half a viewport longer
       pin: true,
       scrub: 0.6,
       invalidateOnRefresh: true,

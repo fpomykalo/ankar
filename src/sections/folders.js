@@ -1,4 +1,4 @@
-import { gsap } from '../lib/scroll.js';
+import { gsap, lenis } from '../lib/scroll.js';
 import { industries, people, quotes } from '../data/content.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -78,12 +78,12 @@ export function initBios() {
       </div>
     </article>`).join('');
   const cards = Array.from(track.children);
-  // custom scrollbar for the full bio
+  // custom scrollbar for the full bio (thumb is draggable)
   cards.forEach((c) => {
     const full = c.querySelector('.fcard__full');
     const thumb = c.querySelector('.fcard__thumb');
+    const trackH = 253;
     const update = () => {
-      const trackH = 253;
       const ratio = full.clientHeight / full.scrollHeight;
       const h = ratio >= 1 ? trackH : Math.max(30, Math.round(trackH * ratio));
       const maxScroll = full.scrollHeight - full.clientHeight;
@@ -94,7 +94,31 @@ export function initBios() {
     full.addEventListener('scroll', update);
     c.addEventListener('transitionend', update);
     update();
+    let dragY = null;
+    let dragTop = 0;
+    thumb.addEventListener('pointerdown', (e) => { e.stopPropagation(); dragY = e.clientY; dragTop = full.scrollTop; thumb.setPointerCapture(e.pointerId); });
+    thumb.addEventListener('pointermove', (e) => {
+      if (dragY === null) return;
+      const h = thumb.offsetHeight;
+      const maxScroll = full.scrollHeight - full.clientHeight;
+      full.scrollTop = dragTop + ((e.clientY - dragY) / (trackH - h)) * maxScroll;
+    });
+    const endThumb = () => { dragY = null; };
+    thumb.addEventListener('pointerup', endThumb);
+    thumb.addEventListener('pointercancel', endThumb);
+    // while the pointer is over an open bio the page scroller pauses, so the wheel only moves the text
+    c.addEventListener('mouseenter', () => { if (c.classList.contains('is-expanded')) lenis.stop(); });
+    c.addEventListener('mouseleave', () => lenis.start());
   });
+  const wheelDelta = (e) => (e.deltaMode === 1 ? e.deltaY * 40 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY);
+  // document-level, capture phase: nothing else can see the wheel before the bio does
+  document.addEventListener('wheel', (e) => {
+    const expanded = e.target.closest?.('#bios-track .fcard.is-expanded');
+    if (!expanded || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    expanded.querySelector('.fcard__full').scrollTop += wheelDelta(e);
+  }, { passive: false, capture: true });
   dotsEl.innerHTML = Array.from({ length: pageCount }, (_, p) => `<button class="bios__dot${p === 0 ? ' is-active' : ''}" aria-label="Page ${p + 1}"></button>`).join('');
   const dots = Array.from(dotsEl.children);
 
@@ -115,6 +139,7 @@ export function initBios() {
     const prev = active;
     active = (i + n) % n;
     cards.forEach((c, j) => { c.classList.toggle('is-open', j === active); if (j !== active) { c.classList.remove('is-expanded'); c.removeAttribute('data-lenis-prevent'); } });
+    lenis.start();
     counter.textContent = `${active + 1} / ${n}`;
     const p = pageOf(active);
     if (paging && p !== page) showPage(p);
@@ -164,20 +189,16 @@ export function initBios() {
     if (!card) return;
     const i = cards.indexOf(card);
     if (i !== active) setActive(i, { paging: false });
-    else { card.classList.toggle('is-expanded'); card.toggleAttribute('data-lenis-prevent', card.classList.contains('is-expanded')); }
+    else {
+      const open = card.classList.toggle('is-expanded');
+      card.toggleAttribute('data-lenis-prevent', open);
+      if (open) lenis.stop(); else lenis.start();
+    }
   };
   track.addEventListener('pointerup', endDrag);
   track.addEventListener('pointercancel', () => { dragging = false; track.classList.remove('is-dragging'); if (moved) snap(); });
   let wheelTimer;
   track.addEventListener('wheel', (e) => {
-    // inside an expanded card the wheel scrolls the bio, never the page
-    const expanded = e.target.closest('.fcard.is-expanded');
-    if (expanded && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) {
-      e.preventDefault();
-      e.stopPropagation();
-      expanded.querySelector('.fcard__full').scrollTop += e.deltaY;
-      return;
-    }
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
     e.preventDefault();
     gsap.killTweensOf(pos);
