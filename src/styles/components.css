@@ -12,7 +12,7 @@
   border-radius: 20px;
   font: 400 12px/14px var(--font-mono);
   white-space: nowrap;
-  transition: transform 0.4s var(--ease-out), background-color 0.3s;
+  transition: transform 0.4s var(--ease-out), background-color 0.3s, color 0.3s;
 }
 .btn > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .btn:hover { transform: translateY(-1px); }

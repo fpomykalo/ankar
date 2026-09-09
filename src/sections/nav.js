@@ -1,37 +1,15 @@
-import { gsap, lenis } from '../lib/scroll.js';
+import { gsap } from '../lib/scroll.js';
 
 /**
  * Fixed navigation.
  * - Logo links home (respects the deploy base path).
- * - Theme: white ink over dark surfaces ([data-nav-dark] elements under the
- *   nav's centre line), black ink over light surfaces.
+ * - Ink stays black over every surface.
  * - Hover opens the mega-menu (Figma "Nav / Variant2": 1280 × 410).
  */
 export function initNav() {
   const nav = document.getElementById('nav');
   if (!nav) return;
   nav.querySelector('.nav__logo').setAttribute('href', import.meta.env.BASE_URL || '/');
-
-  // --- light / dark ---------------------------------------------------------
-  const darkZones = Array.from(document.querySelectorAll('[data-nav-dark]'));
-  const probeY = 50;   // nav centre line
-  const probeX = () => window.innerWidth / 2;
-  let dark = null;
-  function updateTheme() {
-    const x = probeX();
-    const isDark = darkZones.some((el) => {
-      if (el.offsetParent === null && getComputedStyle(el).position !== 'fixed') return false;
-      const r = el.getBoundingClientRect();
-      return r.top <= probeY && r.bottom >= probeY && r.left <= x && r.right >= x && getComputedStyle(el).visibility !== 'hidden';
-    });
-    if (isDark !== dark) {
-      dark = isDark;
-      nav.classList.toggle('nav--dark', isDark);
-      document.getElementById('nav-home-wrap')?.classList.toggle('is-dark', isDark); // the Home list follows the bar's ink
-    }
-  }
-  lenis.on('scroll', updateTheme);
-  gsap.ticker.add(updateTheme);
 
   // --- dropdowns ------------------------------------------------------------
   // Product / Careers / Security / Resources open the mega-menu on hover.

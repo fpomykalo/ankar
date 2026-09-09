@@ -375,8 +375,9 @@
   box-shadow: inset 0 2px 2px rgba(255,255,255,.4), inset 0 -2px 2px rgba(255,255,255,.4);
   transition: background-color .3s;
 }
-.final__cta:hover { background: rgba(222,229,237,.42); }
-.final__cta > span { color: var(--footer-ink); }
+.final__cta:hover { background: #fff; }
+.final__cta:hover > span { color: var(--ink); }
+.final__cta > span { color: var(--footer-ink); transition: color .3s; }
 .footer__cols { position: absolute; left: 0; top: 1478px; width: 1280px; display: grid; grid-template-columns: repeat(4, 308px); column-gap: 16px; opacity: .3; }
 .footer__col { position: relative; height: 120px; }
 .footer__rule { position: absolute; left: 0; top: 0; width: 308px; background: #bcccdc; }
@@ -417,8 +418,6 @@
 .nav[data-reveal] { transform: translate3d(-50%, 20px, 0); }
 .nav__logo { display: block; color: inherit; }
 .nav__logo-svg { display: block; width: 102px; height: 16px; }
-.nav--dark { color: #fff; }
-.nav--dark .nav__line { background: rgba(255,255,255,.6); }
 .nav.is-open { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .nav__panel { position: absolute; left: 0; top: 0; width: 1280px; height: 410px; opacity: 0; pointer-events: none; transition: opacity .35s; }
 .nav.is-open .nav__panel { opacity: 1; pointer-events: auto; transition-delay: .1s; }
@@ -460,7 +459,7 @@
 .fcard.is-open .fcard__img { filter: grayscale(0); }
 
 /* enterprise trust CTAs turn white on hover */
-.security__ctas .btn--blue:hover { background: #fff; }
+.security__ctas .btn--blue:hover { background: var(--ink); color: #fff; }
 
 /* people: viewport-wide strip, text layout below */
 .bios__viewport { position: absolute; left: calc(50% - 50vw); top: 342px; width: 100vw; height: 480px; overflow: clip; }
@@ -534,7 +533,11 @@
   box-shadow: inset 0 2px 2px rgba(255,255,255,.4), inset 0 -2px 2px rgba(255,255,255,.4);
   color: #000; transition: opacity .25s var(--ease-out), transform .25s var(--ease-out), color .4s;
 }
-.nav__home-wrap.is-dark .nav__home-panel { color: #fff; }
 .nav__home-wrap.is-open .nav__home-panel { opacity: 1; transform: none; }
 .nav__home-panel a { display: block; white-space: nowrap; text-box-trim: trim-both; text-box-edge: cap alphabetic; transition: opacity .3s; }
 .nav__home-panel a:hover { opacity: .6; }
+
+/* CTA hover states */
+.nav__cta:hover { background: var(--blue); color: var(--ink); }
+.hero__cta:hover { background: #fff; color: var(--ink); }
+.tk-cta:hover, .ls__cta:hover, .closing__cta:hover { background: var(--ink); color: #fff; }
