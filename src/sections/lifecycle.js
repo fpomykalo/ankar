@@ -15,9 +15,12 @@ const FAN_ROT = 10;
 export function initLifecycle() {
   const wheel = document.getElementById('wheel');
   if (!wheel) return;
-  const n = lifecycle.length;
+  // Three copies of the four phases sit on the wheel so wide screens see a card in every slot
+  // (…4, 1, 2, 3, 4…) instead of running out on the right past the 1440px artboard.
+  const COPIES = 3;
+  const n = lifecycle.length * COPIES;
 
-  const cards = lifecycle.map((c) => {
+  const cards = Array.from({ length: COPIES }, () => lifecycle).flat().map((c) => {
     const el = document.createElement('article');
     el.className = 'wcard folder';
     el.innerHTML = `
@@ -39,7 +42,7 @@ export function initLifecycle() {
   function layout() {
     cards.forEach((el, i) => {
       const k = wrap(i - state.u);
-      const vis = Math.abs(k) < 2.4;
+      const vis = Math.abs(k) < 3.6;
       el.style.visibility = vis ? '' : 'hidden';
       if (!vis) return;
       const x = 308 + STEP * k + state.e * FAN_X * k;

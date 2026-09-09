@@ -83,7 +83,8 @@ export function initKnowledge() {
   gsap.set(cta, { xPercent: -50, opacity: 1 });
   gsap.set(skip, { xPercent: -50, opacity: 1 });
 
-  const vw = () => stage.clientWidth;
+  // viewport width, not the stage's: while pinned the stage carries a fixed pixel width that is stale during a refresh
+  const vw = () => Math.max(document.documentElement.clientWidth, 1440);
   const vh = () => window.innerHeight;
   const targetRect = () => {
     const r = placeholder.getBoundingClientRect();
@@ -119,8 +120,10 @@ export function initKnowledge() {
   // moment the first pill of a group is about to arrive at the front
   const groupTime = (gi) => T_GROUPS + ((pills.find((p) => p.gi === gi).z - F * 0.45) / zEnd) * SPAN;
 
-  gsap.set(bg, { left: () => vw() * 0.1, top: () => vh(), width: () => vw() * 0.8, height: () => vh() * 0.8, borderRadius: 30 });
-
+  // The resting shape (80% of the viewport, centred, parked below the fold) comes from the stylesheet in vw/vh units,
+  // and the rise/expand tweens state their start values as functions of the viewport too. ScrollTrigger re-evaluates
+  // them on every refresh, so a window that changes size after load (a tab dragged to a larger screen) keeps the
+  // shape centred instead of holding the pixel geometry of the first render until the expand takes over.
   const tl = gsap.timeline({
     defaults: { ease: 'none' },
     scrollTrigger: {
@@ -136,9 +139,12 @@ export function initKnowledge() {
   });
 
   // 1. rise over the intro layer
-  tl.to(bg, { top: () => vh() * 0.1, duration: RISE, ease: 'power1.out' }, T_RISE);
+  const restW = { left: () => vw() * 0.1, width: () => vw() * 0.8, height: () => vh() * 0.8, borderRadius: 30 };
+  tl.fromTo(bg, { top: () => vh(), ...restW }, { top: () => vh() * 0.1, ...restW, duration: RISE, ease: 'power1.out', immediateRender: false }, T_RISE);
   // 2. expand; the intro layer goes, the light stage background comes
-  tl.to(bg, { left: 0, top: 0, width: () => vw(), height: () => vh(), borderRadius: 0, duration: EXPAND, ease: 'power1.inOut' }, T_EXPAND);
+  tl.fromTo(bg,
+    { left: () => vw() * 0.1, top: () => vh() * 0.1, width: () => vw() * 0.8, height: () => vh() * 0.8, borderRadius: 30 },
+    { left: 0, top: 0, width: () => vw(), height: () => vh(), borderRadius: 0, duration: EXPAND, ease: 'power1.inOut', immediateRender: false }, T_EXPAND);
   tl.to(titles[0], { scale: 1, duration: EXPAND, ease: 'power1.inOut' }, T_EXPAND);
   tl.to(introLayer, { opacity: 0, duration: EXPAND * 0.6 }, T_EXPAND);
   tl.set(introLayer, { visibility: 'hidden' }, T_EXPAND + EXPAND);
@@ -210,6 +216,11 @@ export function initKnowledge() {
   setPhase(0, true);
 
   const st = tl.scrollTrigger;
+  // While the shape is still parked, drop the inline pixels left by the last render so the stylesheet's vw/vh values
+  // apply to the new viewport; the (invalidated) tweens re-evaluate their function values when they next render.
+  ScrollTrigger.addEventListener('refresh', () => {
+    if (st.progress * TOTAL < T_RISE) gsap.set(bg, { clearProps: 'left,top,width,height,borderRadius' });
+  });
   anchorTargets.possible = () => st.start + T_PHASES; // nav "Our Value": What Ankar makes possible, fully revealed
   skip.addEventListener('click', (e) => {
     e.preventDefault();
