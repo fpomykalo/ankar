@@ -150,7 +150,7 @@
 .ls__cta { position: absolute; left: 113px; top: 820px; }
 
 /* ========================================================== PARTNERSHIPS */
-.partnerships { padding-top: 200px; }
+.partnerships { padding-top: 120px; }
 .partnerships__title { width: 721px; }
 .partnerships__body { left: 648px; top: 103px; width: 649px; }
 .pgrid { position: absolute; left: 0; top: 344px; width: 1280px; height: 356px; display: grid; grid-template-columns: 632px 632px; column-gap: 16px; align-items: start; }
@@ -408,7 +408,7 @@
 .ls__panel { --tab-top: 309px; position: absolute; left: 49.444%; top: 0; width: 50.556%; height: 100%; background: var(--blue); z-index: 6; }
 .ls__label { --label-bottom: 259px; --dot-top: 269px; color: #000; }
 
-.partnerships { padding-top: 200px; }
+.partnerships { padding-top: 120px; }
 .partnerships > .container { height: 490px; }
 
 .bios { padding-top: 200px; }

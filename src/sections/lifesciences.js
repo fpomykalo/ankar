@@ -1,11 +1,13 @@
-import { gsap, lenis } from '../lib/scroll.js';
+import { gsap, lenis, ScrollTrigger } from '../lib/scroll.js';
 
 /**
- * The Antheros take-over. The CTA on the Life sciences card opens it: everything
- * else fades, the photo grows out of its card to cover the left of the viewport,
- * the blue folder comes in from the right and its copy rises in. A click anywhere
- * (except the "Watch the Antheros story" button) plays it backwards. It sits in the
- * document at the position it opened, so the page can still be scrolled away from it.
+ * The Antheros take-over, opened by the CTA on the Life sciences card.
+ * It lives in the page flow: the section grows by a viewport's worth (pushing
+ * everything below it down) while the page eases so the carousel area fills
+ * the viewport, and the photo grows out of its card as the blue folder comes
+ * in from the right. A click anywhere (except the story button) plays it
+ * backwards and hands the space back. You can still scroll away while it is
+ * open; once it is fully out of view it folds itself away.
  */
 export function initLifeSciences() {
   const section = document.getElementById('industries');
@@ -26,9 +28,15 @@ export function initLifeSciences() {
   const vw = () => Math.max(document.documentElement.clientWidth, 1440);
   const vh = () => window.innerHeight;
   const PHOTO_W = 786 / 1440; // Figma: the photo covers the left 786px of a 1440 viewport
+  const CARDS_H = 480;
+  const DUR = 0.7;
 
   let open = false;
   let tl = null;
+  let extra = 0; // how much the section grew
+
+  const sectionTop = () => section.getBoundingClientRect().top + window.scrollY;
+  const cardsTop = () => folders.getBoundingClientRect().top + window.scrollY - sectionTop(); // within the section
 
   function openTakeover() {
     if (open) return;
@@ -37,36 +45,53 @@ export function initLifeSciences() {
     cards().forEach((c, i) => c.classList.toggle('is-open', i === 0));
     folders.style.pointerEvents = 'none';
 
-    // the overlay covers the viewport as it is right now, and stays at that spot in the page
-    const secTop = section.getBoundingClientRect().top + window.scrollY;
-    gsap.set(takeover, { top: window.scrollY - secTop, height: vh(), visibility: 'visible' });
-    const r = card().getBoundingClientRect(); // viewport coordinates match the overlay's
-    gsap.set(photo, { left: r.left, top: r.top, width: 557, height: r.height, '--tab-top': '58px', visibility: 'hidden' });
+    // the take-over starts at the carousel's top and is one viewport tall
+    const top = cardsTop();
+    extra = vh() - CARDS_H;
+    gsap.set(takeover, { top, height: vh(), visibility: 'visible' });
+    const r = card().getBoundingClientRect();
+    const o = takeover.getBoundingClientRect();
+    gsap.set(photo, { left: r.left - o.left, top: r.top - o.top, width: 557, height: r.height, '--tab-top': '58px', visibility: 'hidden' });
     gsap.set(brand, { opacity: 0 });
     gsap.set(panel, { x: vw() * 0.51 + 40 });
     gsap.set(copy, { y: 40, opacity: 0 });
 
+    // the page eases so the take-over fills the viewport while the section makes room below
+    lenis.scrollTo(sectionTop() + top, { duration: DUR + 0.3, lock: true, force: true });
     tl?.kill();
     tl = gsap.timeline({
+      onComplete: () => ScrollTrigger.refresh(),
       onReverseComplete: () => {
         gsap.set(takeover, { visibility: 'hidden' });
         gsap.set(card(), { visibility: 'visible' });
         takeover.setAttribute('aria-hidden', 'true');
         folders.style.pointerEvents = '';
         open = false;
+        ScrollTrigger.refresh();
       },
     });
-    tl.to(fadeEls(), { opacity: 0, duration: 0.3, ease: 'power2.in' })
-      .set(photo, { visibility: 'visible' })
-      .set(card(), { visibility: 'hidden' })
-      .to(photo, { left: -55, top: 0, width: () => vw() * PHOTO_W + 55, height: () => vh(), duration: 0.7, ease: 'power2.inOut' })
-      .to(brand, { opacity: 1, duration: 0.3, ease: 'power2.out' }, '-=0.28')
-      .to(panel, { x: 0, duration: 0.65, ease: 'power3.inOut' }, '-=0.45')
-      .to(copy, { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, ease: 'power3.out' }, '-=0.1');
+    tl.to(section, { paddingBottom: extra, duration: DUR + 0.3, ease: 'power2.inOut' }, 0)
+      .to(fadeEls(), { opacity: 0, duration: 0.3, ease: 'power2.in' }, 0)
+      .set(photo, { visibility: 'visible' }, 0.3)
+      .set(card(), { visibility: 'hidden' }, 0.3)
+      .to(photo, { left: -55, top: 0, width: () => vw() * PHOTO_W + 55, height: () => vh(), duration: DUR, ease: 'power2.inOut' }, 0.3)
+      .to(brand, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 0.72)
+      .to(panel, { x: 0, duration: 0.65, ease: 'power3.inOut' }, 0.55)
+      .to(copy, { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, ease: 'power3.out' }, 1.1);
   }
 
   function closeTakeover() {
-    if (!open || !tl) return;
+    if (!open || !tl || tl.reversed()) return;
+    const r = takeover.getBoundingClientRect();
+    if (r.bottom <= 0) {
+      // scrolled past it: fold instantly and keep the viewer where they are
+      tl.progress(0).reverse();
+      lenis.scrollTo(window.scrollY - extra, { immediate: true, force: true });
+      return;
+    }
+    if (r.top >= vh()) { tl.progress(0).reverse(); return; } // scrolled back above it: nothing on screen moves
+    // in view: bring the carousel back to its 120px lock while the space closes
+    lenis.scrollTo(sectionTop() + cardsTop() - 120, { duration: DUR + 0.3, lock: true, force: true });
     tl.reverse();
   }
 
@@ -80,14 +105,14 @@ export function initLifeSciences() {
   });
   // a click anywhere closes it, except on the story button
   document.addEventListener('click', (e) => {
-    if (!open || tl?.reversed()) return;
+    if (!open) return;
     if (e.target.closest('.ls__cta')) return;
     closeTakeover();
   });
-  // scrolled fully out of view: fold it away so the carousel is back when the user returns
+  // scrolled fully out of view: fold it away so the carousel is back when the viewer returns
   lenis.on('scroll', () => {
-    if (!open || tl?.reversed()) return;
+    if (!open || !tl || tl.reversed() || tl.progress() < 1) return;
     const r = takeover.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > vh()) tl.progress(0).reverse();
+    if (r.bottom < 0 || r.top > vh()) closeTakeover();
   });
 }
