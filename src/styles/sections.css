@@ -438,3 +438,7 @@
 
 /* current page in the menu */
 .nav__menu a.is-current { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+/* everything in the open menu fades on hover, like the top row */
+.nav__panel a, .nav__home-panel a { transition: opacity .3s; }
+.nav__panel a:hover { opacity: .6; }

@@ -18,8 +18,7 @@
 
 /* --- product workflows: the tab row sticks 20px under the nav (Figma "Group 305"), the
    group head and its items scroll; a tab swaps the group in place --------------------- */
-.pwrap { position: relative; padding-top: 55px; margin-bottom: -60px; }
-.pwrap::after { content: ''; display: block; height: 60px; } /* in-flow spacer: the sticky range runs 60px past the last item, so the pills release with their top 20px below it */
+.pwrap { position: relative; display: flow-root; padding-top: 55px; margin-bottom: 20px; } /* flow-root keeps .pgroup's negative margin inside: the sticky range ends 20px above the last item, the closing keeps its place */
 .pbar { position: sticky; top: 9px; z-index: 20; height: 131px; pointer-events: none; }
 .pbar > .container { height: 131px; }
 .pbar__tabs { position: absolute; left: 540px; top: 91px; display: flex; gap: 10px; pointer-events: auto; }
@@ -33,7 +32,7 @@
 }
 .ptab > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .ptab.is-active, .ptab:hover { background: var(--ink); color: #fff; }
-.pgroup { position: relative; margin-top: -66px; } /* rule at 610, title at 630, first item at 796 */
+.pgroup { position: relative; margin-top: -66px; margin-bottom: -20px; } /* rule at 610, title at 630, first item at 796; the pills release 20px above the last item */
 .pgroup__rule { position: absolute; left: 0; top: 0; width: 1280px; }
 .pgroup__n { position: absolute; left: 0; top: 20px; white-space: nowrap; }
 .pgroup__title { position: absolute; left: 108px; top: 20px; white-space: nowrap; }
@@ -179,7 +178,7 @@
 .rsec__storiesbody { position: absolute; left: 864px; top: 137px; width: 416px; }
 .rsec--stories .folders--stories { top: 244px; }
 .rsec--stories .rsec__pager { top: 744px; }
-.rwrap { position: relative; margin-bottom: -10px; } /* the sticky range ends 10px short of the news block, so the pills release 20px below the last row */
+.rwrap { position: relative; } /* the sticky range ends with the news block, cut 20px above its last row */
 .rbar { position: sticky; top: 9px; z-index: 20; height: 131px; margin-top: 30px; pointer-events: none; } /* only the pills stick, 20px under the nav, over the content */
 .rbar > .container { height: 131px; }
 .rbar__tabs { position: absolute; left: 363px; top: 91px; display: flex; gap: 10px; pointer-events: auto; }
@@ -193,14 +192,14 @@
 .rsec--recent .folders--stories, .rsec--next .folders--stories { top: 68px; }
 .rsec--recent .rsec__pager, .rsec--next .rsec__pager { top: 568px; }
 .rsec--news { padding-top: 89px; }
-.rsec--news > .container { height: 583px; }
+.rsec--news > .container { height: 493px; } /* 583 in Figma; the last 90px move to the brand block's padding so the pills release 20px above the last row */
 .newslist { position: absolute; left: 0; top: 68px; width: 1280px; }
 .nrow { position: relative; height: 91px; }
 .nrow > .rule { position: absolute; left: 0; top: 0; width: 1280px; }
 .nrow__title { position: absolute; left: 0; top: 20px; white-space: nowrap; }
 .nrow__source { position: absolute; left: 972px; top: 33px; white-space: nowrap; }
 .nrow__more { position: absolute; right: 0; top: 33px; white-space: nowrap; }
-.rsec--brand { padding-top: 10px; }
+.rsec--brand { padding-top: 90px; }
 .rsec--brand > .container { height: 548px; }
 .brandbox { position: absolute; left: 0; top: 68px; width: 1280px; height: 480px; border-radius: 30px; overflow: hidden; color: #fff; transform: translateZ(0); }
 .brandbox__grad { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
