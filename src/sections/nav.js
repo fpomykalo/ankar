@@ -4,7 +4,7 @@ import { gsap } from '../lib/scroll.js';
  * Fixed navigation.
  * - Logo links home (respects the deploy base path).
  * - Ink stays black over every surface.
- * - Hover opens the mega-menu (Figma "Nav / Variant2": 1280 × 410).
+ * - Hover opens the mega-menu (Figma "Nav / Variant2": 1280 × 468).
  */
 export function initNav() {
   const nav = document.getElementById('nav');
@@ -21,7 +21,7 @@ export function initNav() {
     closeHome();
     nav.classList.add('is-open');
     openTl?.kill();
-    openTl = gsap.to(nav, { height: 410, duration: 0.55, ease: 'power3.out' });
+    openTl = gsap.to(nav, { height: 468, duration: 0.55, ease: 'power3.out' });
   };
   const closeMega = () => {
     if (!nav.classList.contains('is-open')) return;
