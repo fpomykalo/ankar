@@ -39,7 +39,7 @@ function initSecurity() {
   panel.style.height = `${closed + tallest - trailing}px`; // 533 with the current copy
   panel.parentElement.style.minHeight = `${acc.offsetTop + closed + tallest}px`;
   open(0, true);
-  items.forEach((item, i) => item.addEventListener('click', () => open(i)));
+  items.forEach((item, i) => { item.addEventListener('mouseenter', () => open(i)); item.addEventListener('click', () => open(i)); }); // hover opens, a click (touch) too
 }
 
 bootPage(initSecurity);
