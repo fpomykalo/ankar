@@ -22,10 +22,15 @@ export const anchorTargets = {};
 
 // in-page anchors go through Lenis
 document.addEventListener('click', (e) => {
-  const a = e.target.closest('a[href^="#"]');
+  const a = e.target.closest('a[href]');
   if (!a) return;
-  const href = a.getAttribute('href');
-  if (href.length < 2) { e.preventDefault(); return; } // placeholder links stay put instead of jumping to the top
+  const raw = a.getAttribute('href');
+  if (raw === '#') { e.preventDefault(); return; } // placeholder links stay put instead of jumping to the top
+  if (!raw.includes('#')) return;
+  const url = new URL(a.href, location.href);
+  if (url.origin !== location.origin || url.pathname !== location.pathname) return; // another page: let the browser go there
+  const href = url.hash;
+  if (href.length < 2) { e.preventDefault(); return; }
   const named = anchorTargets[href.slice(1)];
   let target = named ? named() : document.querySelector(href);
   if (target == null) return;
