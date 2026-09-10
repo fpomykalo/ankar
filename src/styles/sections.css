@@ -184,7 +184,7 @@
 .quotes__title { position: absolute; left: 0; top: 20px; width: 719px; }
 
 /* =========================================================== CLOSING CTA */
-.closing { padding-top: 200px; z-index: 0; }
+.closing { padding-top: 120px; z-index: 0; } /* 120 from the content above, like every other section gap */
 .closing > .container { height: 1148px; padding-bottom: 300px; box-sizing: content-box; }
 .closing__eyebrow { position: absolute; left: 588px; top: 100px; }
 .closing__title { position: absolute; left: 50%; top: 148px; width: 830px; transform: translateX(-50%); text-align: center; }
