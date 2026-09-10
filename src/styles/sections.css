@@ -11,7 +11,6 @@
 .sec__body { position: absolute; top: 58px; }
 
 /* 3-column blocks (system intro, security): 416px columns, 16px gutters */
-.cols3 { position: absolute; left: 0; width: 1280px; display: grid; grid-template-columns: repeat(3, 416px); column-gap: 16px; }
 .col { position: relative; }
 .col__n { position: absolute; left: 0; top: 20px; }
 .col__title { position: absolute; left: 45px; top: 20px; white-space: nowrap; }
@@ -73,111 +72,18 @@
 .hero__tab { position: absolute; left: calc(50% - 125px); bottom: 0; }
 
 /* ============================================================= CHALLENGE */
-.challenge { padding-top: 0; } /* section moved up 80px: only the stage's 120 lock offset sits under the hero */
-.challenge__stage { position: relative; height: 758px; padding-top: 120px; }
-.challenge__stage > .container { height: 638px; }
-.challenge__body { left: 648px; width: 632px; }
-.callout {
-  position: absolute; left: 0; top: 294px; width: 505px; height: 118px;
-}
-.callout__shape { --tab-left: 267px; position: absolute; inset: 0; background: var(--blue); }
-.callout__label { position: absolute; left: 294px; top: 10px; }
-.callout__text { position: absolute; left: 26px; top: 55px; }
 
 /* ============================================================== EVIDENCE */
-.evidence { padding-top: 200px; }
-.evidence > .container { height: 638px; }
-.evidence__eyebrow2 { left: 181px; }
-.evidence__cards { position: absolute; left: -25px; top: 294px; width: 1305px; height: 580px; }
 
-.ecard { position: absolute; top: 0; width: 665px; height: 580px; color: #000; }
-.ecard--one { left: 0; z-index: 1; }
-.ecard--two { left: 640px; z-index: 3; }
-.ecard__bg { position: absolute; inset: 0; background: var(--blue); transition: background-color .5s var(--ease-out); }
-.ecard__content { position: absolute; inset: 0; transition: color .5s var(--ease-out); }
-.ecard__line { position: absolute; left: 45px; width: 575px; height: 1px; background: rgba(0,0,0,.15); transition: background-color .5s; }
-.ecard__line--top { top: 40px; }
-.ecard__line--mid { top: 249px; }
-.ecard__num { position: absolute; left: 45px; top: 60px; white-space: nowrap; }
-.ecard__lead { position: absolute; }
-.ecard__lead--quote { left: 241px; top: 60px; width: 379px; }
-.ecard__lead--bottom { left: 241px; top: 269px; width: 379px; }
-.ecard__lead--right { left: 296px; top: 60px; width: 324px; }
-.ecard__source { position: absolute; left: 241px; white-space: nowrap; }
-.ecard__source--top { top: 161px; }
-.ecard__source--bottom { left: 45px; top: 518px; }
-.ecard__bold { position: absolute; left: 45px; top: 269px; width: 227px; }
-.ecard__copy { position: absolute; left: 296px; top: 269px; width: 324px; }
-.ecard .tab-label { color: currentColor; }
 /* active (hovered) state: red card, white ink */
-.ecard.is-active .ecard__bg { background: var(--red); }
-.ecard.is-active .ecard__content { color: #fff; }
-.ecard.is-active .ecard__line { background: rgba(255,255,255,.4); }
 
 /* the callout that rotates into card 1 (driven by GSAP) */
-.ecard-morph { --tab-left: 267px; position: absolute; left: 25px; top: 0; width: 505px; height: 118px; transform-origin: 0 0; pointer-events: none; z-index: 2; visibility: hidden; }
-.ecard-morph__shape { position: absolute; inset: 0; background: var(--blue); }
 
 /* ================================================================= INTRO */
-.intro-layer { position: absolute; left: 50%; top: 120px; transform: translateX(-50%); height: 751px; z-index: 1; }
-.intro__title { width: 508px; }
-.intro__body { left: 648px; top: 62px; width: 632px; }
-.intro__cols { top: 504px; }
-.intro__cols .col:nth-child(2) .col__body { width: 326px; }
 
 /* ============================================ KNOWLEDGE (pinned takeover) */
-.knowledge { position: relative; margin-top: 0; }
-.knowledge__stage {
-  position: relative;
-  height: max(100vh, 900px);
-  width: 100%;
-  overflow: hidden;
-  background: transparent;
-}
-.knowledge__bg { position: absolute; inset: 0; background: var(--bg); opacity: 0; z-index: 2; }
-.tk-bg {
-  position: absolute; left: 10vw; top: 100vh; width: 80vw; height: 80vh; z-index: 3;
-  border-radius: 30px; overflow: hidden; transform: translateZ(0);
-  will-change: left, top, width, height;
-}
-.tk-bg__img { position: absolute; left: 0; top: 0; width: 135%; height: 100%; object-fit: fill; }
-.illus { position: absolute; left: 120px; top: 0; width: 500px; height: 100%; opacity: 0; }
-.illus__item { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .5s var(--ease-out); pointer-events: none; }
-.illus__item > div { width: 100%; }
-.illus__item.is-on { opacity: 1; }
-
-.tk-content { position: absolute; inset: 0; pointer-events: none; }
-.tk-pills { position: absolute; inset: 0; overflow: hidden; }
-.pill {
-  position: absolute; left: 0; top: 0;
-  display: inline-flex; align-items: flex-start; gap: 20px;
-  padding: 30px 50px 30px 30px; border-radius: 200px; white-space: nowrap;
-  font: 300 36px/14px var(--font-mono); letter-spacing: -1px; color: #fff;
-  background: rgba(255,255,255,.3);
-  -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);
-  box-shadow: inset 0 2px 2px rgba(255,255,255,.4), inset 0 -2px 2px rgba(255,255,255,.4);
-  transform-origin: 50% 50%;
-  will-change: transform, filter, opacity;
-  opacity: 0;
-}
-.pill > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
-.pill__tag { font: 400 12px/14px var(--font-mono); letter-spacing: 0; }
-.tk-titles { position: absolute; left: 0; right: 0; top: 50%; height: 0; }
-.tk-title {
-  position: absolute; left: 50%; top: 0;
-  margin-top: 5px;
-  color: #fff; text-align: center; white-space: nowrap;
-  font: 200 130px/110px var(--font-display); letter-spacing: -2px;
-  text-box-trim: trim-both; text-box-edge: cap alphabetic;
-  opacity: 0;
-}
-.tk-cta { position: absolute; left: 50%; top: 50%; margin-top: 72px; pointer-events: auto; opacity: 0; height: 40px; }
 
 /* "What Ankar makes possible" (lives inside the stage, revealed at the end) */
-.possible { position: absolute; left: 50%; top: 120px; transform: translateX(-50%); height: 740px; visibility: hidden; z-index: 4; }
-.possible [data-tk-reveal] { opacity: 0; transform: translate3d(0, 40px, 0); }
-.possible__body { position: absolute; left: 864px; top: 111px; width: 416px; }
-.possible__panel { position: absolute; left: 540px; top: 244px; width: 740px; height: 480px; border-radius: 30px; pointer-events: none; }
 .acc { position: absolute; left: 0; top: 244px; width: 524px; }
 .acc__item { position: relative; padding-top: 81px; padding-bottom: 24px; cursor: pointer; }
 .acc__item > .rule { position: absolute; left: 0; top: 0; width: 524px; }
@@ -187,35 +93,9 @@
 .acc__body { padding-bottom: 16px; }
 
 /* ============================================================= LIFECYCLE */
-.lifecycle { padding-top: 200px; }
-.lifecycle > .container:not(.wheel-nav) { height: 244px; }
 .lifecycle__body { left: 864px; top: 85px; width: 416px; }
-.wheel-wrap { position: relative; width: 100%; height: 479px; overflow-x: clip; overflow-y: visible; }
-.wheel { height: 479px; touch-action: pan-y; user-select: none; cursor: grab; }
-.wheel.is-dragging { cursor: grabbing; }
-.wcard {
-  position: absolute; left: 0; top: 0; width: 640px; height: 479px; color: #fff;
-  transform-origin: 50% 50%; will-change: transform;
-}
-.wcard__bg { position: absolute; inset: 0; }
-.wcard__line { position: absolute; left: 45px; width: 575px; height: 1px; background: rgba(255,255,255,.4); }
-.wcard__line--top { top: 40px; }
-.wcard__line--mid { top: 212px; }
-.wcard__title { position: absolute; left: 45px; top: 60px; white-space: nowrap; }
-.wcard__sub { position: absolute; left: 341px; top: 69px; width: 279px; }
-.wcard__body { position: absolute; left: 45px; top: 232px; width: 288px; }
-.wcard__list { position: absolute; left: 341px; top: 232px; width: 279px; }
-.wcard .tab-label { --dot-top: 206px; }
-.wheel-nav { height: 67px; }
-.wheel-nav .arrow { position: absolute; top: 43px; }
-.wheel-nav #wheel-prev { left: 552px; }
-.wheel-nav #wheel-next { left: 705px; }
 
 /* ============================================================ INDUSTRIES */
-.industries { padding-top: 80px; } /* 80 + 120 lock offset = 200 under the lifecycle */
-.industries__stage { position: relative; height: max(100vh, 900px); padding-top: 120px; overflow: hidden; }
-.industries__stage > .container { height: 724px; }
-.industries__body { left: 740px; width: 541px; }
 
 /* folder accordion (industries, bios pages, quotes) */
 .folders { position: absolute; left: -25px; width: 1305px; height: 480px; display: flex; }
@@ -263,22 +143,14 @@
 .folders--quotes .fcard.is-open .fcard__line { right: 45px; }
 
 /* ========================================================= LIFE SCIENCES */
-.ls__photo { position: absolute; left: 0; top: 0; width: 50vw; height: 100%; overflow: hidden; visibility: hidden; z-index: 5; }
-.ls__photo > img:first-child { width: 100%; height: 100%; object-fit: cover; }
-.ls__photo-shade { position: absolute; inset: 0; background: rgba(0,0,0,.2); }
-.ls__brand { position: absolute; left: calc(25vw - 12.5px + 55px); top: 50%; margin: -40px 0 0 -195px; opacity: 0; } /* centred in the visible left area (0 to 50vw - 25px), photo starts at -55px */
-.ls__panel { --tab-top: 129px; position: absolute; left: calc(50% - 25px); top: 0; width: calc(50% + 65px); height: 100%; background: var(--blue); color: #000; z-index: 6; }
-.ls__label { --label-bottom: 259px; --dot-top: 269px; color: #000; }
 .ls__eyebrow { position: absolute; left: 113px; top: 129px; }
 .ls__title { position: absolute; left: 113px; top: 177px; width: 560px; }
 .ls__rule { position: absolute; left: 113px; top: 567px; width: 560px; }
 .ls__body { position: absolute; left: 113px; top: 587px; width: 452px; }
 .ls__cta { position: absolute; left: 113px; top: 820px; }
-.ls__panel [data-ls] { opacity: 0; transform: translate3d(0, 40px, 0); }
 
 /* ========================================================== PARTNERSHIPS */
 .partnerships { padding-top: 200px; }
-.partnerships > .container { height: 700px; }
 .partnerships__title { width: 721px; }
 .partnerships__body { left: 648px; top: 103px; width: 649px; }
 .pgrid { position: absolute; left: 0; top: 344px; width: 1280px; height: 356px; display: grid; grid-template-columns: 632px 632px; column-gap: 16px; align-items: start; }
@@ -291,45 +163,20 @@
 .prow__body { padding-bottom: 16px; }
 
 /* ============================================================== SECURITY */
-.security { padding-top: 200px; }
-.security > .container { height: 640px; }
 .security__title { width: 721px; }
 .security__body { left: 864px; top: 129px; width: 433px; }
 .security__ctas { position: absolute; left: 0; top: 284px; display: flex; gap: 10px; }
-.security__cols { top: 444px; }
-.security__cols .col__body { top: 81px; }
-.security__col1 { width: 286px; }
-.security__col2 { width: 271px; }
-.security__col3 { width: 315px; }
 
 /* ================================================================== BIOS */
-.bios { padding-top: 200px; }
-.bios > .container { height: 822px; }
-.bios__title { width: 721px; }
-.bios__body { left: 864px; top: 103px; width: 433px; }
-.bios__controls { position: absolute; left: 0; top: 302px; width: 1280px; height: 30px; }
-.bios__controls .arrow { position: absolute; top: 0; }
-#bios-prev { left: -7px; }
-#bios-next { left: 146px; }
 .bios__counter { position: absolute; left: 59px; top: 12px; }
 .bios__dots { position: absolute; left: 607px; top: 13px; display: flex; gap: 11.43px; }
 .bios__dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,.2); cursor: pointer; transition: background-color .3s; }
 .bios__dot.is-active { background: #000; }
-.bios__viewport { position: absolute; left: -25px; top: 342px; width: 1305px; height: 480px; overflow: hidden; }
 .bios__pages { display: flex; height: 480px; will-change: transform; }
 .folders--bios { position: relative; left: 0; top: 0; flex: 0 0 1305px; }
 .bios__bio { position: absolute; left: 0; top: 862px; width: 674px; min-height: 375px; }
 
 /* ================================================================= VIDEO */
-.video { padding-top: 200px; }
-.video > .container { height: 928px; }
-.video__title { position: absolute; left: 0; top: 20px; width: 719px; }
-.video__box { position: absolute; left: 0; top: 206px; width: 1280px; height: 722px; border-radius: 30px; overflow: hidden; background: #000; cursor: pointer; }
-.video__box video { width: 100%; height: 100%; object-fit: cover; }
-.video__shade { position: absolute; inset: 0; background: rgba(0,0,0,.4); transition: opacity .5s; }
-.video__play { position: absolute; left: 617px; top: 335px; width: 46px; height: 53px; transition: transform .4s var(--ease-out), opacity .4s; }
-.video__box:hover .video__play { transform: scale(1.08); }
-.video__box.is-playing .video__shade, .video__box.is-playing .video__play { opacity: 0; }
 
 /* ================================================================ QUOTES */
 .quotes { padding-top: 200px; }
@@ -402,7 +249,6 @@
 .footer__legal-mid { left: 648px; }
 .footer__legal-right { right: 0; }
 
-
 /* ==================================================== v2 overrides / additions */
 
 /* fixed navigation with light/dark themes and the mega-menu dropdown */
@@ -444,15 +290,8 @@
 .nav__menu a { position: relative; padding: 10px 0; margin: -10px 0; }
 
 /* challenge: crossfading eyebrows + card slot under the sticky header */
-#challenge-eb1-muted, #challenge-eb2 { opacity: 0; }
-.ecard-morph { left: 25px; top: 0; }
 
 /* takeover: title + CTA sit on the gradient shape */
-.tk-titles { z-index: 50; }
-.tk-title { margin-top: 0; }
-.tk-cta { z-index: 60; margin-top: 72px; }
-.pill { z-index: 10; pointer-events: none; } /* decorative: never intercept clicks (the SKIP button sits under the stream) */
-.pill.is-front { z-index: 80; }
 
 /* accordion photos: black and white unless highlighted */
 .fcard__img { filter: grayscale(1); transition: filter .7s var(--ease-inout); }
@@ -462,7 +301,6 @@
 .security__ctas .btn--blue:hover { background: var(--ink); color: #fff; }
 
 /* people: viewport-wide strip, text layout below */
-.bios__viewport { position: absolute; left: calc(50% - 50vw); top: 342px; width: 100vw; height: 480px; overflow: clip; }
 .bios__track { position: absolute; top: 0; left: calc(50vw - 665px); display: flex; width: max-content; height: 480px; will-change: transform; }
 .folders--bios { position: absolute; }
 .folders--bios .tab-label { --dot-top: 206px; }
@@ -472,9 +310,6 @@
 
 /* ==================================================== v3 additions */
 /* pinned sections lock 40px under the navigation (nav bottom = 80px) */
-.ecard-morph__label { --label-off: 27px; position: absolute; left: calc(var(--tab-left) + var(--label-off)); top: 9px; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
-.ecard-morph__word { display: inline-block; min-width: 70px; }
-.ecard-morph__label .t-mono, .ecard-morph__label span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .bios__name { position: absolute; left: 0; top: 882px; white-space: nowrap; }
 .bios__role { top: 940px; }
 .bios__track { cursor: grab; touch-action: pan-y; user-select: none; }
@@ -482,8 +317,6 @@
 .fcard__logos { top: auto; bottom: 40px; align-items: center; }
 
 /* takeover: section number above each title */
-.tk-num { position: absolute; left: 50%; top: 50%; z-index: 55; width: 40px; text-align: center; color: #fff; font: 400 12px/14px var(--font-mono); pointer-events: none; }
-.tk-num span { position: absolute; left: 0; width: 100%; text-box-trim: trim-both; text-box-edge: cap alphabetic; opacity: 0; }
 
 /* people cards: role + logo up top, four-line excerpt, click for the full (scrollable) bio */
 .fcard__ui { position: absolute; inset: 0; }
@@ -508,10 +341,6 @@
 .folders--bios .fcard { cursor: pointer; }
 
 /* takeover: skip control 40px above the bottom edge */
-.tk-skip { position: absolute; left: 50%; bottom: 40px; z-index: 120; cursor: pointer; padding: 12px 20px; margin-bottom: -12px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: #fff; pointer-events: auto; opacity: 0; }
-.tk-skip span { text-box-trim: trim-both; text-box-edge: cap alphabetic; text-transform: uppercase; }
-.tk-skip svg { display: block; transition: transform .3s var(--ease-out); }
-.tk-skip:hover svg { transform: translateY(3px); }
 
 /* wrapper the pinned stages fade out, so entrance reveals on its children never fight the stage timeline */
 .stage-fade { position: absolute; inset: 0; }
@@ -540,4 +369,70 @@
 /* CTA hover states */
 .nav__cta:hover { background: var(--blue); color: var(--ink); }
 .hero__cta:hover { background: #fff; color: var(--ink); }
-.tk-cta:hover, .ls__cta:hover, .closing__cta:hover { background: var(--ink); color: #fff; }
+
+/* ================================================================ V02 */
+/* section rhythm: 120px under the hero and between the first three sections, 200px elsewhere */
+.possible { padding-top: 120px; }
+.possible > .container { height: 724px; }
+.possible__body { position: absolute; left: 864px; top: 111px; width: 416px; }
+.possible__panel { position: absolute; left: 540px; top: 244px; width: 740px; height: 480px; border-radius: 30px; overflow: hidden; pointer-events: none; transform: translateZ(0); }
+.possible__grad { position: absolute; left: 0; top: 0; width: 135%; height: 100%; object-fit: fill; }
+.illus { position: absolute; left: 120px; top: 0; width: 500px; height: 100%; }
+.illus__item { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .5s var(--ease-out); pointer-events: none; }
+.illus__item > div { width: 100%; }
+.illus__item.is-on { opacity: 1; }
+
+.lifecycle { padding-top: 120px; }
+.lifecycle > .container { height: 724px; }
+.folders--lifecycle { top: 244px; }
+.folders--lifecycle .fcard.is-open { width: 931px; }
+.lcard__bg { position: absolute; inset: 0; background: var(--card); }
+.lcard__title { position: absolute; left: 45px; top: 60px; white-space: nowrap; }
+.lcard__sub { position: absolute; left: 349px; top: 69px; width: 445px; }
+.lcard__rule { position: absolute; top: 201px; height: 1px; background: rgba(255,255,255,.4); }
+.lcard__rule--left { left: 45px; width: 288px; }
+.lcard__rule--right { left: 349px; width: 537px; }
+.lcard__body { position: absolute; left: 45px; top: 221px; width: 288px; }
+.lcard__list-title { position: absolute; left: 349px; top: 221px; white-space: nowrap; }
+.lcard__list { position: absolute; left: 535px; top: 221px; width: 351px; }
+
+.industries { padding-top: 120px; }
+.industries > .container { height: 724px; }
+.industries__body { left: 740px; width: 541px; }
+.fcard__cta { position: absolute; left: 45px; top: 110px; }
+.ls-takeover { position: absolute; left: 0; top: 0; width: 100%; height: 100vh; visibility: hidden; z-index: 900; overflow: hidden; }
+.ls__photo { position: absolute; left: 0; top: 0; width: 50vw; height: 100%; overflow: hidden; visibility: hidden; z-index: 5; }
+.ls__photo > img:first-child { width: 100%; height: 100%; object-fit: cover; }
+.ls__photo-shade { position: absolute; inset: 0; background: rgba(0,0,0,.2); }
+.ls__brand { position: absolute; left: 20.5%; top: 50%; margin-top: -40px; opacity: 0; }
+.ls__panel { --tab-top: 309px; position: absolute; left: 49.444%; top: 0; width: 50.556%; height: 100%; background: var(--blue); z-index: 6; }
+.ls__label { --label-bottom: 259px; --dot-top: 269px; color: #000; }
+
+.partnerships { padding-top: 200px; }
+.partnerships > .container { height: 490px; }
+
+.bios { padding-top: 200px; }
+.bios > .container { height: 517px; }
+.bios__viewport { position: absolute; left: calc(50% - 50vw); top: 0; width: 100vw; height: 480px; overflow: clip; }
+.bios__controls { position: absolute; left: 0; top: 500px; width: 1280px; height: 17px; }
+.bios__controls .arrow { position: absolute; top: -3px; width: 10px; height: 24px; }
+#bios-prev { left: 0; }
+#bios-next { left: 162px; }
+.bios__counter { position: absolute; left: 59px; top: 5px; }
+.bios__dots { position: absolute; left: 607px; top: 5px; display: flex; gap: 11.43px; }
+
+.security { padding-top: 120px; }
+.security > .container { height: 606px; }
+.security__cols { position: absolute; left: 0; top: 444px; width: 1280px; }
+.scol { position: absolute; left: 0; top: 0; width: 632px; }
+.scol--right { left: 648px; }
+.sitem { position: absolute; left: 0; top: 0; width: 632px; }
+.sitem--2 { top: 133px; }
+.sitem > .rule { position: absolute; left: 0; top: 0; width: 632px; }
+.sitem__title { position: absolute; left: 85px; top: 20px; }
+.sitem__body { position: absolute; left: 324px; top: 20px; }
+.badges { position: absolute; left: 85px; top: 188px; display: flex; gap: 0; }
+.badge { position: relative; width: 239px; height: 54px; }
+.badge__mark { position: absolute; left: 0; top: 0; color: var(--ink); }
+.badge__line { position: absolute; left: 74px; top: 6px; width: 1px; height: 42px; background: var(--rule); }
+.badge__label { position: absolute; left: 94px; top: 23px; text-transform: uppercase; white-space: nowrap; }

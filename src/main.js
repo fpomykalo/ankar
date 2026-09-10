@@ -11,17 +11,16 @@ import { ScrollTrigger } from './lib/scroll.js';
 import { initReveal } from './lib/reveal.js';
 import { initHero } from './sections/hero.js';
 import { initNav } from './sections/nav.js';
-import { initEvidence } from './sections/evidence.js';
-import { initKnowledge } from './sections/knowledge.js';
-import { initLifecycle } from './sections/lifecycle.js';
-import { initIndustries, initBios, initQuotes } from './sections/folders.js';
+import { initPossible } from './sections/possible.js';
+import { initIndustries, initLifecycleCards, initBios, initQuotes } from './sections/folders.js';
 import { initLifeSciences } from './sections/lifesciences.js';
 import { initPartnerships } from './sections/partnerships.js';
 import { initClosing } from './sections/closing.js';
 
 function boot() {
   // render data-driven sections first so measurements are right
-  initLifecycle();
+  initPossible();
+  initLifecycleCards();
   initIndustries();
   initPartnerships();
   initBios();
@@ -29,8 +28,6 @@ function boot() {
 
   // scroll scenes in document order (pins must be created top to bottom)
   initHero();
-  initEvidence();
-  initKnowledge();
   initLifeSciences();
   initClosing();
   initReveal();

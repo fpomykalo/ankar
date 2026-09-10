@@ -55,40 +55,29 @@ export const pillGroups = [
 
 export const lifecycle = [
   {
-    label: 'Sup.E. — 1',
+    label: 'Lifecycle — 1',
     color: '#ba484f',
-    // Figma card 265 is titled "Experiment" but its copy is the landscape/whitespace phase.
-    // Using "Explore" so the four phases are distinct. Flagged in the handoff notes.
     title: 'Explore',
-    subtitle: 'See the landscape before choosing a direction.',
+    subtitle: 'See the landscape before<br>choosing a direction.',
     body: 'Connect internal knowledge with scientific literature, patents, competitive activity and adjacent fields to uncover whitespace, emerging technologies and new routes forward.',
     listTitle: 'Workflows:',
     list: ['Technology landscaping', 'Whitespace analysis', 'Competitive and technical intelligence', 'Emerging-technology monitoring', 'Opportunity discovery'],
   },
   {
-    label: 'Sup.E. — 2',
-    color: '#894c6b',
-    title: 'Invent',
-    subtitle: 'Turn possibilities into stronger, testable concepts.',
+    label: 'Lifecycle — 2',
+    color: '#2f3d86',
+    title: 'Invent &amp;<br>Experiment',
+    subtitle: 'Make every iteration compound by turning possibilities into stronger, testable concepts.',
     body: 'Bring relevant science, prior work and alternative approaches into the creative process so teams can develop concepts with more context and spend more time testing the most promising ideas.',
     listTitle: 'Potential workflows:',
     list: ['Concept generation', 'Alternative approach generation', 'Design-around exploration', 'Technical problem solving', 'Cross-domain inspiration'],
   },
   {
-    label: 'Sup.E. — 3',
-    color: '#2f3d86',
-    title: 'Experiment',
-    subtitle: 'Make every iteration compound.',
-    body: 'Preserve experimental context, decisions, results and failed approaches so teams can learn across projects, avoid repeating work and sharpen the next attempt.',
-    listTitle: 'Potential workflows:',
-    list: ['Experimental knowledge capture', 'Lab knowledge bases', 'Result synthesis', 'Failure analysis', 'Cross-project learning'],
-  },
-  {
-    label: 'Sup.E. — 4',
+    label: 'Lifecycle — 3',
     color: '#162247',
     title: 'Protect',
     subtitle: 'Turn technical progress into defensible value.',
-    body: 'Identify inventions earlier, evaluate what is worth protecting and move from complex R&D to stronger patent assets with less wasted expert time.',
+    body: 'Identify inventions earlier, evaluate what is worth protecting and move from complex R&amp;D to stronger patent assets with less wasted expert time.',
     listTitle: 'Potential workflows:',
     list: ['Invention capture', 'Patentability and novelty analysis', 'Invention evaluation', 'Patent drafting', 'Portfolio and protection decisions'],
   },
@@ -98,6 +87,7 @@ export const industries = [
   {
     label: 'Case Study — 1',
     title: 'Life sciences',
+    cta: 'Watch the Antheros story',
     image: `${BASE}/assets/images/industries/life-sciences.jpg`,
     caption: 'Capacity to assess or strengthen <b>100-150 more disclosures annually</b> at 50% adoption.',
   },
@@ -134,8 +124,6 @@ export const partnerships = [
   { n: '2.', title: 'Workflow configuration', body: 'Every organization works differently. We configure Ankar around your templates, your standards, and the judgement of your most experienced people. The more your teams use it, the more precisely the platform reflects how you work. That’s how the value compounds.' },
   { n: '3.', title: 'Onboarding and enablement', body: 'Adoption is central to our partnership. We onboard every user on their real work Ankar feels like home from the first session. This is how we ensure organizational change sticks after the pilot is over.' },
   { n: '4.', title: 'Forward-deployed support', body: 'We deploy alongside you to ensure we truly understand your organization. Our Deployment Strategists listen, synthesize and solve your challenges — configuring, fixing, and feeding what we learn straight into your product experience. When your usage surfaces a need, we can ship it fast.' },
-  { n: '5.', title: 'Hands-on customer success', body: 'Regular working sessions keep your teams learning from each other while you sharpen the platform to adapt to your ways of working. The experience will feel customized, never generic.' },
-  { n: '6.', title: 'Ongoing product partnership', body: 'We have a clear view of where this platform is going. Deploying with us means your workflows directly inform that roadmap. Through aggregated partner feedback, we apply our team’s deep product and engineering experience to build the platform our partners need.' },
 ];
 
 const basePeople = [

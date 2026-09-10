@@ -1,5 +1,5 @@
 import { gsap, lenis } from '../lib/scroll.js';
-import { industries, people, quotes } from '../data/content.js';
+import { industries, lifecycle, people, quotes } from '../data/content.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -38,8 +38,34 @@ export function initIndustries() {
       <div class="fcard__line"></div>
       <div class="fcard__open">
         <h3 class="t-h3 fcard__title">${c.openTitle || c.title.replace(/<br>/g, ' ')}</h3>
+        ${c.cta ? `<a class="btn btn--glass fcard__cta" href="#" data-ls-open><span>${c.cta}</span></a>` : ''}
         <div class="fcard__line fcard__line--bottom"></div>
         <p class="t-body fcard__caption">${c.caption}</p>
+      </div>
+      <div class="fcard__closed"><h3 class="t-h3 fcard__vtitle">${c.title}</h3></div>
+      </div>
+    </article>`).join('');
+  bindAccordion(root);
+}
+
+// --- lifecycle (three coloured folder cards, hover opens) ------------------------
+export function initLifecycleCards() {
+  const root = document.getElementById('lifecycle-folders');
+  if (!root) return;
+  root.innerHTML = lifecycle.map((c, i) => `
+    <article class="fcard folder lcard${i === 0 ? ' is-open' : ''}" style="--card:${c.color}">
+      <div class="lcard__bg"></div>
+      <div class="fcard__ui">
+      ${label(c.label)}
+      <div class="fcard__line"></div>
+      <div class="fcard__open">
+        <h3 class="t-h3 lcard__title">${c.title}</h3>
+        <p class="t-h4 lcard__sub">${c.subtitle}</p>
+        <div class="lcard__rule lcard__rule--left"></div>
+        <div class="lcard__rule lcard__rule--right"></div>
+        <p class="t-body lcard__body">${c.body}</p>
+        <p class="t-body lcard__list-title">${c.listTitle}</p>
+        <div class="t-body lcard__list"><ul class="spaced">${c.list.map((l) => `<li>${l}</li>`).join('')}</ul></div>
       </div>
       <div class="fcard__closed"><h3 class="t-h3 fcard__vtitle">${c.title}</h3></div>
       </div>
