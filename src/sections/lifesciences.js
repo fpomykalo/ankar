@@ -6,8 +6,8 @@ import { gsap, lenis, ScrollTrigger } from '../lib/scroll.js';
  * everything below it down) while the page eases so the carousel area fills
  * the viewport, and the photo grows out of its card as the blue folder comes
  * in from the right. A click anywhere (except the story button) plays it
- * backwards and hands the space back. You can scroll away and come back while
- * it is open; it stays until something is clicked.
+ * backwards and hands the space back. Scroll it fully out of view and it folds
+ * itself away, so the carousel is back when you return.
  */
 export function initLifeSciences() {
   const section = document.getElementById('industries');
@@ -61,14 +61,7 @@ export function initLifeSciences() {
     tl?.kill();
     tl = gsap.timeline({
       onComplete: () => ScrollTrigger.refresh(),
-      onReverseComplete: () => {
-        gsap.set(takeover, { visibility: 'hidden' });
-        gsap.set(card(), { visibility: 'visible' });
-        takeover.setAttribute('aria-hidden', 'true');
-        folders.style.pointerEvents = '';
-        open = false;
-        ScrollTrigger.refresh();
-      },
+      onReverseComplete: finishClose,
     });
     tl.to(section, { paddingBottom: extra, duration: DUR + 0.3, ease: 'power2.inOut' }, 0)
       .to(fadeEls(), { opacity: 0, duration: 0.3, ease: 'power2.in' }, 0)
@@ -80,16 +73,35 @@ export function initLifeSciences() {
       .to(copy, { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, ease: 'power3.out' }, 1.1);
   }
 
+  function finishClose() {
+    gsap.set(takeover, { visibility: 'hidden' });
+    gsap.set(card(), { visibility: 'visible' });
+    takeover.setAttribute('aria-hidden', 'true');
+    folders.style.pointerEvents = '';
+    open = false;
+    ScrollTrigger.refresh();
+  }
+
+  // Out of view: reset everything in one frame. When it sits above the viewport the section
+  // gives back `extra` pixels above what is on screen, so the scroll moves up by the same
+  // amount in the same frame and nothing visible shifts.
+  function foldAway() {
+    const above = takeover.getBoundingClientRect().bottom <= 0;
+    tl.pause(0);
+    tl.kill();
+    tl = null;
+    if (above) {
+      const y = window.scrollY - extra;
+      window.scrollTo(0, y); // same frame as the section shrinking
+      lenis.scrollTo(y, { immediate: true, force: true }); // and Lenis carries on from there
+    }
+    finishClose();
+  }
+
   function closeTakeover() {
     if (!open || !tl || tl.reversed()) return;
     const r = takeover.getBoundingClientRect();
-    if (r.bottom <= 0) {
-      // scrolled past it: fold instantly and keep the viewer where they are
-      tl.progress(0).reverse();
-      lenis.scrollTo(window.scrollY - extra, { immediate: true, force: true });
-      return;
-    }
-    if (r.top >= vh()) { tl.progress(0).reverse(); return; } // scrolled back above it: nothing on screen moves
+    if (r.bottom <= 0 || r.top >= vh()) { foldAway(); return; }
     // in view: bring the carousel back to its 120px lock while the space closes
     lenis.scrollTo(sectionTop() + cardsTop() - 120, { duration: DUR + 0.3, lock: true, force: true });
     tl.reverse();
@@ -108,5 +120,11 @@ export function initLifeSciences() {
     if (!open) return;
     if (e.target.closest('.ls__cta')) return;
     closeTakeover();
+  });
+  // fully out of view while open: fold it away so the carousel is back when the viewer returns
+  lenis.on('scroll', () => {
+    if (!open || !tl || tl.reversed() || tl.progress() < 1) return;
+    const r = takeover.getBoundingClientRect();
+    if (r.bottom <= 0 || r.top >= vh()) foldAway();
   });
 }
