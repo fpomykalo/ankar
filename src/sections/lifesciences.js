@@ -95,10 +95,10 @@ export function initLifeSciences() {
     tl.reverse();
   }
 
-  // the CTA on the Life sciences card
+  // the CTA on the Life sciences card, or a click anywhere on that card
   folders.addEventListener('click', (e) => {
     const cta = e.target.closest('[data-ls-open]');
-    if (!cta) return;
+    if (!cta && e.target.closest('.fcard') !== card()) return;
     e.preventDefault();
     e.stopPropagation();
     openTakeover();
