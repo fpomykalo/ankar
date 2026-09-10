@@ -51,28 +51,29 @@ export function pager(pageCount) {
 
 /**
  * A paged card strip: `pages` is an array of pages, each an array of card HTML strings.
- * Arrows and dots cross-fade to the next page; `onRender` runs after each page is drawn.
+ * The pages sit side by side on a track that slides left and right; `onRender` runs once
+ * after the cards are in the DOM.
  */
 export function initStrip({ folders, pager: pagerId, pages, onRender }) {
   const foldersEl = document.getElementById(folders);
   const pagerEl = document.getElementById(pagerId);
   if (!foldersEl || !pagerEl) return;
+  foldersEl.classList.add('strip');
+  foldersEl.innerHTML = `<div class="strip__track">${pages.map((p) => `<div class="strip__page">${p.join('')}</div>`).join('')}</div>`;
+  const track = foldersEl.firstElementChild;
   pagerEl.innerHTML = pager(pages.length);
   const count = pagerEl.querySelector('.pager__count');
   const dots = Array.from(pagerEl.querySelectorAll('.bios__dot'));
   let page = 0;
-  const render = () => {
-    foldersEl.innerHTML = pages[page].join('');
-    count.textContent = `${page + 1} / ${pages.length}`;
-    dots.forEach((d, i) => d.classList.toggle('is-active', i === page));
-    onRender?.(foldersEl);
-  };
   const go = (p) => {
     const next = (p + pages.length) % pages.length;
     if (next === page) return;
-    gsap.to(foldersEl, { opacity: 0, duration: 0.25, overwrite: true, onComplete: () => { page = next; render(); gsap.to(foldersEl, { opacity: 1, duration: 0.35 }); } });
+    page = next;
+    gsap.to(track, { x: -page * 1305, duration: 0.9, ease: 'power3.inOut', overwrite: true });
+    count.textContent = `${page + 1} / ${pages.length}`;
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === page));
   };
-  render();
+  onRender?.(foldersEl);
   pagerEl.querySelector('.pager__prev').addEventListener('click', () => go(page - 1));
   pagerEl.querySelector('.pager__next').addEventListener('click', () => go(page + 1));
   dots.forEach((d, i) => d.addEventListener('click', () => go(i)));

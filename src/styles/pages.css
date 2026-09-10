@@ -65,6 +65,9 @@
 .folders--stories .fcard:nth-child(2) { width: 451px; flex-basis: 451px; }
 .folders--wide .fcard { width: 1305px; flex: 0 0 1305px; }
 .scard[hidden] { display: none; }
+.strip { overflow: hidden; }
+.strip__track { display: flex; width: max-content; will-change: transform; }
+.strip__page { display: flex; flex: 0 0 1305px; width: 1305px; height: 480px; }
 .scard__title { position: absolute; left: 45px; top: 60px; width: 362px; }
 .scard--wide .scard__title { width: 505px; }
 .scard__author { position: absolute; left: 45px; top: 209px; }
@@ -83,7 +86,7 @@
 .pcard { position: absolute; left: 536px; top: 68px; width: 744px; height: 413px; color: #fff; overflow: hidden; }
 .pcard .fcard__img { filter: none; }
 .pcard .fcard__shade { background: rgba(0,0,0,.2); }
-.pcard .fcard__grad-bottom { opacity: 1; }
+.pcard .fcard__grad, .pcard .fcard__grad-bottom { display: none; } /* no copy at the bottom, so no gradient */
 .pcard .tab-label { --dot-top: 206px; }
 .pcard__title { position: absolute; left: 45px; top: 60px; white-space: nowrap; }
 .pcard__sub { position: absolute; left: 45px; top: 110px; }
@@ -134,14 +137,14 @@
 
 /* --- security ---------------------------------------------------------------- */
 .ssec { padding-top: 120px; }
-.ssec > .container { height: 844px; }
+.ssec > .container { min-height: 844px; } /* grows with the open item so nothing below overlaps it */
 .ssec__eb1 { position: absolute; left: 0; top: 20px; }
 .ssec__eb2 { position: absolute; left: 648px; top: 20px; }
 .ssec__title { position: absolute; left: 0; top: 72px; width: 549px; }
 .ssec__body { position: absolute; left: 648px; top: 72px; width: 632px; }
 .ssec__badges { position: absolute; left: 648px; top: 204px; }
 .ssec__badges .badges { position: static; }
-.sacc { position: absolute; left: 0; top: 378px; width: 524px; }
+.sacc { position: relative; margin-top: 378px; width: 524px; }
 .sacc__item { position: relative; padding: 20px 0 64px 85px; cursor: pointer; }
 .sacc__item > .rule { position: absolute; left: 0; top: 0; width: 524px; }
 .sacc__n { position: absolute; left: 0; top: 20px; }

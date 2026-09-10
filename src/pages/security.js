@@ -8,7 +8,7 @@ function initSecurity() {
   const rows = document.getElementById('spanel-rows');
   if (!acc) return;
   acc.innerHTML = securityItems.map((it, i) => `
-    <div class="sacc__item${i === 1 ? ' is-open' : ''}" data-index="${i}">
+    <div class="sacc__item${i === 0 ? ' is-open' : ''}" data-index="${i}">
       <div class="rule"></div>
       <span class="t-mono sacc__n">${it.n}</span>
       <h3 class="t-h4 sacc__title">${it.title}</h3>
@@ -28,7 +28,7 @@ function initSecurity() {
     if (immediate) { renderRows(securityItems[i]); return; }
     gsap.to(rows, { opacity: 0, duration: 0.2, onComplete: () => { renderRows(securityItems[i]); gsap.to(rows, { opacity: 1, duration: 0.3 }); } });
   }
-  open(1, true);
+  open(0, true);
   items.forEach((item, i) => item.addEventListener('click', () => open(i)));
 }
 

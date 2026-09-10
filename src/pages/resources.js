@@ -8,7 +8,15 @@ const pagesOf = (cards) => Array.from({ length: PAGES }, () => cards.map(storyCa
 function initResources() {
   // the sticky bar's pills filter the posts; a second click on the active pill shows everything again
   let active = null;
-  const applyFilter = () => document.querySelectorAll('#recent-folders .scard').forEach((card) => { card.hidden = !!active && card.dataset.cat !== active; });
+  const applyFilter = () => document.querySelectorAll('#recent-folders .strip__page').forEach((pageEl) => {
+    let first = true;
+    pageEl.querySelectorAll('.scard').forEach((card) => {
+      card.hidden = !!active && card.dataset.cat !== active;
+      if (card.hidden) return;
+      card.style.marginLeft = first ? '0' : ''; // only the first visible card sits flush; the rest overlap by their 25px tab
+      first = false;
+    });
+  });
 
   initStrip({ folders: 'stories-folders', pager: 'stories-pager', pages: pagesOf(stories) });
   document.getElementById('highlighted-folders').innerHTML = wideCard(highlighted);

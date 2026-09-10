@@ -4,8 +4,6 @@ import { initReveal } from '../lib/reveal.js';
 import { productGroups } from '../data/product.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
-const BAR_TOP = 9;    // where the tab row sticks: its pills sit 20px under the nav
-const BAR_START = 55; // the row's natural offset inside the section (Figma "Group 305" at 545)
 
 /**
  * One workflow group at a time. The tab row (Explore / Invent / Protect / Collaborate)
@@ -43,9 +41,9 @@ function initProduct() {
     if (reveal) initReveal(itemsEl);
     ScrollTrigger.refresh();
   }
-  // the scroll position at which the row has just stuck (the group head sits right under it)
-  const stuckY = () => wrap.getBoundingClientRect().top + window.scrollY + BAR_START - BAR_TOP;
-  const settle = () => { if (window.scrollY > stuckY()) lenis.scrollTo(stuckY(), { duration: 1, force: true, lock: true }); };
+  // where a tab lands the page: the group's rule sits 40px under the nav (nav bottom at 80)
+  const landY = () => group.getBoundingClientRect().top + window.scrollY - 120;
+  const settle = () => { if (window.scrollY > landY()) lenis.scrollTo(landY(), { duration: 1, force: true, lock: true }); };
   function show(slug) {
     if (slug === active) { settle(); return; }
     gsap.to(group, { opacity: 0, duration: 0.25, overwrite: true, onComplete: () => { render(slug, false); gsap.to(group, { opacity: 1, duration: 0.35 }); } });
@@ -55,7 +53,7 @@ function initProduct() {
 
   const first = fromHash();
   render(first || productGroups[0].slug, true);
-  if (first) { const land = () => lenis.scrollTo(stuckY(), { immediate: true, force: true }); requestAnimationFrame(land); setTimeout(land, 150); } // once layout has settled
+  if (first) { const land = () => lenis.scrollTo(landY(), { immediate: true, force: true }); requestAnimationFrame(land); setTimeout(land, 150); } // once layout has settled
 
   tabsEl.addEventListener('click', (e) => {
     const tab = e.target.closest('.ptab');
