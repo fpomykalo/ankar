@@ -15,7 +15,7 @@ export const posts = [
   { title: 'Senior Patent Partner Joins Ankar as Head of Patent Innovation', cat: 'Announcements', image: img('industries/consumer.jpg'), author: 'Preston Teng<br>Narratives, Ankar', meta: 'June 1, 2026 / 3 min read', href: `${BASE}/resources/article/` },
 ];
 
-export const highlighted = { title: 'My First 30 Days at Ankar:<br>Autonomy, Debugging,<br>Deadlines, and Discovery', label: 'Announcements', image: img('pages/story-first-30-days.jpg'), author: 'Manick Vennimalai<br>Machine Learning Engineer', meta: 'November 7, 2025 / 7 min read', href: `${BASE}/resources/article/` };
+export const highlighted = { title: 'My First 30 Days at Ankar:<br>Autonomy, Debugging,<br>Deadlines, and Discovery', label: 'Announcements', image: img('people/william-sweetenham.jpg'), author: 'Manick Vennimalai<br>Machine Learning Engineer', meta: 'November 7, 2025 / 7 min read', href: `${BASE}/resources/article/` };
 
 export const news = [
   { title: 'Patent Startup Ankar Raises $20M in Series A Round', source: 'law.com' },
@@ -50,12 +50,19 @@ export const jobs = [
 
 /** Security: the three pillars. Only the second has copy in Figma so far. */
 export const securityItems = [
-  { n: '1.', title: 'Strict No-Data Sharing<br>and Training Policy', body: '[Copy for this item to come.]', rows: [['1.1', '[Detail to come.]']] },
-  { n: '2.', title: 'Enterprise-Grade<br>Security Infrastructure', body: 'We strictly safeguard your data by never sharing it with third parties, affiliates, or sub-processors without your explicit authorization. Your information stays private and secure, giving you full confidence in our commitment to protect your intellectual property at every step.', rows: [
+  { n: '1.', title: 'Strict No-Data Sharing<br>and Training Policy', body: 'We strictly safeguard your data by never sharing it with third parties, affiliates, or sub-processors without your explicit authorization. Your information stays private and secure, giving you full confidence in our commitment to protect your intellectual property at every step.', rows: [
+    ['1.1', 'No Model Training on Client Data: Your data is never used to train any AI models.'],
+    ['1.2', 'No Data Sharing: Data is never shared with third parties, affiliates, or sub-processors without explicit authorization.'],
+  ] },
+  { n: '2.', title: 'Enterprise-Grade<br>Security Infrastructure', body: 'Our platform ensures full segregation of customer data within a secure multi-tenant environment, with all information encrypted both in transit and at rest. Strict role-based access controls, multi-factor authentication, and comprehensive audit logs safeguard against unauthorized access. Additionally, we offer flexible data hosting options with servers located in the US or the EU, tailored to meet your compliance and security requirements.', rows: [
     ['2.1', 'Fully segregated customer data in a multi-tenant environment.'],
     ['2.2', 'Encryption: All data is encrypted in transit and at rest.'],
     ['2.3', 'Access Controls: Strict role-based access, robust user authentication with MFA, and audit logs protect against unauthorized access.'],
     ['2.4', 'Flexible data hosting options with servers located in the US or the EU to meet your compliance and security requirements.'],
   ] },
-  { n: '3.', title: 'Transparent &amp; Auditable', body: '[Copy for this item to come.]', rows: [['3.1', '[Detail to come.]']] },
+  { n: '3.', title: 'Transparent &amp; Auditable', body: 'We work with industry-leading partners to conduct independent, rigorous assessments of our web and network defenses, ensuring robust protection. Full activity logging enables transparent customer-side monitoring, while our comprehensive security posture is fully auditable through our dedicated trust center portal for maximum transparency and confidence.', rows: [
+    ['3.1', 'Independent assessments: we partner with industry leaders to rigorously test our web and network defenses.'],
+    ['3.2', 'Full activity logging for customer-side monitoring.'],
+    ['3.3', 'Our security posture is auditable on our trust center portal.'],
+  ] },
 ];

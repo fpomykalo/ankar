@@ -1,48 +1,71 @@
 import { bootPage } from '../site.js';
-import { lenis } from '../lib/scroll.js';
+import { lenis, gsap, ScrollTrigger } from '../lib/scroll.js';
+import { initReveal } from '../lib/reveal.js';
 import { productGroups } from '../data/product.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+const BAR_TOP = 9;    // where the tab row sticks: its pills sit 20px under the nav
+const BAR_START = 55; // the row's natural offset inside the section (Figma "Group 305" at 545)
 
 /**
- * Four workflow groups. Each group's header bar (number, title, the four tabs) is
- * sticky while its items scroll past, and the next group's bar takes over.
+ * One workflow group at a time. The tab row (Explore / Invent / Protect / Collaborate)
+ * sticks under the nav while the group's items scroll; a tab swaps the group in place.
+ * `#invent` and friends (mega-menu links) select a group on arrival.
  */
 function initProduct() {
-  const root = document.getElementById('product-groups');
-  if (!root) return;
-  const tabs = (active) => productGroups.map((g) => `<a class="ptab${g.slug === active ? ' is-active' : ''}" href="#${g.slug}"><span>${g.title}</span></a>`).join('');
-  root.innerHTML = productGroups.map((g) => `
-    <section class="pgroup" id="${g.slug}">
-      <div class="pbar">
-        <div class="container">
-          <div class="rule pbar__rule"></div>
-          <span class="t-h2 pbar__n">${g.n}.</span>
-          <h2 class="t-h2 pbar__title">${g.title}</h2>
-          <nav class="pbar__tabs" aria-label="Workflow groups">${tabs(g.slug)}</nav>
-        </div>
-      </div>
-      <div class="container pgroup__items">
-        ${g.items.map((it) => `
-        <article class="pitem" data-reveal>
-          <div class="rule pitem__rule"></div>
-          <span class="t-mono pitem__n">${it.n}</span>
-          <h3 class="t-h4 pitem__title">${it.title}</h3>
-          <p class="t-body pitem__body">${it.body}</p>
-          <div class="pitem__ui pui--${it.ui}"><img src="${BASE}/assets/images/ui/ui-${it.ui === 'a' ? '1' : '2'}.png" alt="Ankar platform interface" /></div>
-        </article>`).join('')}
-      </div>
-    </section>`).join('');
+  const wrap = document.getElementById('workflows');
+  if (!wrap) return;
+  const tabsEl = document.getElementById('ptabs');
+  const group = document.getElementById('pgroup');
+  const nEl = document.getElementById('pgroup-n');
+  const titleEl = document.getElementById('pgroup-title');
+  const itemsEl = document.getElementById('pitems');
 
-  // a tab scrolls its group's bar to the top of the viewport, where it sticks
-  root.addEventListener('click', (e) => {
+  tabsEl.innerHTML = productGroups.map((g) => `<a class="ptab" href="#${g.slug}" data-slug="${g.slug}"><span>${g.tab}</span></a>`).join('');
+  const tabs = Array.from(tabsEl.children);
+  const item = (it, reveal) => `
+    <article class="pitem"${reveal ? ' data-reveal' : ''}>
+      <div class="rule pitem__rule"></div>
+      <span class="t-mono pitem__n">${it.n}</span>
+      <h3 class="t-h4 pitem__title">${it.title}</h3>
+      <p class="t-body pitem__body">${it.body}</p>
+      <div class="pitem__ui pui--${it.ui}"><img src="${BASE}/assets/images/ui/ui-${it.ui === 'a' ? '1' : '2'}.png" alt="Ankar platform interface" /></div>
+    </article>`;
+
+  let active = null;
+  function render(slug, reveal) {
+    const g = productGroups.find((x) => x.slug === slug) || productGroups[0];
+    active = g.slug;
+    tabs.forEach((t) => t.classList.toggle('is-active', t.dataset.slug === g.slug));
+    nEl.textContent = `${g.n}.`;
+    titleEl.innerHTML = g.title;
+    itemsEl.innerHTML = g.items.map((it) => item(it, reveal)).join('');
+    if (reveal) initReveal(itemsEl);
+    ScrollTrigger.refresh();
+  }
+  // the scroll position at which the row has just stuck (the group head sits right under it)
+  const stuckY = () => wrap.getBoundingClientRect().top + window.scrollY + BAR_START - BAR_TOP;
+  const settle = () => { if (window.scrollY > stuckY()) lenis.scrollTo(stuckY(), { duration: 1, force: true, lock: true }); };
+  function show(slug) {
+    if (slug === active) { settle(); return; }
+    gsap.to(group, { opacity: 0, duration: 0.25, overwrite: true, onComplete: () => { render(slug, false); gsap.to(group, { opacity: 1, duration: 0.35 }); } });
+    settle();
+  }
+  const fromHash = () => productGroups.find((g) => `#${g.slug}` === location.hash)?.slug;
+
+  const first = fromHash();
+  render(first || productGroups[0].slug, true);
+  if (first) { const land = () => lenis.scrollTo(stuckY(), { immediate: true, force: true }); requestAnimationFrame(land); setTimeout(land, 150); } // once layout has settled
+
+  tabsEl.addEventListener('click', (e) => {
     const tab = e.target.closest('.ptab');
     if (!tab) return;
     e.preventDefault();
-    e.stopPropagation();
-    const group = document.getElementById(tab.getAttribute('href').slice(1));
-    if (group) lenis.scrollTo(group, { offset: 55, duration: 1.2, force: true, lock: true }); // the bar itself lands at the top and sticks
+    e.stopPropagation(); // keep the global anchor handler out of it
+    history.replaceState(null, '', `#${tab.dataset.slug}`);
+    show(tab.dataset.slug);
   });
+  window.addEventListener('hashchange', () => { const slug = fromHash(); if (slug) show(slug); });
 }
 
 bootPage(initProduct);

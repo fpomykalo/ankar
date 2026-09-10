@@ -435,3 +435,6 @@
 .badge__mark { position: absolute; left: 0; top: 0; color: var(--ink); }
 .badge__line { position: absolute; left: 74px; top: 6px; width: 1px; height: 42px; background: var(--rule); }
 .badge__label { position: absolute; left: 94px; top: 23px; text-transform: uppercase; white-space: nowrap; }
+
+/* current page in the menu */
+.nav__menu a.is-current { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }

@@ -1,3 +1,5 @@
+import { gsap } from './scroll.js';
+
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const label = (t) => `<div class="tab-label"><span class="tab-label__text">${t}</span><span class="tab-label__dot"></span></div>`;
 const layers = '<div class="fcard__shade"></div><div class="fcard__grad"></div><div class="fcard__grad-bottom"></div><div class="noise"></div>';
@@ -36,13 +38,42 @@ export function wideCard(c) {
     </a>`;
 }
 
-/** Arrows, counter and dots under a card strip. Static for now: the strips hold one page. */
-export function pager(count) {
+/** Arrows, counter and dots under a card strip. */
+export function pager(pageCount) {
   return `
     <div class="pager">
       <button class="arrow arrow--prev pager__prev" aria-label="Previous"><svg viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9l8 8" stroke="#000"/></svg></button>
-      <span class="t-mono pager__count">1 / ${count}</span>
+      <span class="t-mono pager__count">1 / ${pageCount}</span>
       <button class="arrow arrow--next pager__next" aria-label="Next"><svg viewBox="0 0 10 18" fill="none"><path d="M1 1l8 8-8 8" stroke="#000"/></svg></button>
-      <div class="pager__dots"><span class="bios__dot is-active"></span></div>
+      <div class="pager__dots">${Array.from({ length: pageCount }, (_, p) => `<button class="bios__dot${p === 0 ? ' is-active' : ''}" type="button" aria-label="Page ${p + 1}"></button>`).join('')}</div>
     </div>`;
+}
+
+/**
+ * A paged card strip: `pages` is an array of pages, each an array of card HTML strings.
+ * Arrows and dots cross-fade to the next page; `onRender` runs after each page is drawn.
+ */
+export function initStrip({ folders, pager: pagerId, pages, onRender }) {
+  const foldersEl = document.getElementById(folders);
+  const pagerEl = document.getElementById(pagerId);
+  if (!foldersEl || !pagerEl) return;
+  pagerEl.innerHTML = pager(pages.length);
+  const count = pagerEl.querySelector('.pager__count');
+  const dots = Array.from(pagerEl.querySelectorAll('.bios__dot'));
+  let page = 0;
+  const render = () => {
+    foldersEl.innerHTML = pages[page].join('');
+    count.textContent = `${page + 1} / ${pages.length}`;
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === page));
+    onRender?.(foldersEl);
+  };
+  const go = (p) => {
+    const next = (p + pages.length) % pages.length;
+    if (next === page) return;
+    gsap.to(foldersEl, { opacity: 0, duration: 0.25, overwrite: true, onComplete: () => { page = next; render(); gsap.to(foldersEl, { opacity: 1, duration: 0.35 }); } });
+  };
+  render();
+  pagerEl.querySelector('.pager__prev').addEventListener('click', () => go(page - 1));
+  pagerEl.querySelector('.pager__next').addEventListener('click', () => go(page + 1));
+  dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
 }

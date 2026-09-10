@@ -10,6 +10,11 @@ export function initNav() {
   const nav = document.getElementById('nav');
   if (!nav) return;
   nav.querySelector('.nav__logo').setAttribute('href', import.meta.env.BASE_URL || '/');
+  // the page we are on is underlined in the menu
+  nav.querySelectorAll('.nav__menu a[data-mega]').forEach((a) => {
+    const path = new URL(a.getAttribute('href'), location.href).pathname;
+    if (location.pathname.startsWith(path)) a.classList.add('is-current');
+  });
 
   // --- dropdowns ------------------------------------------------------------
   // Product / Careers / Security / Resources open the mega-menu on hover.

@@ -9,21 +9,19 @@
 .phero__copy { height: 100%; }
 .phero__title { position: absolute; left: -3px; top: 236px; white-space: nowrap; }
 .phero__title--centered { left: 50%; top: 207px; transform: translateX(-50%); }
-.phero__link { position: absolute; left: 0; top: 194px; white-space: nowrap; }
+.phero__link { position: absolute; left: 0; top: 194px; white-space: nowrap; z-index: 2; } /* above the display title's line box */
 .phero__link u { text-decoration-thickness: 1px; text-underline-offset: 2px; }
 .phero__body { position: absolute; left: 795px; top: 236px; width: 475px; line-height: 24px; }
 .phero__body--low { top: 276px; }
-.phero__cta { position: absolute; left: 795px; }
-.phero .hero__tab { bottom: -25px; }
+.phero__cta { position: absolute; left: 795px; z-index: 2; }
+.phero .hero__tab { bottom: 0; }
 
-/* --- sticky group bar (Figma "Group 305" 1440 × 131) ------------------------ */
-.pgroup { position: relative; padding-top: 55px; }
-.pbar { position: sticky; top: 0; z-index: 20; height: 131px; background: var(--bg); }
+/* --- product workflows: the tab row sticks 20px under the nav (Figma "Group 305"), the
+   group head and its items scroll; a tab swaps the group in place --------------------- */
+.pwrap { position: relative; padding-top: 55px; }
+.pbar { position: sticky; top: 9px; z-index: 20; height: 131px; pointer-events: none; }
 .pbar > .container { height: 131px; }
-.pbar__rule { position: absolute; left: 0; top: 65px; width: 1280px; }
-.pbar__n { position: absolute; left: 0; top: 85px; white-space: nowrap; }
-.pbar__title { position: absolute; left: 108px; top: 85px; white-space: nowrap; }
-.pbar__tabs { position: absolute; left: 540px; top: 91px; display: flex; gap: 10px; }
+.pbar__tabs { position: absolute; left: 540px; top: 91px; display: flex; gap: 10px; pointer-events: auto; }
 .ptab {
   display: inline-flex; align-items: center; justify-content: center; width: 177px; height: 40px; border-radius: 30px;
   font: 400 12px/14px var(--font-mono); color: var(--ink); white-space: nowrap; cursor: pointer;
@@ -34,7 +32,11 @@
 }
 .ptab > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .ptab.is-active, .ptab:hover { background: var(--ink); color: #fff; }
-.pgroup__items { padding-top: 120px; }
+.pgroup { position: relative; margin-top: -66px; } /* rule at 610, title at 630, first item at 796 */
+.pgroup__rule { position: absolute; left: 0; top: 0; width: 1280px; }
+.pgroup__n { position: absolute; left: 0; top: 20px; white-space: nowrap; }
+.pgroup__title { position: absolute; left: 108px; top: 20px; white-space: nowrap; }
+.pgroup__items { padding-top: 186px; }
 .pitem { position: relative; margin-bottom: 120px; }
 .pitem:last-child { margin-bottom: 0; }
 .pitem__rule { position: absolute; left: 0; top: 0; width: 524px; }
@@ -78,10 +80,11 @@
 .rsec__pager { position: absolute; left: 0; width: 1280px; height: 17px; }
 
 /* --- photo card (letter, article) ------------------------------------------ */
-.pcard { --tab-top: 238px; position: absolute; left: 536px; top: 68px; width: 744px; height: 413px; color: #fff; overflow: hidden; }
+.pcard { position: absolute; left: 536px; top: 68px; width: 744px; height: 413px; color: #fff; overflow: hidden; }
 .pcard .fcard__img { filter: none; }
 .pcard .fcard__shade { background: rgba(0,0,0,.2); }
 .pcard .fcard__grad-bottom { opacity: 1; }
+.pcard .tab-label { --dot-top: 206px; }
 .pcard__title { position: absolute; left: 45px; top: 60px; white-space: nowrap; }
 .pcard__sub { position: absolute; left: 45px; top: 110px; }
 
@@ -173,9 +176,9 @@
 .rsec--stories .folders--stories { top: 244px; }
 .rsec--stories .rsec__pager { top: 744px; }
 .rwrap { position: relative; }
-.rbar { position: sticky; top: 0; z-index: 20; height: 131px; margin-top: 30px; background: var(--bg); }
+.rbar { position: sticky; top: 9px; z-index: 20; height: 131px; margin-top: 30px; pointer-events: none; } /* only the pills stick, 20px under the nav, over the content */
 .rbar > .container { height: 131px; }
-.rbar__tabs { position: absolute; left: 363px; top: 91px; display: flex; gap: 10px; }
+.rbar__tabs { position: absolute; left: 363px; top: 91px; display: flex; gap: 10px; pointer-events: auto; }
 .rbar__tab { width: 178px; }
 .rsec--highlighted { padding-top: 120px; }
 .rsec--highlighted > .container { height: 548px; }
@@ -213,8 +216,14 @@
 .asec__rule2 { position: absolute; left: 0; top: 521px; width: 1280px; }
 .asec__side { position: absolute; left: 0; top: 541px; width: 524px; }
 .newsletter { position: relative; margin-top: 20px; width: 416px; height: 40px; }
-.newsletter__input { width: 416px; height: 40px; border-radius: 20px; border: 0; background: #fff; padding: 0 40px 0 18px; box-sizing: border-box; font: 400 12px/14px var(--font-mono); color: var(--ink); outline: none; }
-.newsletter__input::placeholder { color: var(--ink); opacity: 1; }
+.newsletter__input {
+  width: 416px; height: 40px; border-radius: 20px; border: 0; padding: 0 40px 0 18px; box-sizing: border-box;
+  font: 400 12px/14px var(--font-mono); color: var(--ink); outline: none;
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  box-shadow: inset 0 2px 2px rgba(255,255,255,.4), inset 0 -2px 2px rgba(255,255,255,.4);
+}
+.newsletter__input::placeholder { color: rgba(0, 0, 0, 0.3); opacity: 1; }
 .newsletter__go { position: absolute; right: 16px; top: 16px; width: 12px; height: 8px; }
 .newsletter__go img { display: block; }
 .asec__share { margin-top: 40px; }

@@ -8,7 +8,7 @@ const layers = '<div class="fcard__shade"></div><div class="fcard__grad"></div><
 
 const team = [
   { name: 'Nick<br>Denman', label: 'Quote — 1', role: 'Head of Engineering;<br>Ex-Palantir', image: `${BASE}/assets/images/people/nick-denman.jpg`, quote: 'Coming from Palantir, I was drawn to Ankar AI’s mission to reinvent how innovation happens with AI. Here, I got to tackle meaningful, complex problems alongside a team that’s as passionate about building great technology as they are about learning from one another. Everyday feels like we are building something truly new - combining deep tech with a sense of purpose and camaraderie that makes work genuinely rewarding.' },
-  { name: 'William<br>Sweetenham', label: 'Quote — 2', role: 'Software Engineer', image: `${BASE}/assets/images/people/william-sweetenham.jpg`, quote: '[Quote to come.]' },
+  { name: 'William<br>Sweetenham', label: 'Quote — 2', role: 'Machine learning Engineer;<br>Ex-Founder', image: `${BASE}/assets/images/pages/story-first-30-days.jpg`, quote: 'At Ankar AI, I get to work on exciting challenges that push me to grow as both a machine learning engineer and a problem-solver. The team is incredibly supportive, everyone’s open to sharing knowledge and helping each other improve. It’s great to see our ideas take shape into real products that make a meaningful impact for R&amp;D and IP teams around the world.' },
 ];
 
 function initCareers() {
