@@ -16,6 +16,7 @@ import { initIndustries, initLifecycleCards, initBios, initQuotes } from './sect
 import { initLifeSciences } from './sections/lifesciences.js';
 import { initPartnerships } from './sections/partnerships.js';
 import { initClosing } from './sections/closing.js';
+import { primeImages } from './lib/decode.js';
 
 function boot() {
   // render data-driven sections first so measurements are right
@@ -38,3 +39,4 @@ function boot() {
 
 document.fonts.ready.then(boot);
 window.addEventListener('load', () => ScrollTrigger.refresh());
+primeImages();
