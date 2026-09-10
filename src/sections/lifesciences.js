@@ -20,8 +20,9 @@ export function initLifeSciences() {
   const copy = panel.querySelectorAll('[data-ls]');
   const cards = () => Array.from(folders.children);
   const card = () => cards()[0];
+  // the other cards and the card's own chrome fade; the section head above stays visible,
+  // so scrolling up from the take-over reads as one section and nothing pops in at the fold
   const fadeEls = () => [
-    document.getElementById('industries-fade'),
     ...cards().slice(1),
     ...card().querySelectorAll('.fcard__ui, .fcard__grad, .fcard__grad-bottom'),
   ];
@@ -73,6 +74,16 @@ export function initLifeSciences() {
       .to(copy, { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, ease: 'power3.out' }, 1.1);
   }
 
+  // Move the scroll position by `by` without touching the smooth scroll in progress: Lenis's
+  // current value, target and running animation all shift together, so momentum is kept.
+  function shiftScroll(by) {
+    const a = lenis.animate;
+    lenis.animatedScroll += by;
+    lenis.targetScroll += by;
+    if (a?.isRunning) { a.value += by; a.from += by; a.to += by; }
+    window.scrollTo(0, lenis.animatedScroll);
+  }
+
   function finishClose() {
     gsap.set(takeover, { visibility: 'hidden' });
     gsap.set(card(), { visibility: 'visible' });
@@ -90,11 +101,7 @@ export function initLifeSciences() {
     tl.pause(0);
     tl.kill();
     tl = null;
-    if (above) {
-      const y = window.scrollY - extra;
-      window.scrollTo(0, y); // same frame as the section shrinking
-      lenis.scrollTo(y, { immediate: true, force: true }); // and Lenis carries on from there
-    }
+    if (above) shiftScroll(-extra); // same frame as the section shrinking
     finishClose();
   }
 
