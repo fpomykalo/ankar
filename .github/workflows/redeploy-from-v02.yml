@@ -1,11 +1,12 @@
-name: Redeploy site from v02
+name: Redeploy site from v02 or pages
 
-# A push to v02 re-runs the deploy workflow on main, which builds both
-# branches and publishes /ankar/ (main) and /ankar/v02/ (v02) together.
+# A push to v02 or pages re-runs the deploy workflow on main, which builds
+# all three branches and publishes /ankar/ (main), /ankar/v02/ (v02) and the
+# unlisted /ankar/bzmxkko5/ (pages) together.
 
 on:
   push:
-    branches: [v02]
+    branches: [v02, pages]
 
 permissions:
   actions: write
