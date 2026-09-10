@@ -3,11 +3,12 @@ name: Deploy to GitHub Pages
 # One Pages site, two versions:
 #   main -> https://fpomykalo.github.io/ankar/
 #   v02  -> https://fpomykalo.github.io/ankar/v02/
-# A push to either branch rebuilds both and redeploys the whole site.
+# The github-pages environment only accepts deployments from main, so this
+# workflow runs on main; a push to v02 dispatches it (see redeploy-from-v02.yml).
 
 on:
   push:
-    branches: [main, v02]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
