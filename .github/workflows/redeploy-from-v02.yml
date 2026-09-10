@@ -1,0 +1,20 @@
+name: Redeploy site from v02
+
+# A push to v02 re-runs the deploy workflow on main, which builds both
+# branches and publishes /ankar/ (main) and /ankar/v02/ (v02) together.
+
+on:
+  push:
+    branches: [v02]
+
+permissions:
+  actions: write
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
