@@ -49,8 +49,19 @@ export function initNav() {
 
   let leaveTimer;
   const hold = () => clearTimeout(leaveTimer);
-  nav.querySelectorAll('.nav__menu a[data-mega]').forEach((a) => a.addEventListener('mouseenter', () => { hold(); openMega(); }));
-  home.addEventListener('mouseenter', () => { hold(); openHome(); });
+  // A page that loads with the cursor already over a menu item would open the dropdown at once
+  // (the item you just clicked). Hover-opening is armed half a second after load; a mouse
+  // moving over an item after that still opens it, since mouseenter alone won't fire again.
+  let armed = false;
+  setTimeout(() => { armed = true; }, 500);
+  nav.querySelectorAll('.nav__menu a[data-mega]').forEach((a) => {
+    const enter = () => { if (!armed) return; hold(); openMega(); };
+    a.addEventListener('mouseenter', enter);
+    a.addEventListener('mousemove', () => { if (!nav.classList.contains('is-open')) enter(); });
+  });
+  const enterHome = () => { if (!armed) return; hold(); openHome(); };
+  home.addEventListener('mouseenter', enterHome);
+  home.addEventListener('mousemove', () => { if (!nav.classList.contains('is-home')) enterHome(); });
   home.addEventListener('click', () => (nav.classList.contains('is-home') ? closeHome() : openHome()));
   homeWrap.addEventListener('mouseenter', hold);
   homeWrap.addEventListener('mouseleave', () => { leaveTimer = setTimeout(closeAll, 120); }); // the list is a sibling of the bar, so it needs its own leave
