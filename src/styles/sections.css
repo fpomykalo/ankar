@@ -439,6 +439,9 @@
 /* current page in the menu */
 .nav__menu a.is-current { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 
-/* everything in the open menu fades on hover, like the top row */
-.nav__panel a, .nav__home-panel a { transition: opacity .3s; }
-.nav__panel a:hover { opacity: .6; }
+/* everything in the open menu fades on hover, like the top row. Text links fade by colour: an opacity
+   transition would promote the link to its own layer, which snaps to whole pixels and nudges the text. */
+.nav__panel a:not(.nav__case) { transition: color .3s; }
+.nav__panel a:not(.nav__case):hover { color: rgba(0, 0, 0, .6); }
+.nav__case { transition: opacity .3s; }
+.nav__case:hover { opacity: .6; }

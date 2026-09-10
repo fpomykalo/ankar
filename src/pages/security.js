@@ -32,8 +32,11 @@ function initSecurity() {
   // section keeps that height whichever item is open
   const closed = items.reduce((sum, item) => sum + item.offsetHeight, 0); // every panel starts at height 0
   const tallest = Math.max(...items.map((item) => item.querySelector('.sacc__body').offsetHeight));
+  const last = items[items.length - 1];
+  const lastTitle = last.querySelector('.sacc__title');
+  const trailing = last.offsetHeight - (lastTitle.offsetTop + lastTitle.offsetHeight); // space under the last title
   const panel = document.querySelector('.spanel');
-  panel.style.height = `${closed + tallest}px`;
+  panel.style.height = `${closed + tallest - trailing}px`; // 533 with the current copy
   panel.parentElement.style.minHeight = `${acc.offsetTop + closed + tallest}px`;
   open(0, true);
   items.forEach((item, i) => item.addEventListener('click', () => open(i)));
