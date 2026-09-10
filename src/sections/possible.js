@@ -26,5 +26,9 @@ export function initPossible() {
     });
   }
   setPhase(0, true);
-  items.forEach((item, i) => item.addEventListener('click', () => { const again = item.classList.contains('is-open'); setPhase(i); if (again) draw(i); })); // the illustration plays once; clicking the open item replays it
+  // hovering an item opens it; the illustration plays once, and a click on the open item replays it
+  items.forEach((item, i) => {
+    item.addEventListener('mouseenter', () => setPhase(i));
+    item.addEventListener('click', () => { if (item.classList.contains('is-open')) draw(i); else setPhase(i); });
+  });
 }

@@ -410,10 +410,10 @@
 .partnerships { padding-top: 120px; }
 .partnerships > .container { height: 490px; }
 
-.bios { padding-top: 200px; }
-.bios > .container { height: 517px; }
-.bios__viewport { position: absolute; left: calc(50% - 50vw); top: 0; width: 100vw; height: 480px; overflow: clip; }
-.bios__controls { position: absolute; left: 0; top: 500px; width: 1280px; height: 17px; }
+.bios { padding-top: 120px; } /* divider, "Developed by" eyebrow at 20, cards at 68, controls 20 under them */
+.bios > .container { height: 585px; }
+.bios__viewport { position: absolute; left: calc(50% - 50vw); top: 68px; width: 100vw; height: 480px; overflow: clip; }
+.bios__controls { position: absolute; left: 0; top: 568px; width: 1280px; height: 17px; }
 .bios__controls .arrow { position: absolute; top: -3px; width: 10px; height: 24px; }
 #bios-prev { left: 0; }
 #bios-next { left: 162px; }
