@@ -137,14 +137,14 @@
 
 /* --- security ---------------------------------------------------------------- */
 .ssec { padding-top: 120px; }
-.ssec > .container { min-height: 844px; } /* grows with the open item so nothing below overlaps it */
+.ssec > .container { box-sizing: border-box; padding-top: 378px; min-height: 844px; } /* the accordion is in flow, so the section grows with the open item */
 .ssec__eb1 { position: absolute; left: 0; top: 20px; }
 .ssec__eb2 { position: absolute; left: 648px; top: 20px; }
 .ssec__title { position: absolute; left: 0; top: 72px; width: 549px; }
 .ssec__body { position: absolute; left: 648px; top: 72px; width: 632px; }
 .ssec__badges { position: absolute; left: 648px; top: 204px; }
 .ssec__badges .badges { position: static; }
-.sacc { position: relative; margin-top: 378px; width: 524px; }
+.sacc { position: relative; width: 524px; }
 .sacc__item { position: relative; padding: 20px 0 64px 85px; cursor: pointer; }
 .sacc__item > .rule { position: absolute; left: 0; top: 0; width: 524px; }
 .sacc__n { position: absolute; left: 0; top: 20px; }
