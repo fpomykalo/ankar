@@ -22,7 +22,7 @@ function initSecurity() {
     items.forEach((item, idx) => {
       const on = idx === i;
       item.classList.toggle('is-open', on);
-      const h = on ? item.querySelector('.sacc__body').offsetHeight + 40 : 0;
+      const h = on ? item.querySelector('.sacc__body').offsetHeight : 0;
       gsap.to(item.querySelector('.sacc__panel'), { height: h, duration: immediate ? 0 : 0.6, ease: 'power3.inOut', overwrite: true });
     });
     if (immediate) { renderRows(securityItems[i]); return; }
