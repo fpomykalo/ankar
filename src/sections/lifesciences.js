@@ -90,8 +90,17 @@ export function initLifeSciences() {
     takeover.setAttribute('aria-hidden', 'true');
     folders.style.pointerEvents = '';
     open = false;
-    ScrollTrigger.refresh();
+    refreshWhenIdle();
   }
+
+  // A full ScrollTrigger refresh takes a few hundred milliseconds on this page, so after the
+  // fold it waits for a pause in the scrolling, where a frozen frame cannot be seen.
+  let pendingRefresh = null;
+  function refreshWhenIdle() {
+    clearTimeout(pendingRefresh);
+    pendingRefresh = setTimeout(() => { pendingRefresh = null; ScrollTrigger.refresh(); }, 600);
+  }
+  lenis.on('scroll', () => { if (pendingRefresh) refreshWhenIdle(); });
 
   // Out of view: reset everything in one frame. When it sits above the viewport the section
   // gives back `extra` pixels above what is on screen, so the scroll moves up by the same
