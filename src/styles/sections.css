@@ -265,27 +265,27 @@
 .nav__logo { display: block; color: inherit; }
 .nav__logo-svg { display: block; width: 102px; height: 16px; }
 .nav.is-open { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-.nav__panel { position: absolute; left: 0; top: 0; width: 1280px; height: 468px; opacity: 0; pointer-events: none; transition: opacity .35s; }
+.nav__panel { position: absolute; left: 0; top: 0; width: 1280px; height: 440px; opacity: 0; pointer-events: none; transition: opacity .35s; }
 .nav.is-open .nav__panel { opacity: 1; pointer-events: auto; transition-delay: .1s; }
 .nav__line { position: absolute; left: 0; top: 0; width: 100%; height: 1px; background: #000; }
 .nav__head { position: absolute; left: 0; top: 20px; }
 .nav__head .dot { margin-right: 10px; }
 .nav__col { position: absolute; top: 98px; }
-.nav__col--product { left: 20px; width: 288px; height: 350px; }
+.nav__col--product { left: 20px; width: 288px; height: 322px; }
 .nav__col--pages { left: 324px; width: 308px; }
-.nav__col--cases { left: 648px; width: 612px; height: 350px; }
-.nav__tree { position: absolute; left: 28px; top: 48px; white-space: pre; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.nav__col--cases { left: 648px; width: 612px; height: 322px; }
+.nav__tree { position: absolute; left: 28px; top: 20px; white-space: pre; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .nav__row { position: relative; height: 68px; }
 .nav__viewall { position: absolute; right: 0; top: 20px; }
-.nav__case { position: absolute; left: 0; top: 68px; width: 298px; height: 282px; border-radius: 10px; overflow: hidden; color: var(--footer-ink); }
+.nav__case { position: absolute; left: 0; top: 68px; width: 298px; height: 254px; border-radius: 10px; overflow: hidden; color: var(--footer-ink); }
 .nav__case--2 { left: 314px; }
 .nav__case-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .nav__case-shade { position: absolute; inset: 0; background: linear-gradient(180deg, #000 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 79.8%, #000 100%), rgba(0,0,0,.4); }
 .nav__case-shade--60 { background: linear-gradient(180deg, #000 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 79.8%, #000 100%), rgba(0,0,0,.6); }
-.nav__case-logo { position: absolute; left: 20px; top: 20px; }
+.nav__case-logo { position: absolute; left: 20px; top: 22px; }
 .nav__case-line { position: absolute; left: 20px; top: 68px; width: 258px; height: 1px; background: rgba(238,242,246,.4); }
 .nav__case-title { position: absolute; left: 20px; top: 78px; width: 152px; font: 400 18px/20px var(--font-body); text-box-trim: trim-both; text-box-edge: cap alphabetic; }
-.nav__case-link { position: absolute; left: 20px; top: 254px; }
+.nav__case-link { position: absolute; left: 20px; top: 226px; }
 .nav__menu a { position: relative; padding: 10px 0; margin: -10px 0; }
 
 /* challenge: crossfading eyebrows + card slot under the sticky header */
