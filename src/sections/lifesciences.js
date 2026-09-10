@@ -6,8 +6,8 @@ import { gsap, lenis, ScrollTrigger } from '../lib/scroll.js';
  * everything below it down) while the page eases so the carousel area fills
  * the viewport, and the photo grows out of its card as the blue folder comes
  * in from the right. A click anywhere (except the story button) plays it
- * backwards and hands the space back. You can still scroll away while it is
- * open; once it is fully out of view it folds itself away.
+ * backwards and hands the space back. You can scroll away and come back while
+ * it is open; it stays until something is clicked.
  */
 export function initLifeSciences() {
   const section = document.getElementById('industries');
@@ -108,11 +108,5 @@ export function initLifeSciences() {
     if (!open) return;
     if (e.target.closest('.ls__cta')) return;
     closeTakeover();
-  });
-  // scrolled fully out of view: fold it away so the carousel is back when the viewer returns
-  lenis.on('scroll', () => {
-    if (!open || !tl || tl.reversed() || tl.progress() < 1) return;
-    const r = takeover.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > vh()) closeTakeover();
   });
 }
