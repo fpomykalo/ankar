@@ -20,6 +20,8 @@ gsap.ticker.lagSmoothing(0);
 // so an anchor can land inside a scrubbed stage instead of at an element's top.
 export const anchorTargets = {};
 
+const layoutTop = (el) => { let y = 0; for (let n = el; n; n = n.offsetParent) y += n.offsetTop; return y; };
+
 // in-page anchors go through Lenis
 document.addEventListener('click', (e) => {
   const a = e.target.closest('a[href]');
@@ -38,6 +40,7 @@ document.addEventListener('click', (e) => {
   // a pinned stage reports the viewport top as its position while it is pinned, so aim at its trigger's start instead
   const pinned = target instanceof Element && ScrollTrigger.getAll().find((t) => t.pin === target);
   if (pinned) target = pinned.start;
+  else if (target instanceof Element) target = layoutTop(target); // layout position: a reveal transform still in flight must not shift the landing
   const offset = Number(a.dataset.offset || 0); // positive values land the section's content 120px under the top, like the pinned scenes
   lenis.scrollTo(target, { offset, duration: 1.4, force: true, lock: true });
 });
