@@ -276,6 +276,9 @@
 .nav__col--cases { left: 648px; width: 612px; height: 322px; }
 .nav__tree { position: absolute; left: 28px; top: 20px; white-space: pre; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .nav__row { position: relative; height: 68px; }
+.nav__row--careers { height: 70px; }
+.nav__row--security { height: 98px; } /* rows sit on the left column's 14px line grid */
+.nav__sub { position: absolute; left: 28px; top: 48px; white-space: nowrap; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .nav__viewall { position: absolute; right: 0; top: 20px; }
 .nav__case { position: absolute; left: 0; top: 68px; width: 298px; height: 254px; border-radius: 10px; overflow: hidden; color: var(--footer-ink); }
 .nav__case--2 { left: 314px; }
