@@ -1,4 +1,4 @@
-import { gsap } from '../lib/scroll.js';
+import { gsap, lenis } from '../lib/scroll.js';
 
 /**
  * Fixed navigation.
@@ -62,7 +62,14 @@ export function initNav() {
   const enterHome = () => { if (!armed) return; hold(); openHome(); };
   home.addEventListener('mouseenter', enterHome);
   home.addEventListener('mousemove', () => { if (!nav.classList.contains('is-home')) enterHome(); });
-  home.addEventListener('click', () => (nav.classList.contains('is-home') ? closeHome() : openHome()));
+  // Home is a link to the homepage (the anchor list shows on hover); on the homepage itself it scrolls to the top
+  const base = import.meta.env.BASE_URL || '/';
+  home.addEventListener('click', (e) => {
+    if (location.pathname !== base) return;
+    e.preventDefault();
+    closeHome();
+    lenis.scrollTo(0, { duration: 1.2, force: true, lock: true });
+  });
   homeWrap.addEventListener('mouseenter', hold);
   homeWrap.addEventListener('mouseleave', () => { leaveTimer = setTimeout(closeAll, 120); }); // the list is a sibling of the bar, so it needs its own leave
   homeWrap.addEventListener('click', (e) => { if (e.target.closest('a')) closeHome(); }); // picking an anchor folds the list away
