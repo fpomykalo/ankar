@@ -12,6 +12,7 @@ import { ScrollTrigger } from './lib/scroll.js';
 import { initReveal } from './lib/reveal.js';
 import { initNav } from './sections/nav.js';
 import { initClosing } from './sections/closing.js';
+import { primeImages } from './lib/decode.js';
 
 /** Boots the chrome every inner page shares, then the page's own init. */
 export function bootPage(init) {
@@ -24,3 +25,4 @@ export function bootPage(init) {
   });
   window.addEventListener('load', () => ScrollTrigger.refresh());
 }
+primeImages();
