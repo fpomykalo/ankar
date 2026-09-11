@@ -233,6 +233,9 @@
 .footer__links--indent { left: 108px; }
 .footer__links li { white-space: pre; }
 .footer__links li + li { margin-top: 3px; }
+.footer__tree { position: absolute; left: 108px; top: 20px; white-space: pre; line-height: 14px; text-box-trim: none; } /* untrimmed like the eyebrow heads, so the first line shares their baseline */
+.footer__tree a { transition: opacity .3s; }
+.footer__tree a:hover { opacity: .6; }
 .footer__stack { position: absolute; left: 0; top: 20px; }
 .footer__stack li { display: flex; }
 .footer__stack li + li { margin-top: 18px; }
@@ -274,11 +277,11 @@
 .nav__col--product { left: 20px; width: 288px; height: 322px; }
 .nav__col--pages { left: 324px; width: 308px; }
 .nav__col--cases { left: 648px; width: 612px; height: 322px; }
-.nav__tree { position: absolute; left: 28px; top: 20px; white-space: pre; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.nav__tree { position: absolute; left: 28px; top: 20px; white-space: pre; line-height: 14px; text-box-trim: none; } /* untrimmed like the heads, so "Product" and "Careers" share a baseline */
 .nav__row { position: relative; height: 68px; }
 .nav__row--careers { height: 70px; }
 .nav__row--security { height: 98px; } /* rows sit on the left column's 14px line grid */
-.nav__sub { position: absolute; left: 28px; top: 48px; white-space: nowrap; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.nav__sub { position: absolute; left: 28px; top: 48px; white-space: nowrap; line-height: 14px; text-box-trim: none; }
 .nav__viewall { position: absolute; right: 0; top: 20px; }
 .nav__case { position: absolute; left: 0; top: 68px; width: 298px; height: 254px; border-radius: 10px; overflow: hidden; color: var(--footer-ink); }
 .nav__case--2 { left: 314px; }
