@@ -233,6 +233,7 @@
 .footer__links--indent { left: 108px; }
 .footer__links li { white-space: pre; }
 .footer__links li + li { margin-top: 3px; }
+.footer__tree { position: absolute; left: 108px; top: 20px; white-space: pre; line-height: 14px; text-box-trim: none; } /* untrimmed like the eyebrow heads, so the first line shares their baseline */
 .footer__stack { position: absolute; left: 0; top: 20px; }
 .footer__stack li { display: flex; }
 .footer__stack li + li { margin-top: 18px; }
