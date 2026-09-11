@@ -1,15 +1,20 @@
-import { gsap } from '../lib/scroll.js';
+import { gsap, lenis } from '../lib/scroll.js';
 
 /**
  * Fixed navigation.
  * - Logo links home (respects the deploy base path).
  * - Ink stays black over every surface.
- * - Hover opens the mega-menu (Figma "Nav / Variant2": 1280 × 468).
+ * - Hover opens the mega-menu (Figma "Nav / Variant2": 1280 × 440).
  */
 export function initNav() {
   const nav = document.getElementById('nav');
   if (!nav) return;
   nav.querySelector('.nav__logo').setAttribute('href', import.meta.env.BASE_URL || '/');
+  // the page we are on is underlined in the menu
+  nav.querySelectorAll('.nav__menu a[data-mega]').forEach((a) => {
+    const path = new URL(a.getAttribute('href'), location.href).pathname;
+    if (location.pathname.startsWith(path)) a.classList.add('is-current');
+  });
 
   // --- dropdowns ------------------------------------------------------------
   // Product / Careers / Security / Resources open the mega-menu on hover.
@@ -21,7 +26,7 @@ export function initNav() {
     closeHome();
     nav.classList.add('is-open');
     openTl?.kill();
-    openTl = gsap.to(nav, { height: 468, duration: 0.55, ease: 'power3.out' });
+    openTl = gsap.to(nav, { height: 440, duration: 0.55, ease: 'power3.out' });
   };
   const closeMega = () => {
     if (!nav.classList.contains('is-open')) return;
@@ -44,9 +49,27 @@ export function initNav() {
 
   let leaveTimer;
   const hold = () => clearTimeout(leaveTimer);
-  nav.querySelectorAll('.nav__menu a[data-mega]').forEach((a) => a.addEventListener('mouseenter', () => { hold(); openMega(); }));
-  home.addEventListener('mouseenter', () => { hold(); openHome(); });
-  home.addEventListener('click', () => (nav.classList.contains('is-home') ? closeHome() : openHome()));
+  // A page that loads with the cursor already over a menu item would open the dropdown at once
+  // (the item you just clicked). Hover-opening is armed half a second after load; a mouse
+  // moving over an item after that still opens it, since mouseenter alone won't fire again.
+  let armed = false;
+  setTimeout(() => { armed = true; }, 500);
+  nav.querySelectorAll('.nav__menu a[data-mega]').forEach((a) => {
+    const enter = () => { if (!armed) return; hold(); openMega(); };
+    a.addEventListener('mouseenter', enter);
+    a.addEventListener('mousemove', () => { if (!nav.classList.contains('is-open')) enter(); });
+  });
+  const enterHome = () => { if (!armed) return; hold(); openHome(); };
+  home.addEventListener('mouseenter', enterHome);
+  home.addEventListener('mousemove', () => { if (!nav.classList.contains('is-home')) enterHome(); });
+  // Home is a link to the homepage (the anchor list shows on hover); on the homepage itself it scrolls to the top
+  const base = import.meta.env.BASE_URL || '/';
+  home.addEventListener('click', (e) => {
+    if (location.pathname !== base) return;
+    e.preventDefault();
+    closeHome();
+    lenis.scrollTo(0, { duration: 1.2, force: true, lock: true });
+  });
   homeWrap.addEventListener('mouseenter', hold);
   homeWrap.addEventListener('mouseleave', () => { leaveTimer = setTimeout(closeAll, 120); }); // the list is a sibling of the bar, so it needs its own leave
   homeWrap.addEventListener('click', (e) => { if (e.target.closest('a')) closeHome(); }); // picking an anchor folds the list away
