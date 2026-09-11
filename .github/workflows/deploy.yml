@@ -1,12 +1,10 @@
 name: Deploy to GitHub Pages
 
-# One Pages site, three builds:
-#   main  -> https://fpomykalo.github.io/ankar/
-#   v02   -> https://fpomykalo.github.io/ankar/v02/
-#   pages -> https://fpomykalo.github.io/ankar/bzmxkko5/  (unlisted, noindex)
+# One Pages site, two builds:
+#   main -> https://fpomykalo.github.io/ankar/
+#   v02  -> https://fpomykalo.github.io/ankar/v02/
 # The github-pages environment only accepts deployments from main, so this
-# workflow runs on main; a push to v02 or pages dispatches it
-# (see redeploy-from-v02.yml).
+# workflow runs on main; a push to v02 dispatches it (see redeploy-from-v02.yml).
 
 on:
   push:
@@ -34,10 +32,6 @@ jobs:
         with:
           ref: v02
           path: v02
-      - uses: actions/checkout@v4
-        with:
-          ref: pages
-          path: pages
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -51,20 +45,12 @@ jobs:
         run: npm ci && npm run build
         env:
           VITE_BASE: /ankar/v02/
-      - name: Build pages (unlisted)
-        working-directory: pages
-        run: npm ci && npm run build
-        env:
-          VITE_BASE: /ankar/bzmxkko5/
-          VITE_NOINDEX: '1'
       - name: Assemble site
         run: |
           mkdir -p site
           cp -r v01/dist/. site/
           mkdir -p site/v02
           cp -r v02/dist/. site/v02/
-          mkdir -p site/bzmxkko5
-          cp -r pages/dist/. site/bzmxkko5/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
