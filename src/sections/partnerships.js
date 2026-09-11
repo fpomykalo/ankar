@@ -15,6 +15,13 @@ export function initPartnerships() {
       <div class="prow__panel"><p class="t-body prow__body">${r.body}</p></div>
     </div>`).join('')}</div>`).join('');
 
+  // The grid is absolute, so the section is sized here: tall enough for the tallest open row,
+  // with the next section's divider (120px under the section) sitting 50px under that row's copy.
+  // A row's stack bottom = column closed height + its body; the copy ends 40px above that (paddings).
+  const cols2 = Array.from(grid.querySelectorAll('.pgrid__col'));
+  const tallest = Math.max(...cols2.map((col) => col.offsetHeight + Math.max(...Array.from(col.querySelectorAll('.prow__body')).map((b) => b.offsetHeight))));
+  grid.parentElement.style.height = `${grid.offsetTop + tallest - 40 + 50 - 120}px`;
+
   grid.querySelectorAll('.pgrid__col').forEach((col) => {
     const rows = Array.from(col.querySelectorAll('.prow'));
     const set = (row, open) => {
