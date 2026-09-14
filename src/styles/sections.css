@@ -90,8 +90,8 @@
 .acc__item > .rule { position: absolute; left: 0; top: 0; width: 524px; }
 .acc__n { position: absolute; left: 0; top: 20px; }
 .acc__title { width: 439px; transition: opacity .3s; }
-.acc__panel { height: 0; overflow: hidden; width: 439px; margin-top: 40px; }
-.acc__body { padding-bottom: 16px; }
+.acc__panel { height: 0; overflow: hidden; width: 439px; margin-top: 34px; }
+.acc__body { padding-top: 6px; padding-bottom: 16px; } /* the copy is cap-trimmed: 6px keeps its ascenders inside the clipped panel; the panel starts 6px earlier */
 
 /* ============================================================= LIFECYCLE */
 .lifecycle__body { left: 864px; top: 85px; width: 416px; }
@@ -156,12 +156,12 @@
 .partnerships__body { left: 648px; top: 103px; width: 649px; }
 .pgrid { position: absolute; left: 0; top: 344px; width: 1280px; height: 356px; display: grid; grid-template-columns: 632px 632px; column-gap: 16px; align-items: start; }
 .pgrid__col { display: block; }
-.prow { position: relative; padding-top: 81px; padding-bottom: 24px; cursor: pointer; }
+.prow { position: relative; padding-top: 75px; padding-bottom: 24px; cursor: pointer; }
 .prow > .rule { position: absolute; left: 0; top: 0; width: 632px; }
 .prow__n { position: absolute; left: 0; top: 20px; }
 .prow__title { position: absolute; left: 85px; top: 20px; white-space: nowrap; transition: opacity .3s; }
 .prow__panel { height: 0; overflow: hidden; margin-left: 85px; width: 547px; }
-.prow__body { padding-bottom: 16px; }
+.prow__body { padding-top: 6px; padding-bottom: 16px; }
 
 /* ============================================================== SECURITY */
 .security__title { width: 721px; }
@@ -453,3 +453,7 @@
 .nav__panel a:not(.nav__case):hover { color: rgba(0, 0, 0, .6); }
 .nav__case { transition: opacity .3s; }
 .nav__case:hover { opacity: .6; }
+
+/* the intro copy's last baseline sits on the title's last baseline */
+.possible__bodywrap { position: absolute; left: 864px; top: 174px; width: 416px; height: 0; display: flex; align-items: flex-end; }
+.possible__bodywrap .possible__body { position: static; width: 100%; }

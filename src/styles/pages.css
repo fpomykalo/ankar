@@ -152,8 +152,8 @@
 .sacc__n { position: absolute; left: 0; top: 20px; }
 .sacc__title { white-space: nowrap; transition: opacity .3s; }
 .sacc__item:not(.is-open):hover .sacc__title { opacity: .6; }
-.sacc__panel { height: 0; overflow: hidden; width: 439px; margin-top: 40px; } /* 40 under the title, open or closed */
-.sacc__body { padding-bottom: 16px; }
+.sacc__panel { height: 0; overflow: hidden; width: 439px; margin-top: 34px; } /* 40 under the title once the body's 6px top padding is counted */
+.sacc__body { padding-top: 6px; padding-bottom: 16px; }
 .spanel { position: absolute; left: 540px; top: 378px; width: 740px; height: 466px; border-radius: 30px; overflow: hidden; color: #fff; transform: translateZ(0); }
 .spanel__grad { position: absolute; left: 0; top: 0; width: 135%; height: 100%; object-fit: fill; }
 .spanel__rows { position: absolute; left: 40px; top: 40px; width: 660px; }
