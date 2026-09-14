@@ -277,8 +277,8 @@
 .nav__head { position: absolute; left: 0; top: 20px; }
 .nav__head .dot { margin-right: 10px; }
 .nav__col { position: absolute; top: 98px; }
-.nav__col--product { left: 20px; width: 288px; height: 230px; }
-.nav__col--pages { left: 324px; width: 308px; }
+.nav__col--product { left: 20px; width: 298px; height: 230px; } /* four 298px units with 16px gutters: 20, 334, 648 (double width) */
+.nav__col--pages { left: 334px; width: 298px; }
 .nav__col--cases { left: 648px; width: 612px; height: 230px; }
 .nav__tree { position: absolute; left: 28px; top: 20px; white-space: pre; line-height: 14px; text-box-trim: none; } /* untrimmed like the heads, so "Product" and "Careers" share a baseline */
 .nav__row { position: relative; height: 56px; }
