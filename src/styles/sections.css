@@ -85,11 +85,12 @@
 
 /* "What Ankar makes possible" (lives inside the stage, revealed at the end) */
 .acc { position: absolute; left: 0; top: 244px; width: 524px; }
-.acc__item { position: relative; padding-top: 81px; padding-bottom: 24px; cursor: pointer; }
+/* title in flow so a long one wraps; single-line rhythm unchanged: title at 20, body from 81, 24 under the item */
+.acc__item { position: relative; padding: 20px 0 24px 85px; cursor: pointer; }
 .acc__item > .rule { position: absolute; left: 0; top: 0; width: 524px; }
 .acc__n { position: absolute; left: 0; top: 20px; }
-.acc__title { position: absolute; left: 85px; top: 20px; white-space: nowrap; transition: opacity .3s; }
-.acc__panel { height: 0; overflow: hidden; margin-left: 85px; width: 439px; }
+.acc__title { width: 439px; transition: opacity .3s; }
+.acc__panel { height: 0; overflow: hidden; width: 439px; margin-top: 40px; }
 .acc__body { padding-bottom: 16px; }
 
 /* ============================================================= LIFECYCLE */

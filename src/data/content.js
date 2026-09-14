@@ -61,7 +61,7 @@ export const lifecycle = [
     subtitle: 'See the landscape before<br>choosing a direction.',
     body: 'Connect internal knowledge with scientific literature, patents, competitive activity and adjacent fields to uncover whitespace, emerging technologies and new routes forward.',
     listTitle: 'Workflows:',
-    list: ['Technology landscaping', 'Whitespace analysis', 'Competitive and technical intelligence', 'Emerging-technology monitoring', 'Opportunity discovery'],
+    list: ['Portfolio Mapping', 'Technology Monitoring', 'Whitespace Analysis'],
   },
   {
     label: 'Lifecycle — 2',
@@ -69,8 +69,8 @@ export const lifecycle = [
     title: 'Invent &amp;<br>Experiment',
     subtitle: 'Make every iteration compound by turning possibilities into stronger, testable concepts.',
     body: 'Bring relevant science, prior work and alternative approaches into the creative process so teams can develop concepts with more context and spend more time testing the most promising ideas.',
-    listTitle: 'Potential workflows:',
-    list: ['Concept generation', 'Alternative approach generation', 'Design-around exploration', 'Technical problem solving', 'Cross-domain inspiration'],
+    listTitle: 'Workflows:',
+    list: ['Concept Generation', 'Design Acceleration', 'Experiment design', 'Result Synthesis'],
   },
   {
     label: 'Lifecycle — 3',
@@ -78,8 +78,8 @@ export const lifecycle = [
     title: 'Protect',
     subtitle: 'Turn technical progress into defensible value.',
     body: 'Identify inventions earlier, evaluate what is worth protecting and move from complex R&amp;D to stronger patent assets with less wasted expert time.',
-    listTitle: 'Potential workflows:',
-    list: ['Invention capture', 'Patentability and novelty analysis', 'Invention evaluation', 'Patent drafting', 'Portfolio and protection decisions'],
+    listTitle: 'Workflows:',
+    list: ['Patent Drafting', 'Prosecution', 'Adversarial Procedures', 'Portfolio Pruning', 'Infringement Detection'],
   },
 ];
 
@@ -89,7 +89,7 @@ export const industries = [
     title: 'Life sciences',
     cta: 'Watch the Antheros story',
     image: `${BASE}/assets/images/industries/life-sciences.jpg`,
-    caption: 'Capacity to assess or strengthen <b>100-150 more disclosures annually</b> at 50% adoption.',
+    caption: 'A client used Ankar to generate a targeted genus across 648 compounds, closely matching the result of 3+ hours of manual expert analysis.',
   },
   {
     label: 'Case Study — 2',
@@ -137,9 +137,9 @@ const basePeople = [
   {
     name: 'Tamar<br>Gomez',
     image: `${BASE}/assets/images/people/tamar-gomez.avif`,
-    role: 'Co-Founder<br>Past: Palantir, Helsing',
-    logos: ['helsing', 'palantir'],
-    bio: 'Tamar Gomez is Co-Founder of Ankar, an AI platform helping R&D teams make better technology decisions and accelerate innovation.<br><br>She spent nearly a decade building and deploying advanced AI software for enterprises and governments at Palantir and Helsing, working at the frontier of science, technology and complex decision-making. Tamar holds a PhD in Game Theory from Imperial College London.<br><br>Through that work, she saw first-hand that while technical progress was accelerating, the systems behind innovation remained fragmented, manual and disconnected. She co-founded Ankar in 2024 to change that.<br><br>Today, Ankar connects an organisation’s internal R&D knowledge with external technical change, AI models and purpose-built workflows, helping researchers and innovators explore new possibilities, develop stronger ideas and build on everything their organisation has learned before.',
+    role: 'Co-Founder<br>Past: Palantir',
+    logos: ['palantir'],
+    bio: 'Tamar Gomez is Co-Founder of Ankar, an AI platform helping R&D teams make better technology decisions and accelerate innovation.<br><br>She spent nearly a decade building and deploying advanced AI software for enterprises and governments at Palantir, working at the frontier of science, technology and complex decision-making. Tamar holds a PhD in Game Theory from Imperial College London.<br><br>Through that work, she saw first-hand that while technical progress was accelerating, the systems behind innovation remained fragmented, manual and disconnected. She co-founded Ankar in 2024 to change that.<br><br>Today, Ankar connects an organisation’s internal R&D knowledge with external technical change, AI models and purpose-built workflows, helping researchers and innovators explore new possibilities, develop stronger ideas and build on everything their organisation has learned before.',
   },
   {
     name: 'Harm<br>van der Heijden',
@@ -266,7 +266,13 @@ const advisors = [
   },
 ];
 
-export const people = [...basePeople, ...advisors].map((p, i) => ({ ...p, label: `People — ${i + 1}` }));
+// the strip's order: these eight first, everyone else after them in their listed order
+const ORDER = ['Wiem', 'Tamar', 'Jean-Christophe', 'Giulia', 'Robert', 'Helene', 'Dan', 'Kimiya'];
+const rank = (p) => { const i = ORDER.findIndex((n) => p.name.startsWith(n)); return i < 0 ? ORDER.length : i; };
+export const people = [...basePeople, ...advisors]
+  .map((p, i) => [p, i])
+  .sort((a, b) => rank(a[0]) - rank(b[0]) || a[1] - b[1])
+  .map(([p], i) => ({ ...p, label: `People — ${i + 1}` }));
 
 export const quotes = [
   {

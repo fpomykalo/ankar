@@ -8,7 +8,7 @@ export function initPossible() {
   const acc = document.getElementById('possible-acc');
   if (!acc) return;
   const slots = document.querySelectorAll('#illus .illus__item');
-  const htmls = [wf1, wf2, wf3];
+  const htmls = [wf2, wf1, wf3]; // item 1 evaluates (landscape drawing), item 2 finds evidence (A-to-B path), item 3 compounds knowledge
   const draw = (i) => { if (slots[i]) slots[i].innerHTML = htmls[i]; }; // re-inserting restarts the illustration's draw-in
   htmls.forEach((_, i) => draw(i));
 
