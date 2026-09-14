@@ -150,6 +150,7 @@ export function initBios() {
 
   let active = 0;
   let page = 0;
+  counter.textContent = `1 / ${n}`; // from the data, whatever the markup says
   const pos = { x: 0 };
   const widthOf = (c) => (c.classList.contains('is-open') ? 744 : 212) - 25;
   const pageOffset = (p) => { let x = 0; for (let i = 0; i < pageStart(p); i += 1) x += widthOf(cards[i]); return x; };
