@@ -1,0 +1,35 @@
+[
+  {
+    "label": "Case Study — 1",
+    "title": "Life sciences",
+    "cta": "Watch the Antheros story",
+    "image": "/assets/images/industries/life-sciences.jpg",
+    "caption": "Capacity to assess or strengthen <b>100-150 more disclosures annually</b> at 50% adoption."
+  },
+  {
+    "label": "Case Study — 2",
+    "title": "Aerospace and<br>defense",
+    "image": "/assets/images/industries/aerospace.jpg",
+    "caption": "A client used Ankar to explore <b>4 distinct invention directions in a single session</b>, selecting <b>3 to take forward</b>."
+  },
+  {
+    "label": "Case Study — 3",
+    "title": "Semiconductors",
+    "image": "/assets/images/industries/semiconductors.jpg",
+    "caption": "A client used Ankar to turn <b>1 seed document and 2 hand-drawn sketches</b> into a complete invention disclosure <b>in under 2 hours</b>, on their first use."
+  },
+  {
+    "label": "Case Study — 4",
+    "title": "Consumer R&amp;D,<br>cosmetics<br>and materials",
+    "openTitle": "Consumer R&amp;D,<br>cosmetics and materials",
+    "image": "/assets/images/industries/consumer.jpg",
+    "caption": "A client uses Ankar to continuously monitor its technology landscape, with around <b>64 potential infringement signals</b> identified annually."
+  },
+  {
+    "label": "Case Study — 5",
+    "title": "Automotive<br>and industrials",
+    "openTitle": "Automotive<br>and industrials",
+    "image": "/assets/images/industries/automotive.jpg",
+    "caption": "During a live evaluation, a client used Ankar to surface <b>relevant prior art</b> that its incumbent external research provider had missed."
+  }
+]

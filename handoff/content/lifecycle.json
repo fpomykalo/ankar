@@ -1,0 +1,47 @@
+[
+  {
+    "label": "Lifecycle — 1",
+    "color": "#ba484f",
+    "title": "Explore",
+    "subtitle": "See the landscape before<br>choosing a direction.",
+    "body": "Connect internal knowledge with scientific literature, patents, competitive activity and adjacent fields to uncover whitespace, emerging technologies and new routes forward.",
+    "listTitle": "Workflows:",
+    "list": [
+      "Technology landscaping",
+      "Whitespace analysis",
+      "Competitive and technical intelligence",
+      "Emerging-technology monitoring",
+      "Opportunity discovery"
+    ]
+  },
+  {
+    "label": "Lifecycle — 2",
+    "color": "#2f3d86",
+    "title": "Invent &amp;<br>Experiment",
+    "subtitle": "Make every iteration compound by turning possibilities into stronger, testable concepts.",
+    "body": "Bring relevant science, prior work and alternative approaches into the creative process so teams can develop concepts with more context and spend more time testing the most promising ideas.",
+    "listTitle": "Potential workflows:",
+    "list": [
+      "Concept generation",
+      "Alternative approach generation",
+      "Design-around exploration",
+      "Technical problem solving",
+      "Cross-domain inspiration"
+    ]
+  },
+  {
+    "label": "Lifecycle — 3",
+    "color": "#162247",
+    "title": "Protect",
+    "subtitle": "Turn technical progress into defensible value.",
+    "body": "Identify inventions earlier, evaluate what is worth protecting and move from complex R&amp;D to stronger patent assets with less wasted expert time.",
+    "listTitle": "Potential workflows:",
+    "list": [
+      "Invention capture",
+      "Patentability and novelty analysis",
+      "Invention evaluation",
+      "Patent drafting",
+      "Portfolio and protection decisions"
+    ]
+  }
+]

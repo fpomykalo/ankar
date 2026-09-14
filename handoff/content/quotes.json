@@ -1,0 +1,38 @@
+[
+  {
+    "label": "Quote — 1",
+    "name": "Jean Yves<br>Legendre",
+    "image": "/assets/images/people/jean-yves-legendre.avif",
+    "role": "IP Intelligence Manager,<br>L’Oréal",
+    "logo": "loreal",
+    "logoSize": [
+      122,
+      22
+    ],
+    "quote": "Most vendors came with a fixed solution. With Ankar, they began with our needs. They understood patents, spoke our language, and adapted to our needs by configuring their existing technology into a solution that fits our reality."
+  },
+  {
+    "label": "Quote — 2",
+    "name": "Alain<br>Durand",
+    "image": "/assets/images/people/alain-durand.webp",
+    "role": "IP Engineer,<br>Valeo",
+    "logo": "valeo",
+    "logoSize": [
+      84,
+      37
+    ],
+    "quote": "What impressed me was how Ankar invested time into understanding our unique needs as an industrial company. They didn’t just deliver a tool, they delivered results."
+  },
+  {
+    "label": "Quote — 3",
+    "name": "Sabrina<br>Poulos",
+    "image": "/assets/images/people/sabrina-poulos.jpg",
+    "role": "Founding partner,<br>Antheros",
+    "logo": "antheros",
+    "logoSize": [
+      122,
+      25
+    ],
+    "quote": "Ankar gives us that extra capacity—it takes away some of the rote, mechanical work and lets us focus on the substantive."
+  }
+]
