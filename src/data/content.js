@@ -266,13 +266,12 @@ const advisors = [
   },
 ];
 
-// the strip's order: these eight first, everyone else after them in their listed order
+// the strip shows these eight, in this order; the other entries above stay on file but are not shown
 const ORDER = ['Wiem', 'Tamar', 'Jean-Christophe', 'Giulia', 'Robert', 'Helene', 'Dan', 'Kimiya'];
-const rank = (p) => { const i = ORDER.findIndex((n) => p.name.startsWith(n)); return i < 0 ? ORDER.length : i; };
-export const people = [...basePeople, ...advisors]
-  .map((p, i) => [p, i])
-  .sort((a, b) => rank(a[0]) - rank(b[0]) || a[1] - b[1])
-  .map(([p], i) => ({ ...p, label: `People — ${i + 1}` }));
+const all = [...basePeople, ...advisors];
+export const people = ORDER
+  .map((n) => all.find((p) => p.name.startsWith(n)))
+  .map((p, i) => ({ ...p, label: `People — ${i + 1}` }));
 
 export const quotes = [
   {
