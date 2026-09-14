@@ -293,8 +293,8 @@
 .nav__case-shade--60 { background: linear-gradient(180deg, #000 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 79.8%, #000 100%), rgba(0,0,0,.6); }
 .nav__case-logo { position: absolute; left: 20px; top: 22px; }
 .nav__case-line { position: absolute; left: 20px; top: 68px; width: 258px; height: 1px; background: rgba(238,242,246,.4); }
-.nav__case-title--wide { width: 258px; }
 .nav__case-title { position: absolute; left: 20px; top: 78px; width: 152px; font: 400 18px/20px var(--font-body); text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.nav__case-title--wide { width: 258px; }
 .nav__case-link { position: absolute; left: 20px; top: 226px; }
 .nav__menu a { position: relative; padding: 10px 0; margin: -10px 0; }
 
