@@ -38,13 +38,10 @@ export function wideCard(c) {
     </a>`;
 }
 
-/** Arrows, counter and dots under a card strip. */
+/** Page dots under a card strip. */
 export function pager(pageCount) {
   return `
     <div class="pager">
-      <button class="arrow arrow--prev pager__prev" aria-label="Previous"><svg viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9l8 8" stroke="#000"/></svg></button>
-      <span class="t-mono pager__count">1 / ${pageCount}</span>
-      <button class="arrow arrow--next pager__next" aria-label="Next"><svg viewBox="0 0 10 18" fill="none"><path d="M1 1l8 8-8 8" stroke="#000"/></svg></button>
       <div class="pager__dots">${Array.from({ length: pageCount }, (_, p) => `<button class="bios__dot${p === 0 ? ' is-active' : ''}" type="button" aria-label="Page ${p + 1}"></button>`).join('')}</div>
     </div>`;
 }
@@ -62,7 +59,6 @@ export function initStrip({ folders, pager: pagerId, pages, onRender }) {
   foldersEl.innerHTML = `<div class="strip__track">${pages.map((p) => `<div class="strip__page">${p.join('')}</div>`).join('')}</div>`;
   const track = foldersEl.firstElementChild;
   pagerEl.innerHTML = pager(pages.length);
-  const count = pagerEl.querySelector('.pager__count');
   const dots = Array.from(pagerEl.querySelectorAll('.bios__dot'));
   let page = 0;
   const go = (p) => {
@@ -70,11 +66,8 @@ export function initStrip({ folders, pager: pagerId, pages, onRender }) {
     if (next === page) return;
     page = next;
     gsap.to(track, { x: -page * 1305, duration: 0.9, ease: 'power3.inOut', overwrite: true });
-    count.textContent = `${page + 1} / ${pages.length}`;
     dots.forEach((d, i) => d.classList.toggle('is-active', i === page));
   };
   onRender?.(foldersEl);
-  pagerEl.querySelector('.pager__prev').addEventListener('click', () => go(page - 1));
-  pagerEl.querySelector('.pager__next').addEventListener('click', () => go(page + 1));
   dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
 }

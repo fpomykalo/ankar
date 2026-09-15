@@ -10,12 +10,12 @@ export const stories = [
 
 /** Most recent posts (Resources) and Read next (Article). Photos for the last two are stand-ins until the real ones arrive. */
 export const posts = [
-  { title: 'CAFC Reverses PTAB Invalidity Findings in Google Hotword Detection Patent Dispute with Sonos', cat: 'Product', image: img('industries/aerospace.jpg'), author: 'Rose Esfandiari<br>Patent Correspondent;<br>IPWatchdog Columnist', meta: 'June 23, 2026 / 5 min read', href: `${BASE}/resources/article/` },
-  { title: 'Federal Circuit Upholds No-Infringement Ruling in Actelion Epoprostenol Patent Dispute', cat: 'Community', image: img('industries/semiconductors.jpg'), author: 'Rose Esfandiari<br>Patent Correspondent;<br>IPWatchdog Columnist', meta: 'May 19, 2026 / 5 min read', href: `${BASE}/resources/article/` },
-  { title: 'Senior Patent Partner Joins Ankar as Head of Patent Innovation', cat: 'Announcements', image: img('industries/consumer.jpg'), author: 'Preston Teng<br>Narratives, Ankar', meta: 'June 1, 2026 / 3 min read', href: `${BASE}/resources/article/` },
+  { title: 'CAFC Reverses PTAB Invalidity Findings in Google Hotword Detection Patent Dispute with Sonos', cat: 'Blog', image: img('industries/aerospace.jpg'), author: 'Rose Esfandiari<br>Patent Correspondent;<br>IPWatchdog Columnist', meta: 'June 23, 2026 / 5 min read', href: `${BASE}/resources/article/` },
+  { title: 'Federal Circuit Upholds No-Infringement Ruling in Actelion Epoprostenol Patent Dispute', cat: 'Blog', image: img('industries/semiconductors.jpg'), author: 'Rose Esfandiari<br>Patent Correspondent;<br>IPWatchdog Columnist', meta: 'May 19, 2026 / 5 min read', href: `${BASE}/resources/article/` },
+  { title: 'Senior Patent Partner Joins Ankar as Head of Patent Innovation', cat: 'Press', image: img('industries/consumer.jpg'), author: 'Preston Teng<br>Narratives, Ankar', meta: 'June 1, 2026 / 3 min read', href: `${BASE}/resources/article/` },
 ];
 
-export const highlighted = { title: 'My First 30 Days at Ankar:<br>Autonomy, Debugging,<br>Deadlines, and Discovery', label: 'Announcements', image: img('people/william-sweetenham.jpg'), author: 'Manick Vennimalai<br>Machine Learning Engineer', meta: 'November 7, 2025 / 7 min read', href: `${BASE}/resources/article/` };
+export const highlighted = { title: 'My First 30 Days at Ankar:<br>Autonomy, Debugging,<br>Deadlines, and Discovery', label: 'Blog', image: img('people/william-sweetenham.jpg'), author: 'Manick Vennimalai<br>Machine Learning Engineer', meta: 'November 7, 2025 / 7 min read', href: `${BASE}/resources/article/` };
 
 export const news = [
   { title: 'Patent Startup Ankar Raises $20M in Series A Round', source: 'law.com' },

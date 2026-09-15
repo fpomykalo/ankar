@@ -76,10 +76,6 @@
 .scard__logo { position: absolute; left: 45px; bottom: 88px; }
 .scard__meta { position: absolute; left: 45px; bottom: 40px; white-space: nowrap; }
 .pager { position: absolute; left: 0; top: 0; width: 1280px; height: 17px; }
-.pager .arrow { position: absolute; top: -3px; width: 10px; height: 24px; }
-.pager__prev { left: 0; }
-.pager__next { left: 162px; }
-.pager__count { position: absolute; left: 59px; top: 5px; }
 .pager__dots { position: absolute; left: 607px; top: 5px; display: flex; gap: 11.43px; }
 .rsec__pager { position: absolute; left: 0; width: 1280px; height: 17px; }
 

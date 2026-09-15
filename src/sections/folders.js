@@ -73,10 +73,9 @@ export function initLifecycleCards() {
   bindAccordion(root);
 }
 
-// --- bios (one viewport-wide strip, paged by 4; click a card for the full bio) -----
+// --- bios (one viewport-wide strip, paged by 4 with dots; click a card for the full bio) -----
 export function initBios() {
   const track = document.getElementById('bios-track');
-  const counter = document.getElementById('bios-counter');
   const dotsEl = document.getElementById('bios-dots');
   if (!track) return;
   const PER = 4;
@@ -150,7 +149,6 @@ export function initBios() {
 
   let active = 0;
   let page = 0;
-  counter.textContent = `1 / ${n}`; // from the data, whatever the markup says
   const pos = { x: 0 };
   const widthOf = (c) => (c.classList.contains('is-open') ? 744 : 212) - 25;
   const pageOffset = (p) => { let x = 0; for (let i = 0; i < pageStart(p); i += 1) x += widthOf(cards[i]); return x; };
@@ -167,7 +165,6 @@ export function initBios() {
     active = (i + n) % n;
     cards.forEach((c, j) => { c.classList.toggle('is-open', j === active); if (j !== active) { c.classList.remove('is-expanded'); c.removeAttribute('data-lenis-prevent'); } });
     lenis.start();
-    counter.textContent = `${active + 1} / ${n}`;
     const p = pageOf(active);
     if (paging && p !== page) showPage(p);
     // keep the page anchored when a card that sits before it (off to the left) just shrank
@@ -175,8 +172,6 @@ export function initBios() {
   }
 
   cards.forEach((c, i) => c.addEventListener('mouseenter', () => { if (i !== active && !dragging) setActive(i, { paging: false }); }));
-  document.getElementById('bios-prev')?.addEventListener('click', () => setActive(active - 1));
-  document.getElementById('bios-next')?.addEventListener('click', () => setActive(active + 1));
   dots.forEach((d, p) => d.addEventListener('click', () => { showPage(p); }));
 
   // drag / horizontal wheel moves the strip (snapping to pages); a plain click toggles the full bio

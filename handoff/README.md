@@ -76,7 +76,7 @@ Two more will need writing in Framer from the behaviour notes below: the Anthero
 Navigation
 
 - Fixed glass bar, 1280 × 60 at 20px from the top. Menu items: Home with a chevron, Product, Careers, Security, Resources. The current page is underlined (1px, 3px offset).
-- Hovering Product, Careers, Security or Resources opens the mega-menu: the bar grows to 440px tall and shows three columns. Left: "Product > Explore" with the four workflow groups and their workflows, single-spaced, every line a link to the product page. Middle: Careers, Security (with "Note from our founders on security" beneath), Resources (with "Press kit" beneath). Right: Use Cases with two 298 × 254 photo cards and a "View all" link.
+- Hovering Product, Careers, Security or Resources opens the mega-menu: the bar grows to 440px tall and shows three columns. Left: "Product > Explore" with the four workflow groups and their workflows, single-spaced, every line a link to the product page. Middle: Careers, Security (with "Note from our founders on security" beneath), Resources (with "Press kit" beneath). Right: Use Cases with two 298 × 176 photo cards (Antheros, L’Oréal), each linking to the article page, and a "View all" link.
 - Hovering Home shows a small 163 × 244 glass list of on-page anchors. Clicking Home goes to the homepage. Anchors land with the section's divider 40px under the nav.
 - After a page loads, hover-opening is disabled for half a second so the menu you just clicked does not reopen under the cursor.
 - Every text link in the site fades to 60% on hover.
@@ -94,7 +94,7 @@ Homepage
 - Built for consequential R&D: five industry folder cards, open card 557px. The Life Sciences card carries a "Watch the Antheros story" button; clicking the button or anywhere on the card opens the take-over.
 - Take-over: the section grows by a viewport height minus 480, the page eases so the take-over fills the viewport, the photo grows out of its card to 786px wide while the blue panel slides in from the right with the copy. The section head stays visible above it. A click anywhere closes it (except on the story button). If it scrolls fully out of view it closes itself without moving what is on screen. In Framer this is best rebuilt with layout animations rather than ported.
 - More than software: four rows in two columns, open on hover, only one open per column. The section is sized so the next divider sits 50px under the tallest open row.
-- Developed by: divider, eyebrow, then a viewport-wide strip of 13 people cards, open card 744px, closed 212px, paged by four with arrows, a counter and dots. Drag scrolls the strip. A click on the open card expands the full bio with its own scrollbar.
+- Developed by: divider, eyebrow, then a viewport-wide strip of eight people cards, open card 744px, closed 212px, paged by four with dots. Drag scrolls the strip. A click on the open card expands the full bio with its own scrollbar.
 - Enterprise trust: two columns with the SOC 2 and ISO 27001 badges and two CTAs.
 - Closing "What could your team invent next?" with the product screenshot, 120px under the content. Footer with the "Invention reinvented." line, four columns at 30% opacity, and the Ankar wordmark.
 
@@ -116,7 +116,7 @@ Security
 Resources
 
 - Hero with "Press kit", which anchors to the brand block with its divider 40px under the nav and everything above it off screen.
-- Customer stories strip: three cards, three pages that slide left and right. Then the sticky filter pills (Announcements, Product, Community) 20px under the nav; a pill hides the other posts, a second click shows all, and the first visible card always sits flush left. Highlighted wide card, Most recent strip, In the news list of five rows, then the brand block on its gradient. The pills release once their top is 20px below the last news title.
+- Customer stories strip: three cards, three pages that slide left and right. Then the sticky filter pills (Blog, Press) 20px under the nav; a pill hides the other posts, a second click shows all, and the first visible card always sits flush left. Highlighted wide card, Most recent strip, In the news list of five rows, then the brand block on its gradient. The pills release once their top is 20px below the last news title.
 - Article page: date, title, photo card with its category label, author with avatar, a glass email field with a grey placeholder, share links, the body, then a "Read next" strip.
 
 Sticky rule used everywhere: a sticky element sits 20px under the nav (top of the pills at 100px) and releases when its top is 20px below the last element of its section.
