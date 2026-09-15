@@ -35,25 +35,26 @@
   </section>
 
   <div class="rwrap">
-    <div class="rbar" id="rbar"><div class="container"><nav class="rbar__tabs" aria-label="Filter posts">
-      <button class="ptab rbar__tab" type="button" data-cat="Blog"><span>Blog</span></button>
-      <button class="ptab rbar__tab" type="button" data-cat="Press"><span>Press</span></button>
+    <div class="rbar" id="rbar"><div class="container"><nav class="rbar__tabs" aria-label="Jump to">
+      <a class="ptab rbar__tab" href="#blog" data-offset="-120" data-target="blog"><span>Blog</span></a>
+      <a class="ptab rbar__tab" href="#press" data-offset="-120" data-target="press"><span>Press</span></a>
     </nav></div></div>
 
-    <section class="psec rsec rsec--highlighted">
+    <section class="psec rsec rsec--blog">
       <div class="container">
-        <div class="rule psec__rule" data-reveal></div>
-        <p class="eyebrow t-mono sec__eyebrow" data-reveal><span class="dot"></span>Highlighted</p>
-        <div class="folders folders--wide" id="highlighted-folders" data-reveal data-reveal-delay="0.2"></div>
+        <div class="rule psec__rule" id="blog" data-reveal></div>
+        <p class="eyebrow t-mono sec__eyebrow" data-reveal><span class="dot"></span>Blog</p>
+        <div class="folders folders--grid" id="blog-folders" data-reveal data-reveal-delay="0.2"></div>
+        <div class="rsec__pager" id="blog-pager" data-reveal data-reveal-delay="0.25"></div>
       </div>
     </section>
 
-    <section class="psec rsec rsec--recent">
+    <section class="psec rsec rsec--press">
       <div class="container">
-        <div class="rule psec__rule" data-reveal></div>
-        <p class="eyebrow t-mono sec__eyebrow" data-reveal><span class="dot"></span>Most recent</p>
-        <div class="folders folders--stories" id="recent-folders" data-reveal data-reveal-delay="0.2"></div>
-        <div class="rsec__pager" id="recent-pager" data-reveal data-reveal-delay="0.25"></div>
+        <div class="rule psec__rule" id="press" data-reveal></div>
+        <p class="eyebrow t-mono sec__eyebrow" data-reveal><span class="dot"></span>Press</p>
+        <div class="folders folders--press" id="press-folders" data-reveal data-reveal-delay="0.2"></div>
+        <div class="rsec__pager" id="press-pager" data-reveal data-reveal-delay="0.25"></div>
       </div>
     </section>
 

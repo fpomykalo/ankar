@@ -8,11 +8,26 @@ export const stories = [
   { title: 'L’Oréal and Ankar: Seeing and safeguarding innovation', label: 'Case study', image: img('people/jean-yves-legendre.avif'), logo: 'loreal', logoSize: [122, 22], meta: 'November 10, 2025 / 4 min read' },
 ];
 
-/** Most recent posts (Resources) and Read next (Article). Photos for the last two are stand-ins until the real ones arrive. */
+/** Blog posts (Resources grid, Read next on the article). The Sonos and first-30-days photos are stand-ins. */
 export const posts = [
   { title: 'CAFC Reverses PTAB Invalidity Findings in Google Hotword Detection Patent Dispute with Sonos', cat: 'Blog', image: img('industries/aerospace.jpg'), author: 'Rose Esfandiari<br>Patent Correspondent;<br>IPWatchdog Columnist', meta: 'June 23, 2026 / 5 min read', href: `${BASE}/resources/article/` },
   { title: 'Federal Circuit Upholds No-Infringement Ruling in Actelion Epoprostenol Patent Dispute', cat: 'Blog', image: img('industries/semiconductors.jpg'), author: 'Rose Esfandiari<br>Patent Correspondent;<br>IPWatchdog Columnist', meta: 'May 19, 2026 / 5 min read', href: `${BASE}/resources/article/` },
-  { title: 'Senior Patent Partner Joins Ankar as Head of Patent Innovation', cat: 'Press', image: img('industries/consumer.jpg'), author: 'Preston Teng<br>Narratives, Ankar', meta: 'June 1, 2026 / 3 min read', href: `${BASE}/resources/article/` },
+  { title: 'Senior Patent Partner Joins Ankar as Head of Patent Innovation', cat: 'Blog', image: img('people/harm-van-der-heijden.avif'), author: 'Preston Teng<br>Narratives, Ankar', meta: 'June 1, 2026 / 3 min read', href: `${BASE}/resources/article/` },
+  { title: 'My First 30 Days at Ankar: Autonomy, Debugging, Deadlines, and Discovery', cat: 'Blog', image: img('people/william-sweetenham.jpg'), author: 'Manick Vennimalai<br>Machine Learning Engineer', meta: 'November 7, 2025 / 7 min read', href: `${BASE}/resources/article/` },
+];
+
+/** The blog grid on Resources: three rows of three, the four posts mixed so no row or column repeats
+ *  a story and every card carries a different photo until there are nine real posts. */
+export const blogGrid = [
+  [0, null], [1, null], [2, null],
+  [3, null], [0, img('industries/automotive.jpg')], [1, img('industries/life-sciences.jpg')],
+  [2, img('industries/consumer.jpg')], [3, img('people/nick-denman.jpg')], [0, img('industries/aerospace.jpg')],
+].map(([i, image]) => ({ ...posts[i], ...(image ? { image } : {}) }));
+
+/** Press coverage (Resources). */
+export const press = [
+  { title: 'Exclusive: Palantir alums using AI to streamline patent filing secure $20 million in Series A venture funding', label: 'Press', image: img('people/wiem-and-tamar.avif'), source: 'Fortune', href: '#' },
+  { title: 'Exclusive: AI patent platform hires NLO veteran in ‘industry first’', label: 'Press', image: img('people/harm-van-der-heijden.avif'), source: 'Managingip', href: '#' },
 ];
 
 export const highlighted = { title: 'My First 30 Days at Ankar:<br>Autonomy, Debugging,<br>Deadlines, and Discovery', label: 'Blog', image: img('people/william-sweetenham.jpg'), author: 'Manick Vennimalai<br>Machine Learning Engineer', meta: 'November 7, 2025 / 7 min read', href: `${BASE}/resources/article/` };

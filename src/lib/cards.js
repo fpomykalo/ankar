@@ -22,6 +22,36 @@ export function storyCard(c) {
     </a>`;
 }
 
+/** A 425 × 400 blog card: title with the author flowing under it, date at the bottom. */
+export function postCard(c) {
+  return `
+    <a class="fcard folder is-open scard scard--post" href="${c.href || '#'}" data-cat="${c.cat}">
+      <img class="fcard__img" src="${c.image}" alt="" />
+      ${layers}
+      <div class="fcard__ui">
+        ${label(c.cat)}
+        <div class="fcard__line"></div>
+        <div class="scard__text"><h3 class="t-h4 scard__title">${c.title}</h3><p class="t-mono scard__author">${c.author}</p></div>
+        <p class="t-mono scard__meta">${c.meta}</p>
+      </div>
+    </a>`;
+}
+
+/** A 665 × 480 press card: headline and the outlet at the bottom. */
+export function pressCard(c) {
+  return `
+    <a class="fcard folder is-open scard scard--press" href="${c.href || '#'}">
+      <img class="fcard__img" src="${c.image}" alt="" />
+      ${layers}
+      <div class="fcard__ui">
+        ${label(c.label)}
+        <div class="fcard__line"></div>
+        <h3 class="t-h4 scard__title">${c.title}</h3>
+        <p class="t-mono scard__meta">${c.source}</p>
+      </div>
+    </a>`;
+}
+
 /** The 1305px wide story card. */
 export function wideCard(c) {
   return `

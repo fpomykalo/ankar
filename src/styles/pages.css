@@ -65,7 +65,7 @@
 .folders--stories .fcard { width: 452px; flex: 0 0 452px; }
 .folders--stories .fcard:nth-child(2) { width: 451px; flex-basis: 451px; }
 .folders--wide .fcard { width: 1305px; flex: 0 0 1305px; }
-.scard[hidden] { display: none; }
+.folders--press .fcard { width: 665px; flex: 0 0 665px; cursor: pointer; }
 .strip { overflow: hidden; }
 .strip__track { display: flex; width: max-content; will-change: transform; }
 .strip__page { display: flex; flex: 0 0 1305px; width: 1305px; height: 480px; }
@@ -75,6 +75,16 @@
 .scard--wide .scard__author { top: 202px; }
 .scard__logo { position: absolute; left: 45px; bottom: 88px; }
 .scard__meta { position: absolute; left: 45px; bottom: 40px; white-space: nowrap; }
+.scard--press .scard__title { width: 504px; }
+/* 425 × 400 blog cards on a 3-column grid, 40px between the bodies (15 between a body and the next tab), 20px between rows */
+.folders--grid { height: auto; }
+.folders--grid .strip__page { display: grid; grid-template-columns: repeat(3, 425px); column-gap: 15px; row-gap: 20px; height: auto; align-content: start; }
+.folders--grid .fcard { margin-left: 0; }
+.scard--post { width: 425px; height: 400px; cursor: pointer; }
+.scard--post .fcard__line { right: 20px; }
+.scard__text { position: absolute; left: 45px; top: 60px; width: 362px; }
+.scard--post .scard__title, .scard--post .scard__author { position: static; width: auto; }
+.scard--post .scard__author { margin-top: 20px; }
 .pager { position: absolute; left: 0; top: 0; width: 1280px; height: 17px; }
 .pager__dots { position: absolute; left: 607px; top: 5px; display: flex; gap: 11.43px; }
 .rsec__pager { position: absolute; left: 0; width: 1280px; height: 17px; }
@@ -178,17 +188,17 @@
 .rwrap { position: relative; } /* the sticky range ends with the news block, cut 20px above its last row */
 .rbar { position: sticky; top: 9px; z-index: 20; height: 131px; margin-top: 30px; pointer-events: none; } /* only the pills stick, 20px under the nav, over the content */
 .rbar > .container { height: 131px; }
-.rbar__tabs { position: absolute; left: 363px; top: 91px; display: flex; gap: 10px; pointer-events: auto; }
+.rbar__tabs { position: absolute; left: 457px; top: 91px; display: flex; gap: 10px; pointer-events: auto; } /* centred: 366 wide in 1280 */
 .rbar__tab { width: 178px; }
-.rsec--highlighted { padding-top: 120px; }
-.rsec--highlighted > .container { height: 548px; }
-.rsec--highlighted .folders--wide { top: 68px; }
-.rsec--recent, .rsec--next { padding-top: 120px; }
-.rsec--recent > .container { height: 585px; }
-.rsec--next > .container { height: 585px; }
-.rsec--recent .folders--stories, .rsec--next .folders--stories { top: 68px; }
-.rsec--recent .rsec__pager, .rsec--next .rsec__pager { top: 568px; }
-.rsec--news { padding-top: 89px; }
+.rsec--blog, .rsec--press, .rsec--next { padding-top: 120px; }
+.rsec--blog > .container { height: 1346px; } /* rule, eyebrow at 20, grid at 68 (three rows, 1240), dots at 1338 */
+.rsec--press > .container { height: 586px; } /* two 665 × 480 cards at 68, dots at 578 */
+.rsec--next > .container { height: 506px; } /* one row of blog cards at 68, dots at 498 */
+.rsec--blog .folders, .rsec--press .folders, .rsec--next .folders { top: 68px; }
+.rsec--blog .rsec__pager { top: 1333px; }
+.rsec--press .rsec__pager { top: 573px; }
+.rsec--next .rsec__pager { top: 493px; }
+.rsec--news { padding-top: 120px; }
 .rsec--news > .container { height: 533px; } /* 583 in Figma; the last 50px move to the brand block's padding so the pills release with 20px under the last title */
 .newslist { position: absolute; left: 0; top: 68px; width: 1280px; }
 .nrow { position: relative; height: 91px; }
