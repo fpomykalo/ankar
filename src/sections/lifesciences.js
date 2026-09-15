@@ -1,4 +1,4 @@
-import { gsap, lenis, ScrollTrigger } from '../lib/scroll.js';
+import { gsap, lenis, ScrollTrigger, anchorTargets } from '../lib/scroll.js';
 
 /**
  * The Antheros take-over, opened by the CTA on the Life sciences card.
@@ -125,7 +125,7 @@ export function initLifeSciences() {
   // a click anywhere closes it, except on the story button
   document.addEventListener('click', (e) => {
     if (!open) return;
-    if (e.target.closest('.ls__cta')) return;
+    if (e.target.closest('.ls__cta') || e.target.closest('#nav')) return; // the story button, or the menu card that just opened it
     closeTakeover();
   });
   // fully out of view while open: fold it away so the carousel is back when the viewer returns
@@ -134,4 +134,11 @@ export function initLifeSciences() {
     const r = takeover.getBoundingClientRect();
     if (r.bottom <= 0 || r.top >= vh()) foldAway();
   });
+
+  // #antheros (the case study card in the menu): the story opens and fills the viewport
+  anchorTargets.antheros = () => { openTakeover(); return sectionTop() + cardsTop(); };
+  if (location.hash === '#antheros') {
+    const land = () => { lenis.scrollTo(sectionTop() + cardsTop(), { immediate: true, force: true }); openTakeover(); };
+    if (document.readyState === 'complete') setTimeout(land, 400); else window.addEventListener('load', () => setTimeout(land, 400), { once: true });
+  }
 }

@@ -4,7 +4,7 @@ import fs from 'fs';
 
 // VITE_BASE lets the same build serve from a sub-path (GitHub Pages uses /ankar/, /ankar/v02/, ...).
 // VITE_NOINDEX=1 adds a robots noindex tag to every page (used for the unlisted work-in-progress build).
-const pages = ['index.html', 'product/index.html', 'careers/index.html', 'security/index.html', 'security/letter/index.html', 'resources/index.html', 'resources/article/index.html'].filter((p) => fs.existsSync(resolve(__dirname, p)));
+const pages = ['index.html', 'product/index.html', 'careers/index.html', 'security/index.html', 'security/letter/index.html', 'resources/index.html', 'resources/article/index.html', 'resources/video/index.html'].filter((p) => fs.existsSync(resolve(__dirname, p)));
 
 function partials() {
   let base = '/';

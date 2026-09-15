@@ -146,9 +146,9 @@
 /* ========================================================= LIFE SCIENCES */
 .ls__eyebrow { position: absolute; left: 113px; top: 129px; }
 .ls__title { position: absolute; left: 113px; top: 177px; width: 560px; }
-.ls__rule { position: absolute; left: 113px; top: 567px; width: 560px; }
-.ls__body { position: absolute; left: 113px; top: 587px; width: 452px; }
-.ls__cta { position: absolute; left: 113px; top: 820px; }
+.ls__rule { position: absolute; left: 113px; top: 503px; width: 560px; } /* 70 under the last title line (title ends at 433) */
+.ls__body { position: absolute; left: 113px; top: 523px; width: 452px; }
+.ls__cta { position: absolute; left: 113px; top: 756px; }
 
 /* ========================================================== PARTNERSHIPS */
 .partnerships { padding-top: 120px; }
@@ -391,7 +391,7 @@
 .ls__photo { position: absolute; left: 0; top: 0; width: 50vw; height: 100%; overflow: hidden; visibility: hidden; z-index: 5; }
 .ls__photo > img:first-child { width: 100%; height: 100%; object-fit: cover; }
 .ls__photo-shade { position: absolute; inset: 0; background: rgba(0,0,0,.2); }
-.ls__brand { position: absolute; left: 20.5%; top: 50%; margin-top: -40px; opacity: 0; }
+.ls__brand { position: absolute; left: calc(24.722vw - 140px); top: 50%; width: 390px; margin-top: -40px; opacity: 0; } /* centred on the photo up to the blue panel's edge (Figma: x 161 of 712 at 1440; the photo starts 55px off screen) */
 .ls__panel { --tab-top: 309px; position: absolute; left: 49.444%; top: 0; width: 50.556%; height: 100%; background: var(--blue); z-index: 6; }
 .ls__label { --label-bottom: 259px; --dot-top: 269px; color: #000; }
 

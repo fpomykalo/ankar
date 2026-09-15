@@ -2,7 +2,7 @@
 
 This folder is everything a developer needs to rebuild the Ankar marketing site in Framer, or to take over the current code. It sits next to the source of the site it describes.
 
-- Live build of this exact state: https://fpomykalo.github.io/ankar/v02/ (pages: `/product/`, `/careers/`, `/security/`, `/security/letter/`, `/resources/`, `/resources/article/`)
+- Live build of this exact state: https://fpomykalo.github.io/ankar/v02/ (pages: `/product/`, `/careers/`, `/security/`, `/security/letter/`, `/resources/`, `/resources/article/`, `/resources/video/`)
 - Design source: Figma file `ANKAR — Web`, key `amR3f07jEVMx1Q4m1XRCQc`, page 4.2 for the current layouts, page 3.3 for the earlier homepage
 - Repository: github.com/fpomykalo/ankar, branch `v02`
 
@@ -76,7 +76,7 @@ Two more will need writing in Framer from the behaviour notes below: the Anthero
 Navigation
 
 - Fixed glass bar, 1280 × 60 at 20px from the top. Menu items: Home, Product, Careers, Security, Resources. The current page is underlined (1px, 3px offset).
-- Hovering any menu item opens the one mega-menu: the bar grows to 333px tall and shows three columns on dividers at y 98, with the text 10px under the divider. Left (x 20, 288 wide): "Home > Our Value" and the five other homepage anchors, double-spaced. Middle (x 324, 308 wide): "Product > Explore" and the other three workflow groups, double-spaced, every line a link to the product page. Right (x 648, 612 wide): Case studies with a "View all" link and two 298 × 175 photo cards (Antheros, L’Oréal) at y 138, each linking to the article page.
+- Hovering any menu item opens the one mega-menu: the bar grows to 333px tall and shows three columns on dividers at y 98, with the text 10px under the divider. Left (x 20, 288 wide): "Home > Our Value" and the five other homepage anchors, double-spaced. Middle (x 324, 308 wide): "Product > Explore" and the other three workflow groups, double-spaced, every line a link to the product page. Right (x 648, 612 wide): Case studies with a "View all" link and two 298 × 175 photo cards at y 138: Antheros opens the Antheros story on the homepage (`/#antheros`), L’Oréal opens the video article.
 - Clicking Home goes to the homepage (on the homepage it scrolls to the top). Anchors land with the section's divider 40px under the nav.
 - After a page loads, hover-opening is disabled for half a second so the menu you just clicked does not reopen under the cursor.
 - Every text link in the site fades to 60% on hover.
@@ -118,6 +118,7 @@ Resources
 - Hero with "Press kit", which anchors to the brand block with its divider 40px under the nav and everything above it off screen.
 - Customer stories strip: three cards, three pages that slide left and right. Then the sticky pills (Blog, Press) 20px under the nav, centred; a pill scrolls its section's divider to 40px under the nav, and the pill of the section currently under the nav is filled. Blog: two highlighted 665 × 480 cards, then 70px under them a grid of three rows of three 425 × 400 cards (40px between the bodies, 20px between rows), paged by dots like the strips. Press: two 665 × 480 cards with the outlet name at the bottom. In the news list of five rows, then the brand block on its gradient. The pills release once their top is 20px below the last news title.
 - Article page: date, title, photo card with its category label, author with avatar, a glass email field with a grey placeholder, share links, the body, then a "Read next" row of the three blog cards.
+- Video article (`/resources/video/`): the same page with a plain 740 × 416 poster and a centred play mark in place of the photo card; the video plays in place once a source is set on the card.
 
 Sticky rule used everywhere: a sticky element sits 20px under the nav (top of the pills at 100px) and releases when its top is 20px below the last element of its section.
 
