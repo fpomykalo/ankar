@@ -3,9 +3,9 @@ const img = (p) => `${BASE}/assets/images/${p}`;
 
 /** Customer stories (Resources). */
 export const stories = [
-  { title: 'Vorys and Ankar:<br>A Collaborative Approach to Patent Law Innovation', label: 'Use case', image: img('pages/vorys-story.avif'), logo: 'vorys', logoSize: [126, 17], meta: 'November 10, 2025 / 3 min read' },
-  { title: 'Valeo and Ankar: Amplifying Patent Expertise with AI', label: 'Use case', image: img('people/alain-durand.webp'), logo: 'valeo', logoSize: [84, 36], meta: 'November 15, 2025 / 4 min read' },
-  { title: 'L’Oréal and Ankar: Seeing and safeguarding innovation', label: 'Use case', image: img('people/jean-yves-legendre.avif'), logo: 'loreal', logoSize: [122, 22], meta: 'November 10, 2025 / 4 min read' },
+  { title: 'Vorys and Ankar:<br>A Collaborative Approach to Patent Law Innovation', label: 'Case study', image: img('pages/vorys-story.avif'), logo: 'vorys', logoSize: [126, 17], meta: 'November 10, 2025 / 3 min read' },
+  { title: 'Valeo and Ankar: Amplifying Patent Expertise with AI', label: 'Case study', image: img('people/alain-durand.webp'), logo: 'valeo', logoSize: [84, 36], meta: 'November 15, 2025 / 4 min read' },
+  { title: 'L’Oréal and Ankar: Seeing and safeguarding innovation', label: 'Case study', image: img('people/jean-yves-legendre.avif'), logo: 'loreal', logoSize: [122, 22], meta: 'November 10, 2025 / 4 min read' },
 ];
 
 /** Most recent posts (Resources) and Read next (Article). Photos for the last two are stand-ins until the real ones arrive. */

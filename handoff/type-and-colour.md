@@ -23,7 +23,7 @@ Headings, labels and button text use `text-box-trim: trim-both; text-box-edge: c
 | Lead (.t-lead) | Crimson Pro 200 | 30 / 32 | -1px | Row titles on the founders' letter |
 | Quote mark (.fcard__quote-mark) | Crimson Pro 200 | 86 / 36 | -1px | Opening quote glyph on team cards |
 | Body (.t-body) | Crimson Text 400 (600 for bold) | 18 / 26 | 0 | All running copy |
-| Body tight (.nav__case-title) | Crimson Text 400 | 18 / 20 | 0 | Mega-menu use-case card titles |
+| Body tight (.nav__case-title) | Crimson Text 400 | 18 / 20 | 0 | Mega-menu case-study card titles |
 | Body small (.footer__about) | Crimson Text 400 | 10 / 12 | 0 | Footer company paragraph |
 | Label (.t-mono) | DM Mono 400 | 12 / 14 | 0 | Eyebrows, nav, buttons, tabs, card labels, metadata, footer links, form fields. Sentence case |
 | Button (.btn) | DM Mono 400 | 12 / 14 | 0 | 40px tall, 20px side padding, 20px radius |

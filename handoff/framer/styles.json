@@ -13,7 +13,7 @@
     { "name": "Quote mark", "font": "Crimson Pro", "weight": 200, "size": 86, "lineHeight": 36, "letterSpacing": -1, "tag": "p", "use": "Opening quote glyph on team cards" },
     { "name": "Body", "font": "Crimson Text", "weight": 400, "size": 18, "lineHeight": 26, "letterSpacing": 0, "tag": "p", "use": "All running copy" },
     { "name": "Body bold", "font": "Crimson Text", "weight": 600, "size": 18, "lineHeight": 26, "letterSpacing": 0, "tag": "p", "use": "Emphasised phrases inside captions" },
-    { "name": "Body tight", "font": "Crimson Text", "weight": 400, "size": 18, "lineHeight": 20, "letterSpacing": 0, "tag": "p", "use": "Mega-menu use-case card titles" },
+    { "name": "Body tight", "font": "Crimson Text", "weight": 400, "size": 18, "lineHeight": 20, "letterSpacing": 0, "tag": "p", "use": "Mega-menu case-study card titles" },
     { "name": "Body small", "font": "Crimson Text", "weight": 400, "size": 10, "lineHeight": 12, "letterSpacing": 0, "tag": "p", "use": "Footer company paragraph" },
     { "name": "Label", "font": "DM Mono", "weight": 400, "size": 12, "lineHeight": 14, "letterSpacing": 0, "tag": "p", "use": "Eyebrows, nav, buttons, tabs, card labels, metadata, footer links, form fields. Sentence case" },
     { "name": "Label large", "font": "DM Mono", "weight": 400, "size": 20, "lineHeight": 14, "letterSpacing": 0, "tag": "p", "use": "Footer Book a Demo pill" }

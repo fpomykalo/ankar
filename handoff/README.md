@@ -76,7 +76,7 @@ Two more will need writing in Framer from the behaviour notes below: the Anthero
 Navigation
 
 - Fixed glass bar, 1280 × 60 at 20px from the top. Menu items: Home with a chevron, Product, Careers, Security, Resources. The current page is underlined (1px, 3px offset).
-- Hovering Product, Careers, Security or Resources opens the mega-menu: the bar grows to 440px tall and shows three columns. Left: "Product > Explore" with the four workflow groups and their workflows, single-spaced, every line a link to the product page. Middle: Careers, Security (with "Note from our founders on security" beneath), Resources (with "Press kit" beneath). Right: Use Cases with two 298 × 176 photo cards (Antheros, L’Oréal), each linking to the article page, and a "View all" link.
+- Hovering Product, Careers, Security or Resources opens the mega-menu: the bar grows to 440px tall and shows three columns. Left: "Product > Explore" with the four workflow groups and their workflows, single-spaced, every line a link to the product page. Middle: Careers, Security (with "Note from our founders on security" beneath), Resources (with "Press kit" beneath). Right: Case studies with two 298 × 176 photo cards (Antheros, L’Oréal), each linking to the article page, and a "View all" link.
 - Hovering Home shows a small 163 × 244 glass list of on-page anchors. Clicking Home goes to the homepage. Anchors land with the section's divider 40px under the nav.
 - After a page loads, hover-opening is disabled for half a second so the menu you just clicked does not reopen under the cursor.
 - Every text link in the site fades to 60% on hover.
@@ -123,10 +123,10 @@ Sticky rule used everywhere: a sticky element sits 20px under the nav (top of th
 
 ## Open items the developer will meet
 
-- Links that still point nowhere: Book a Demo (all of them), Apply now, Read more, View all, the two use-case cards, Download brand assets, the article share links.
+- Links that still point nowhere: Book a Demo (all of them), Apply now, Read more, View all, Download brand assets, the article share links.
 - Placeholder photos: the article hero and two of the three post cards reuse industry photos.
 - Every card strip repeats its first page on pages 2 and 3 until more stories exist.
-- Footer: "Client one / two / three" under Use Cases are placeholders.
+- Footer: "Client one / two / three" under Case studies are placeholders.
 - Two type styles are defined but unused (`.t-num` 140/140 and `.t-mono-light` 36/14), and DM Mono 300 is loaded only for the unused one.
 
 ## Assets worth knowing about

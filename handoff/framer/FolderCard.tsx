@@ -161,7 +161,7 @@ export default function FolderCard(props) {
 FolderCard.defaultProps = {
     width: 452,
     height: 480,
-    label: "Use case",
+    label: "Case study",
     labelActive: false,
     tabTop: 58,
     labelBottom: 188,
