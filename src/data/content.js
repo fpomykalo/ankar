@@ -142,6 +142,13 @@ const basePeople = [
     bio: 'Tamar Gomez is Co-Founder of Ankar, an AI platform helping R&D teams make better technology decisions and accelerate innovation.<br><br>She spent nearly a decade building and deploying advanced AI software for enterprises and governments at Palantir, working at the frontier of science, technology and complex decision-making. Tamar holds a PhD in Game Theory from Imperial College London.<br><br>Through that work, she saw first-hand that while technical progress was accelerating, the systems behind innovation remained fragmented, manual and disconnected. She co-founded Ankar in 2024 to change that.<br><br>Today, Ankar connects an organisation’s internal R&D knowledge with external technical change, AI models and purpose-built workflows, helping researchers and innovators explore new possibilities, develop stronger ideas and build on everything their organisation has learned before.',
   },
   {
+    name: 'Nick<br>Denman',
+    image: `${BASE}/assets/images/people/nick-denman.jpg`,
+    role: 'Head of Engineering<br>Past: Palantir',
+    logos: ['palantir'],
+    bio: 'Nick Denman is Head of Engineering at Ankar, leading the team that builds the platform.<br><br>He joined Ankar from Palantir, where he built and deployed software for enterprises and governments. Full bio to come.', // placeholder until the real bio arrives
+  },
+  {
     name: 'Harm<br>van der Heijden',
     image: `${BASE}/assets/images/people/harm-van-der-heijden.avif`,
     role: 'Head of Patent Innovation<br>Past: NLO (Partner)',
@@ -267,7 +274,7 @@ const advisors = [
 ];
 
 // the strip shows these eight, in this order; the other entries above stay on file but are not shown
-const ORDER = ['Wiem', 'Tamar', 'Jean-Christophe', 'Giulia', 'Robert', 'Helene', 'Dan', 'Kimiya'];
+const ORDER = ['Wiem', 'Tamar', 'Nick', 'Jean-Christophe', 'Giulia', 'Robert', 'Helene', 'Dan', 'Kimiya'];
 const all = [...basePeople, ...advisors];
 export const people = ORDER
   .map((n) => all.find((p) => p.name.startsWith(n)))

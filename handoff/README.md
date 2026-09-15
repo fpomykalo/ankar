@@ -94,7 +94,7 @@ Homepage
 - Built for consequential R&D: five industry folder cards, open card 557px. The Life Sciences card carries a "Watch the Antheros story" button; clicking the button or anywhere on the card opens the take-over.
 - Take-over: the section grows by a viewport height minus 480, the page eases so the take-over fills the viewport, the photo grows out of its card to 786px wide while the blue panel slides in from the right with the copy. The section head stays visible above it. A click anywhere closes it (except on the story button). If it scrolls fully out of view it closes itself without moving what is on screen. In Framer this is best rebuilt with layout animations rather than ported.
 - More than software: four rows in two columns, open on hover, only one open per column. The section is sized so the next divider sits 50px under the tallest open row.
-- Developed by: divider, eyebrow, then a viewport-wide strip of eight people cards, open card 744px, closed 212px, paged by four with dots. Drag scrolls the strip. A click on the open card expands the full bio with its own scrollbar.
+- Developed by: divider, eyebrow, then a viewport-wide strip of nine people cards, open card 744px, closed 212px, paged by four with dots. Drag scrolls the strip. A click on the open card expands the full bio with its own scrollbar.
 - Enterprise trust: two columns with the SOC 2 and ISO 27001 badges and two CTAs.
 - Closing "What could your team invent next?" with the product screenshot, 120px under the content. Footer with the "Invention reinvented." line, four columns at 30% opacity, and the Ankar wordmark.
 

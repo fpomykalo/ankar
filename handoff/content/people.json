@@ -20,12 +20,22 @@
     "label": "People — 2"
   },
   {
+    "name": "Nick<br>Denman",
+    "image": "/assets/images/people/nick-denman.jpg",
+    "role": "Head of Engineering<br>Past: Palantir",
+    "logos": [
+      "palantir"
+    ],
+    "bio": "Nick Denman is Head of Engineering at Ankar, leading the team that builds the platform.<br><br>He joined Ankar from Palantir, where he built and deployed software for enterprises and governments. Full bio to come.",
+    "label": "People — 3"
+  },
+  {
     "name": "Jean-Christophe<br>Simon",
     "image": "/assets/images/people/jean-christophe-simon.avif",
     "role": "Former Group Innovation Officer at Groupe SEB<br>Ankar Patent Expert Panel",
     "logos": [],
     "bio": "Jean-Christophe brings more than 30 years of leadership experience spanning Research & Development, innovation strategy and intellectual property. His work cuts across a broad range of industries, including defense, cosmetics, consumer goods, custom industrial machines, optics and medical devices, with deep experience in turning technological advances into products that markets actually adopt.<br><br>He has held senior R&D and innovation roles at some of the world’s leading industrial groups, including L’Oréal, Kao Corporation, Essilor-Nikon, Groupe SEB and Thuasne. As Group Innovation Officer at Groupe SEB, he served on the executive committee, built the group’s open innovation and was strongly involved in corporate venture capabilities.<br><br>Earlier in his career, he led international research operations from Japan, an experience that shaped his approach to managing teams and reading global markets across Europe and Asia.<br><br>Today he is the founder of Calsoï, an innovation strategy and R&D advisory firm working with large industrial groups, mid-sized companies and deeptech startups. He advises on innovation roadmaps, fractional R&D management, intellectual property strategy and the sale of technology companies, bringing the dual perspective of a scientist and a senior executive.",
-    "label": "People — 3"
+    "label": "People — 4"
   },
   {
     "name": "Giulia<br>Toti",
@@ -36,7 +46,7 @@
       "astra-zeneca"
     ],
     "bio": "Giulia Toti leads Life Sciences and Go-to-Market at Ankar, helping R&D organisations apply AI to some of their most complex innovation challenges.<br><br>She began her career in immuno-oncology R&D at GSK before joining AstraZeneca’s Global Strategy and Insights team. She later advised pharmaceutical, medtech and diagnostics companies on growth, M&A and commercialisation at L.E.K. Consulting, before moving into investing at Montagu Private Equity, where she focused on healthcare, data and digital health businesses.<br><br>Across those roles, Giulia saw the same challenge from different sides: scientific organisations generate enormous amounts of valuable knowledge, but turning that knowledge into better decisions, stronger ideas and faster innovation remains difficult.<br><br>At Ankar, she brings together that experience across science, strategy and technology to shape how the platform supports R&D teams, particularly in life sciences. She works closely with global pharma, biotech and medtech organisations on how AI can help researchers navigate complex technical landscapes, build on existing knowledge and accelerate the path from insight to breakthrough.",
-    "label": "People — 4"
+    "label": "People — 5"
   },
   {
     "name": "Robert (Bob)<br>Hulse",
@@ -44,7 +54,7 @@
     "role": "Head of Patent Prosecution, Fenwick and West<br>Ankar Patent Expert Panel",
     "logos": [],
     "bio": "Bob advises clients in the computer software, electronics, electromechanical and medical devices, digital healthcare and electronic media industries. His holistic approach to building patent portfolios is strengthened by his extensive experience in intellectual property due diligence on both sides of M&A and financing transactions. Companies in the earlier stages rely on Bob to establish strong patent programs as they grow from industry newcomers to household names. He worked alongside Facebook to secure their first patent, on the Newsfeed, and many other fundamental patents such as the Like button, Check-In feature, privacy controls for social media, Social Ads and more. Bob was also the original patent attorney for Instacart and successfully grew their portfolio in the lead-up to their IPO.<br><br>In addition to providing legal services for his clients, Bob has served as an adjunct professor at the University of California College of the Law, San Francisco, teaching patent drafting and prosecution. He is also a member of the faculty at the Practising Law Institute and has lectured on topics related to patent law at the University of Washington School of Law, Dalhousie University and the National University of Singapore.",
-    "label": "People — 5"
+    "label": "People — 6"
   },
   {
     "name": "Helene Laville<br>Fiorucci",
@@ -52,7 +62,7 @@
     "role": "Former Lead Patent Counsel at Solvay<br>Ankar Patent Expert Panel",
     "logos": [],
     "bio": "Helene Fiorucci is an IP strategist and fractional Chief IP Officer supporting deeptech startups in building strong, investment-ready intellectual property.<br><br>With more than 22 years of experience as a patent attorney, qualified in both European and U.S. patent laws, and a scientific background in biotechnology, pharmacology and organic chemistry, she helps founders secure IP assets that attract investors, protect competitive advantage, and drive long-term growth.<br><br>In 2022, she founded her own patent law practice in the U.S., following several years in a large IP law firm and in industry. She has handled a wide variety of situations, from portfolio strategy and prosecution to pre-litigation and litigation across Germany, China, and the USA.<br><br>Helene advises across the full innovation lifecycle, from early-stage invention harvesting and patent drafting to global portfolio management and IP due diligence. She works closely with scientific teams in biotechnology, advanced materials, polymers, energy storage, and antibody engineering, translating complex R&D into clear, defensible IP positions. She also collaborates with venture capital firms to assess IP strength during due diligence and support informed investment decisions.<br><br>Known for her strategic and pragmatic approach, Helene partners with founders, CTOs and investors to develop IP strategies tailored to both technical realities and business objectives. Her mission is to help deeptech companies build high-value IP that supports commercial success.",
-    "label": "People — 6"
+    "label": "People — 7"
   },
   {
     "name": "Dan<br>Enebo",
@@ -60,7 +70,7 @@
     "role": "Former Chief IP Counsel at Cargill<br>Ankar Patent Expert Panel",
     "logos": [],
     "bio": "Daniel Enebo brings more than 30 years of strategic leadership experience spanning Research & Development and Intellectual Property law. His work encompasses a broad range of technology domains, including medical devices, food chemistry, biotechnology, complex global trading systems, large-scale manufacturing, and the IT platforms that support them.<br><br>He most recently served as Senior Vice President and Chief Intellectual Property Counsel at Cargill, Incorporated, where he led the global IP legal function and guided the company’s enterprise-wide strategy for creating, protecting, and deploying intellectual property. His responsibilities included IP strategy across diverse business units, technology development and licensing, IP leadership in complex M&A and joint venture transactions, freedom-to-operate analysis, enforcement, and numerous initiatives to enhance legal practice efficiency and strengthen outside counsel collaboration through IP-focused IT systems.<br><br>A recognized leader in the IP field, he served for many years on the Intellectual Property Owners Association Board, including roles as an officer and member of its Executive Committee. Earlier in his career, he practiced IP law at Fredrikson & Byron in Minneapolis and served as a Senior Scientist and R&D Team Leader at a multinational medical device company.",
-    "label": "People — 7"
+    "label": "People — 8"
   },
   {
     "name": "Kimiya<br>Shams",
@@ -69,6 +79,6 @@
     "role": "General Counsel, Devialet<br>Ankar Patent Expert Panel",
     "logos": [],
     "bio": "Kimiya brings over 15 years of global experience across technology, luxury, entertainment, and highly regulated industries. She has built her career at the intersection of innovation, law, and business strategy; advising cutting-edge companies on intellectual property, product development, regulatory frameworks, AI adoption, and global go-to-market execution.<br><br>A recognized voice in the legal and tech ecosystem, Kimiya has authored multiple publications on AI, emerging technologies, intellectual property, and global regulatory landscapes, shaping industry dialogue on responsible innovation. In parallel, she is deeply committed to education and talent development, serving as a lecturer and guest speaker at HEC Paris, ESCP Business School, EDHEC, and Columbia Law School, where she teaches on topics spanning intellectual property, technology, management and the future of digital regulation.<br><br>Her background includes leadership roles in the U.S. and Europe, guiding organizations through complex legal, compliance, and operational challenges while enabling them to scale responsibly and creatively. Kimiya has worked with major brands and companies in technology, luxury, entertainment and emerging tech innovators, bringing a multi-sector perspective that aligns directly with Ankar AI’s mission.",
-    "label": "People — 8"
+    "label": "People — 9"
   }
 ]
