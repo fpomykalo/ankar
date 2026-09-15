@@ -8,8 +8,8 @@
     "listTitle": "Workflows:",
     "list": [
       "Portfolio Mapping",
-      "Technology Monitoring",
-      "Whitespace Analysis"
+      "Landscape Monitoring",
+      "Technology Scouting"
     ]
   },
   {
@@ -23,6 +23,7 @@
       "Concept Generation",
       "Design Acceleration",
       "Experiment design",
+      "Reformulation",
       "Result Synthesis"
     ]
   },

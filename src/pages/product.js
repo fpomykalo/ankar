@@ -26,7 +26,7 @@ function initProduct() {
   tabsEl.innerHTML = productGroups.map((g) => `<a class="ptab" href="#${g.slug}" data-slug="${g.slug}"><span>${g.tab}</span></a>`).join('');
   const tabs = Array.from(tabsEl.children);
   const item = (it, reveal) => `
-    <article class="pitem" id="${slug(it.title)}"${reveal ? ' data-reveal' : ''}>
+    <article class="pitem${it.ui === 'b' ? ' pitem--flip' : ''}" id="${slug(it.title)}"${reveal ? ' data-reveal' : ''}>
       <div class="rule pitem__rule"></div>
       <span class="t-mono pitem__n">${it.n}</span>
       <h3 class="t-h4 pitem__title">${it.title}</h3>

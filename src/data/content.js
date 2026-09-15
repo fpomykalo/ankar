@@ -61,7 +61,7 @@ export const lifecycle = [
     subtitle: 'See the landscape before<br>choosing a direction.',
     body: 'Connect internal knowledge with scientific literature, patents, competitive activity and adjacent fields to uncover whitespace, emerging technologies and new routes forward.',
     listTitle: 'Workflows:',
-    list: ['Portfolio Mapping', 'Technology Monitoring', 'Whitespace Analysis'],
+    list: ['Portfolio Mapping', 'Landscape Monitoring', 'Technology Scouting'],
   },
   {
     label: 'Lifecycle — 2',
@@ -70,7 +70,7 @@ export const lifecycle = [
     subtitle: 'Make every iteration compound by turning possibilities into stronger, testable concepts.',
     body: 'Bring relevant science, prior work and alternative approaches into the creative process so teams can develop concepts with more context and spend more time testing the most promising ideas.',
     listTitle: 'Workflows:',
-    list: ['Concept Generation', 'Design Acceleration', 'Experiment design', 'Result Synthesis'],
+    list: ['Concept Generation', 'Design Acceleration', 'Experiment design', 'Reformulation', 'Result Synthesis'],
   },
   {
     label: 'Lifecycle — 3',

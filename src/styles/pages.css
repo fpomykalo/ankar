@@ -45,6 +45,10 @@
 .pitem__title { position: absolute; left: 108px; top: 20px; white-space: nowrap; }
 .pitem__body { position: absolute; left: 108px; top: 81px; width: 373px; }
 .pitem__ui { position: relative; margin-left: 540px; width: 740px; }
+/* every second workflow is mirrored: the screenshot on the left, the copy at 836 (Figma 1.2) */
+.pitem--flip .pitem__rule, .pitem--flip .pitem__n { left: 756px; }
+.pitem--flip .pitem__title, .pitem--flip .pitem__body { left: 864px; }
+.pitem--flip .pitem__ui { margin-left: 0; }
 .pui--a {
   height: 402px; border-radius: 20px; overflow: hidden;
   background: rgba(255, 255, 255, 0.49);

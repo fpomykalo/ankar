@@ -13,14 +13,14 @@
       },
       {
         "n": "1.2",
-        "title": "Technology Monitoring",
-        "body": "Build a clear view of any technology landscape by mapping the key players, technical approaches, patents, and emerging areas of activity. Identify where innovation is concentrated, how competitors are positioning themselves, and where meaningful white spaces remain. Turn fragmented technical information into actionable insight for R&D strategy, technology investment, and new invention opportunities.",
+        "title": "Landscape Monitoring",
+        "body": "Track a technology area continuously and be alerted the moment it shifts. Understand which competitors have entered, which applications have just published, and which technical approaches are accelerating — without rebuilding the analysis by hand each quarter. Set watches on specific technologies, companies or problem areas, and receive alerts as new filings publish, new entrants appear, or activity moves in an unexpected direction. Use that running view to catch competitive moves while there is still time to respond, and keep strategy current between formal reviews.",
         "ui": "b"
       },
       {
         "n": "1.3",
-        "title": "Whitespace Analysis",
-        "body": "Identify where meaningful opportunities remain within a crowded technology space. Understand which technical approaches are already well explored, where competitors are concentrating their efforts, and which problems or solution paths remain underserved. Turn those gaps into actionable directions for R&D, helping teams focus experimentation and invention on areas with the greatest potential for differentiation.",
+        "title": "Technology Scouting",
+        "body": "Describe a technical problem and search globally for the technologies, methods and materials that could solve it. Understand which approaches are already proven, which are still emerging, and who holds the capability behind each one. Scan patents, publications, startups, universities and established players, including industries that have solved the same underlying constraint for entirely different reasons. Use the resulting shortlist to source solutions externally, choose partners, and import proven approaches into a domain where they are still novel.",
         "ui": "a"
       }
     ]
@@ -34,7 +34,7 @@
       {
         "n": "2.1",
         "title": "Concept Generation",
-        "body": "Generate and explore multiple solutions to a technical challenge, drawing inspiration from existing technologies and approaches across adjacent fields. Rapidly assess concepts against what already exists, uncover alternative mechanisms, and iterate toward stronger, more differentiated solutions. Turn promising directions into concrete concepts ready for further development and experimentation.",
+        "body": "Start from a technical problem and generate candidate solutions tested against both the published record and your own internal knowledge bases. Understand which approaches are genuinely new, which your teams have already tried, and why the ones that failed didn’t work. Use the surviving shortlist to develop a few concepts that stand up to the evidence, rather than repeating an experiment a colleague ran three years ago.",
         "ui": "a"
       },
       {
@@ -46,14 +46,20 @@
       {
         "n": "2.3",
         "title": "Experiment Design",
-        "body": "Transform fragmented technical knowledge into structured, comparable experimental data. Identify patterns, uncover unexplored possibilities and define the most promising areas for investigation. Design better-targeted experiments to reduce unnecessary iterations and accelerate R&D.",
+        "body": "Bring together results held across ELNs, instrument outputs and historical project reports, and turn them into a single comparable picture of what your teams have already tested. Understand which parameters drive performance, where the data is thin, and which conditions remain untested. Use that to plan the experiments that resolve the most uncertainty per run, and to feed each result back so the next round is more precisely targeted than the last.",
         "ui": "a"
       },
       {
         "n": "2.4",
+        "title": "Reformulation",
+        "body": "Take a product that already works and adapt it to a constraint it was never designed for, whether a restricted ingredient, a new market’s regulations, a supply shortage or a lower price point. Understand which substitutions are viable, how each is likely to affect performance, and which have already been tried across your own formulation history and the published literature. Use that to reach a small set of candidate reformulations worth taking to the bench, with the trade-offs understood before the first batch is produced.",
+        "ui": "b"
+      },
+      {
+        "n": "2.5",
         "title": "Result Synthesis",
         "body": "Turn experimental results and technical data into clear, actionable conclusions. Bring together findings across tests, datasets, reports, and prior experiments to identify patterns, compare outcomes, and understand what worked and why. Help R&D teams decide what to pursue, refine, or stop; and capture those learnings for future projects.",
-        "ui": "b"
+        "ui": "a"
       }
     ]
   },
