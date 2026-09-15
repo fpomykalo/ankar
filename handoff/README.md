@@ -116,7 +116,7 @@ Security
 Resources
 
 - Hero with "Press kit", which anchors to the brand block with its divider 40px under the nav and everything above it off screen.
-- Customer stories strip: three cards, three pages that slide left and right. Then the sticky pills (Blog, Press) 20px under the nav, centred; a pill scrolls its section's divider to 40px under the nav, and the pill of the section currently under the nav is filled. Blog: a grid of three rows of three 425 × 400 cards (40px between the bodies, 20px between rows), paged by dots like the strips. Press: two 665 × 480 cards with the outlet name at the bottom. In the news list of five rows, then the brand block on its gradient. The pills release once their top is 20px below the last news title.
+- Customer stories strip: three cards, three pages that slide left and right. Then the sticky pills (Blog, Press) 20px under the nav, centred; a pill scrolls its section's divider to 40px under the nav, and the pill of the section currently under the nav is filled. Blog: two highlighted 665 × 480 cards, then 70px under them a grid of three rows of three 425 × 400 cards (40px between the bodies, 20px between rows), paged by dots like the strips. Press: two 665 × 480 cards with the outlet name at the bottom. In the news list of five rows, then the brand block on its gradient. The pills release once their top is 20px below the last news title.
 - Article page: date, title, photo card with its category label, author with avatar, a glass email field with a grey placeholder, share links, the body, then a "Read next" row of the three blog cards.
 
 Sticky rule used everywhere: a sticky element sits 20px under the nav (top of the pills at 100px) and releases when its top is 20px below the last element of its section.

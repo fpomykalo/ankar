@@ -16,6 +16,9 @@ export const posts = [
   { title: 'My First 30 Days at Ankar: Autonomy, Debugging, Deadlines, and Discovery', cat: 'Blog', image: img('people/william-sweetenham.jpg'), author: 'Manick Vennimalai<br>Machine Learning Engineer', meta: 'November 7, 2025 / 7 min read', href: `${BASE}/resources/article/` },
 ];
 
+/** The two highlighted posts at the top of the blog section on Resources. */
+export const blogHighlights = [posts[3], posts[2]];
+
 /** The blog grid on Resources: three rows of three, the four posts mixed so no row or column repeats
  *  a story and every card carries a different photo until there are nine real posts. */
 export const blogGrid = [

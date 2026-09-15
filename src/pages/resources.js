@@ -1,6 +1,6 @@
 import { bootPage } from '../site.js';
 import { lenis } from '../lib/scroll.js';
-import { stories, blogGrid, press, news } from '../data/pages.js';
+import { stories, blogHighlights, blogGrid, press, news } from '../data/pages.js';
 import { storyCard, postCard, pressCard, initStrip } from '../lib/cards.js';
 
 const PAGES = 3; // until more stories arrive, every strip repeats its first page
@@ -9,6 +9,7 @@ const layoutTop = (el) => { let y = 0; for (let n = el; n; n = n.offsetParent) y
 
 function initResources() {
   initStrip({ folders: 'stories-folders', pager: 'stories-pager', pages: pagesOf(stories, storyCard) });
+  document.getElementById('blog-highlights').innerHTML = blogHighlights.map(pressCard).join('');
   initStrip({ folders: 'blog-folders', pager: 'blog-pager', pages: pagesOf(blogGrid, postCard) });
   initStrip({ folders: 'press-folders', pager: 'press-pager', pages: pagesOf(press, pressCard) });
   document.getElementById('newslist').innerHTML = news.map((n) => `

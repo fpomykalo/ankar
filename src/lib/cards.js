@@ -37,17 +37,19 @@ export function postCard(c) {
     </a>`;
 }
 
-/** A 665 × 480 press card: headline and the outlet at the bottom. */
+/** A 665 × 480 card: press coverage (headline, outlet at the bottom) or a highlighted post
+ *  (title with the author under it, date at the bottom). */
 export function pressCard(c) {
+  const author = c.author ? `<p class="t-mono scard__author">${c.author}</p>` : '';
   return `
     <a class="fcard folder is-open scard scard--press" href="${c.href || '#'}">
       <img class="fcard__img" src="${c.image}" alt="" />
       ${layers}
       <div class="fcard__ui">
-        ${label(c.label)}
+        ${label(c.label || c.cat)}
         <div class="fcard__line"></div>
-        <h3 class="t-h4 scard__title">${c.title}</h3>
-        <p class="t-mono scard__meta">${c.source}</p>
+        <div class="scard__text"><h3 class="t-h4 scard__title">${c.title}</h3>${author}</div>
+        <p class="t-mono scard__meta">${c.source || c.meta}</p>
       </div>
     </a>`;
 }

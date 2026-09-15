@@ -75,7 +75,9 @@
 .scard--wide .scard__author { top: 202px; }
 .scard__logo { position: absolute; left: 45px; bottom: 88px; }
 .scard__meta { position: absolute; left: 45px; bottom: 40px; white-space: nowrap; }
-.scard--press .scard__title { width: 504px; }
+.scard--press .scard__text { width: 504px; }
+.scard--press .scard__title, .scard--press .scard__author { position: static; width: auto; }
+.scard--press .scard__author { margin-top: 20px; }
 /* 425 × 400 blog cards on a 3-column grid, 40px between the bodies (15 between a body and the next tab), 20px between rows */
 .folders--grid { height: auto; }
 .folders--grid .strip__page { display: grid; grid-template-columns: repeat(3, 425px); column-gap: 15px; row-gap: 20px; height: auto; align-content: start; }
@@ -191,11 +193,12 @@
 .rbar__tabs { position: absolute; left: 457px; top: 91px; display: flex; gap: 10px; pointer-events: auto; } /* centred: 366 wide in 1280 */
 .rbar__tab { width: 178px; }
 .rsec--blog, .rsec--press, .rsec--next { padding-top: 120px; }
-.rsec--blog > .container { height: 1346px; } /* rule, eyebrow at 20, grid at 68 (three rows, 1240), dots at 1338 */
+.rsec--blog > .container { height: 1896px; } /* rule, eyebrow at 20, two highlighted cards at 68, the grid 70 under them at 618 (three rows, 1240), dots at 1888 */
 .rsec--press > .container { height: 586px; } /* two 665 × 480 cards at 68, dots at 578 */
 .rsec--next > .container { height: 506px; } /* one row of blog cards at 68, dots at 498 */
 .rsec--blog .folders, .rsec--press .folders, .rsec--next .folders { top: 68px; }
-.rsec--blog .rsec__pager { top: 1333px; }
+.rsec--blog .folders--grid { top: 618px; }
+.rsec--blog .rsec__pager { top: 1883px; }
 .rsec--press .rsec__pager { top: 573px; }
 .rsec--next .rsec__pager { top: 493px; }
 .rsec--news { padding-top: 120px; }
