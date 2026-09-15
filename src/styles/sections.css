@@ -270,20 +270,18 @@
 .nav__logo { display: block; color: inherit; }
 .nav__logo-svg { display: block; width: 102px; height: 16px; }
 .nav.is-open { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-.nav__panel { position: absolute; left: 0; top: 0; width: 1280px; height: 348px; opacity: 0; pointer-events: none; transition: opacity .35s; }
+.nav__panel { position: absolute; left: 0; top: 0; width: 1280px; height: 333px; opacity: 0; pointer-events: none; transition: opacity .35s; }
 .nav.is-open .nav__panel { opacity: 1; pointer-events: auto; transition-delay: .1s; }
 .nav__line { position: absolute; left: 0; top: 0; width: 100%; height: 1px; background: #000; }
-.nav__head { position: absolute; left: 0; top: 20px; }
+.nav__head { position: absolute; left: 0; top: 10px; } /* text 10px under the divider */
 .nav__head .dot { margin-right: 10px; }
 .nav__col { position: absolute; top: 98px; }
-.nav__col--product { left: 20px; width: 298px; height: 230px; } /* four 298px units with 16px gutters: 20, 334, 648 (double width) */
-.nav__col--pages { left: 334px; width: 298px; }
-.nav__col--cases { left: 648px; width: 612px; height: 230px; }
-.nav__tree { position: absolute; left: 28px; top: 20px; white-space: pre; line-height: 14px; text-box-trim: none; } /* untrimmed like the heads, so "Product" and "Careers" share a baseline */
-.nav__row { position: relative; height: 56px; }
-.nav__sub { position: absolute; left: 28px; top: 48px; white-space: nowrap; line-height: 14px; text-box-trim: none; }
-.nav__viewall { position: absolute; right: 0; top: 20px; }
-.nav__case { position: absolute; left: 0; top: 54px; width: 298px; height: 176px; border-radius: 10px; overflow: hidden; color: var(--footer-ink); }
+.nav__col--home { left: 20px; width: 288px; height: 215px; } /* columns at 20 (288), 324 (308) and 648 (612) */
+.nav__col--product { left: 324px; width: 308px; height: 215px; }
+.nav__col--cases { left: 648px; width: 612px; height: 215px; }
+.nav__tree { position: absolute; left: 28px; top: 10px; white-space: pre; line-height: 14px; text-box-trim: none; } /* untrimmed like the heads, so the trees share a baseline */
+.nav__viewall { position: absolute; right: 0; top: 10px; }
+.nav__case { position: absolute; left: 0; top: 40px; width: 298px; height: 175px; border-radius: 10px; overflow: hidden; color: var(--footer-ink); }
 .nav__case--2 { left: 314px; }
 .nav__case-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .nav__case-shade { position: absolute; inset: 0; background: linear-gradient(180deg, #000 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 79.8%, #000 100%), rgba(0,0,0,.4); }
@@ -353,24 +351,7 @@
 
 /* nav: Home item with chevron and its small anchor dropdown (Figma "Nav" 163 × 244, 10px under the bar) */
 .nav__menu { z-index: 2; } /* links stay hoverable above the open mega-menu panel */
-.nav__menu .nav__home { padding-right: 9.46px; } /* 3px gap + chevron; beats the generic link padding */
-.nav__chev { position: absolute; right: 0; top: 13px; display: block; width: 6.46px; height: 4.55px; transition: transform .3s var(--ease-out); } /* 10px link padding + 3px */
-.nav.is-home .nav__chev { transform: rotate(180deg); }
 /* sits beside the bar, not inside it: a backdrop-filter nested in the bar's own filter could only blur the bar */
-.nav__home-wrap { position: fixed; left: calc(50% - 640px + 409px); top: 80px; z-index: 1000; padding-top: 10px; pointer-events: none; }
-.nav__home-wrap.is-open { pointer-events: auto; }
-/* the fade lives on the panel itself: an ancestor at opacity < 1 becomes the backdrop root and the blur would only kick in once the fade ends */
-.nav__home-panel {
-  opacity: 0; transform: translateY(-6px);
-  display: flex; flex-direction: column; gap: 20px; width: 163px; padding: 20px; border-radius: 20px; box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.5);
-  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
-  box-shadow: inset 0 2px 2px rgba(255,255,255,.4), inset 0 -2px 2px rgba(255,255,255,.4);
-  color: #000; transition: opacity .25s var(--ease-out), transform .25s var(--ease-out), color .4s;
-}
-.nav__home-wrap.is-open .nav__home-panel { opacity: 1; transform: none; }
-.nav__home-panel a { display: block; white-space: nowrap; text-box-trim: trim-both; text-box-edge: cap alphabetic; transition: opacity .3s; }
-.nav__home-panel a:hover { opacity: .6; }
 
 /* CTA hover states */
 .nav__cta:hover { background: var(--blue); color: var(--ink); }
