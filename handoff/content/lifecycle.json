@@ -21,10 +21,9 @@
     "listTitle": "Workflows:",
     "list": [
       "Concept Generation",
-      "Design Acceleration",
-      "Experiment design",
       "Reformulation",
-      "Result Synthesis"
+      "Experiment design",
+      "Knowledge Capture"
     ]
   },
   {
@@ -37,9 +36,8 @@
     "list": [
       "Patent Drafting",
       "Prosecution",
-      "Adversarial Procedures",
-      "Portfolio Pruning",
-      "Infringement Detection"
+      "Invalidity",
+      "Portfolio Pruning"
     ]
   }
 ]

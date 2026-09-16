@@ -70,7 +70,7 @@ export const lifecycle = [
     subtitle: 'Make every iteration compound by turning possibilities into stronger, testable concepts.',
     body: 'Bring relevant science, prior work and alternative approaches into the creative process so teams can develop concepts with more context and spend more time testing the most promising ideas.',
     listTitle: 'Workflows:',
-    list: ['Concept Generation', 'Design Acceleration', 'Experiment design', 'Reformulation', 'Result Synthesis'],
+    list: ['Concept Generation', 'Reformulation', 'Experiment design', 'Knowledge Capture'],
   },
   {
     label: 'Lifecycle — 3',
@@ -79,7 +79,7 @@ export const lifecycle = [
     subtitle: 'Turn technical progress into defensible value.',
     body: 'Identify inventions earlier, evaluate what is worth protecting and move from complex R&amp;D to stronger patent assets with less wasted expert time.',
     listTitle: 'Workflows:',
-    list: ['Patent Drafting', 'Prosecution', 'Adversarial Procedures', 'Portfolio Pruning', 'Infringement Detection'],
+    list: ['Patent Drafting', 'Prosecution', 'Invalidity', 'Portfolio Pruning'],
   },
 ];
 

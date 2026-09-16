@@ -76,7 +76,7 @@ Two more will need writing in Framer from the behaviour notes below: the Anthero
 Navigation
 
 - Fixed glass bar, 1280 × 60 at 20px from the top. Menu items: Home, Product, Careers, Security, Resources. The current page is underlined (1px, 3px offset).
-- Hovering any menu item opens the one mega-menu: the bar grows to 333px tall and shows three columns on dividers at y 98, with the text 10px under the divider. Left (x 20, 288 wide): "Home > Our Value" and the five other homepage anchors, double-spaced. Middle (x 324, 308 wide): "Product > Explore" and the other three workflow groups, double-spaced, every line a link to the product page. Right (x 648, 612 wide): Case studies with a "View all" link and two 298 × 175 photo cards at y 138: Antheros opens the Antheros story on the homepage (`/#antheros`), L’Oréal opens the video article.
+- Hovering any menu item opens the one mega-menu: the bar grows to 333px tall and shows three columns on dividers at y 98, with the text 10px under the divider. Left (x 20, 288 wide): "Home > Our Value" and the five other homepage anchors, double-spaced. Middle (x 324, 308 wide): "Product > Explore" and the other two workflow groups, double-spaced, every line a link to the product page. Right (x 648, 612 wide): Case studies with a "View all" link and two 298 × 175 photo cards at y 138: Antheros opens the Antheros story on the homepage (`/#antheros`), L’Oréal opens the video article.
 - Clicking Home goes to the homepage (on the homepage it scrolls to the top). Anchors land with the section's divider 40px under the nav.
 - After a page loads, hover-opening is disabled for half a second so the menu you just clicked does not reopen under the cursor.
 - Every text link in the site fades to 60% on hover.
@@ -100,7 +100,7 @@ Homepage
 
 Product
 
-- Hero, then one workflow group at a time. The tab row (Explore, Invent, Protect, Collaborate) is sticky 20px under the nav while the group scrolls; the group title is not sticky. A tab cross-fades the group in place and, if the head has scrolled away, settles the page so the group's divider sits 40px under the nav. The tabs release once their top is 20px below the last workflow image.
+- Hero, then one workflow group at a time. The tab row (Explore, Invent & Experiment, Protect; three 240px pills) is sticky 20px under the nav while the group scrolls; the group title is not sticky. A tab cross-fades the group in place and, if the head has scrolled away, settles the page so the group's divider sits 40px under the nav. The tabs release once their top is 20px below the last workflow image.
 - URL hashes select a group (`#invent`) or a workflow (`#experiment-design`, which selects its group and scrolls to it). The mega-menu and the footer use these.
 - Each workflow: divider, number, title, body on the left; a 740px screenshot frame on the right, alternating two frame styles.
 

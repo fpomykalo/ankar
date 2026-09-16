@@ -23,6 +23,7 @@
 .pbar { position: sticky; top: 9px; z-index: 20; height: 131px; pointer-events: none; }
 .pbar > .container { height: 131px; }
 .pbar__tabs { position: absolute; left: 540px; top: 91px; display: flex; gap: 10px; pointer-events: auto; }
+.pbar__tabs .ptab { width: 240px; } /* three tabs across the same 740px, 10px apart */
 .ptab {
   display: inline-flex; align-items: center; justify-content: center; width: 177px; height: 40px; border-radius: 30px;
   font: 400 12px/14px var(--font-mono); color: var(--ink); white-space: nowrap; cursor: pointer;
