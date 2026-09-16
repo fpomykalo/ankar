@@ -6,6 +6,7 @@ export const isMobile = () => mq.matches;
 export function stripBreaks(root = document) {
   if (!isMobile()) return;
   root.querySelectorAll('br').forEach((br) => {
+    if (br.parentElement.closest('.t-mono')) return; // mono labels (roles, bylines) keep their lines
     const skip = (n, dir) => { while (n && n.nodeType === 3 && !n.textContent.trim()) n = n[dir]; return n; }; // whitespace between two breaks
     if (skip(br.previousSibling, 'previousSibling')?.nodeName === 'BR' || skip(br.nextSibling, 'nextSibling')?.nodeName === 'BR') return;
     br.replaceWith(' ');

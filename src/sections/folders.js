@@ -109,19 +109,11 @@ export function initBios() {
       </div>
     </article>`).join('');
   const cards = Array.from(track.children);
-  if (isMobile()) { // the strip scrolls natively; a tap on a card opens its full bio, another closes it
-    cards.forEach((c) => c.addEventListener('click', (e) => {
-      if (e.target.closest('.fcard__full')) return;
-      const open = c.classList.toggle('is-expanded');
-      c.toggleAttribute('data-lenis-prevent', open);
-    }));
-    return;
-  }
   // custom scrollbar for the full bio (thumb is draggable)
   cards.forEach((c) => {
     const full = c.querySelector('.fcard__full');
     const thumb = c.querySelector('.fcard__thumb');
-    const trackH = 253;
+    const trackH = isMobile() ? 342 : 253; // the bar's height (Figma: 253 on desktop, 342 on the phone card)
     const update = () => {
       const ratio = full.clientHeight / full.scrollHeight;
       const h = ratio >= 1 ? trackH : Math.max(30, Math.round(trackH * ratio));
@@ -146,9 +138,24 @@ export function initBios() {
     thumb.addEventListener('pointerup', endThumb);
     thumb.addEventListener('pointercancel', endThumb);
     // while the pointer is over an open bio the page scroller pauses, so the wheel only moves the text
+    if (isMobile()) return; // the phone scrolls natively: stopping Lenis would lock the page
     c.addEventListener('mouseenter', () => { if (c.classList.contains('is-expanded')) lenis.stop(); });
     c.addEventListener('mouseleave', () => lenis.start());
   });
+  if (isMobile()) { // the strip scrolls natively; a tap on a card opens its full bio, another closes it; one dot per card follows the scroll
+    cards.forEach((c) => c.addEventListener('click', (e) => {
+      if (e.target.closest('.fcard__full')) return;
+      const open = c.classList.toggle('is-expanded');
+      c.toggleAttribute('data-lenis-prevent', open);
+      c.querySelector('.fcard__full').dispatchEvent(new Event('scroll'));
+    }));
+    dotsEl.innerHTML = cards.map((_, i) => `<button class="bios__dot${i === 0 ? ' is-active' : ''}" type="button" aria-label="Person ${i + 1}"></button>`).join('');
+    const dots = Array.from(dotsEl.children);
+    const pitch = () => cards[0].offsetWidth - 25;
+    dots.forEach((d, i) => d.addEventListener('click', () => track.scrollTo({ left: i * pitch(), behavior: 'smooth' })));
+    track.addEventListener('scroll', () => { const i = Math.round(track.scrollLeft / pitch()); dots.forEach((d, j) => d.classList.toggle('is-active', j === i)); }, { passive: true });
+    return;
+  }
   const wheelDelta = (e) => (e.deltaMode === 1 ? e.deltaY * 40 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY);
   // document-level, capture phase: nothing else can see the wheel before the bio does
   document.addEventListener('wheel', (e) => {

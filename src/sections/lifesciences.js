@@ -7,8 +7,8 @@ import { isMobile } from '../lib/mobile.js';
  * everything below it down) while the page eases so the carousel area fills
  * the viewport, and the photo grows out of its card as the blue folder comes
  * in from the right. A click anywhere (except the story button) plays it
- * backwards and hands the space back. Scroll it fully below the viewport and it
- * folds itself away, so the carousel is back when you return.
+ * backwards and hands the space back. Scroll it fully out of view and it folds
+ * itself away, so the carousel is back when you return.
  */
 export function initLifeSciences() {
   const section = document.getElementById('industries');
@@ -86,6 +86,16 @@ export function initLifeSciences() {
       .to(copy, { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, ease: 'power3.out' }, 1.1);
   }
 
+  // Move the scroll position by `by` in the same frame as the section shrinks, so nothing on screen moves.
+  // Lenis's current value, target and running animation all shift together, so momentum is kept.
+  function shiftScroll(by) {
+    const a = lenis.animate;
+    lenis.animatedScroll += by;
+    lenis.targetScroll += by;
+    if (a?.isRunning) { a.value += by; a.from += by; a.to += by; }
+    window.scrollTo(0, lenis.animatedScroll);
+  }
+
   function finishClose() {
     gsap.set(takeover, { visibility: 'hidden' });
     gsap.set(card(), { visibility: 'visible' });
@@ -95,21 +105,28 @@ export function initLifeSciences() {
     ScrollTrigger.refresh(); // the page is shorter now: the triggers below move up with it (about 1ms)
   }
 
-  // Fully below the viewport: reset everything in one frame. Only the space under the fold gives way,
-  // so nothing on screen moves. (Folding while it sits above the viewport would need the scroll position
-  // shifted in the same frame, which trackpads and touch momentum ignore: that was the jump.)
-  function foldAway() {
+  // Out of view: reset everything in one frame. Below the viewport only the space under the fold gives way.
+  // Above it, the section gives back `extra` pixels above what is on screen, so the scroll moves up by the
+  // same amount in the same frame; that shift only lands cleanly once scrolling has settled (trackpad and
+  // touch momentum ignore a scrollTo mid-flight, which showed as a jump), so it waits for the scroll to stop.
+  function foldAway(above) {
     tl.pause(0);
     tl.kill();
     tl = null;
+    if (above) shiftScroll(-extra);
     finishClose();
   }
+  let settleTimer;
+  const foldWhenSettled = () => {
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(() => { if (open && tl && !tl.reversed() && takeover.getBoundingClientRect().bottom <= 0) foldAway(true); }, 160);
+  };
 
   function closeTakeover() {
     if (!open || !tl || tl.reversed()) return;
     const r = takeover.getBoundingClientRect();
-    if (r.top >= vh()) { foldAway(); return; }
-    if (r.bottom <= 0) return; // scrolled past it: it stays until it is back on screen or fully below
+    if (r.top >= vh()) { foldAway(false); return; }
+    if (r.bottom <= 0) { foldWhenSettled(); return; }
     // in view: bring the carousel back to its lock under the nav while the space closes
     lenis.scrollTo(sectionTop() + cardsTop() - NAV_LOCK, { duration: DUR + 0.3, lock: true, force: true });
     tl.reverse();
@@ -129,10 +146,12 @@ export function initLifeSciences() {
     if (e.target.closest('.ls__cta') || e.target.closest('#nav')) return; // the story button, or the menu card that just opened it
     closeTakeover();
   });
-  // scrolled fully below the viewport while open: fold it away so the carousel is back when the viewer returns
+  // scrolled fully out of view while open: fold it away so the carousel is back when the viewer returns
   lenis.on('scroll', () => {
     if (!open || !tl || tl.reversed() || tl.progress() < 1) return;
-    if (takeover.getBoundingClientRect().top >= vh()) foldAway();
+    const r = takeover.getBoundingClientRect();
+    if (r.top >= vh()) foldAway(false);
+    else if (r.bottom <= 0) foldWhenSettled();
   });
 
   // #antheros (the case study card in the menu): the story opens and fills the viewport

@@ -21,7 +21,10 @@ export function initPossible() {
       const open = idx === i;
       item.classList.toggle('is-open', open);
       const accPanel = item.querySelector('.acc__panel');
-      if (mobile && open) accPanel.appendChild(illusPanel);
+      if (mobile && open) {
+        accPanel.appendChild(illusPanel); // moving the panel restarts every CSS animation inside it
+        slots.forEach((s, idx) => { if (idx !== i) s.getAnimations({ subtree: true }).forEach((a) => a.finish()); }); // the one fading out stays finished instead of redrawing
+      }
       const h = open ? accPanel.scrollHeight : 0;
       gsap.to(accPanel, { height: h, duration: immediate ? 0 : 0.6, ease: 'power3.inOut', overwrite: true });
     });

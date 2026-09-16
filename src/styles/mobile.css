@@ -38,6 +38,10 @@ body { min-width: 0; font-size: 16px; line-height: 22px; }
 .nav__burger span:nth-child(3) { top: 24px; }
 .nav.is-open .nav__logo { left: 36px; top: 29px; }
 .nav.is-open .nav__burger { right: 20px; top: 16px; } /* same screen position: 341/30 */
+.nav__burger span { transition: transform .4s var(--ease-inout), opacity .25s, width .4s var(--ease-inout), left .4s var(--ease-inout), top .4s var(--ease-inout); }
+.nav.is-open .nav__burger span:nth-child(1) { top: 19px; left: 15px; width: 18px; transform: rotate(45deg); }
+.nav.is-open .nav__burger span:nth-child(2) { opacity: 0; }
+.nav.is-open .nav__burger span:nth-child(3) { top: 19px; left: 15px; width: 18px; transform: rotate(-45deg); }
 .nav__mobile { display: block; position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding: 72px 36px 51px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; opacity: 0; pointer-events: none; transition: opacity .3s; font-size: 12px; line-height: 14px; }
 .nav__mobile::-webkit-scrollbar { display: none; }
 .nav.is-open .nav__mobile { opacity: 1; pointer-events: auto; transition-delay: .15s; }
@@ -64,12 +68,12 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .hero__rule { top: 72px; width: auto; right: 0; }
 .hero__eyebrow { top: 92px; white-space: normal; align-items: flex-start; right: 0; }
 .hero__title { top: 130px; white-space: normal; }
-.hero__body { left: 1px; top: 424px; width: 347px; line-height: 24px; }
+.hero__body { left: 1px; right: 0; top: 424px; width: auto; line-height: 24px; }
 .hero__cta { left: 1px; top: 569px; }
-.hero__logos { left: 1px; top: 721px; width: 360px; height: 46px; border-radius: 23px; transform: none; } /* ends 16px from the edge */
+.hero__logos { left: 1px; right: 0; top: 721px; width: auto; height: 46px; border-radius: 23px; transform: none; } /* ends 16px from the edge */
 .hero__logos[data-reveal] { transform: translate3d(0, 40px, 0); }
 .hero__trusted { left: 0; top: -41px; width: 180px; }
-.marquee { left: 0; width: 360px; height: 46px; }
+.marquee { left: 0; right: 0; width: auto; height: 46px; }
 .marquee__track { height: 46px; }
 .marquee__item { margin-left: 20px; }
 .marquee__item img { zoom: .78; }
@@ -96,25 +100,25 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .acc__item.is-open { padding-bottom: 14px; }
 .acc__item:last-child:not(.is-open) { padding-bottom: 0; }
 .acc__panel .possible__panel { position: relative; left: 0; top: 0; width: 100%; height: 270px; border-radius: 20px; margin-top: 22px; }
-.illus { left: 41px; width: 279px; }
+.illus { left: 41px; right: 41px; width: auto; }
 
-/* --- card strips: native horizontal scroll, every card open at 361 × 540 ------------ */
+/* --- card strips: native horizontal scroll, every card open at (100vw − 32) × 540; tab at 58, label text to 188, dot at 198 (Figma people and quote cards) --- */
 .folders { position: relative; left: -16px; top: 0; width: 100vw; height: 540px; margin-top: 50px; padding: 0 16px; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-padding-left: 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .folders::-webkit-scrollbar { display: none; }
 .folders::after { content: ''; flex: 0 0 16px; }
-.fcard, .folders .fcard.is-open, .folders--stories .fcard, .folders--wide .fcard, .folders--press .fcard, .folders--grid .fcard, .scard--post { --tab-top: 238px; width: 361px; flex: 0 0 361px; height: 540px; margin-left: -25px; scroll-snap-align: start; transition: none; }
+.fcard, .folders .fcard.is-open, .folders--stories .fcard, .folders--wide .fcard, .folders--press .fcard, .folders--grid .fcard, .scard--post { --tab-top: 58px; width: calc(100vw - 32px); flex: 0 0 calc(100vw - 32px); height: 540px; margin-left: -25px; scroll-snap-align: start; transition: none; }
 .folders .fcard:first-child, .folders .fcard.is-open:first-child, .folders--grid .fcard:first-child { margin-left: 0; }
-.fcard .tab-label { --label-bottom: 368px; --dot-top: 378px; }
+.fcard .tab-label, .folders--bios .tab-label { --label-bottom: 188px; --dot-top: 198px; }
 .fcard__open, .fcard:not(.is-open) .fcard__open { opacity: 1; pointer-events: auto; transition: none; }
 .fcard__closed { display: none; }
 .fcard__shade, .fcard.is-open .fcard__shade, .folders--bios .fcard.is-open .fcard__shade, .folders--quotes .fcard.is-open .fcard__shade { background: rgba(0, 0, 0, .2); }
 .folders--bios .fcard.is-open.is-expanded .fcard__shade { background: rgba(0, 0, 0, .7); }
 .fcard__grad-bottom { opacity: 1; }
 .fcard__line { top: 30px; right: 45px; }
-.fcard__title, .lcard__title { position: static; width: 271px; margin: 50px 0 0 45px; white-space: normal; }
+.fcard__title, .lcard__title { position: static; width: auto; margin: 50px 45px 0 45px; white-space: normal; }
 
 /* lifecycle card: title, subtitle, the workflows as rows above the link (Figma "Frame 1321316096") */
-.lcard__sub { position: static; width: 271px !important; margin: 20px 0 0 45px; }
+.lcard__sub { position: static; width: auto !important; margin: 20px 45px 0 45px; }
 .lcard__rule, .lcard__body { display: none; }
 .lcard[data-slug="invent"] .lcard__sub { font-size: 24px; line-height: 26px; } /* two-line title and a five-line subtitle: this one has to shrink to clear its four rows */
 .lcard__more { top: 493px; }
@@ -131,21 +135,21 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 /* industries card: title, the story button, the caption at the bottom */
 .fcard__cta { position: relative; left: 0; top: 0; margin: 20px 0 0 45px; }
 .fcard__line--bottom { top: 414px; }
-.fcard__caption { top: 424px; width: 271px; }
+.fcard__caption { top: 424px; right: 45px; width: auto; }
 
 /* the Antheros take-over: photo on top (393 × 345), the blue folder below with its tab on the top edge */
 .ls-takeover { height: 900px; }
 .ls__photo { width: 100%; height: 405px; border-radius: 30px; -webkit-mask-image: none; mask-image: none; } /* runs 60px under the blue panel, so both curves meet with no gap */
 .ls__brand { left: 50%; top: 123px; width: 210px; margin: 0 0 0 -105px; }
-.ls__panel { --tab-left: 210px; left: 0; top: 277px; width: 100%; height: 623px; }
-.ls-takeover > .ls__label { left: 30px; top: 288px; width: auto; height: auto; z-index: 7; display: flex; flex-direction: row-reverse; align-items: flex-end; gap: 10px; color: #000; } /* moved out of the masked panel by the script, 30px from the screen edge */
+.ls__panel { --tab-left: 30px; left: 0; top: 277px; width: 100%; height: 623px; }
+.ls-takeover > .ls__label { left: 62px; top: 288px; width: auto; height: auto; z-index: 7; display: flex; flex-direction: row-reverse; align-items: flex-end; gap: 10px; color: #000; } /* moved out of the masked panel by the script: inside the tab at 30, dot 32px in from its start */
 .ls__label .tab-label__text { position: static; writing-mode: horizontal-tb; transform: none; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .ls-takeover > .ls__label .tab-label__dot { background: currentColor; }
 .ls__label .tab-label__dot { position: static; }
 .ls__eyebrow { left: 16px; top: 65px; }
-.ls__title { left: 16px; top: 103px; width: 361px; }
-.ls__rule { left: 16px; top: 317px; width: 361px; }
-.ls__body { left: 16px; top: 327px; width: 361px; }
+.ls__title { left: 16px; right: 16px; top: 103px; width: auto; }
+.ls__rule { left: 16px; right: 16px; top: 317px; width: auto; }
+.ls__body { left: 16px; right: 16px; top: 327px; width: auto; }
 .ls__cta { left: 16px; top: 543px; }
 
 /* --- partnerships: one column of rows, a tap opens the copy under the title --- */
@@ -158,68 +162,74 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .prow.is-open { padding-bottom: 14px; }
 .prow:last-child:not(.is-open) { padding-bottom: 0; }
 
-/* --- people: one strip, the full bio scrolls inside the card --- */
-.bios__viewport { position: relative; left: 0; top: 0; width: auto; height: auto; margin-top: 40px; overflow: visible; }
+/* --- people (Figma Group 350): cards 30 under the eyebrow, dots 20 under the cards; name 50, role 20 under it, logo at 252,
+   four-line excerpt at 397, "Click for full Bio" at 493. Open (Group 354): the bio scrolls from 158 beside a 3px bar, 70% shade --- */
+.bios__viewport { position: relative; left: 0; top: 0; width: auto; height: auto; margin-top: 30px; overflow: visible; }
 .bios__track { position: relative; left: -16px; top: 0; width: 100vw; height: 540px; cursor: default; touch-action: auto; user-select: auto; }
-.bios__controls { display: none; }
-.folders--bios .fcard__meta { top: 150px; width: 271px; }
-.folders--bios .fcard__logos { top: auto; bottom: 88px; right: 45px; left: auto; align-items: flex-end; }
-.fcard__excerpt { top: 210px; width: 271px; -webkit-line-clamp: 6; }
+.bios__controls { position: static; width: auto; height: 8px; margin-top: 20px; }
+.bios__dots { position: static; justify-content: center; gap: 11.33px; }
+.folders--bios .fcard__meta, .fcard__meta--quote { position: static; width: auto; margin: 20px 45px 0 45px; }
+.folders--bios .fcard__logos { top: 252px; bottom: auto; left: 45px; right: auto; align-items: flex-end; transition: opacity .35s; }
+.fcard.is-expanded .fcard__logos { opacity: 0; }
+.fcard__excerpt { top: 397px; right: 45px; width: auto; -webkit-line-clamp: 4; }
 .fcard__more { top: 493px; }
-.fcard__full { top: 205px; width: 271px; height: 195px; padding-right: 0; }
-.fcard__scroll { display: none; }
+.fcard__full { top: 158px; left: 45px; width: auto; right: 55px; height: 342px; padding-right: 0; }
+.fcard__scroll { left: auto; right: 39px; top: 158px; height: 342px; }
 
 /* --- enterprise trust: stacked items, the badges under the last one --- */
-.security__ctas { position: static; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
-.security__cols { position: relative; top: 0; width: auto; margin-top: 50px; }
+.security__ctas { position: static; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 30px; }
+.security__cols { position: relative; top: 0; width: auto; margin-top: 40px; }
 .scol, .scol--right { position: relative; left: 0; width: auto; }
 .sitem, .sitem--2 { position: relative; top: 0; width: auto; padding: 20px 0 40px 42px; }
 .sitem > .rule { width: auto; right: 0; }
 .sitem__title { position: static; }
 .sitem__body { position: static; width: auto !important; margin-top: 20px; }
-.badges { position: static; flex-direction: column; gap: 20px; margin-top: 30px; }
+.badges { position: static; flex-direction: column; gap: 20px; margin-top: 20px; }
 
-/* --- customers --- */
+/* --- customers (Figma Group 355): cards 30 under the title; name at 50, role 20 under it, logo at 255,
+   the 60px quote mark at 358 with the quote (16/22) beside it from 353 --- */
 .quotes { padding-top: 70px; }
 .quotes__title { position: static; width: auto; margin-top: 20px; }
-.folders--quotes { margin-top: 40px; }
-.fcard__quote-mark { left: 45px; top: 150px; font-size: 60px; line-height: 30px; }
-.fcard__quote { left: 45px; top: 190px; width: 271px; font-size: 20px; line-height: 24px; letter-spacing: 0; }
-.fcard__meta--quote { top: auto; bottom: 88px; width: 271px; }
-.folders--quotes .fcard__logos { left: 45px; right: auto; bottom: 40px; }
+.folders--quotes { margin-top: 30px; }
+.fcard__quote-mark { left: 45px; top: 358px; font-size: 60px; line-height: 60px; }
+.fcard__quote { left: 90px; right: 45px; top: 353px; width: auto; font: 400 16px/22px var(--font-body); letter-spacing: 0; }
+.folders--quotes .fcard__logos { top: 255px; bottom: auto; left: 45px; right: auto; }
 .fcard__logo-bottom { display: none; }
 
 /* --- closing: in flow, the mock at full width, nothing sticks --- */
 .closing { padding-top: 70px; }
-.closing > .container { padding-bottom: 70px; }
+.closing > .container { padding-bottom: 130px; }
 .closing__title { position: static; width: auto; margin-top: 30px; text-align: left; transform: none; font-size: 50px; line-height: 45px; letter-spacing: -2px; }
 .closing__title[data-reveal] { transform: translate3d(0, 40px, 0); }
 .closing__body { position: static; width: auto; margin-top: 30px; text-align: left; transform: none; }
 .closing__body[data-reveal] { transform: translate3d(0, 40px, 0); }
 .closing__cta-wrap { position: static; width: auto; justify-content: flex-start; margin-top: 30px; }
-.closing__mock-wrap { position: static; width: auto; height: auto; margin-top: 50px; }
+.closing__mock-wrap { position: static; width: auto; height: auto; margin-top: 60px; }
 .closing__mock { position: relative; left: 0; width: 100%; height: auto; aspect-ratio: 880 / 478; border-radius: 12px; }
 .closing__mock img { height: auto; }
 
-/* --- footer: stacked --- */
-.footer { height: auto; border-radius: 20px 20px 0 0; }
-.footer__inner { height: auto; padding: 60px 0 30px; }
-.footer__hero { position: relative; width: auto; height: auto; }
-.final { position: relative; top: 0; width: auto; height: auto; margin: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 30px; }
-.final__word { position: static; font-size: 70px; line-height: 62px; letter-spacing: -2px; }
-.final__word--right { text-align: left; }
-.final__cta { position: static; width: 184px; height: 40px; border-radius: 20px; }
-.footer__cols { position: relative; top: 0; width: auto; display: block; margin-top: 70px; }
-.footer__col { height: auto; padding: 20px 0 30px; }
-.footer__rule { width: auto; right: 0; }
-.footer__head, .footer__links, .footer__stack, .footer__about { position: static; width: auto; }
-.footer__tree { position: static; margin-top: 12px; }
-.footer__brand { position: relative; top: 0; width: auto; height: auto; margin-top: 40px; display: flex; align-items: center; gap: 12px; }
-.footer__mark { position: static; width: 48px; height: 48px; }
-.footer__word { position: static; width: 240px; height: auto; }
-.footer__legal { position: relative; top: 0; width: auto; margin-top: 30px; display: flex; flex-direction: column; gap: 8px; }
-.footer__legal span { position: static; }
-.footer__legal-right { text-align: left; }
+/* --- footer (Figma Mobile frame, 1303 tall, 30px top corners): "Invention, reinvented." at 40 with Book a demo 30 under it,
+   holding while the gradient scrolls; then a line, the about text (10/12), the logo at 10%, the legal lines, 20 to the bottom --- */
+.footer { height: auto; border-radius: 30px 30px 0 0; }
+.footer__inner { height: auto; padding: 40px 0 20px; }
+.footer__hero { position: relative; width: auto; height: 1036px; }
+.final { position: sticky; top: calc(50vh - 97px); width: auto; height: auto; margin: 0; display: flex; flex-direction: column; align-items: flex-start; }
+.final__word { position: static; order: 1; text-align: left; font-size: 85px; line-height: 75px; letter-spacing: -3px; }
+.final__word--left::after { content: ','; }
+.final__word--right { order: 2; margin-top: 26px; } /* second line of one 75px-leading title */
+.final__cta { position: static; order: 3; width: 120px; height: 40px; border-radius: 30px; margin-top: 30px; background: rgba(255, 255, 255, .3); }
+.final__cta > span { font-size: 12px; line-height: 14px; }
+.footer__cols { display: none; }
+.footer__mobile { display: block; position: relative; padding-top: 10px; }
+.footer__mobile .footer__rule { position: absolute; left: 0; right: 0; top: 0; width: auto; }
+.footer__mobile .footer__about { position: static; width: auto; font: 400 10px/12px var(--font-body); }
+.footer__brand { position: relative; top: 0; width: auto; height: auto; margin-top: 40px; display: flex; align-items: center; gap: 0; }
+.footer__mark { position: static; width: 60px; height: 60px; }
+.footer__word { position: static; width: calc(100% - 60px); height: auto; }
+.footer__legal { position: relative; top: 0; width: auto; margin-top: 10px; display: flex; flex-direction: column; gap: 10px; }
+.footer__legal span { position: static; opacity: 1; white-space: pre; }
+.footer__legal-desktop, .footer__legal-right { display: none; }
+.footer__legal-mobile { display: inline; }
 
 /* ==================================================== inner pages */
 .phero { height: 460px; }
