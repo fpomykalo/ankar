@@ -112,7 +112,26 @@ export function initLifeSciences() {
     folders.style.pointerEvents = '';
     open = false;
     stopWatch();
-    if (mobile) setTimeout(() => ScrollTrigger.refresh(), 800); else ScrollTrigger.refresh(); // the page is shorter now: the triggers below move up with it
+    if (mobile) refreshAtRest(); else ScrollTrigger.refresh(); // the page is shorter now: the triggers below move up with it
+  }
+
+  // ScrollTrigger.refresh() puts the scroll position back where it measured it (a scrollTo), and on the phone any
+  // scrollTo stops the native momentum scroll dead. So the phone refreshes only once the scroll has rested.
+  let restTimer = 0;
+  function refreshAtRest() {
+    clearInterval(restTimer);
+    let last = -1;
+    let same = 0;
+    restTimer = setInterval(() => {
+      const y = Math.round(window.scrollY);
+      same = y === last ? same + 1 : 0;
+      last = y;
+      if (same < 2) return;
+      clearInterval(restTimer);
+      restTimer = 0;
+      ScrollTrigger.refresh();
+      debugLog(`refresh at rest y ${y}`);
+    }, 150);
   }
 
   // Out of view, the take-over folds away in one frame. Below the viewport only the space under the fold gives way.
@@ -152,7 +171,7 @@ export function initLifeSciences() {
         if (shift) shiftScroll(-extra);
         debugLog(`space back (${why}) at y ${y}`);
         debugShow(`space back (${why})`);
-        setTimeout(() => ScrollTrigger.refresh(), 800);
+        refreshAtRest();
       };
       debugShow(`holding space ${extra} bottom:${Math.round(b)} vh:${vh()} y:${y} still:${st}`);
       if (b - extra >= vh()) give('below', false); // the space is under the screen: nothing on screen moves
