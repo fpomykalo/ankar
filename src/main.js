@@ -3,9 +3,7 @@ import '@fontsource/crimson-text/400.css';
 import '@fontsource/crimson-text/600.css';
 import '@fontsource/dm-mono/300.css';
 import '@fontsource/dm-mono/400.css';
-import './styles/base.css';
-import './styles/components.css';
-import './styles/sections.css';
+import './styles/home.css';
 
 import { ScrollTrigger } from './lib/scroll.js';
 import { initReveal } from './lib/reveal.js';

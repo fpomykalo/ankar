@@ -10,6 +10,15 @@
     <a href="{{base}}resources/" data-mega>Resources</a>
   </nav>
   <a class="btn btn--black nav__cta" href="#"><span>Book a Demo</span></a>
+  <button class="nav__burger" id="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-mobile"><span></span><span></span><span></span></button>
+  <nav class="nav__mobile t-mono" id="nav-mobile" aria-label="Primary">
+    <a href="{{base}}"><span>Home</span></a>
+    <a href="{{base}}product/"><span>Product</span></a>
+    <a href="{{base}}careers/"><span>Careers</span></a>
+    <a href="{{base}}security/"><span>Security</span></a>
+    <a href="{{base}}resources/"><span>Resources</span></a>
+    <a class="btn btn--black" href="#"><span>Book a Demo</span></a>
+  </nav>
 
   <div class="nav__panel" id="nav-panel" aria-hidden="true">
     <div class="nav__col nav__col--home">
@@ -25,7 +34,7 @@
 
      &gt; <a href="{{base}}#security">Our Protections</a>
 
-     &gt; <a href="{{base}}#customers" data-offset="80">Our Customers</a></div>
+     &gt; <a href="{{base}}#customers" data-offset="80" data-offset-mobile="0">Our Customers</a></div>
     </div>
     <div class="nav__col nav__col--product">
       <div class="nav__line"></div>

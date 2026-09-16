@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import { isMobile } from './mobile.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,7 +42,7 @@ document.addEventListener('click', (e) => {
   const pinned = target instanceof Element && ScrollTrigger.getAll().find((t) => t.pin === target);
   if (pinned) target = pinned.start;
   else if (target instanceof Element) target = layoutTop(target); // layout position: a reveal transform still in flight must not shift the landing
-  const offset = Number(a.dataset.offset || 0); // positive values land the section's content 120px under the top, like the pinned scenes
+  const offset = Number((isMobile() && a.dataset.offsetMobile != null ? a.dataset.offsetMobile : a.dataset.offset) || 0); // positive values land the section's content 120px under the top, like the pinned scenes
   lenis.scrollTo(target, { offset, duration: 1.4, force: true, lock: true });
 });
 

@@ -1,4 +1,5 @@
 import { gsap, lenis, ScrollTrigger, anchorTargets } from '../lib/scroll.js';
+import { isMobile } from '../lib/mobile.js';
 
 /**
  * The Antheros take-over, opened by the CTA on the Life sciences card.
@@ -26,10 +27,17 @@ export function initLifeSciences() {
     ...cards().slice(1),
     ...card().querySelectorAll('.fcard__ui, .fcard__grad, .fcard__grad-bottom'),
   ];
-  const vw = () => Math.max(document.documentElement.clientWidth, 1440);
+  // phone (Figma "Group 348", 393 × 900): the photo fills the top 345px, the blue folder slides up under it
+  const mobile = isMobile();
+  const vw = () => (mobile ? document.documentElement.clientWidth : Math.max(document.documentElement.clientWidth, 1440));
   const vh = () => window.innerHeight;
   const PHOTO_W = 786 / 1440; // Figma: the photo covers the left 786px of a 1440 viewport
   const CARDS_H = 480;
+  const M_H = 900;
+  const M_PHOTO_H = 345;
+  const M_PANEL_H = 623;
+  const NAV_LOCK = mobile ? 96 : 120; // the carousel comes back 40px under the nav
+  if (mobile) panel.classList.add('folder--top');
   const DUR = 0.7;
 
   let open = false;
@@ -48,13 +56,15 @@ export function initLifeSciences() {
 
     // the take-over starts at the carousel's top and is one viewport tall
     const top = cardsTop();
-    extra = vh() - CARDS_H;
-    gsap.set(takeover, { top, height: vh(), visibility: 'visible' });
+    const H = mobile ? M_H : vh();
+    extra = H - (mobile ? folders.offsetHeight : CARDS_H);
+    gsap.set(takeover, { top, height: H, visibility: 'visible' });
+    if (mobile) folders.scrollTo({ left: 0, behavior: 'instant' }); // the photo grows out of the first card
     const r = card().getBoundingClientRect();
     const o = takeover.getBoundingClientRect();
-    gsap.set(photo, { left: r.left - o.left, top: r.top - o.top, width: 557, height: r.height, '--tab-top': '58px', visibility: 'hidden' });
+    gsap.set(photo, { left: r.left - o.left, top: r.top - o.top, width: mobile ? r.width : 557, height: r.height, '--tab-top': mobile ? '238px' : '58px', visibility: 'hidden' });
     gsap.set(brand, { opacity: 0 });
-    gsap.set(panel, { x: vw() * 0.51 + 40 });
+    if (mobile) gsap.set(panel, { x: 0, y: M_PANEL_H + 40 }); else gsap.set(panel, { x: vw() * 0.51 + 40 });
     gsap.set(copy, { y: 40, opacity: 0 });
 
     // the page eases so the take-over fills the viewport while the section makes room below
@@ -68,9 +78,9 @@ export function initLifeSciences() {
       .to(fadeEls(), { opacity: 0, duration: 0.3, ease: 'power2.in' }, 0)
       .set(photo, { visibility: 'visible' }, 0.3)
       .set(card(), { visibility: 'hidden' }, 0.3)
-      .to(photo, { left: -55, top: 0, width: () => vw() * PHOTO_W + 55, height: () => vh(), duration: DUR, ease: 'power2.inOut' }, 0.3)
+      .to(photo, mobile ? { left: 0, top: 0, width: () => vw(), height: M_PHOTO_H, duration: DUR, ease: 'power2.inOut' } : { left: -55, top: 0, width: () => vw() * PHOTO_W + 55, height: () => vh(), duration: DUR, ease: 'power2.inOut' }, 0.3)
       .to(brand, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 0.72)
-      .to(panel, { x: 0, duration: 0.65, ease: 'power3.inOut' }, 0.55)
+      .to(panel, { x: 0, y: 0, duration: 0.65, ease: 'power3.inOut' }, 0.55)
       .to(copy, { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, ease: 'power3.out' }, 1.1);
   }
 
@@ -110,7 +120,7 @@ export function initLifeSciences() {
     const r = takeover.getBoundingClientRect();
     if (r.bottom <= 0 || r.top >= vh()) { foldAway(); return; }
     // in view: bring the carousel back to its 120px lock while the space closes
-    lenis.scrollTo(sectionTop() + cardsTop() - 120, { duration: DUR + 0.3, lock: true, force: true });
+    lenis.scrollTo(sectionTop() + cardsTop() - NAV_LOCK, { duration: DUR + 0.3, lock: true, force: true });
     tl.reverse();
   }
 

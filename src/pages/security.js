@@ -1,5 +1,6 @@
 import { bootPage } from '../site.js';
 import { gsap } from '../lib/scroll.js';
+import { isMobile } from '../lib/mobile.js';
 import { securityItems } from '../data/pages.js';
 
 /** Three pillars: click one to open its copy and show its detail rows on the gradient panel. Nothing pins. */
@@ -30,6 +31,7 @@ function initSecurity() {
   }
   // the gradient panel is as tall as the accordion gets (its tallest item open), and the
   // section keeps that height whichever item is open
+  if (isMobile()) { open(0, true); items.forEach((item, i) => item.addEventListener('click', () => open(i))); return; }
   const closed = items.reduce((sum, item) => sum + item.offsetHeight, 0); // every panel starts at height 0
   const tallest = Math.max(...items.map((item) => item.querySelector('.sacc__body').offsetHeight));
   const last = items[items.length - 1];

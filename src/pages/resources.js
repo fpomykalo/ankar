@@ -1,5 +1,6 @@
 import { bootPage } from '../site.js';
 import { lenis } from '../lib/scroll.js';
+import { isMobile } from '../lib/mobile.js';
 import { stories, blogHighlights, blogGrid, press, news } from '../data/pages.js';
 import { storyCard, postCard, pressCard, initStrip } from '../lib/cards.js';
 
@@ -18,7 +19,7 @@ function initResources() {
   // arriving with #brand (the press kit link in the menu): the brand divider lands 40px under the nav
   if (location.hash === '#brand') {
     const rule = document.getElementById('brand');
-    const land = () => lenis.scrollTo(layoutTop(rule) - 120, { immediate: true, force: true });
+    const land = () => lenis.scrollTo(layoutTop(rule) - (isMobile() ? 96 : 120), { immediate: true, force: true });
     requestAnimationFrame(land); setTimeout(land, 150);
   }
 
@@ -27,7 +28,7 @@ function initResources() {
   const ruleOf = (tab) => document.getElementById(tab.dataset.target);
   const spy = () => {
     let active = null;
-    tabs.forEach((tab) => { if (ruleOf(tab).getBoundingClientRect().top <= 121) active = tab; });
+    tabs.forEach((tab) => { if (ruleOf(tab).getBoundingClientRect().top <= (isMobile() ? 147 : 121)) active = tab; });
     tabs.forEach((t) => t.classList.toggle('is-active', t === active));
   };
   lenis.on('scroll', spy);

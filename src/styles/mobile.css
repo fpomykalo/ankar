@@ -1,0 +1,355 @@
+/* ---------------------------------------------------------------------------
+   ANKAR — mobile (Figma "Mobile" frame, 393 wide: 16px gutters, 361px content)
+   Loaded last: every rule here overrides the desktop layout under 768px.
+   The homepage down to the partnership rows is measured from Figma; the
+   sections after it and the inner pages follow the same rhythm (70px between
+   sections, 30px between a head's lines, 40/50px before a section's content).
+--------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+
+/* --- base ---------------------------------------------------------------- */
+body { min-width: 0; font-size: 16px; line-height: 22px; }
+.container { width: auto; margin: 0 16px; }
+
+.t-display { font-size: 85px; line-height: 75px; letter-spacing: -3px; }
+.t-h2      { font-size: 50px; line-height: 45px; letter-spacing: -2px; }
+.t-h3      { font-size: 40px; line-height: 40px; letter-spacing: -1px; }
+.t-h4, .t-lead { font-size: 30px; line-height: 30px; letter-spacing: -1px; }
+.t-body    { font-size: 16px; line-height: 22px; }
+.t-mono    { font-size: 10px; line-height: 14px; }
+.t-mono-lg { font-size: 14px; }
+.tab-label__text { font-size: 10px; }
+.t-body ul { padding-left: 22px; }
+.nowrap { white-space: normal; }
+.stage-fade { position: static; }
+
+/* --- navigation: 361 × 40 bar, logo 82 × 13, burger at the right ------------- */
+.nav { left: 16px; right: 16px; top: 16px; width: auto; height: 40px; border-radius: 20px; transform: none; }
+.nav[data-reveal] { transform: translate3d(0, 20px, 0); }
+.nav__logo { left: 20px; top: 13px; }
+.nav__logo-svg { width: 82px; height: 13px; }
+.nav__menu, .nav__cta, .nav__panel { display: none; }
+.nav__burger { display: block; position: absolute; right: 20px; top: 0; width: 48px; height: 40px; }
+.nav__burger span { position: absolute; left: 16px; width: 16px; height: 2px; background: currentColor; transition: transform .35s var(--ease-inout), opacity .25s; }
+.nav__burger span:nth-child(1) { top: 14px; }
+.nav__burger span:nth-child(2) { top: 19px; }
+.nav__burger span:nth-child(3) { top: 24px; }
+.nav.is-open .nav__burger span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+.nav.is-open .nav__burger span:nth-child(2) { opacity: 0; }
+.nav.is-open .nav__burger span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+.nav__mobile { display: block; position: absolute; left: 0; top: 40px; width: 100%; padding: 0 20px 20px; opacity: 0; pointer-events: none; transition: opacity .3s; font-size: 12px; }
+.nav.is-open .nav__mobile { opacity: 1; pointer-events: auto; transition-delay: .1s; }
+.nav__mobile > a:not(.btn) { display: block; padding: 13px 0; border-top: 1px solid rgba(0, 0, 0, .15); }
+.nav__mobile > a:not(.btn) > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.nav__mobile > a.is-current { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.nav__mobile > .btn { width: 100%; margin-top: 10px; }
+
+/* --- hero (393 × 832 image; the tab notch sits over its last 25px) -------------- */
+.hero { height: 857px; }
+.hero__video { inset: 0; height: 100%; }
+.hero__shade { inset: 0; }
+.hero__rule { top: 72px; width: auto; right: 0; }
+.hero__eyebrow { top: 92px; white-space: normal; align-items: flex-start; right: 0; }
+.hero__title { top: 130px; white-space: normal; }
+.hero__body { left: 1px; top: 424px; width: 347px; line-height: 24px; }
+.hero__cta { left: 1px; top: 569px; }
+.hero__logos { left: 1px; top: 721px; width: 723px; height: 46px; border-radius: 23px; transform: none; }
+.hero__logos[data-reveal] { transform: translate3d(0, 40px, 0); }
+.hero__trusted { left: 0; top: -41px; }
+.marquee { left: 0; width: 723px; height: 46px; }
+.marquee__track { height: 46px; }
+.marquee__item { margin-left: 20px; }
+.marquee__item img { zoom: .78; }
+.marquee__sep { margin-left: 20px; height: 23px; }
+.hero__tab { left: 50%; margin-left: -125px; }
+
+/* --- section heads in flow: eyebrow 10 under the line, title 30 under it, body 30 under that --- */
+.sec, .psec { padding-top: 70px; }
+.possible { padding-top: 35px; } /* the line lands 60px under the hero image */
+.sec > .container, .psec > .container { height: auto; min-height: 0; padding: 0; }
+.sec__eyebrow, .closing__eyebrow, .ssec__eb1, .asec__date { position: static; display: flex; align-items: center; height: 8px; margin-top: 10px; }
+.sec__title { position: static; width: auto; margin-top: 30px; white-space: normal; }
+.sec__body, .possible__bodywrap { position: static; width: auto; height: auto; display: block; margin-top: 30px; }
+.lifecycle__body, .industries__body, .partnerships__body, .security__body, .partnerships__title, .security__title { width: auto; }
+
+/* --- what Ankar makes possible: accordion, the illustration inside the open item --- */
+.acc { position: relative; top: 0; width: auto; margin-top: 50px; }
+.acc__item { padding: 20px 0 40px; }
+.acc__item > .rule { width: auto; right: 0; }
+.acc__n { top: 20px; }
+.acc__title { width: auto; margin-left: 42px; white-space: normal; }
+.acc__panel { width: auto; margin-top: 14px; }
+.acc__body { margin-left: 42px; padding-bottom: 6px; }
+.acc__item.is-open { padding-bottom: 14px; }
+.acc__item:last-child:not(.is-open) { padding-bottom: 0; }
+.acc__panel .possible__panel { position: relative; left: 0; top: 0; width: 100%; height: 270px; border-radius: 20px; margin-top: 22px; }
+.illus { left: 41px; width: 279px; }
+
+/* --- card strips: native horizontal scroll, every card open at 361 × 540 ------------ */
+.folders { position: relative; left: -16px; top: 0; width: 100vw; height: 540px; margin-top: 50px; padding: 0 16px; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-padding-left: 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.folders::-webkit-scrollbar { display: none; }
+.folders::after { content: ''; flex: 0 0 16px; }
+.fcard, .folders .fcard.is-open, .folders--stories .fcard, .folders--wide .fcard, .folders--press .fcard, .folders--grid .fcard, .scard--post { --tab-top: 238px; width: 361px; flex: 0 0 361px; height: 540px; margin-left: -25px; scroll-snap-align: start; transition: none; }
+.folders .fcard:first-child, .folders .fcard.is-open:first-child, .folders--grid .fcard:first-child { margin-left: 0; }
+.fcard .tab-label { --label-bottom: 368px; --dot-top: 378px; }
+.fcard__open, .fcard:not(.is-open) .fcard__open { opacity: 1; pointer-events: auto; transition: none; }
+.fcard__closed { display: none; }
+.fcard__shade, .fcard.is-open .fcard__shade, .folders--bios .fcard.is-open .fcard__shade, .folders--quotes .fcard.is-open .fcard__shade { background: rgba(0, 0, 0, .2); }
+.folders--bios .fcard.is-open.is-expanded .fcard__shade { background: rgba(0, 0, 0, .7); }
+.fcard__grad-bottom { opacity: 1; }
+.fcard__img { filter: none; }
+.tab-label .tab-label__dot { background: currentColor; }
+.fcard__line { top: 30px; right: 45px; }
+.fcard__title, .lcard__title { position: static; width: 271px; margin: 50px 0 0 45px; white-space: normal; }
+
+/* lifecycle card: title, subtitle, the workflows as rows above the link (Figma "Frame 1321316096") */
+.lcard__sub { position: static; width: 271px !important; margin: 20px 0 0 45px; }
+.lcard__rule, .lcard__body { display: none; }
+.lcard[data-slug="invent"] .lcard__sub { font-size: 24px; line-height: 26px; } /* two-line title and a five-line subtitle: this one has to shrink to clear its four rows */
+.lcard__more { top: 493px; }
+.ltile { left: 45px !important; right: 45px; top: auto !important; width: auto !important; height: 45px !important; border-radius: 0; box-shadow: none; border-top: 1px solid rgba(255, 255, 255, .4); }
+.ltile:hover { background: none; }
+.ltile:nth-last-of-type(1) { bottom: 88px; }
+.ltile:nth-last-of-type(2) { bottom: 133px; }
+.ltile:nth-last-of-type(3) { bottom: 178px; }
+.ltile:nth-last-of-type(4) { bottom: 223px; }
+.ltile__n { left: 0; top: 9px; }
+.ltile__title { left: 38px; top: 9px; bottom: auto; }
+.ltile__icon { left: auto; right: 0; top: 9px; width: 13px; height: 13px; transform: none; object-fit: contain; }
+
+/* industries card: title, the story button, the caption at the bottom */
+.fcard__cta { position: relative; left: 0; top: 0; margin: 20px 0 0 45px; }
+.fcard__line--bottom { top: 414px; }
+.fcard__caption { top: 424px; width: 271px; }
+
+/* the Antheros take-over: photo on top (393 × 345), the blue folder below with its tab on the top edge */
+.ls-takeover { height: 900px; }
+.ls__photo { width: 100%; height: 345px; border-radius: 30px; -webkit-mask-image: none; mask-image: none; }
+.ls__brand { left: 50%; top: 123px; width: 210px; margin: 0 0 0 -105px; }
+.ls__panel { --tab-left: 150px; left: 0; top: 277px; width: 100%; height: 623px; }
+.ls__label { left: 176px; top: 11px; width: auto; height: auto; display: flex; flex-direction: row-reverse; align-items: flex-end; gap: 10px; }
+.ls__label .tab-label__text { position: static; writing-mode: horizontal-tb; transform: none; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.ls__label .tab-label__dot { position: static; }
+.ls__eyebrow { left: 16px; top: 65px; }
+.ls__title { left: 16px; top: 103px; width: 361px; }
+.ls__rule { left: 16px; top: 317px; width: 361px; }
+.ls__body { left: 16px; top: 327px; width: 361px; }
+.ls__cta { left: 16px; top: 543px; }
+
+/* --- partnerships: one column of rows, a tap opens the copy under the title --- */
+.pgrid { position: relative; top: 0; width: auto; height: auto; display: block; margin-top: 40px; }
+.prow { padding: 20px 0 40px; }
+.prow > .rule { width: auto; right: 0; }
+.prow__title { position: static; margin-left: 42px; white-space: normal; }
+.prow__panel { width: auto; margin: 14px 0 0 42px; }
+.prow__body { padding-bottom: 6px; }
+.prow.is-open { padding-bottom: 14px; }
+.prow:last-child:not(.is-open) { padding-bottom: 0; }
+
+/* --- people: one strip, the full bio scrolls inside the card --- */
+.bios__viewport { position: relative; left: 0; top: 0; width: auto; height: auto; margin-top: 40px; overflow: visible; }
+.bios__track { position: relative; left: -16px; top: 0; width: 100vw; height: 540px; cursor: default; touch-action: auto; user-select: auto; }
+.bios__controls { display: none; }
+.folders--bios .fcard__meta { top: 150px; width: 271px; }
+.folders--bios .fcard__logos { top: auto; bottom: 88px; right: 45px; left: auto; align-items: flex-end; }
+.fcard__excerpt { top: 210px; width: 271px; -webkit-line-clamp: 6; }
+.fcard__more { top: 493px; }
+.fcard__full { top: 205px; width: 271px; height: 195px; padding-right: 0; }
+.fcard__scroll { display: none; }
+
+/* --- enterprise trust: stacked items, the badges under the last one --- */
+.security__ctas { position: static; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.security__cols { position: relative; top: 0; width: auto; margin-top: 50px; }
+.scol, .scol--right { position: relative; left: 0; width: auto; }
+.sitem, .sitem--2 { position: relative; top: 0; width: auto; padding: 20px 0 40px 42px; }
+.sitem > .rule { width: auto; right: 0; }
+.sitem__title { position: static; }
+.sitem__body { position: static; width: auto !important; margin-top: 20px; }
+.badges { position: static; flex-direction: column; gap: 20px; margin-top: 30px; }
+
+/* --- customers --- */
+.quotes { padding-top: 70px; }
+.quotes__title { position: static; width: auto; margin-top: 20px; }
+.folders--quotes { margin-top: 40px; }
+.fcard__quote-mark { left: 45px; top: 150px; font-size: 60px; line-height: 30px; }
+.fcard__quote { left: 45px; top: 190px; width: 271px; font-size: 20px; line-height: 24px; letter-spacing: 0; }
+.fcard__meta--quote { top: auto; bottom: 88px; width: 271px; }
+.folders--quotes .fcard__logos { left: 45px; right: auto; bottom: 40px; }
+.fcard__logo-bottom { display: none; }
+
+/* --- closing: in flow, the mock at full width, nothing sticks --- */
+.closing { padding-top: 70px; }
+.closing > .container { padding-bottom: 70px; }
+.closing__title { position: static; width: auto; margin-top: 30px; text-align: left; transform: none; font-size: 50px; line-height: 45px; letter-spacing: -2px; }
+.closing__title[data-reveal] { transform: translate3d(0, 40px, 0); }
+.closing__body { position: static; width: auto; margin-top: 30px; text-align: left; transform: none; }
+.closing__body[data-reveal] { transform: translate3d(0, 40px, 0); }
+.closing__cta-wrap { position: static; width: auto; justify-content: flex-start; margin-top: 30px; }
+.closing__mock-wrap { position: static; width: auto; height: auto; margin-top: 50px; }
+.closing__mock { position: relative; left: 0; width: 100%; height: auto; aspect-ratio: 880 / 478; border-radius: 12px; }
+.closing__mock img { height: auto; }
+
+/* --- footer: stacked --- */
+.footer { height: auto; border-radius: 20px 20px 0 0; }
+.footer__inner { height: auto; padding: 60px 0 30px; }
+.footer__hero { position: relative; width: auto; height: auto; }
+.final { position: relative; top: 0; width: auto; height: auto; margin: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 30px; }
+.final__word { position: static; font-size: 70px; line-height: 62px; letter-spacing: -2px; }
+.final__word--right { text-align: left; }
+.final__cta { position: static; width: 184px; height: 40px; border-radius: 20px; }
+.footer__cols { position: relative; top: 0; width: auto; display: block; margin-top: 70px; }
+.footer__col { height: auto; padding: 20px 0 30px; }
+.footer__rule { width: auto; right: 0; }
+.footer__head, .footer__links, .footer__stack, .footer__about { position: static; width: auto; }
+.footer__tree { position: static; margin-top: 12px; }
+.footer__brand { position: relative; top: 0; width: auto; height: auto; margin-top: 40px; display: flex; align-items: center; gap: 12px; }
+.footer__mark { position: static; width: 48px; height: 48px; }
+.footer__word { position: static; width: 240px; height: auto; }
+.footer__legal { position: relative; top: 0; width: auto; margin-top: 30px; display: flex; flex-direction: column; gap: 8px; }
+.footer__legal span { position: static; }
+.footer__legal-right { text-align: left; }
+
+/* ==================================================== inner pages */
+.phero { height: 460px; }
+.phero__title { top: 130px; white-space: normal; }
+.phero__title--centered { top: 190px; }
+.phero__link { top: 92px; white-space: normal; width: 300px; }
+.phero__body { left: 1px; right: 0; top: 224px !important; width: auto; }
+.phero__cta { left: 1px; top: auto !important; bottom: 70px; }
+.psec__rule { width: auto; right: 0; }
+
+/* product: the pills stick under the nav, the workflows stack */
+.pwrap { padding-top: 30px; margin-bottom: 0; }
+.pwrap::after { height: 0; }
+.pbar { top: 66px; height: 40px; }
+.pbar > .container { height: 40px; }
+.pbar__tabs { position: static; display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
+.pbar__tabs .ptab { width: auto; flex: 0 0 auto; padding: 0 20px; }
+.pgroup { margin-top: 20px; }
+.pgroup__rule { width: auto; right: 0; }
+.pgroup__title { position: static; padding: 20px 0 0 58px; white-space: normal; }
+.pgroup .pgroup__items { padding-top: 50px; }
+.pitem { margin-bottom: 70px; }
+.pitem__rule, .pitem--flip .pitem__rule { left: 0; width: auto; right: 0; }
+.pitem__n, .pitem--flip .pitem__n { left: 0; }
+.pitem__title, .pitem--flip .pitem__title { position: static; padding: 20px 0 0 58px; white-space: normal; }
+.pitem__body, .pitem--flip .pitem__body { position: static; width: auto; margin: 20px 0 0 58px; }
+.pitem__ui, .pitem--flip .pitem__ui { width: auto; margin: 30px 0 0; }
+.pui--a { height: auto; aspect-ratio: 740 / 402; border-radius: 12px; }
+.pui--a img { left: 1.5%; top: 1.5%; width: 97%; }
+.pui--b { height: auto; }
+.pui--b img { width: 100%; height: auto; }
+
+/* careers */
+.csec__title { position: static; margin-top: 20px; }
+.cpair { position: relative; left: 0; top: 0 !important; width: auto; margin-top: 40px; padding-left: 28px; }
+.cpair--lead { padding-left: 0; }
+.cpair__dot { top: 6px; }
+.cpair__label { position: static; width: auto !important; }
+.cpair__body, .cpair--lead .cpair__body { position: static; left: 0; width: auto; }
+.cpair__label + .cpair__body { margin-top: 10px; }
+.folders--team { margin-top: 50px; }
+.tcard__name { top: 50px; width: 271px; }
+.tcard__mark { left: 45px; top: 150px; font-size: 60px; line-height: 30px; }
+.tcard__quote { left: 45px; top: 190px; width: 271px; }
+.tcard__role { top: auto; bottom: 40px; }
+.ccol, .ccol--right { position: relative; left: 0; width: auto; }
+.ccol--right { margin-top: 70px; }
+.ccol > .rule { width: auto; right: 0; }
+.ccol__title { position: static; padding-top: 20px; white-space: normal; }
+.ccol__rows { position: static; width: auto; margin-top: 40px; }
+.crow { padding-left: 28px; margin-bottom: 30px; }
+.crow__label { position: static; width: auto; }
+.crow__body { width: auto !important; margin-top: 8px; }
+.csec__h3 { position: static; padding-top: 20px; white-space: normal; }
+.folders--wide { margin-top: 40px; }
+.scard--wide .scard__title { top: 50px; width: 271px; font-size: 30px; line-height: 30px; }
+.scard--wide .scard__author { top: auto; bottom: 88px; }
+.csec--e { padding-bottom: 0; }
+.csec__joinbody { position: static; width: auto; margin-top: 30px; }
+.jobs { padding-top: 50px; }
+.jobdept > .rule, .job > .rule { width: auto; right: 0; }
+.job { height: auto; padding: 20px 0 30px 42px; }
+.job__title { position: static; white-space: normal; }
+.job__meta { position: static; display: block; margin-top: 10px; white-space: normal; }
+.job__apply { position: static; display: inline-block; margin-top: 10px; }
+.csec__joinfoot { width: auto; }
+
+/* security */
+.ssec > .container { padding-top: 0 !important; min-height: 0 !important; }
+.ssec__eb2 { display: none; }
+.ssec__title { position: static; width: auto; margin-top: 30px; }
+.ssec__body { position: static; width: auto; margin-top: 30px; }
+.ssec__badges { position: static; margin-top: 30px; }
+.sacc { width: auto; margin-top: 50px; }
+.sacc__item { padding: 20px 0 40px; }
+.sacc__item > .rule { width: auto; right: 0; }
+.sacc__title { margin-left: 42px; white-space: normal; }
+.sacc__panel { width: auto; margin: 14px 0 0 42px; }
+.sacc__body { padding-bottom: 6px; }
+.sacc__item.is-open { padding-bottom: 14px; }
+.spanel { position: relative; left: 0; top: 0; width: auto; height: auto !important; border-radius: 20px; margin-top: 20px; padding: 30px 20px 10px; }
+.spanel__rows { position: relative; left: 0; top: 0; width: auto; }
+.srow { padding: 20px 0 30px 42px; }
+.srow > .rule { width: auto; right: 0; }
+.srow__text { width: auto; }
+
+/* founders' letter */
+.lsec__title { position: static; width: auto; margin-top: 30px; }
+.pcard { position: relative; left: 0; top: 0; width: auto; height: 300px; margin-top: 40px; }
+.pcard__title { top: 50px; white-space: normal; }
+.pcard__sub { top: 93px; }
+.pcard--article { height: 240px; }
+.lrows { padding-top: 60px; }
+.lrow { padding: 20px 0 40px; }
+.lrow > .rule { width: auto; right: 0; }
+.lrow__title { position: static; width: auto; }
+.lrow__body { width: auto; margin-top: 20px; }
+
+/* resources */
+.rsec__storiesbody { position: static; width: auto; margin-top: 30px; }
+.rsec .folders, .rsec--stories .folders--stories, .rsec--blog .folders--grid { top: 0; margin-top: 40px; }
+.rsec--blog .folders--grid { margin-top: 30px; }
+.rsec__pager, .pager { display: none; }
+.strip { overflow-x: auto; }
+.strip__track { transform: none !important; }
+.strip__page, .folders--grid .strip__page { display: flex; flex: 0 0 auto; width: auto; height: 540px; column-gap: 0; row-gap: 0; }
+.strip__page:not(:first-child) { display: none; } /* the strips repeat their page until more stories arrive */
+.scard__title { top: 50px; width: 271px; }
+.scard__text { top: 50px; width: 271px; }
+.scard__author { top: auto; bottom: 88px; }
+.scard--post .scard__author, .scard--press .scard__author { margin-top: 20px; }
+.scard--press .scard__text { width: 271px; }
+.scard__logo { bottom: 88px; }
+.rsec--stories { padding-bottom: 30px; }
+.rbar { top: 66px; height: 40px; margin-top: 0; }
+.rbar > .container { height: 40px; }
+.rbar__tabs { position: static; display: flex; justify-content: center; }
+.rbar__tab { width: 150px; }
+.newslist { position: static; width: auto; margin-top: 30px; }
+.nrow { height: auto; padding: 20px 0 30px; }
+.nrow > .rule { width: auto; right: 0; }
+.nrow__title { position: static; white-space: normal; }
+.nrow__source { position: static; display: block; margin-top: 10px; white-space: normal; }
+.nrow__more { position: static; display: inline-block; margin-top: 10px; }
+.brandbox { position: relative; top: 0; width: auto; height: auto; margin-top: 30px; padding: 30px 20px; border-radius: 20px; }
+.brandbox__text, .brandbox__logo, .brandbox__cta { position: relative; left: 0; top: 0; }
+.brandbox__text { width: auto; }
+.brandbox__logo { display: block; width: 100%; margin-top: 60px; }
+.brandbox__cta { margin-top: 30px; }
+
+/* article */
+.asec > .container { display: flex; flex-direction: column; }
+.asec__back { position: static; margin-top: 20px; }
+.asec__date { margin-top: 30px; }
+.asec__title { position: static; width: auto; margin-top: 30px; }
+.vcard { position: relative; left: 0; top: 0; width: auto; height: auto; aspect-ratio: 740 / 416; margin-top: 40px; border-radius: 20px; }
+.vcard__poster { position: absolute; inset: 0; }
+.asec__author { position: relative; top: 0; width: auto; margin-top: 30px; }
+.asec__read { left: auto; right: 0; }
+.asec__rule2 { position: static; width: auto; margin-top: 30px; }
+.asec__side { position: static; width: auto; margin-top: 40px; order: 99; }
+.newsletter, .newsletter__input { width: 100%; }
+.asec__body { margin-left: 0; padding-top: 30px; width: auto; }
+
+}

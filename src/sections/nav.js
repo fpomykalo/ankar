@@ -1,4 +1,5 @@
 import { gsap, lenis } from '../lib/scroll.js';
+import { isMobile } from '../lib/mobile.js';
 
 /**
  * Fixed navigation.
@@ -10,12 +11,36 @@ import { gsap, lenis } from '../lib/scroll.js';
 export function initNav() {
   const nav = document.getElementById('nav');
   if (!nav) return;
-  nav.querySelector('.nav__logo').setAttribute('href', import.meta.env.BASE_URL || '/');
+  const base = import.meta.env.BASE_URL || '/';
+  const home = document.getElementById('nav-home');
+  nav.querySelector('.nav__logo').setAttribute('href', base);
   // the page we are on is underlined in the menu
-  nav.querySelectorAll('.nav__menu a[data-mega]:not(.nav__home)').forEach((a) => {
+  nav.querySelectorAll('.nav__menu a[data-mega]:not(.nav__home), .nav__mobile a:not(.btn)').forEach((a) => {
     const path = new URL(a.getAttribute('href'), location.href).pathname;
-    if (location.pathname.startsWith(path)) a.classList.add('is-current');
+    if (path !== base && location.pathname.startsWith(path)) a.classList.add('is-current');
   });
+
+  // --- phone: the burger opens the list inside the bar ----------------------
+  if (isMobile()) {
+    const burger = document.getElementById('nav-burger');
+    const list = document.getElementById('nav-mobile');
+    let tl;
+    const setOpen = (open) => {
+      nav.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      tl?.kill();
+      tl = gsap.to(nav, { height: open ? 40 + list.offsetHeight : 40, duration: open ? 0.5 : 0.4, ease: open ? 'power3.out' : 'power3.inOut' });
+    };
+    burger.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+    list.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
+    document.addEventListener('click', (e) => { if (nav.classList.contains('is-open') && !e.target.closest('#nav')) setOpen(false); });
+    list.querySelector('a').addEventListener('click', (e) => { // Home on the homepage scrolls to the top
+      if (location.pathname !== base) return;
+      e.preventDefault();
+      lenis.scrollTo(0, { duration: 1.2, force: true, lock: true });
+    });
+    return;
+  }
 
   // --- mega-menu ------------------------------------------------------------
   let openTl;
@@ -44,8 +69,6 @@ export function initNav() {
     a.addEventListener('mousemove', () => { if (!nav.classList.contains('is-open')) enter(); });
   });
   // Home is a link to the homepage; on the homepage itself it scrolls to the top
-  const home = document.getElementById('nav-home');
-  const base = import.meta.env.BASE_URL || '/';
   home.addEventListener('click', (e) => {
     if (location.pathname !== base) return;
     e.preventDefault();

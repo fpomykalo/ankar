@@ -1,5 +1,6 @@
 import { gsap, lenis } from '../lib/scroll.js';
 import { industries, lifecycle, people, quotes } from '../data/content.js';
+import { isMobile } from '../lib/mobile.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); // product page item ids
@@ -54,7 +55,7 @@ export function initLifecycleCards() {
   const root = document.getElementById('lifecycle-folders');
   if (!root) return;
   root.innerHTML = lifecycle.map((c, i) => `
-    <article class="fcard folder lcard${i === 0 ? ' is-open' : ''}" style="--card:${c.color}">
+    <article class="fcard folder lcard${i === 0 ? ' is-open' : ''}" data-slug="${c.slug}" style="--card:${c.color}">
       <div class="lcard__bg"></div>
       <div class="fcard__ui">
       ${label(c.label)}
@@ -108,6 +109,14 @@ export function initBios() {
       </div>
     </article>`).join('');
   const cards = Array.from(track.children);
+  if (isMobile()) { // the strip scrolls natively; a tap on a card opens its full bio, another closes it
+    cards.forEach((c) => c.addEventListener('click', (e) => {
+      if (e.target.closest('.fcard__full')) return;
+      const open = c.classList.toggle('is-expanded');
+      c.toggleAttribute('data-lenis-prevent', open);
+    }));
+    return;
+  }
   // custom scrollbar for the full bio (thumb is draggable)
   cards.forEach((c) => {
     const full = c.querySelector('.fcard__full');

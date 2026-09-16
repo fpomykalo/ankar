@@ -6,7 +6,7 @@ This folder is everything a developer needs to rebuild the Ankar marketing site 
 - Design source: Figma file `ANKAR — Web`, key `amR3f07jEVMx1Q4m1XRCQc`, page 4.2 for the current layouts, page 3.3 for the earlier homepage
 - Repository: github.com/fpomykalo/ankar, branch `v02`
 
-Desktop only for now: everything is drawn on a 1440px artboard with a 1280px container. Mobile is a later pass.
+Everything is drawn on a 1440px artboard with a 1280px container. Under 768px the site switches to the phone layout (Figma "Mobile" frame, 393 wide, 16px gutters, 361px content): `src/styles/mobile.css` overrides the desktop layout, and the scripts branch on `isMobile()` from `src/lib/mobile.js`. The homepage down to the partnership rows is measured from that frame; the sections after it and the inner pages follow the same rhythm and are waiting for their own designs.
 
 ## What is in the zip
 
@@ -38,7 +38,7 @@ Where things live in `source/`:
 
 - `index.html` and `<page>/index.html`: one file per page. The nav, closing section and footer are partials in `src/partials/`, pulled in at build time.
 - `src/data/`: the copy. `content.js` (homepage), `pages.js` (careers, security, resources, article), `product.js`. The same data is exported as JSON in `handoff/content/`.
-- `src/styles/`: `base.css` (tokens, type scale), `components.css` (buttons, folder cards), `sections.css` (homepage and nav), `pages.css` (inner pages).
+- `src/styles/`: `base.css` (tokens, type scale), `components.css` (buttons, folder cards), `sections.css` (homepage and nav), `pages.css` (inner pages), `mobile.css` (the phone layout, under 768px). `home.css` and `page.css` only import these in order, so the mobile layer always comes last in the bundle.
 - `src/sections/`: homepage behaviours. `src/pages/`: one script per inner page. `src/lib/`: scroll, reveal, cards, image pre-decoding.
 - `src/illustrations/`: the three animated SVG illustrations.
 

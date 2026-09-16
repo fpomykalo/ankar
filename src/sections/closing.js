@@ -1,4 +1,5 @@
 import { gsap, ScrollTrigger } from '../lib/scroll.js';
+import { isMobile } from '../lib/mobile.js';
 
 /** Closing CTA: the product mock grows from 880px to 1000px wide while
  *  scrolling; the "Explore the platform" button locks 40px under the
@@ -9,6 +10,7 @@ export function initClosing() {
   const ctaWrap = document.getElementById('closing-cta-wrap');
   if (!closing || !mock) return;
 
+  if (!isMobile()) {
   gsap.to(mock, {
     scale: 1000 / 880,
     ease: 'none',
@@ -30,6 +32,7 @@ export function initClosing() {
     const shift = Math.max(0, LOCK - natural);
     gsap.set([ctaWrap, mockWrap], { y: shift }); // the image locks together with the button
   });
+  }
 
   const box = document.getElementById('video-box');
   if (box) {
