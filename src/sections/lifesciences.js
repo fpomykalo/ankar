@@ -91,11 +91,18 @@ export function initLifeSciences() {
   // Lenis's current value, target and running animation all shift together, so momentum is kept.
   function shiftScroll(by) {
     const a = lenis.animate;
-    lenis.animatedScroll += by;
-    lenis.targetScroll += by;
+    const y = window.scrollY + by; // the real position: Lenis's own value can lag behind native scrolling on the phone
+    lenis.animatedScroll = y;
+    lenis.targetScroll = y;
     if (a?.isRunning) { a.value += by; a.from += by; a.to += by; }
-    window.scrollTo(0, lenis.animatedScroll);
+    window.scrollTo(0, y);
+    debugLog(`fold shift ${by} -> ${y}`);
   }
+  // ?debug shows the watch's view of things on the phone
+  const debugEl = /[?&]debug/.test(location.search) ? Object.assign(document.body.appendChild(document.createElement('pre')), { style: 'position:fixed;left:0;bottom:0;z-index:99999;margin:0;padding:6px 8px;font:11px/14px monospace;background:rgba(0,0,0,.75);color:#0f0;pointer-events:none;white-space:pre-wrap;max-width:100%' }) : null;
+  const debugLines = [];
+  function debugLog(line) { if (!debugEl) return; debugLines.push(line); if (debugLines.length > 4) debugLines.shift(); }
+  function debugShow(state) { if (debugEl) debugEl.textContent = `${state}\n${debugLines.join('\n')}`; }
 
   function finishClose() {
     gsap.set(takeover, { visibility: 'hidden' });
@@ -127,13 +134,14 @@ export function initLifeSciences() {
   function startWatch() {
     stopWatch();
     watch = setInterval(() => {
-      if (!open || !tl || tl.reversed() || tl.progress() < 1) return;
+      if (!open || !tl || tl.reversed() || tl.progress() < 1) { debugShow(`waiting open:${open} tl:${tl ? tl.progress().toFixed(2) : 'none'} rev:${tl ? tl.reversed() : '-'}`); return; }
       const r = takeover.getBoundingClientRect();
       const out = r.top >= vh() || r.bottom <= 0;
       const y = Math.round(window.scrollY);
       still = out && y === lastY ? still + 1 : 0;
       lastY = y;
-      if (out && still >= 2) foldAway(r.bottom <= 0);
+      debugShow(`open:${open} tl:${tl.progress().toFixed(2)} top:${Math.round(r.top)} bottom:${Math.round(r.bottom)} vh:${vh()} y:${y} lenis:${Math.round(lenis.animatedScroll)} still:${still} out:${out}`);
+      if (out && still >= 2) { debugLog(`fold ${r.bottom <= 0 ? 'above' : 'below'} at y ${y}`); foldAway(r.bottom <= 0); }
     }, 120);
   }
 

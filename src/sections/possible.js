@@ -1,5 +1,6 @@
 import { gsap } from '../lib/scroll.js';
 import { isMobile } from '../lib/mobile.js';
+import { driveDashAnimations } from '../lib/dashdraw.js';
 import wf1 from '../illustrations/wf1.html?raw';
 import wf2 from '../illustrations/wf2.html?raw';
 import wf3 from '../illustrations/wf3.html?raw';
@@ -26,6 +27,7 @@ export function initPossible() {
     return panel.querySelector('.illus__item');
   }) : [];
   let drawTimer;
+  let stopDash = () => {};
   function setPhase(i, immediate) {
     items.forEach((item, idx) => {
       const open = idx === i;
@@ -36,8 +38,9 @@ export function initPossible() {
     });
     if (mobile) {
       clearTimeout(drawTimer);
+      stopDash();
       mSlots.forEach((s, idx) => { if (idx !== i) s.innerHTML = ''; });
-      const drawInto = () => { mSlots[i].innerHTML = htmls[i]; };
+      const drawInto = () => { mSlots[i].innerHTML = htmls[i]; stopDash = driveDashAnimations(mSlots[i]); }; // the lines are drawn from script: WebKit restarts CSS animations inside masks
       if (immediate) drawInto(); else drawTimer = setTimeout(drawInto, 650); // once the panel has opened
       return;
     }
