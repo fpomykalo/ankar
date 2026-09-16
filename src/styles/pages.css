@@ -39,6 +39,7 @@
 .pgroup__n { position: absolute; left: 0; top: 20px; white-space: nowrap; }
 .pgroup__title { position: absolute; left: 108px; top: 20px; white-space: nowrap; }
 .pgroup__items { padding-top: 186px; }
+.pgroup--two .pgroup__items { padding-top: 256px; } /* second title line adds 70 */
 .pitem { position: relative; margin-bottom: 120px; }
 .pitem:last-child { margin-bottom: 0; }
 .pitem__rule { position: absolute; left: 0; top: 0; width: 524px; }

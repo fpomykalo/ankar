@@ -41,6 +41,7 @@ function initProduct() {
     tabs.forEach((t) => t.classList.toggle('is-active', t.dataset.slug === g.slug));
     nEl.textContent = `${g.n}.`;
     titleEl.innerHTML = g.title;
+    group.classList.toggle('pgroup--two', g.title.includes('<br>')); // a two-line title keeps the first workflow 120 under it
     itemsEl.innerHTML = g.items.map((it) => item(it, reveal)).join('');
     if (reveal) initReveal(itemsEl);
     ScrollTrigger.refresh();

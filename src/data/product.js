@@ -9,7 +9,7 @@ export const productGroups = [
     ],
   },
   {
-    slug: 'invent', n: '2', tab: 'Invent &amp; Experiment', title: 'Invent &amp; Experiment',
+    slug: 'invent', n: '2', tab: 'Invent &amp; Experiment', title: 'Invent &amp;<br>Experiment',
     items: [
       { n: '2.1', title: 'Concept Generation', body: 'Start from a technical problem and generate candidate solutions tested against both the published record and your own internal knowledge bases. Understand which approaches are genuinely new, which your teams have already tried, and why the ones that failed didn’t work. Use the surviving shortlist to develop a few concepts that stand up to the evidence, rather than repeating an experiment a colleague ran three years ago.', ui: 'a' },
       { n: '2.2', title: 'Reformulation', body: 'Take a product that already works and adapt it to a constraint it was never designed for, whether a restricted ingredient, a new market’s regulations, a supply shortage or a lower price point. Understand which substitutions are viable, how each is likely to affect performance, and which have already been tried across your own formulation history and the published literature. Use that to reach a small set of candidate reformulations worth taking to the bench, with the trade-offs understood before the first batch is produced.', ui: 'b' },
