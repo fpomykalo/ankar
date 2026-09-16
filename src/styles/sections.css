@@ -375,13 +375,17 @@
 .folders--lifecycle .fcard.is-open { width: 931px; }
 .lcard__bg { position: absolute; inset: 0; background: var(--card); }
 .lcard__title { position: absolute; left: 45px; top: 60px; white-space: nowrap; }
-.lcard__sub { position: absolute; left: 349px; top: 69px; width: 445px; }
-.lcard__rule { position: absolute; top: 201px; height: 1px; background: rgba(255,255,255,.4); }
-.lcard__rule--left { left: 45px; width: 288px; }
-.lcard__rule--right { left: 349px; width: 537px; }
-.lcard__body { position: absolute; left: 45px; top: 221px; width: 288px; }
-.lcard__list-title { position: absolute; left: 349px; top: 221px; white-space: nowrap; }
-.lcard__list { position: absolute; left: 535px; top: 221px; width: 351px; }
+.lcard__sub { position: absolute; left: 45px; top: 110px; }
+.lcard__rule { position: absolute; left: 45px; top: 291px; width: 413px; height: 1px; background: rgba(255,255,255,.4); }
+.lcard__body { position: absolute; left: 45px; top: 311px; }
+.lcard__more { position: absolute; left: 45px; top: 432px; white-space: nowrap; transition: opacity .3s; }
+.lcard__more:hover { opacity: .6; }
+/* workflow tiles: 10px radius, a 35% white hairline; hover fills 10% white. Number top left, icon centred, name bottom left */
+.ltile { position: absolute; display: block; border-radius: 10px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.35); color: #fff; transition: background-color .3s; }
+.ltile:hover { background: rgba(255,255,255,.1); }
+.ltile__n { position: absolute; left: 20px; top: 20px; }
+.ltile__icon { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: block; }
+.ltile__title { position: absolute; left: 20px; bottom: 20px; white-space: nowrap; }
 
 .industries { padding-top: 120px; }
 .industries > .container { height: 724px; }

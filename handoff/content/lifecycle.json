@@ -1,43 +1,169 @@
 [
   {
     "label": "Lifecycle — 1",
+    "slug": "explore",
     "color": "#ba484f",
     "title": "Explore",
     "subtitle": "See the landscape before<br>choosing a direction.",
+    "subWidth": 319,
     "body": "Connect internal knowledge with scientific literature, patents, competitive activity and adjacent fields to uncover whitespace, emerging technologies and new routes forward.",
+    "bodyWidth": 368,
     "listTitle": "Workflows:",
     "list": [
       "Portfolio Mapping",
       "Landscape Monitoring",
       "Technology Scouting"
+    ],
+    "tiles": [
+      {
+        "n": "1.1",
+        "title": "Portfolio Mapping",
+        "rect": [
+          474,
+          60,
+          184,
+          235
+        ]
+      },
+      {
+        "n": "1.2",
+        "title": "Landscape Monitoring",
+        "rect": [
+          668,
+          60,
+          218,
+          235
+        ]
+      },
+      {
+        "n": "1.3",
+        "title": "Technology Scouting",
+        "rect": [
+          474,
+          305,
+          412,
+          135
+        ]
+      }
     ]
   },
   {
     "label": "Lifecycle — 2",
+    "slug": "invent",
     "color": "#2f3d86",
     "title": "Invent &amp;<br>Experiment",
+    "openTitle": "Invent &amp; Experiment",
     "subtitle": "Make every iteration compound by turning possibilities into stronger, testable concepts.",
+    "subWidth": 404,
     "body": "Bring relevant science, prior work and alternative approaches into the creative process so teams can develop concepts with more context and spend more time testing the most promising ideas.",
+    "bodyWidth": 413,
     "listTitle": "Workflows:",
     "list": [
       "Concept Generation",
       "Reformulation",
       "Experiment design",
       "Knowledge Capture"
+    ],
+    "tiles": [
+      {
+        "n": "2.1",
+        "title": "Concept Generation",
+        "rect": [
+          474,
+          60,
+          225,
+          203
+        ]
+      },
+      {
+        "n": "2.2",
+        "title": "Reformulation",
+        "rect": [
+          708,
+          60,
+          178,
+          170
+        ]
+      },
+      {
+        "n": "2.3",
+        "title": "Experiment design",
+        "rect": [
+          474,
+          273,
+          225,
+          167
+        ]
+      },
+      {
+        "n": "2.4",
+        "title": "Knowledge Capture",
+        "rect": [
+          708,
+          240,
+          178,
+          200
+        ]
+      }
     ]
   },
   {
     "label": "Lifecycle — 3",
+    "slug": "protect",
     "color": "#162247",
     "title": "Protect",
     "subtitle": "Turn technical progress into defensible value.",
+    "subWidth": 351,
     "body": "Identify inventions earlier, evaluate what is worth protecting and move from complex R&amp;D to stronger patent assets with less wasted expert time.",
+    "bodyWidth": 362,
     "listTitle": "Workflows:",
     "list": [
       "Patent Drafting",
       "Prosecution",
       "Invalidity",
       "Portfolio Pruning"
+    ],
+    "tiles": [
+      {
+        "n": "3.1",
+        "title": "Patent Drafting",
+        "rect": [
+          474,
+          60,
+          178,
+          200
+        ]
+      },
+      {
+        "n": "3.2",
+        "title": "Prosecution",
+        "rect": [
+          661,
+          60,
+          225,
+          167
+        ]
+      },
+      {
+        "n": "3.3",
+        "title": "Invalidity",
+        "rect": [
+          474,
+          270,
+          178,
+          170
+        ]
+      },
+      {
+        "n": "3.4",
+        "title": "Portfolio Pruning",
+        "rect": [
+          661,
+          237,
+          225,
+          203
+        ]
+      }
     ]
   }
 ]

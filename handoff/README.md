@@ -90,7 +90,7 @@ Homepage
 
 - Hero with the video background and two CTAs. "Explore the platform" links to the product page.
 - What Ankar makes possible: three items open on hover, the open item's illustration plays once, a click on the open item replays it.
-- Lifecycle: three folder cards (Explore red, Invent & Experiment indigo, Protect navy). The open one is 931px wide.
+- Lifecycle: three folder cards (Explore red, Invent & Experiment indigo, Protect navy). The open one is 931px wide: title, subtitle, rule, body and a "View more details" link to the product group on the left; on the right a 412 × 380 grid of workflow tiles (10px radius, 35% white hairline, 10% white fill on hover) with the number, a centred icon and the name, each linking to its workflow on the product page.
 - Built for consequential R&D: five industry folder cards, open card 557px. The Life Sciences card carries a "Watch the Antheros story" button; clicking the button or anywhere on the card opens the take-over.
 - Take-over: the section grows by a viewport height minus 480, the page eases so the take-over fills the viewport, the photo grows out of its card to 786px wide while the blue panel slides in from the right with the copy. The section head stays visible above it. A click anywhere closes it (except on the story button). If it scrolls fully out of view it closes itself without moving what is on screen. In Framer this is best rebuilt with layout animations rather than ported.
 - More than software: four rows in two columns, open on hover, only one open per column. The section is sized so the next divider sits 50px under the tallest open row.

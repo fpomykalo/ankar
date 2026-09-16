@@ -2,6 +2,7 @@ import { gsap, lenis } from '../lib/scroll.js';
 import { industries, lifecycle, people, quotes } from '../data/content.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); // product page item ids
 
 const LOGO_SIZES = {
   palantir: [92, 22], helsing: [97, 23], nlo: [55, 27], gsk: [70, 21], 'astra-zeneca': [122, 31],
@@ -59,13 +60,17 @@ export function initLifecycleCards() {
       ${label(c.label)}
       <div class="fcard__line"></div>
       <div class="fcard__open">
-        <h3 class="t-h3 lcard__title">${c.title}</h3>
-        <p class="t-h4 lcard__sub">${c.subtitle}</p>
-        <div class="lcard__rule lcard__rule--left"></div>
-        <div class="lcard__rule lcard__rule--right"></div>
-        <p class="t-body lcard__body">${c.body}</p>
-        <p class="t-body lcard__list-title">${c.listTitle}</p>
-        <div class="t-body lcard__list"><ul class="spaced">${c.list.map((l) => `<li>${l}</li>`).join('')}</ul></div>
+        <h3 class="t-h3 lcard__title">${c.openTitle || c.title}</h3>
+        <p class="t-h4 lcard__sub" style="width:${c.subWidth}px">${c.subtitle}</p>
+        <div class="lcard__rule"></div>
+        <p class="t-body lcard__body" style="width:${c.bodyWidth}px">${c.body}</p>
+        <a class="t-mono lcard__more" href="${BASE}/product/#${c.slug}"><u>View more details &gt;</u></a>
+        ${c.tiles.map((t) => `
+        <a class="ltile" href="${BASE}/product/#${slug(t.title)}" style="left:${t.rect[0]}px;top:${t.rect[1]}px;width:${t.rect[2]}px;height:${t.rect[3]}px">
+          <span class="t-mono ltile__n">${t.n}</span>
+          <img class="ltile__icon" src="${BASE}/assets/svg/icons/${t.n}-white.svg" alt="" />
+          <span class="t-body ltile__title">${t.title}</span>
+        </a>`).join('')}
       </div>
       <div class="fcard__closed"><h3 class="t-h3 fcard__vtitle">${c.title}</h3></div>
       </div>
