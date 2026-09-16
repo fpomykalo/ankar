@@ -5,7 +5,9 @@
 /* --- page hero (Figma "Hero" 1440 × 490) ---------------------------------- */
 .phero { position: relative; height: 490px; color: #fff; }
 .phero__bg { position: absolute; inset: 0; border-radius: 0 0 30px 30px; overflow: hidden; background: #0d1d4a; }
-.phero__bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); } /* gradient-3 mirrored: dark blue on the left, red top right, as the Figma heroes */
+.phero__bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.grad--mirror { transform: scaleX(-1); } /* product: gradient-3 mirrored, dark blue left and red top right as in Figma */
+.grad--flip { transform: scaleY(-1); } /* resources: gradient-2 upside down, red along the bottom */
 .phero__copy { height: 100%; }
 .phero__title { position: absolute; left: -3px; top: 236px; white-space: nowrap; }
 .phero__title--centered { left: 50%; top: 207px; transform: translateX(-50%); }
