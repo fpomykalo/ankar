@@ -11,12 +11,15 @@ export function initPossible() {
   if (!acc) return;
   const slots = document.querySelectorAll('#illus .illus__item');
   const htmls = [wf2, wf1, wf3]; // item 1 evaluates (landscape drawing), item 2 finds evidence (A-to-B path), item 3 compounds knowledge
-  const draw = (i) => { if (slots[i]) slots[i].innerHTML = htmls[i]; }; // re-inserting restarts the illustration's draw-in
-  htmls.forEach((_, i) => draw(i));
+  const mobile = isMobile();
+  // re-inserting restarts the illustration's draw-in; the lines themselves are drawn from script (WebKit renders
+  // an animated dash offset inside a mask wrongly, on the phone and in Safari)
+  const stops = [];
+  const draw = (i) => { if (!slots[i]) return; stops[i]?.(); slots[i].innerHTML = htmls[i]; stops[i] = driveDashAnimations(slots[i]); };
+  if (!mobile) htmls.forEach((_, i) => draw(i));
 
   const items = Array.from(acc.querySelectorAll('.acc__item'));
   const illusPanel = document.getElementById('possible-panel');
-  const mobile = isMobile();
   // On the phone each item carries its own copy of the gradient panel under its copy, so nothing is ever moved in the
   // DOM (moving an element restarts every CSS animation inside it). The item's illustration draws once its panel is open.
   const mSlots = mobile ? items.map((item) => {
@@ -40,7 +43,7 @@ export function initPossible() {
       clearTimeout(drawTimer);
       stopDash();
       mSlots.forEach((s, idx) => { if (idx !== i) s.innerHTML = ''; });
-      const drawInto = () => { mSlots[i].innerHTML = htmls[i]; stopDash = driveDashAnimations(mSlots[i]); }; // the lines are drawn from script: WebKit restarts CSS animations inside masks
+      const drawInto = () => { mSlots[i].innerHTML = htmls[i]; stopDash = driveDashAnimations(mSlots[i]); };
       if (immediate) drawInto(); else drawTimer = setTimeout(drawInto, 650); // once the panel has opened
       return;
     }

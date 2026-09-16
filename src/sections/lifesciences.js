@@ -51,6 +51,7 @@ export function initLifeSciences() {
 
   function openTakeover() {
     if (open) return;
+    if (hold) { releaseSpace(); gsap.set(section, { paddingBottom: 0 }); }
     open = true;
     takeover.setAttribute('aria-hidden', 'false');
     cards().forEach((c, i) => c.classList.toggle('is-open', i === 0));
@@ -114,21 +115,54 @@ export function initLifeSciences() {
     if (mobile) setTimeout(() => ScrollTrigger.refresh(), 800); else ScrollTrigger.refresh(); // the page is shorter now: the triggers below move up with it
   }
 
-  // Out of view: reset everything in one frame. Below the viewport only the space under the fold gives way.
-  // Above it, the section gives back `extra` pixels above what is on screen, so the scroll moves up by the
-  // same amount in the same frame; that shift only lands cleanly on a resting scroll (trackpad and touch
-  // momentum ignore a scrollTo mid-flight, which showed as a jump), so the watch below waits for it to stop.
+  // Out of view, the take-over folds away in one frame. Below the viewport only the space under the fold gives way.
+  // Above it the section would give back `extra` pixels above what is on screen, which needs the scroll shifted by
+  // the same amount in the same frame. On the desktop Lenis carries that shift (its running animation moves with
+  // it). On the phone a scrollTo kills the native momentum scroll dead, so there the section keeps its extra space
+  // for the moment and hands it back once the scroll rests, or once the space is below the screen, where nothing
+  // moves; only a thumb heading back up towards it gets the shift while still moving.
   function foldAway(above) {
     tl.pause(0);
     tl.kill();
     tl = null;
+    if (mobile) {
+      gsap.set(section, { paddingBottom: extra }); // the timeline's rewind took it away: keep the space until it can go
+      finishClose();
+      holdSpace();
+      return;
+    }
     if (above) shiftScroll(-extra);
     finishClose();
   }
-  // While open, a 120ms watch folds it once it is fully out of view. Below the viewport that is immediate: only the
-  // space under the fold gives way. Above it the section shrinks by `extra` above the screen, so the scroll is shifted
-  // by the same amount in the same frame; that lands cleanly once the scroll rests (two ticks within 2px), and a
-  // thumb that never rests gets it after 1.5s out of view anyway (a momentum flick may pause for a frame then).
+  let hold = 0;
+  function releaseSpace() { clearInterval(hold); hold = 0; }
+  function holdSpace() {
+    releaseSpace();
+    let ly = -1;
+    let st = 0;
+    hold = setInterval(() => {
+      const b = section.getBoundingClientRect().bottom; // the space is the section's bottom padding
+      const y = Math.round(window.scrollY);
+      const prev = ly;
+      st = y === ly ? st + 1 : 0;
+      ly = y;
+      const give = (why, shift) => {
+        releaseSpace();
+        gsap.set(section, { paddingBottom: 0 });
+        if (shift) shiftScroll(-extra);
+        debugLog(`space back (${why}) at y ${y}`);
+        debugShow(`space back (${why})`);
+        setTimeout(() => ScrollTrigger.refresh(), 800);
+      };
+      debugShow(`holding space ${extra} bottom:${Math.round(b)} vh:${vh()} y:${y} still:${st}`);
+      if (b - extra >= vh()) give('below', false); // the space is under the screen: nothing on screen moves
+      else if (b <= 0 && st >= 2) give('rest', true); // above the screen, scroll at rest: the shift lands unseen
+      else if (prev >= 0 && y < prev && b > -200) give('near', true); // heading back up towards it: shift now rather than show blank space
+    }, 120);
+  }
+  // While open, a 120ms watch folds the take-over once it is fully out of view. The phone folds at once (the space
+  // stays for now, see foldAway). The desktop shifts the scroll, so above the screen it waits for the scroll to rest
+  // (two ticks within 2px) or for 1.5s out of view, when a trackpad flick will have paused for a frame anyway.
   let watch = 0;
   let lastY = -1;
   let still = 0;
@@ -149,7 +183,7 @@ export function initLifeSciences() {
       const outFor = outSince ? Math.round(performance.now() - outSince) : 0;
       debugShow(`open:${open} tl:${tl.progress().toFixed(2)} top:${Math.round(r.top)} bottom:${Math.round(r.bottom)} vh:${vh()} y:${y} still:${still} out:${out} outFor:${outFor}`);
       if (!out) return;
-      if (!above || still >= 2 || outFor >= 1500) { debugLog(`fold ${above ? 'above' : 'below'} at y ${y} (${still >= 2 ? 'rest' : !above ? 'below' : 'timeout'})`); foldAway(above); }
+      if (mobile || !above || still >= 2 || outFor >= 1500) { debugLog(`fold ${above ? 'above' : 'below'} at y ${y} (${mobile ? 'phone' : still >= 2 ? 'rest' : !above ? 'below' : 'timeout'})`); foldAway(above); }
     }, 120);
   }
 

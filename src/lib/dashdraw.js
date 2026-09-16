@@ -1,12 +1,13 @@
 /**
- * Drives the stroke-dashoffset keyframes of an illustration from JavaScript.
+ * Draws an illustration's lines from JavaScript instead of CSS keyframes.
  *
- * The illustrations draw their lines through SVG masks whose paths animate with CSS keyframes.
- * WebKit (Safari on the iPhone) regenerates a mask image whenever the masked content repaints and
- * restarts the CSS animations inside it, so the lines were drawn, wiped and drawn again. Setting the
- * offsets from a requestAnimationFrame loop gives the mask a fresh, correct value on every frame,
- * and measuring the real path length removes the dependence on `pathLength` support.
- * Only the dash keyframes are driven; opacity and transform animations stay in CSS.
+ * The illustrations reveal their dashed lines through SVG masks: a solid stroke inside a <mask> draws in
+ * with animated stroke-dashoffset keyframes. WebKit (Safari, and every browser on the iPhone) renders an
+ * animated dash offset inside a mask wrongly: the line drew in, wiped and drew in again. So the masks are
+ * dropped altogether: the dashed line's own dash array is rebuilt every frame so that only the revealed
+ * part of it carries dashes, which needs no mask and no dash offset animation at all. The unmasked lines
+ * (arrows, the check mark) keep their offset animation, driven from the same loop off the real path length.
+ * Opacity and transform animations stay in CSS.
  */
 const bezier = (x1, y1, x2, y2) => {
   const a = (a1, a2) => 1 - 3 * a2 + 3 * a1;
@@ -53,35 +54,87 @@ function parseKeyframes(css) {
   return out;
 }
 
-/** Takes over every dash animation inside `root` (an inserted illustration). Returns a stop function. */
+/** The keyframe value at time fraction t, eased between stops. */
+const at = (stops, t) => {
+  if (t <= stops[0].p) return stops[0].v;
+  for (let i = 0; i < stops.length - 1; i += 1) {
+    const a = stops[i];
+    const b = stops[i + 1];
+    if (t <= b.p) { const span = b.p - a.p; const k = span > 0 ? a.ease((t - a.p) / span) : 1; return a.v + (b.v - a.v) * k; }
+  }
+  return stops[stops.length - 1].v;
+};
+
+const durationOf = (el) => parseFloat(el.style.animationDuration) * (el.style.animationDuration.endsWith('ms') ? 1 : 1000) || 4000;
+const lengthOf = (el) => { try { return (typeof el.getTotalLength === 'function' && el.getTotalLength()) || 0; } catch { return 0; } };
+
+/**
+ * A dashed stroke (pattern like "2 4", anchored at the path start) showing only between A and B along the path:
+ * the dash array lists just the dashes inside that window, and a huge gap hides the rest.
+ * The window is what a dash array of [1, 1] on pathLength=1 with offset `o` would show: from -o to the end
+ * for a negative offset (drawing from the far end), from the start to 1 - o for a positive one.
+ */
+function windowDashes(el, pattern, L, A, B) {
+  const T = pattern.reduce((s, v) => s + v, 0);
+  const ivs = [];
+  for (let x = Math.floor(A / T) * T; x < B; ) {
+    for (let k = 0; k < pattern.length; k += 2) {
+      const s = Math.max(x, A);
+      const e = Math.min(x + pattern[k], B);
+      if (e - s > 0.05) ivs.push([s, e]);
+      x += pattern[k] + pattern[k + 1];
+    }
+  }
+  if (!ivs.length) { el.style.visibility = 'hidden'; return; }
+  const arr = [];
+  ivs.forEach(([s, e], i) => { arr.push(e - s); if (i < ivs.length - 1) arr.push(ivs[i + 1][0] - e); });
+  arr.push(L * 4 + 1000);
+  el.setAttribute('stroke-dasharray', arr.map((v) => v.toFixed(2)).join(' '));
+  el.style.strokeDashoffset = `${-ivs[0][0]}`;
+  el.style.visibility = '';
+}
+
+/** Takes over every dash animation inside `root` (a freshly inserted illustration). Returns a stop function. */
 export function driveDashAnimations(root) {
   const css = Array.from(root.querySelectorAll('style')).map((s) => s.textContent).join('\n');
   const frames = parseKeyframes(css);
   const runs = [];
+  // masked lines: the mask goes, the dashed line reveals itself
+  root.querySelectorAll('mask').forEach((mask) => {
+    const src = mask.querySelector('[style*="animation"]');
+    const stops = src && frames[src.style.animationName];
+    const target = root.querySelector(`[mask="url(#${mask.id})"]`);
+    if (!stops || !target) return;
+    let pattern = (target.getAttribute('stroke-dasharray') || '').split(/[\s,]+/).map(Number).filter((v) => !Number.isNaN(v));
+    if (!pattern.length) return; // a solid line under a mask would need the mask
+    if (pattern.length % 2) pattern = pattern.concat(pattern);
+    const L = lengthOf(target);
+    if (!L) return;
+    target.removeAttribute('mask');
+    mask.remove();
+    runs.push({ el: target, stops, duration: durationOf(src), pattern, L, reveal: true });
+  });
+  // plain lines drawn by their own offset (arrows, the check mark): the real length replaces pathLength=1
   root.querySelectorAll('[style*="animation"]').forEach((el) => {
-    const name = el.style.animationName;
-    const stops = frames[name];
+    const stops = frames[el.style.animationName];
     if (!stops) return;
-    const duration = parseFloat(el.style.animationDuration) * (el.style.animationDuration.endsWith('ms') ? 1 : 1000) || 4000;
+    const duration = durationOf(el);
     el.style.animation = 'none';
-    // real length instead of pathLength=1: the keyframe values are fractions of the path
     let scale = 1;
-    if (el.hasAttribute('pathLength') && typeof el.getTotalLength === 'function') {
-      try { scale = el.getTotalLength() || 1; } catch { scale = 1; }
+    if (el.hasAttribute('pathLength')) {
+      scale = lengthOf(el) || 1;
       el.removeAttribute('pathLength');
       el.setAttribute('stroke-dasharray', String(scale));
     }
     runs.push({ el, stops, duration, scale });
   });
   if (!runs.length) return () => {};
-  const at = (stops, t) => {
-    if (t <= stops[0].p) return stops[0].v;
-    for (let i = 0; i < stops.length - 1; i += 1) {
-      const a = stops[i];
-      const b = stops[i + 1];
-      if (t <= b.p) { const span = b.p - a.p; const k = span > 0 ? a.ease((t - a.p) / span) : 1; return a.v + (b.v - a.v) * k; }
-    }
-    return stops[stops.length - 1].v;
+  const apply = (r, t) => {
+    const o = at(r.stops, t);
+    if (!r.reveal) { r.el.style.strokeDashoffset = `${o * r.scale}`; return; }
+    const a = o <= 0 ? -o : 0;
+    const b = o <= 0 ? 1 : 1 - o;
+    windowDashes(r.el, r.pattern, r.L, a * r.L, b >= 1 ? r.L + 1 : b * r.L);
   };
   const start = performance.now();
   let raf = 0;
@@ -90,12 +143,12 @@ export function driveDashAnimations(root) {
     let live = false;
     runs.forEach((r) => {
       const t = Math.min(1, (now - start) / r.duration);
-      r.el.style.strokeDashoffset = `${at(r.stops, t) * r.scale}`;
+      apply(r, t);
       if (t < 1) live = true;
     });
     if (live && !done) raf = requestAnimationFrame(tick);
   };
-  runs.forEach((r) => { r.el.style.strokeDashoffset = `${at(r.stops, 0) * r.scale}`; });
+  runs.forEach((r) => apply(r, 0));
   raf = requestAnimationFrame(tick);
   return () => { done = true; cancelAnimationFrame(raf); };
 }
