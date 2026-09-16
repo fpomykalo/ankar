@@ -243,7 +243,7 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 /* Figma: the legal line 10 under the logo, the copyright line 10 under it (cap to cap 17), 20 to the bottom; both at 30% */
 .footer__legal { position: relative; top: 0; width: auto; margin-top: 10px; display: flex; flex-direction: column; gap: 10px; text-box-trim: none; }
 .footer__legal span { position: static; opacity: 1; white-space: pre; }
-.footer__legal > span { display: block; opacity: .3; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.footer__legal > span:not(.footer__legal-right) { display: block; opacity: .3; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .footer__legal-desktop, .footer__legal-right { display: none; }
 .footer__legal-mobile { display: inline; opacity: 1; }
 
