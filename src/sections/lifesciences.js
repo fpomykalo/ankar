@@ -7,8 +7,8 @@ import { isMobile } from '../lib/mobile.js';
  * everything below it down) while the page eases so the carousel area fills
  * the viewport, and the photo grows out of its card as the blue folder comes
  * in from the right. A click anywhere (except the story button) plays it
- * backwards and hands the space back. Scroll it fully out of view and it folds
- * itself away, so the carousel is back when you return.
+ * backwards and hands the space back. Scroll it fully below the viewport and it
+ * folds itself away, so the carousel is back when you return.
  */
 export function initLifeSciences() {
   const section = document.getElementById('industries');
@@ -34,10 +34,12 @@ export function initLifeSciences() {
   const PHOTO_W = 786 / 1440; // Figma: the photo covers the left 786px of a 1440 viewport
   const CARDS_H = 480;
   const M_H = 900;
-  const M_PHOTO_H = 345;
+  const M_PHOTO_H = 405; // Figma 345 plus 60 under the blue panel, so the two curves meet
   const M_PANEL_H = 623;
   const NAV_LOCK = mobile ? 96 : 120; // the carousel comes back 40px under the nav
-  if (mobile) panel.classList.add('folder--top');
+  const label = panel.querySelector('.ls__label');
+  if (mobile) { panel.classList.add('folder--top'); takeover.appendChild(label); } // the label sits 30px from the edge, outside the folder mask
+  const panelParts = () => (mobile ? [panel, label] : [panel]);
   const DUR = 0.7;
 
   let open = false;
@@ -64,7 +66,7 @@ export function initLifeSciences() {
     const o = takeover.getBoundingClientRect();
     gsap.set(photo, { left: r.left - o.left, top: r.top - o.top, width: mobile ? r.width : 557, height: r.height, '--tab-top': mobile ? '238px' : '58px', visibility: 'hidden' });
     gsap.set(brand, { opacity: 0 });
-    if (mobile) gsap.set(panel, { x: 0, y: M_PANEL_H + 40 }); else gsap.set(panel, { x: vw() * 0.51 + 40 });
+    if (mobile) gsap.set(panelParts(), { x: 0, y: M_PANEL_H + 40 }); else gsap.set(panel, { x: vw() * 0.51 + 40 });
     gsap.set(copy, { y: 40, opacity: 0 });
 
     // the page eases so the take-over fills the viewport while the section makes room below
@@ -80,18 +82,8 @@ export function initLifeSciences() {
       .set(card(), { visibility: 'hidden' }, 0.3)
       .to(photo, mobile ? { left: 0, top: 0, width: () => vw(), height: M_PHOTO_H, duration: DUR, ease: 'power2.inOut' } : { left: -55, top: 0, width: () => vw() * PHOTO_W + 55, height: () => vh(), duration: DUR, ease: 'power2.inOut' }, 0.3)
       .to(brand, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 0.72)
-      .to(panel, { x: 0, y: 0, duration: 0.65, ease: 'power3.inOut' }, 0.55)
+      .to(panelParts(), { x: 0, y: 0, duration: 0.65, ease: 'power3.inOut' }, 0.55)
       .to(copy, { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, ease: 'power3.out' }, 1.1);
-  }
-
-  // Move the scroll position by `by` without touching the smooth scroll in progress: Lenis's
-  // current value, target and running animation all shift together, so momentum is kept.
-  function shiftScroll(by) {
-    const a = lenis.animate;
-    lenis.animatedScroll += by;
-    lenis.targetScroll += by;
-    if (a?.isRunning) { a.value += by; a.from += by; a.to += by; }
-    window.scrollTo(0, lenis.animatedScroll);
   }
 
   function finishClose() {
@@ -103,23 +95,22 @@ export function initLifeSciences() {
     ScrollTrigger.refresh(); // the page is shorter now: the triggers below move up with it (about 1ms)
   }
 
-  // Out of view: reset everything in one frame. When it sits above the viewport the section
-  // gives back `extra` pixels above what is on screen, so the scroll moves up by the same
-  // amount in the same frame and nothing visible shifts.
+  // Fully below the viewport: reset everything in one frame. Only the space under the fold gives way,
+  // so nothing on screen moves. (Folding while it sits above the viewport would need the scroll position
+  // shifted in the same frame, which trackpads and touch momentum ignore: that was the jump.)
   function foldAway() {
-    const above = takeover.getBoundingClientRect().bottom <= 0;
     tl.pause(0);
     tl.kill();
     tl = null;
-    if (above) shiftScroll(-extra); // same frame as the section shrinking
     finishClose();
   }
 
   function closeTakeover() {
     if (!open || !tl || tl.reversed()) return;
     const r = takeover.getBoundingClientRect();
-    if (r.bottom <= 0 || r.top >= vh()) { foldAway(); return; }
-    // in view: bring the carousel back to its 120px lock while the space closes
+    if (r.top >= vh()) { foldAway(); return; }
+    if (r.bottom <= 0) return; // scrolled past it: it stays until it is back on screen or fully below
+    // in view: bring the carousel back to its lock under the nav while the space closes
     lenis.scrollTo(sectionTop() + cardsTop() - NAV_LOCK, { duration: DUR + 0.3, lock: true, force: true });
     tl.reverse();
   }
@@ -138,11 +129,10 @@ export function initLifeSciences() {
     if (e.target.closest('.ls__cta') || e.target.closest('#nav')) return; // the story button, or the menu card that just opened it
     closeTakeover();
   });
-  // fully out of view while open: fold it away so the carousel is back when the viewer returns
+  // scrolled fully below the viewport while open: fold it away so the carousel is back when the viewer returns
   lenis.on('scroll', () => {
     if (!open || !tl || tl.reversed() || tl.progress() < 1) return;
-    const r = takeover.getBoundingClientRect();
-    if (r.bottom <= 0 || r.top >= vh()) foldAway();
+    if (takeover.getBoundingClientRect().top >= vh()) foldAway();
   });
 
   // #antheros (the case study card in the menu): the story opens and fills the viewport

@@ -4,7 +4,7 @@
 
 /* --- page hero (Figma "Hero" 1440 × 490) ---------------------------------- */
 .phero { position: relative; height: 490px; color: #fff; }
-.phero__bg { position: absolute; inset: 0; border-radius: 0 0 30px 30px; overflow: hidden; background: #0d1d4a; }
+.phero__bg { position: absolute; inset: 0; overflow: hidden; background: #0d1d4a; }
 .phero__bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .grad--mirror { transform: scaleX(-1); } /* product: gradient-3 mirrored, dark blue left and red top right as in Figma */
 .grad--flip { transform: scaleY(-1); } /* resources: gradient-2 upside down, red along the bottom */
@@ -16,7 +16,7 @@
 .phero__body { position: absolute; left: 795px; top: 236px; width: 475px; line-height: 24px; }
 .phero__body--low { top: 276px; }
 .phero__cta { position: absolute; left: 795px; z-index: 2; }
-.phero .hero__tab { bottom: 0; }
+.phero .hero__tab { bottom: 30px; }
 
 /* --- product workflows: the tab row sticks 20px under the nav (Figma "Group 305"), the
    group head and its items scroll; a tab swaps the group in place --------------------- */

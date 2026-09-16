@@ -15,6 +15,7 @@ import { initLifeSciences } from './sections/lifesciences.js';
 import { initPartnerships } from './sections/partnerships.js';
 import { initClosing } from './sections/closing.js';
 import { primeImages } from './lib/decode.js';
+import { stripBreaks, initMobileStrips } from './lib/mobile.js';
 
 function boot() {
   // render data-driven sections first so measurements are right
@@ -24,6 +25,8 @@ function boot() {
   initPartnerships();
   initBios();
   initQuotes();
+  stripBreaks();
+  initMobileStrips();
 
   // scroll scenes in document order (pins must be created top to bottom)
   initHero();

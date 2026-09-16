@@ -33,6 +33,7 @@ export function initPossible() {
   setPhase(0, true);
   // hovering an item opens it; the illustration plays once, and a click on the open item replays it
   items.forEach((item, i) => {
+    if (mobile) { item.addEventListener('click', () => { if (!item.classList.contains('is-open')) setPhase(i); }); return; }
     item.addEventListener('mouseenter', () => setPhase(i));
     item.addEventListener('click', () => { if (item.classList.contains('is-open')) draw(i); else setPhase(i); });
   });

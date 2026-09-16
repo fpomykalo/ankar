@@ -12,12 +12,43 @@
   <a class="btn btn--black nav__cta" href="#"><span>Book a Demo</span></a>
   <button class="nav__burger" id="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-mobile"><span></span><span></span><span></span></button>
   <nav class="nav__mobile t-mono" id="nav-mobile" aria-label="Primary">
-    <a href="{{base}}"><span>Home</span></a>
-    <a href="{{base}}product/"><span>Product</span></a>
-    <a href="{{base}}careers/"><span>Careers</span></a>
-    <a href="{{base}}security/"><span>Security</span></a>
-    <a href="{{base}}resources/"><span>Resources</span></a>
-    <a class="btn btn--black" href="#"><span>Book a Demo</span></a>
+    <div class="nav__mgroup"><span class="dot"></span><div class="nav__tree"><a href="{{base}}">Home</a>    &gt; <a href="{{base}}#possible">Our Value</a>
+
+        &gt; <a href="{{base}}#industries">Our Impact</a>
+
+        &gt; <a href="{{base}}#partnerships">Our Methodology</a>
+
+        &gt; <a href="{{base}}#people">Our Expertise</a>
+
+        &gt; <a href="{{base}}#security">Our Protections</a>
+
+        &gt; <a href="{{base}}#customers" data-offset="80" data-offset-mobile="0">Our Customers</a></div></div>
+    <div class="nav__mgroup"><span class="dot"></span><div class="nav__tree"><a href="{{base}}product/">Product</a> &gt; <a href="{{base}}product/#explore">Explore</a>
+
+        &gt; <a href="{{base}}product/#invent">Invent &amp; Experiment</a>
+
+        &gt; <a href="{{base}}product/#protect">Protect</a></div></div>
+    <div class="nav__mgroup"><span class="dot"></span><a class="nav__mlink" href="{{base}}careers/">Careers</a></div>
+    <div class="nav__mgroup"><span class="dot"></span><a class="nav__mlink" href="{{base}}security/">Security</a></div>
+    <div class="nav__mgroup"><span class="dot"></span><a class="nav__mlink" href="{{base}}resources/">Resources</a></div>
+    <div class="nav__mgroup"><span class="dot"></span><a class="nav__mlink" href="{{base}}resources/">Case studies</a><a class="nav__viewall" href="{{base}}resources/"><u>View all &gt;</u></a></div>
+    <div class="nav__mcases">
+      <a class="nav__case" href="{{base}}#antheros">
+        <img class="nav__case-img" src="/assets/images/industries/life-sciences.jpg" alt="" />
+        <div class="nav__case-shade"></div>
+        <img class="nav__case-logo" src="/assets/svg/logos/antheros-white.svg" width="88" height="18" alt="Antheros" />
+        <div class="nav__case-line"></div>
+        <p class="nav__case-title">Built for the scientific complexity of life sciences R&amp;D.</p>
+      </a>
+      <a class="nav__case" href="{{base}}resources/video/">
+        <img class="nav__case-img" src="/assets/images/industries/consumer.jpg" alt="" />
+        <div class="nav__case-shade nav__case-shade--60"></div>
+        <img class="nav__case-logo" src="/assets/svg/logos/loreal-white.svg" width="100" height="18" alt="L’Oréal" />
+        <div class="nav__case-line"></div>
+        <p class="nav__case-title">L’Oréal and Ankar: Seeing and safeguarding innovation</p>
+      </a>
+    </div>
+    <a class="btn btn--black nav__mcta" href="#"><span>Book a Demo</span></a>
   </nav>
 
   <div class="nav__panel" id="nav-panel" aria-hidden="true">

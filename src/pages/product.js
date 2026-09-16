@@ -1,7 +1,7 @@
 import { bootPage } from '../site.js';
 import { lenis, gsap, ScrollTrigger } from '../lib/scroll.js';
 import { initReveal } from '../lib/reveal.js';
-import { isMobile } from '../lib/mobile.js';
+import { isMobile, stripBreaks } from '../lib/mobile.js';
 import { productGroups } from '../data/product.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -44,6 +44,7 @@ function initProduct() {
     titleEl.innerHTML = g.title;
     group.classList.toggle('pgroup--two', g.title.includes('<br>')); // a two-line title keeps the first workflow 120 under it
     itemsEl.innerHTML = g.items.map((it) => item(it, reveal)).join('');
+    stripBreaks(group);
     if (reveal) initReveal(itemsEl);
     ScrollTrigger.refresh();
   }

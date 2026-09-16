@@ -6,7 +6,7 @@ This folder is everything a developer needs to rebuild the Ankar marketing site 
 - Design source: Figma file `ANKAR — Web`, key `amR3f07jEVMx1Q4m1XRCQc`, page 4.2 for the current layouts, page 3.3 for the earlier homepage
 - Repository: github.com/fpomykalo/ankar, branch `v02`
 
-Everything is drawn on a 1440px artboard with a 1280px container. Under 768px the site switches to the phone layout (Figma "Mobile" frame, 393 wide, 16px gutters, 361px content): `src/styles/mobile.css` overrides the desktop layout, and the scripts branch on `isMobile()` from `src/lib/mobile.js`. The homepage down to the partnership rows is measured from that frame; the sections after it and the inner pages follow the same rhythm and are waiting for their own designs.
+Everything is drawn on a 1440px artboard with a 1280px container. Under 768px the site switches to the phone layout (Figma "Mobile" frame, 393 wide, 16px gutters, 361px content): `src/styles/mobile.css` overrides the desktop layout, and the scripts branch on `isMobile()` from `src/lib/mobile.js`. The homepage down to the partnership rows and the full-screen menu are measured from the Figma Mobile frames; the sections after it and the inner pages follow the same rhythm and are waiting for their own designs. Every hero ends in a grey fold: the section below is the folder, its 30px top corners rounding over the image, the tab rising from its edge.
 
 ## What is in the zip
 

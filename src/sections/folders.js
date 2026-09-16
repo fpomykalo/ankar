@@ -23,7 +23,7 @@ function bindAccordion(container, onOpen) {
     cards.forEach((c) => c.classList.toggle('is-open', c === card));
     onOpen?.(cards.indexOf(card));
   };
-  cards.forEach((c) => c.addEventListener('mouseenter', () => open(c)));
+  if (!isMobile()) cards.forEach((c) => c.addEventListener('mouseenter', () => open(c)));
   return open;
 }
 

@@ -16,6 +16,8 @@ function initSecurity() {
       <div class="sacc__panel"><p class="t-body sacc__body">${it.body}</p></div>
     </div>`).join('');
   const items = Array.from(acc.children);
+  const spanel = document.getElementById('spanel');
+  const mobile = isMobile(); // the detail panel lives inside the open item, under its copy
   const renderRows = (it) => rows.innerHTML = it.rows.map(([n, text]) => `
     <div class="srow"><div class="rule"></div><span class="t-mono srow__n">${n}</span><p class="t-body srow__text">${text}</p></div>`).join('');
 
@@ -23,15 +25,18 @@ function initSecurity() {
     items.forEach((item, idx) => {
       const on = idx === i;
       item.classList.toggle('is-open', on);
-      const h = on ? item.querySelector('.sacc__body').offsetHeight : 0;
-      gsap.to(item.querySelector('.sacc__panel'), { height: h, duration: immediate ? 0 : 0.6, ease: 'power3.inOut', overwrite: true });
+      const p = item.querySelector('.sacc__panel');
+      if (mobile && on) { renderRows(securityItems[i]); p.appendChild(spanel); }
+      const h = on ? p.scrollHeight : 0;
+      gsap.to(p, { height: h, duration: immediate ? 0 : 0.6, ease: 'power3.inOut', overwrite: true });
     });
+    if (mobile) return;
     if (immediate) { renderRows(securityItems[i]); return; }
     gsap.to(rows, { opacity: 0, duration: 0.2, onComplete: () => { renderRows(securityItems[i]); gsap.to(rows, { opacity: 1, duration: 0.3 }); } });
   }
   // the gradient panel is as tall as the accordion gets (its tallest item open), and the
   // section keeps that height whichever item is open
-  if (isMobile()) { open(0, true); items.forEach((item, i) => item.addEventListener('click', () => open(i))); return; }
+  if (mobile) { open(0, true); items.forEach((item, i) => item.addEventListener('click', () => { if (!item.classList.contains('is-open')) open(i); })); return; }
   const closed = items.reduce((sum, item) => sum + item.offsetHeight, 0); // every panel starts at height 0
   const tallest = Math.max(...items.map((item) => item.querySelector('.sacc__body').offsetHeight));
   const last = items[items.length - 1];

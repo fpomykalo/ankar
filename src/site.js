@@ -10,11 +10,14 @@ import { initReveal } from './lib/reveal.js';
 import { initNav } from './sections/nav.js';
 import { initClosing } from './sections/closing.js';
 import { primeImages } from './lib/decode.js';
+import { stripBreaks, initMobileStrips } from './lib/mobile.js';
 
 /** Boots the chrome every inner page shares, then the page's own init. */
 export function bootPage(init) {
   document.fonts.ready.then(() => {
     init?.();
+    stripBreaks();
+    initMobileStrips();
     initClosing();
     initReveal();
     initNav();

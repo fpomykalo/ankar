@@ -23,29 +23,42 @@ body { min-width: 0; font-size: 16px; line-height: 22px; }
 .nowrap { white-space: normal; }
 .stage-fade { position: static; }
 
-/* --- navigation: 361 × 40 bar, logo 82 × 13, burger at the right ------------- */
-.nav { left: 16px; right: 16px; top: 16px; width: auto; height: 40px; border-radius: 20px; transform: none; }
+/* --- navigation: 361 × 40 bar, logo 82 × 13, burger 16 × 12 at 325/14 (Figma "Nav") ----------
+   Open, the bar grows to the whole screen (Figma 7097:8300): 80% white, logo at 36/29, burger at 341/30,
+   the groups from 72 (line, dot at 10, 12px mono tree at 28), case cards 250 × 175 at 584, the button 50 under them --- */
+.nav { left: 16px; right: auto; top: 16px; width: calc(100% - 32px); height: 40px; border-radius: 20px; transform: none; }
 .nav[data-reveal] { transform: translate3d(0, 20px, 0); }
-.nav__logo { left: 20px; top: 13px; }
+.nav__logo { left: 20px; top: 13px; transition: left .5s var(--ease-inout), top .5s var(--ease-inout); }
 .nav__logo-svg { width: 82px; height: 13px; }
 .nav__menu, .nav__cta, .nav__panel { display: none; }
-.nav__burger { display: block; position: absolute; right: 20px; top: 0; width: 48px; height: 40px; }
-.nav__burger span { position: absolute; left: 16px; width: 16px; height: 2px; background: currentColor; transition: transform .35s var(--ease-inout), opacity .25s; }
+.nav__burger { display: block; position: absolute; right: 4px; top: 0; z-index: 2; width: 48px; height: 40px; transition: right .5s var(--ease-inout), top .5s var(--ease-inout); }
+.nav__burger span { position: absolute; left: 16px; width: 16px; height: 2px; background: currentColor; }
 .nav__burger span:nth-child(1) { top: 14px; }
 .nav__burger span:nth-child(2) { top: 19px; }
 .nav__burger span:nth-child(3) { top: 24px; }
-.nav.is-open .nav__burger span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
-.nav.is-open .nav__burger span:nth-child(2) { opacity: 0; }
-.nav.is-open .nav__burger span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
-.nav__mobile { display: block; position: absolute; left: 0; top: 40px; width: 100%; padding: 0 20px 20px; opacity: 0; pointer-events: none; transition: opacity .3s; font-size: 12px; }
-.nav.is-open .nav__mobile { opacity: 1; pointer-events: auto; transition-delay: .1s; }
-.nav__mobile > a:not(.btn) { display: block; padding: 13px 0; border-top: 1px solid rgba(0, 0, 0, .15); }
-.nav__mobile > a:not(.btn) > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
-.nav__mobile > a.is-current { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-.nav__mobile > .btn { width: 100%; margin-top: 10px; }
+.nav.is-open .nav__logo { left: 36px; top: 29px; }
+.nav.is-open .nav__burger { right: 20px; top: 16px; } /* same screen position: 341/30 */
+.nav__mobile { display: block; position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding: 72px 36px 51px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; opacity: 0; pointer-events: none; transition: opacity .3s; font-size: 12px; line-height: 14px; }
+.nav__mobile::-webkit-scrollbar { display: none; }
+.nav.is-open .nav__mobile { opacity: 1; pointer-events: auto; transition-delay: .15s; }
+.nav__mgroup { position: relative; display: flex; align-items: flex-start; border-top: 1px solid #000; padding-top: 10px; margin-bottom: 30px; }
+.nav__mgroup .dot { flex: 0 0 auto; margin-right: 20px; }
+.nav__mobile .nav__tree { position: static; white-space: pre; line-height: 14px; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.nav__mlink { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.nav__mobile .nav__viewall { position: absolute; right: 0; top: 10px; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.nav__mobile a { transition: color .3s; }
+.nav__mobile a:hover { color: rgba(0, 0, 0, .6); }
+.nav__mcases { display: flex; gap: 16px; margin: 0 -36px; padding: 0 36px; overflow-x: auto; scrollbar-width: none; }
+.nav__mcases::-webkit-scrollbar { display: none; }
+.nav__mcases .nav__case { position: relative; left: auto; top: auto; flex: 0 0 250px; width: 250px; height: 175px; }
+.nav__mcases .nav__case-logo { top: 20px; }
+.nav__mcases .nav__case-line { top: 104px; width: 210px; }
+.nav__mcases .nav__case-title { top: 114px; width: 210px; }
+.nav__mcta { display: flex; width: 120px; margin: 50px auto 0; }
+html.nav-open, html.nav-open body { overflow: hidden; }
 
-/* --- hero (393 × 832 image; the tab notch sits over its last 25px) -------------- */
-.hero { height: 857px; }
+/* --- hero (393 × 862 image; the grey fold covers its last 30px, the tab rises from 832) -------------- */
+.hero { height: 862px; }
 .hero__video { inset: 0; height: 100%; }
 .hero__shade { inset: 0; }
 .hero__rule { top: 72px; width: auto; right: 0; }
@@ -53,10 +66,10 @@ body { min-width: 0; font-size: 16px; line-height: 22px; }
 .hero__title { top: 130px; white-space: normal; }
 .hero__body { left: 1px; top: 424px; width: 347px; line-height: 24px; }
 .hero__cta { left: 1px; top: 569px; }
-.hero__logos { left: 1px; top: 721px; width: 723px; height: 46px; border-radius: 23px; transform: none; }
+.hero__logos { left: 1px; top: 721px; width: 360px; height: 46px; border-radius: 23px; transform: none; } /* ends 16px from the edge */
 .hero__logos[data-reveal] { transform: translate3d(0, 40px, 0); }
-.hero__trusted { left: 0; top: -41px; }
-.marquee { left: 0; width: 723px; height: 46px; }
+.hero__trusted { left: 0; top: -41px; width: 180px; }
+.marquee { left: 0; width: 360px; height: 46px; }
 .marquee__track { height: 46px; }
 .marquee__item { margin-left: 20px; }
 .marquee__item img { zoom: .78; }
@@ -65,8 +78,8 @@ body { min-width: 0; font-size: 16px; line-height: 22px; }
 
 /* --- section heads in flow: eyebrow 10 under the line, title 30 under it, body 30 under that --- */
 .sec, .psec { padding-top: 70px; }
-.possible { padding-top: 35px; } /* the line lands 60px under the hero image */
-.sec > .container, .psec > .container { height: auto; min-height: 0; padding: 0; }
+.possible { padding-top: 30px; } /* the line at 892: 60px under the fold's edge */
+.sec > .container, .psec > .container { height: auto; min-height: 0; padding: 0; display: flow-root; } /* flow-root: the first child's margin must not collapse through, or the absolute divider slides down onto the eyebrow */
 .sec__eyebrow, .closing__eyebrow, .ssec__eb1, .asec__date { position: static; display: flex; align-items: center; height: 8px; margin-top: 10px; }
 .sec__title { position: static; width: auto; margin-top: 30px; white-space: normal; }
 .sec__body, .possible__bodywrap { position: static; width: auto; height: auto; display: block; margin-top: 30px; }
@@ -97,8 +110,6 @@ body { min-width: 0; font-size: 16px; line-height: 22px; }
 .fcard__shade, .fcard.is-open .fcard__shade, .folders--bios .fcard.is-open .fcard__shade, .folders--quotes .fcard.is-open .fcard__shade { background: rgba(0, 0, 0, .2); }
 .folders--bios .fcard.is-open.is-expanded .fcard__shade { background: rgba(0, 0, 0, .7); }
 .fcard__grad-bottom { opacity: 1; }
-.fcard__img { filter: none; }
-.tab-label .tab-label__dot { background: currentColor; }
 .fcard__line { top: 30px; right: 45px; }
 .fcard__title, .lcard__title { position: static; width: 271px; margin: 50px 0 0 45px; white-space: normal; }
 
@@ -124,11 +135,12 @@ body { min-width: 0; font-size: 16px; line-height: 22px; }
 
 /* the Antheros take-over: photo on top (393 × 345), the blue folder below with its tab on the top edge */
 .ls-takeover { height: 900px; }
-.ls__photo { width: 100%; height: 345px; border-radius: 30px; -webkit-mask-image: none; mask-image: none; }
+.ls__photo { width: 100%; height: 405px; border-radius: 30px; -webkit-mask-image: none; mask-image: none; } /* runs 60px under the blue panel, so both curves meet with no gap */
 .ls__brand { left: 50%; top: 123px; width: 210px; margin: 0 0 0 -105px; }
-.ls__panel { --tab-left: 150px; left: 0; top: 277px; width: 100%; height: 623px; }
-.ls__label { left: 176px; top: 11px; width: auto; height: auto; display: flex; flex-direction: row-reverse; align-items: flex-end; gap: 10px; }
+.ls__panel { --tab-left: 210px; left: 0; top: 277px; width: 100%; height: 623px; }
+.ls-takeover > .ls__label { left: 30px; top: 288px; width: auto; height: auto; z-index: 7; display: flex; flex-direction: row-reverse; align-items: flex-end; gap: 10px; color: #000; } /* moved out of the masked panel by the script, 30px from the screen edge */
 .ls__label .tab-label__text { position: static; writing-mode: horizontal-tb; transform: none; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.ls-takeover > .ls__label .tab-label__dot { background: currentColor; }
 .ls__label .tab-label__dot { position: static; }
 .ls__eyebrow { left: 16px; top: 65px; }
 .ls__title { left: 16px; top: 103px; width: 361px; }
@@ -224,7 +236,8 @@ body { min-width: 0; font-size: 16px; line-height: 22px; }
 .pbar { top: 66px; height: 40px; }
 .pbar > .container { height: 40px; }
 .pbar__tabs { position: static; display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
-.pbar__tabs .ptab { width: auto; flex: 0 0 auto; padding: 0 20px; }
+.pbar__tabs .ptab { width: auto; flex: 1 1 0; padding: 0 12px; }
+.pbar__tabs .ptab[data-slug="invent"] { flex: 0 0 auto; padding: 0 20px; }
 .pgroup { margin-top: 20px; }
 .pgroup__rule { width: auto; right: 0; }
 .pgroup__title { position: static; padding: 20px 0 0 58px; white-space: normal; }
@@ -285,10 +298,11 @@ body { min-width: 0; font-size: 16px; line-height: 22px; }
 .sacc__item { padding: 20px 0 40px; }
 .sacc__item > .rule { width: auto; right: 0; }
 .sacc__title { margin-left: 42px; white-space: normal; }
-.sacc__panel { width: auto; margin: 14px 0 0 42px; }
-.sacc__body { padding-bottom: 6px; }
+.sacc__panel { width: auto; margin: 14px 0 0; }
+.sacc__body { margin-left: 42px; padding-bottom: 6px; }
+.sacc__item:last-child:not(.is-open) { padding-bottom: 0; }
 .sacc__item.is-open { padding-bottom: 14px; }
-.spanel { position: relative; left: 0; top: 0; width: auto; height: auto !important; border-radius: 20px; margin-top: 20px; padding: 30px 20px 10px; }
+.sacc__panel .spanel { position: relative; left: 0; top: 0; width: 100%; height: auto !important; border-radius: 20px; margin-top: 16px; padding: 30px 20px 10px; }
 .spanel__rows { position: relative; left: 0; top: 0; width: auto; }
 .srow { padding: 20px 0 30px 42px; }
 .srow > .rule { width: auto; right: 0; }

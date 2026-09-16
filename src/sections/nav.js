@@ -15,30 +15,35 @@ export function initNav() {
   const home = document.getElementById('nav-home');
   nav.querySelector('.nav__logo').setAttribute('href', base);
   // the page we are on is underlined in the menu
-  nav.querySelectorAll('.nav__menu a[data-mega]:not(.nav__home), .nav__mobile a:not(.btn)').forEach((a) => {
+  nav.querySelectorAll('.nav__menu a[data-mega]:not(.nav__home), .nav__mobile .nav__mlink').forEach((a) => {
     const path = new URL(a.getAttribute('href'), location.href).pathname;
     if (path !== base && location.pathname.startsWith(path)) a.classList.add('is-current');
   });
 
-  // --- phone: the burger opens the list inside the bar ----------------------
+  // --- phone: the burger grows the bar into the full-screen menu (Figma 7097:8300) ----------
   if (isMobile()) {
     const burger = document.getElementById('nav-burger');
     const list = document.getElementById('nav-mobile');
     let tl;
     const setOpen = (open) => {
       nav.classList.toggle('is-open', open);
+      document.documentElement.classList.toggle('nav-open', open);
       burger.setAttribute('aria-expanded', String(open));
       tl?.kill();
-      tl = gsap.to(nav, { height: open ? 40 + list.offsetHeight : 40, duration: open ? 0.5 : 0.4, ease: open ? 'power3.out' : 'power3.inOut' });
+      const vw = document.documentElement.clientWidth;
+      tl = gsap.to(nav, open
+        ? { left: 0, top: 0, width: vw, height: window.innerHeight, borderRadius: 0, duration: 0.55, ease: 'power3.inOut' }
+        : { left: 16, top: 16, width: vw - 32, height: 40, borderRadius: 20, duration: 0.45, ease: 'power3.inOut' });
+      if (!open) list.scrollTop = 0;
     };
     burger.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
     list.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
-    document.addEventListener('click', (e) => { if (nav.classList.contains('is-open') && !e.target.closest('#nav')) setOpen(false); });
     list.querySelector('a').addEventListener('click', (e) => { // Home on the homepage scrolls to the top
       if (location.pathname !== base) return;
       e.preventDefault();
       lenis.scrollTo(0, { duration: 1.2, force: true, lock: true });
     });
+    window.addEventListener('resize', () => { if (nav.classList.contains('is-open')) gsap.set(nav, { width: document.documentElement.clientWidth, height: window.innerHeight }); });
     return;
   }
 

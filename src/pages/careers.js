@@ -1,6 +1,7 @@
 import { bootPage } from '../site.js';
 import { jobs, highlighted } from '../data/pages.js';
 import { wideCard } from '../lib/cards.js';
+import { isMobile } from '../lib/mobile.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const label = (t) => `<div class="tab-label"><span class="tab-label__text">${t}</span><span class="tab-label__dot"></span></div>`;
@@ -30,7 +31,7 @@ function initCareers() {
       </div>
     </article>`).join('');
   const cards = Array.from(folders.children);
-  cards.forEach((c) => c.addEventListener('mouseenter', () => cards.forEach((o) => o.classList.toggle('is-open', o === c))));
+  if (!isMobile()) cards.forEach((c) => c.addEventListener('mouseenter', () => cards.forEach((o) => o.classList.toggle('is-open', o === c))));
 
   document.getElementById('story-folders').innerHTML = wideCard({ ...highlighted, label: 'Story' });
 
