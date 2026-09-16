@@ -33,7 +33,22 @@ function initCareers() {
   const cards = Array.from(folders.children);
   if (!isMobile()) cards.forEach((c) => c.addEventListener('mouseenter', () => cards.forEach((o) => o.classList.toggle('is-open', o === c))));
 
-  document.getElementById('story-folders').innerHTML = wideCard({ ...highlighted, label: 'Story' });
+  // on the phone the story card reads like a customer card: the author's name, their role, the date where the logo would sit,
+  // and the story's title 30 from the bottom
+  const storyMobile = (c) => { const [name, role] = c.author.split('<br>'); return `
+    <a class="fcard folder is-open scard scard--wide scard--story" href="${c.href}">
+      <img class="fcard__img" src="${c.image}" alt="" />
+      ${layers}
+      <div class="fcard__ui">
+        ${label('Story')}
+        <div class="fcard__line"></div>
+        <h3 class="t-h3 fcard__title">${name}</h3>
+        <p class="t-mono fcard__meta fcard__meta--quote">${role}</p>
+        <p class="t-mono scard__meta">${c.meta}</p>
+        <p class="fcard__quote fcard__quote--plain">${c.title.replace(/<br>/g, ' ')}</p>
+      </div>
+    </a>`; };
+  document.getElementById('story-folders').innerHTML = isMobile() ? storyMobile(highlighted) : wideCard({ ...highlighted, label: 'Story' });
 
   let n = 0;
   document.getElementById('jobs').innerHTML = jobs.map((t) => `

@@ -99,7 +99,8 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .acc__body { margin-left: 42px; padding-bottom: 6px; }
 .acc__item.is-open { padding-bottom: 14px; }
 .acc__item:last-child:not(.is-open) { padding-bottom: 0; }
-.acc__panel .possible__panel { position: relative; left: 0; top: 0; width: 100%; height: 270px; border-radius: 20px; margin-top: 22px; }
+.possible > .container > .possible__panel { display: none; } /* the phone draws into a panel inside each item instead */
+.acc__panel .possible__panel { display: block; position: relative; left: 0; top: 0; width: 100%; height: 270px; border-radius: 20px; margin-top: 22px; }
 .illus { left: 69px; right: 69px; width: auto; } /* 20% narrower than the Figma 279, centred both ways by the item's flex */
 
 /* --- card strips: native horizontal scroll, every card open at (100vw − 32) × 540; tab at 58, label text to 188, dot at 198 (Figma people and quote cards) --- */
@@ -195,8 +196,10 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .folders--quotes { margin-top: 30px; }
 .folders--quotes .fcard .fcard__grad, .folders--quotes .fcard.is-open .fcard__grad { background: linear-gradient(270deg, rgba(0,0,0,.5) 50%, rgba(0,0,0,0) 75%); }
 .fcard__quote-mark { display: none; }
-.fcard__quote { left: 45px; right: 45px; top: auto; bottom: 30px; width: auto; padding-left: 45px; font: 400 16px/22px var(--font-body); letter-spacing: 0; } /* as far from the bottom as the line is from the top */
-.fcard__quote::before { content: '“'; position: absolute; left: 0; top: 5px; font: 200 60px/60px var(--font-display); letter-spacing: -1px; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.fcard__quote, .tcard__quote { left: 45px; right: 45px; top: auto; bottom: 30px; width: auto; padding-left: 45px; font: 400 16px/22px var(--font-body); letter-spacing: 0; } /* as far from the bottom as the line is from the top */
+.fcard__quote.fcard__quote--plain { padding-left: 0; }
+.fcard__quote.fcard__quote--plain::before { content: none; }
+.fcard__quote::before, .tcard__quote::before { content: '“'; position: absolute; left: 0; top: 5px; font: 200 60px/60px var(--font-display); letter-spacing: -1px; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .folders--quotes .fcard__logos { top: 255px; bottom: auto; left: 45px; right: auto; }
 .fcard__logo-bottom { display: none; }
 
@@ -213,10 +216,11 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .closing__mock img { height: auto; }
 
 /* --- footer (Figma Mobile frame, 1303 tall, 30px top corners): "Invention, reinvented." at 40 with Book a demo 30 under it,
-   holding while the gradient scrolls; then a line, the about text (10/12), the logo at 10%, the legal lines, 20 to the bottom --- */
+   holding 16px under the nav while the gradient scrolls; two link columns (173 wide, 16 apart) at 832, all at 30%;
+   the full line 40 under them, the about text (10/12) at 30%, the logo at 10%, the legal lines at 30%, 20 to the bottom --- */
 .footer { height: auto; border-radius: 30px 30px 0 0; }
 .footer__inner { height: auto; padding: 40px 0 20px; }
-.footer__hero { position: relative; width: auto; height: 1036px; }
+.footer__hero { position: relative; width: auto; height: 792px; }
 .final { position: sticky; top: 72px; width: auto; height: auto; margin: 0; display: flex; flex-direction: column; align-items: flex-start; }
 .final__word { position: static; order: 1; text-align: left; font-size: 85px; line-height: 75px; letter-spacing: -3px; }
 .final__word--left::after { content: ','; }
@@ -224,16 +228,22 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .final__cta { position: static; order: 3; width: 120px; height: 40px; border-radius: 30px; margin-top: 30px; background: rgba(255, 255, 255, .3); }
 .final__cta > span { font-size: 12px; line-height: 14px; }
 .footer__cols { display: none; }
-.footer__mobile { display: block; position: relative; padding-top: 10px; }
-.footer__mobile .footer__rule { position: absolute; left: 0; right: 0; top: 0; width: auto; }
-.footer__mobile .footer__about { position: static; width: auto; font: 400 10px/12px var(--font-body); }
+.footer__mobile { display: block; opacity: .3; }
+.footer__mcols { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; align-items: start; }
+.footer__mrow { display: flex; align-items: flex-start; gap: 10px; border-top: 1px solid #bcccdc; padding: 10px 0 20px; }
+.footer__mrow .dot { flex: 0 0 auto; background: var(--footer-ink); }
+.footer__mrow > a { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.footer__mobile .footer__tree { position: static; white-space: pre; line-height: 14px; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.footer__mstack .footer__mrow { padding-bottom: 21px; }
+.footer__mobile .footer__rule { position: static; width: auto; margin-top: 20px; }
+.footer__mobile .footer__about { position: static; width: auto; margin-top: 10px; font: 400 10px/12px var(--font-body); }
 .footer__brand { position: relative; top: 0; width: auto; height: auto; margin-top: 40px; display: flex; align-items: center; gap: 0; }
 .footer__mark { position: static; width: 60px; height: 60px; }
 .footer__word { position: static; width: calc(100% - 60px); height: auto; }
 .footer__legal { position: relative; top: 0; width: auto; margin-top: 10px; display: flex; flex-direction: column; gap: 10px; }
-.footer__legal span { position: static; opacity: 1; white-space: pre; }
+.footer__legal span { position: static; opacity: .3; white-space: pre; }
 .footer__legal-desktop, .footer__legal-right { display: none; }
-.footer__legal-mobile { display: inline; }
+.footer__legal-mobile { display: inline; opacity: 1; }
 
 /* ==================================================== inner pages */
 .phero { height: 460px; }
@@ -276,10 +286,9 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .cpair__body, .cpair--lead .cpair__body { position: static; left: 0; width: auto; }
 .cpair__label + .cpair__body { margin-top: 10px; }
 .folders--team { margin-top: 50px; }
-.tcard__name { top: 50px; width: 271px; }
-.tcard__mark { left: 45px; top: 150px; font-size: 60px; line-height: 30px; }
-.tcard__quote { left: 45px; top: 190px; width: 271px; }
-.tcard__role { top: auto; bottom: 40px; }
+.tcard__name { position: static; margin: 50px 45px 0 45px; width: auto; }
+.tcard__mark { display: none; }
+.tcard__role { position: static; margin: 20px 45px 0 45px; }
 .ccol, .ccol--right { position: relative; left: 0; width: auto; }
 .ccol--right { margin-top: 70px; }
 .ccol > .rule { width: auto; right: 0; }
@@ -290,8 +299,7 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .crow__body { width: auto !important; margin-top: 8px; }
 .csec__h3 { position: static; padding-top: 20px; white-space: normal; }
 .folders--wide { margin-top: 40px; }
-.scard--wide .scard__title { top: 50px; width: 271px; font-size: 30px; line-height: 30px; }
-.scard--wide .scard__author { top: auto; bottom: 88px; }
+.scard--story .scard__meta { top: 255px; bottom: auto; } /* the date sits where the customer cards carry their logo */
 .csec--e { padding-bottom: 130px; }
 .csec__joinbody { position: static; width: auto; margin-top: 30px; }
 .jobs { padding-top: 50px; }
@@ -340,16 +348,18 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .rsec .folders, .rsec--stories .folders--stories, .rsec--blog .folders--grid { top: 0; margin-top: 40px; }
 .rsec--blog .folders--grid { margin-top: 30px; }
 .rsec__pager, .pager { display: none; }
-.rsec--blog .rsec__pager { display: block; position: static; width: auto; height: 8px; margin-top: 20px; }
+.rsec--blog .rsec__pager { display: block; position: static; width: auto; height: 8px; margin-top: 30px; }
 .rsec--blog .pager { display: block; position: static; width: auto; height: 8px; }
 .rsec--blog .pager__dots { position: static; justify-content: center; gap: 11.33px; }
 .strip { overflow-x: auto; }
 .strip__track { transform: none !important; }
 .strip__page, .folders--grid .strip__page { display: flex; flex: 0 0 auto; width: auto; height: 540px; column-gap: 0; row-gap: 0; }
 .strip__page:not(.is-current) { display: none; } /* one page at a time; the dots (blog) switch it */
-.folders--grid { height: 300px; }
-.folders--grid .strip__page { height: 300px; }
-.folders--grid .fcard, .folders--grid .fcard.is-open { height: 300px; }
+.rsec--blog .folders--grid { display: block; left: 0; width: auto; height: auto; padding: 0; overflow: visible; }
+.rsec--blog .folders--grid::after { content: none; }
+.rsec--blog .folders--grid .strip__track { display: block; width: auto; }
+.rsec--blog .folders--grid .strip__page { display: flex; flex-direction: column; gap: 10px; width: auto; height: auto; }
+.rsec--blog .folders--grid .fcard, .rsec--blog .folders--grid .fcard.is-open { width: auto; flex: 0 0 auto; height: 300px; margin-left: 0; }
 .folders--grid .scard--post .scard__text { top: 50px; right: 45px; width: auto; }
 .scard__title { top: 50px; width: 271px; }
 .scard__text { top: 50px; width: 271px; }
@@ -368,11 +378,10 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .nrow__title { position: static; flex: 0 0 100%; white-space: normal; }
 .nrow__source { position: static; margin-top: 10px; white-space: normal; }
 .nrow__more { position: static; margin: 10px 0 0 auto; }
-.brandbox { position: relative; top: 0; width: auto; height: auto; margin-top: 30px; padding: 30px 20px; border-radius: 20px; }
-.brandbox__text, .brandbox__logo, .brandbox__cta { position: relative; left: 0; top: 0; }
-.brandbox__text { width: auto; }
-.brandbox__logo { display: block; width: 70%; margin: 60px auto 0; }
-.brandbox__cta { margin-top: 30px; }
+.brandbox { position: relative; top: 0; width: auto; height: 400px; margin-top: 30px; border-radius: 20px; }
+.brandbox__text { left: 20px; right: 20px; top: 30px; width: auto; }
+.brandbox__logo { left: 50%; top: 50%; width: 70%; transform: translate(-50%, -50%); }
+.brandbox__cta { left: 20px; top: auto; bottom: 30px; }
 
 /* article */
 .asec > .container { display: flex; flex-direction: column; }

@@ -19,8 +19,10 @@ export function initMobileStrips(root = document) {
   root.querySelectorAll('.folders').forEach((strip) => {
     if (strip.dataset.tracked) return;
     strip.dataset.tracked = '1';
+    if (strip.id === 'blog-folders') { strip.querySelectorAll('.fcard').forEach((c) => c.classList.add('is-open')); return; } // a vertical list: every card in colour
+    const visible = () => Array.from(strip.querySelectorAll('.fcard')).filter((c) => c.offsetParent !== null); // the strips repeat their page; only the shown one counts
     const update = () => {
-      const cards = Array.from(strip.querySelectorAll('.fcard'));
+      const cards = visible();
       if (!cards.length) return;
       const x = strip.getBoundingClientRect().left + 16;
       let best = null;
@@ -30,8 +32,8 @@ export function initMobileStrips(root = document) {
       dots.forEach((d, i) => d.classList.toggle('is-active', cards[i] === best));
     };
     // one dot per card under the strip (the people strip and the paged blog grid bring their own)
-    const own = strip.classList.contains('folders--bios') || strip.id === 'blog-folders';
-    const cardsNow = Array.from(strip.querySelectorAll('.fcard'));
+    const own = strip.classList.contains('folders--bios');
+    const cardsNow = visible();
     let dots = [];
     if (!own && cardsNow.length > 1) {
       const el = document.createElement('div');

@@ -68,6 +68,7 @@ export function initLifeSciences() {
     gsap.set(brand, { opacity: 0 });
     if (mobile) gsap.set(panelParts(), { x: 0, y: M_PANEL_H + 40 }); else gsap.set(panel, { x: vw() * 0.51 + 40 });
     gsap.set(copy, { y: 40, opacity: 0 });
+    startWatch();
 
     // the page eases so the take-over fills the viewport while the section makes room below
     lenis.scrollTo(sectionTop() + top, { duration: DUR + 0.3, lock: true, force: true });
@@ -102,13 +103,14 @@ export function initLifeSciences() {
     takeover.setAttribute('aria-hidden', 'true');
     folders.style.pointerEvents = '';
     open = false;
+    stopWatch();
     ScrollTrigger.refresh(); // the page is shorter now: the triggers below move up with it (about 1ms)
   }
 
   // Out of view: reset everything in one frame. Below the viewport only the space under the fold gives way.
   // Above it, the section gives back `extra` pixels above what is on screen, so the scroll moves up by the
-  // same amount in the same frame; that shift only lands cleanly once scrolling has settled (trackpad and
-  // touch momentum ignore a scrollTo mid-flight, which showed as a jump), so it waits for the scroll to stop.
+  // same amount in the same frame; that shift only lands cleanly on a resting scroll (trackpad and touch
+  // momentum ignore a scrollTo mid-flight, which showed as a jump), so the watch below waits for it to stop.
   function foldAway(above) {
     tl.pause(0);
     tl.kill();
@@ -116,20 +118,29 @@ export function initLifeSciences() {
     if (above) shiftScroll(-extra);
     finishClose();
   }
-  let settleTimer;
-  const foldWhenSettled = () => {
-    clearTimeout(settleTimer);
-    settleTimer = setTimeout(() => {
-      if (!open || !tl || tl.reversed()) return;
+  // While open, a 120ms watch folds it once it is fully out of view and the scroll position has held still twice
+  // in a row: no event plumbing to miss, and the compensating shift lands on a resting scroll.
+  let watch = 0;
+  let lastY = -1;
+  let still = 0;
+  function stopWatch() { clearInterval(watch); watch = 0; still = 0; lastY = -1; }
+  function startWatch() {
+    stopWatch();
+    watch = setInterval(() => {
+      if (!open || !tl || tl.reversed() || tl.progress() < 1) return;
       const r = takeover.getBoundingClientRect();
-      if (r.bottom <= 0) foldAway(true); else if (r.top >= vh()) foldAway(false);
-    }, 160);
-  };
+      const out = r.top >= vh() || r.bottom <= 0;
+      const y = Math.round(window.scrollY);
+      still = out && y === lastY ? still + 1 : 0;
+      lastY = y;
+      if (out && still >= 2) foldAway(r.bottom <= 0);
+    }, 120);
+  }
 
   function closeTakeover() {
     if (!open || !tl || tl.reversed()) return;
     const r = takeover.getBoundingClientRect();
-    if (r.top >= vh() || r.bottom <= 0) { foldWhenSettled(); return; }
+    if (r.top >= vh() || r.bottom <= 0) return; // out of view: the watch folds it once the scroll rests
     // in view: bring the carousel back to its lock under the nav while the space closes
     lenis.scrollTo(sectionTop() + cardsTop() - NAV_LOCK, { duration: DUR + 0.3, lock: true, force: true });
     tl.reverse();
@@ -149,13 +160,6 @@ export function initLifeSciences() {
     if (e.target.closest('.ls__cta') || e.target.closest('#nav')) return; // the story button, or the menu card that just opened it
     closeTakeover();
   });
-  // scrolled fully out of view while open: fold it away so the carousel is back when the viewer returns
-  lenis.on('scroll', () => {
-    if (!open || !tl || tl.reversed() || tl.progress() < 1) return;
-    const r = takeover.getBoundingClientRect();
-    if (r.top >= vh() || r.bottom <= 0) foldWhenSettled(); // once the scroll settles, in either direction
-  });
-
   // #antheros (the case study card in the menu): the story opens and fills the viewport
   anchorTargets.antheros = () => { openTakeover(); return sectionTop() + cardsTop(); };
   if (location.hash === '#antheros') {

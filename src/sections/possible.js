@@ -15,19 +15,32 @@ export function initPossible() {
 
   const items = Array.from(acc.querySelectorAll('.acc__item'));
   const illusPanel = document.getElementById('possible-panel');
-  const mobile = isMobile(); // the illustration panel lives inside the open item, under its copy
+  const mobile = isMobile();
+  // On the phone each item carries its own copy of the gradient panel under its copy, so nothing is ever moved in the
+  // DOM (moving an element restarts every CSS animation inside it). The item's illustration draws once its panel is open.
+  const mSlots = mobile ? items.map((item) => {
+    const panel = document.createElement('div');
+    panel.className = 'possible__panel';
+    panel.innerHTML = `<img class="possible__grad" src="${illusPanel.querySelector('.possible__grad').getAttribute('src')}" alt="" /><div class="noise"></div><div class="illus"><div class="illus__item is-on"></div></div>`;
+    item.querySelector('.acc__panel').appendChild(panel);
+    return panel.querySelector('.illus__item');
+  }) : [];
+  let drawTimer;
   function setPhase(i, immediate) {
     items.forEach((item, idx) => {
       const open = idx === i;
       item.classList.toggle('is-open', open);
       const accPanel = item.querySelector('.acc__panel');
-      if (mobile && open) {
-        accPanel.appendChild(illusPanel); // moving the panel restarts every CSS animation inside it
-        slots.forEach((s, idx) => { if (idx !== i) s.getAnimations({ subtree: true }).forEach((a) => { try { a.finish(); } catch { a.pause(); } }); }); // the one fading out stays finished instead of redrawing
-      }
       const h = open ? accPanel.scrollHeight : 0;
       gsap.to(accPanel, { height: h, duration: immediate ? 0 : 0.6, ease: 'power3.inOut', overwrite: true });
     });
+    if (mobile) {
+      clearTimeout(drawTimer);
+      mSlots.forEach((s, idx) => { if (idx !== i) s.innerHTML = ''; });
+      const drawInto = () => { mSlots[i].innerHTML = htmls[i]; };
+      if (immediate) drawInto(); else drawTimer = setTimeout(drawInto, 650); // once the panel has opened
+      return;
+    }
     slots.forEach((s, idx) => {
       if (idx === i && !s.classList.contains('is-on')) draw(idx);
       s.classList.toggle('is-on', idx === i);
