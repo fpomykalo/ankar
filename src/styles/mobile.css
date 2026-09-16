@@ -241,7 +241,7 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .footer__mark { position: static; width: 60px; height: 60px; }
 .footer__word { position: static; width: calc(100% - 60px); height: auto; }
 .footer__legal { position: relative; top: 0; width: auto; margin-top: 10px; display: flex; flex-direction: column; gap: 10px; }
-.footer__legal span { position: static; opacity: .3; white-space: pre; }
+.footer__legal > span { position: static; opacity: .3; white-space: pre; } /* the same 30% as the columns; the reveal tween animates the container, so the text carries it */
 .footer__legal-desktop, .footer__legal-right { display: none; }
 .footer__legal-mobile { display: inline; opacity: 1; }
 
@@ -299,7 +299,8 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .crow__body { width: auto !important; margin-top: 8px; }
 .csec__h3 { position: static; padding-top: 20px; white-space: normal; }
 .folders--wide { margin-top: 40px; }
-.scard--story .scard__meta { top: 255px; bottom: auto; } /* the date sits where the customer cards carry their logo */
+.scard--wide .scard__title { position: static; margin: 50px 45px 0 45px; width: auto; }
+.scard--wide .scard__author { position: static; bottom: auto; margin: 20px 45px 0 45px; }
 .csec--e { padding-bottom: 130px; }
 .csec__joinbody { position: static; width: auto; margin-top: 30px; }
 .jobs { padding-top: 50px; }
@@ -355,11 +356,10 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .strip__track { transform: none !important; }
 .strip__page, .folders--grid .strip__page { display: flex; flex: 0 0 auto; width: auto; height: 540px; column-gap: 0; row-gap: 0; }
 .strip__page:not(.is-current) { display: none; } /* one page at a time; the dots (blog) switch it */
-.rsec--blog .folders--grid { display: block; left: 0; width: auto; height: auto; padding: 0; overflow: visible; }
-.rsec--blog .folders--grid::after { content: none; }
-.rsec--blog .folders--grid .strip__track { display: block; width: auto; }
-.rsec--blog .folders--grid .strip__page { display: flex; flex-direction: column; gap: 10px; width: auto; height: auto; }
-.rsec--blog .folders--grid .fcard, .rsec--blog .folders--grid .fcard.is-open { width: auto; flex: 0 0 auto; height: 300px; margin-left: 0; }
+.rsec--blog .folders--grid { height: auto; }
+.rsec--blog .folders--grid .strip__track { display: flex; gap: 16px; width: max-content; }
+.rsec--blog .folders--grid .strip__page, .rsec--blog .folders--grid .strip__page:not(.is-current) { display: flex; flex-direction: column; gap: 10px; flex: 0 0 calc(100vw - 32px); width: calc(100vw - 32px); height: auto; scroll-snap-align: start; }
+.rsec--blog .folders--grid .fcard, .rsec--blog .folders--grid .fcard.is-open { width: 100%; flex: 0 0 auto; height: 300px; margin-left: 0; scroll-snap-align: none; }
 .folders--grid .scard--post .scard__text { top: 50px; right: 45px; width: auto; }
 .scard__title { top: 50px; width: 271px; }
 .scard__text { top: 50px; width: 271px; }

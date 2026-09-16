@@ -93,14 +93,15 @@ export function initStrip({ folders, pager: pagerId, pages, onRender }) {
   pagerEl.innerHTML = pager(pages.length);
   const dots = Array.from(pagerEl.querySelectorAll('.bios__dot'));
   let page = 0;
+  const pageWidth = () => track.children[0].getBoundingClientRect().width + 16;
+  foldersEl.addEventListener('scroll', () => { const p = Math.round(foldersEl.scrollLeft / pageWidth()); if (p !== page && foldersEl.scrollWidth > foldersEl.clientWidth + 1) { page = p; Array.from(track.children).forEach((el, i) => el.classList.toggle('is-current', i === page)); dots.forEach((d, i) => d.classList.toggle('is-active', i === page)); } }, { passive: true });
   const go = (p) => {
     const next = (p + pages.length) % pages.length;
     if (next === page) return;
     page = next;
-    track.children[page].classList.add('is-current'); // the phone shows one page at a time and swaps it
-    Array.from(track.children).forEach((el, i) => el.classList.toggle('is-current', i === page));
-    foldersEl.scrollTo({ left: 0, behavior: 'instant' });
-    gsap.to(track, { x: -page * 1305, duration: 0.9, ease: 'power3.inOut', overwrite: true });
+    Array.from(track.children).forEach((el, i) => el.classList.toggle('is-current', i === page)); // the phone shows one page of a repeated strip
+    if (foldersEl.scrollWidth > foldersEl.clientWidth + 1) { foldersEl.scrollTo({ left: page * pageWidth(), behavior: 'smooth' }); } // pages side by side (the phone blog): scroll to it
+    else gsap.to(track, { x: -page * 1305, duration: 0.9, ease: 'power3.inOut', overwrite: true });
     dots.forEach((d, i) => d.classList.toggle('is-active', i === page));
   };
   onRender?.(foldersEl);
