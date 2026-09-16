@@ -48,7 +48,7 @@ function initProduct() {
   }
   // where a tab lands the page: the group's rule sits 40px under the nav (nav bottom at 80)
   const landY = () => layoutTop(group) - 120;
-  const itemY = (id) => { const el = id && document.getElementById(id); return el ? layoutTop(el) - 120 : null; };
+  const itemY = (id) => { const el = id && document.getElementById(id); return el ? layoutTop(el) - 180 : null; }; // a workflow lands with its divider 40px under the sticky tabs (tabs bottom at 140)
   const settle = () => { if (window.scrollY > landY()) lenis.scrollTo(landY(), { duration: 1, force: true, lock: true }); };
   // a tab only settles the page when the head has scrolled away; an item link always anchors to its item
   function show(groupSlug, itemId) {
