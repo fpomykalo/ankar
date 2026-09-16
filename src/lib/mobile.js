@@ -27,7 +27,20 @@ export function initMobileStrips(root = document) {
       let bestD = Infinity;
       cards.forEach((c) => { const d = Math.abs(c.getBoundingClientRect().left - x); if (d < bestD) { bestD = d; best = c; } });
       cards.forEach((c) => c.classList.toggle('is-open', c === best));
+      dots.forEach((d, i) => d.classList.toggle('is-active', cards[i] === best));
     };
+    // one dot per card under the strip (the people strip and the paged blog grid bring their own)
+    const own = strip.classList.contains('folders--bios') || strip.id === 'blog-folders';
+    const cardsNow = Array.from(strip.querySelectorAll('.fcard'));
+    let dots = [];
+    if (!own && cardsNow.length > 1) {
+      const el = document.createElement('div');
+      el.className = 'strip-dots';
+      el.innerHTML = cardsNow.map((_, i) => `<button class="bios__dot${i === 0 ? ' is-active' : ''}" type="button" aria-label="Card ${i + 1}"></button>`).join('');
+      strip.insertAdjacentElement('afterend', el);
+      dots = Array.from(el.children);
+      dots.forEach((d, i) => d.addEventListener('click', () => strip.scrollTo({ left: i * (cardsNow[0].offsetWidth - 25), behavior: 'smooth' })));
+    }
     let raf = 0;
     strip.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
     update();

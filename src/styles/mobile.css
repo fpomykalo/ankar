@@ -100,12 +100,13 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .acc__item.is-open { padding-bottom: 14px; }
 .acc__item:last-child:not(.is-open) { padding-bottom: 0; }
 .acc__panel .possible__panel { position: relative; left: 0; top: 0; width: 100%; height: 270px; border-radius: 20px; margin-top: 22px; }
-.illus { left: 41px; right: 41px; width: auto; }
+.illus { left: 69px; right: 69px; width: auto; } /* 20% narrower than the Figma 279, centred both ways by the item's flex */
 
 /* --- card strips: native horizontal scroll, every card open at (100vw − 32) × 540; tab at 58, label text to 188, dot at 198 (Figma people and quote cards) --- */
 .folders { position: relative; left: -16px; top: 0; width: 100vw; height: 540px; margin-top: 50px; padding: 0 16px; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-padding-left: 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .folders::-webkit-scrollbar { display: none; }
 .folders::after { content: ''; flex: 0 0 16px; }
+.strip-dots { display: flex; justify-content: center; gap: 11.33px; height: 8px; margin-top: 20px; }
 .fcard, .folders .fcard.is-open, .folders--stories .fcard, .folders--wide .fcard, .folders--press .fcard, .folders--grid .fcard, .scard--post { --tab-top: 58px; width: calc(100vw - 32px); flex: 0 0 calc(100vw - 32px); height: 540px; margin-left: -25px; scroll-snap-align: start; transition: none; }
 .folders .fcard:first-child, .folders .fcard.is-open:first-child, .folders--grid .fcard:first-child { margin-left: 0; }
 .folders--stories .fcard:nth-child(2) { width: calc(100vw - 32px); flex-basis: calc(100vw - 32px); }
@@ -174,8 +175,8 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .fcard.is-expanded .fcard__logos { opacity: 0; }
 .fcard__excerpt { top: 397px; right: 45px; width: auto; -webkit-line-clamp: 4; }
 .fcard__more { top: 493px; }
-.fcard__full { top: 158px; left: 45px; width: auto; right: 55px; height: 342px; padding-right: 0; }
-.fcard__scroll { left: auto; right: 39px; top: 158px; height: 342px; }
+.fcard__full { top: 178px; left: 45px; width: auto; right: 55px; height: 322px; padding-right: 0; }
+.fcard__scroll { left: auto; right: 39px; top: 178px; height: 322px; }
 
 /* --- enterprise trust: stacked items, the badges under the last one --- */
 .security__ctas { position: static; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 30px; }
@@ -192,8 +193,10 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .quotes { padding-top: 70px; }
 .quotes__title { position: static; width: auto; margin-top: 20px; }
 .folders--quotes { margin-top: 30px; }
-.fcard__quote-mark { left: 45px; top: 358px; font-size: 60px; line-height: 60px; }
-.fcard__quote { left: 90px; right: 45px; top: 353px; width: auto; font: 400 16px/22px var(--font-body); letter-spacing: 0; }
+.folders--quotes .fcard .fcard__grad, .folders--quotes .fcard.is-open .fcard__grad { background: linear-gradient(270deg, rgba(0,0,0,.5) 50%, rgba(0,0,0,0) 75%); }
+.fcard__quote-mark { display: none; }
+.fcard__quote { left: 45px; right: 45px; top: auto; bottom: 30px; width: auto; padding-left: 45px; font: 400 16px/22px var(--font-body); letter-spacing: 0; } /* as far from the bottom as the line is from the top */
+.fcard__quote::before { content: '“'; position: absolute; left: 0; top: 5px; font: 200 60px/60px var(--font-display); letter-spacing: -1px; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .folders--quotes .fcard__logos { top: 255px; bottom: auto; left: 45px; right: auto; }
 .fcard__logo-bottom { display: none; }
 
@@ -214,7 +217,7 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .footer { height: auto; border-radius: 30px 30px 0 0; }
 .footer__inner { height: auto; padding: 40px 0 20px; }
 .footer__hero { position: relative; width: auto; height: 1036px; }
-.final { position: sticky; top: calc(50vh - 97px); width: auto; height: auto; margin: 0; display: flex; flex-direction: column; align-items: flex-start; }
+.final { position: sticky; top: 72px; width: auto; height: auto; margin: 0; display: flex; flex-direction: column; align-items: flex-start; }
 .final__word { position: static; order: 1; text-align: left; font-size: 85px; line-height: 75px; letter-spacing: -3px; }
 .final__word--left::after { content: ','; }
 .final__word--right { order: 2; margin-top: 26px; } /* second line of one 75px-leading title */
@@ -360,11 +363,11 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .rbar__tabs { position: static; display: flex; justify-content: center; }
 .rbar__tab { width: 150px; }
 .newslist { position: static; width: auto; margin-top: 30px; }
-.nrow { height: auto; padding: 20px 0 30px; }
+.nrow { height: auto; padding: 20px 0 30px; display: flex; flex-wrap: wrap; align-items: baseline; }
 .nrow > .rule { width: auto; right: 0; }
-.nrow__title { position: static; white-space: normal; }
-.nrow__source { position: static; display: block; margin-top: 10px; white-space: normal; }
-.nrow__more { position: static; display: inline-block; margin-top: 10px; }
+.nrow__title { position: static; flex: 0 0 100%; white-space: normal; }
+.nrow__source { position: static; margin-top: 10px; white-space: normal; }
+.nrow__more { position: static; margin: 10px 0 0 auto; }
 .brandbox { position: relative; top: 0; width: auto; height: auto; margin-top: 30px; padding: 30px 20px; border-radius: 20px; }
 .brandbox__text, .brandbox__logo, .brandbox__cta { position: relative; left: 0; top: 0; }
 .brandbox__text { width: auto; }

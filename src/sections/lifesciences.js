@@ -119,14 +119,17 @@ export function initLifeSciences() {
   let settleTimer;
   const foldWhenSettled = () => {
     clearTimeout(settleTimer);
-    settleTimer = setTimeout(() => { if (open && tl && !tl.reversed() && takeover.getBoundingClientRect().bottom <= 0) foldAway(true); }, 160);
+    settleTimer = setTimeout(() => {
+      if (!open || !tl || tl.reversed()) return;
+      const r = takeover.getBoundingClientRect();
+      if (r.bottom <= 0) foldAway(true); else if (r.top >= vh()) foldAway(false);
+    }, 160);
   };
 
   function closeTakeover() {
     if (!open || !tl || tl.reversed()) return;
     const r = takeover.getBoundingClientRect();
-    if (r.top >= vh()) { foldAway(false); return; }
-    if (r.bottom <= 0) { foldWhenSettled(); return; }
+    if (r.top >= vh() || r.bottom <= 0) { foldWhenSettled(); return; }
     // in view: bring the carousel back to its lock under the nav while the space closes
     lenis.scrollTo(sectionTop() + cardsTop() - NAV_LOCK, { duration: DUR + 0.3, lock: true, force: true });
     tl.reverse();
@@ -150,8 +153,7 @@ export function initLifeSciences() {
   lenis.on('scroll', () => {
     if (!open || !tl || tl.reversed() || tl.progress() < 1) return;
     const r = takeover.getBoundingClientRect();
-    if (r.top >= vh()) foldAway(false);
-    else if (r.bottom <= 0) foldWhenSettled();
+    if (r.top >= vh() || r.bottom <= 0) foldWhenSettled(); // once the scroll settles, in either direction
   });
 
   // #antheros (the case study card in the menu): the story opens and fills the viewport

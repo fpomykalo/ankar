@@ -113,7 +113,7 @@ export function initBios() {
   cards.forEach((c) => {
     const full = c.querySelector('.fcard__full');
     const thumb = c.querySelector('.fcard__thumb');
-    const trackH = isMobile() ? 342 : 253; // the bar's height (Figma: 253 on desktop, 342 on the phone card)
+    const trackH = isMobile() ? 322 : 253; // the bar's height (Figma: 253 on desktop, 342 on the phone card)
     const update = () => {
       const ratio = full.clientHeight / full.scrollHeight;
       const h = ratio >= 1 ? trackH : Math.max(30, Math.round(trackH * ratio));
