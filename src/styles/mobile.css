@@ -25,7 +25,7 @@ body { min-width: 0; font-size: 16px; line-height: 22px; }
 
 /* --- navigation: 361 × 40 bar, logo 82 × 13, burger 16 × 12 at 325/14 (Figma "Nav") ----------
    Open, the bar grows to the whole screen (Figma 7097:8300): 80% white, logo at 36/29, burger at 341/30,
-   the groups from 72 (line, dot at 10, 12px mono tree at 28), case cards 250 × 175 at 584, the button 50 under them --- */
+   the groups from 72 (line, dot at 10, 12px mono tree at 28, single spaced), case cards 250 × 175, the full-width button 40 under them --- */
 .nav { left: 16px; right: auto; top: 16px; width: calc(100% - 32px); height: 40px; border-radius: 20px; transform: none; }
 .nav[data-reveal] { transform: translate3d(0, 20px, 0); }
 .nav__logo { left: 20px; top: 13px; transition: left .5s var(--ease-inout), top .5s var(--ease-inout); }
@@ -58,7 +58,7 @@ body { min-width: 0; font-size: 16px; line-height: 22px; }
 .nav__mcases .nav__case-logo { top: 20px; }
 .nav__mcases .nav__case-line { top: 104px; width: 210px; }
 .nav__mcases .nav__case-title { top: 114px; width: 210px; }
-.nav__mcta { display: flex; width: 120px; margin: 50px auto 0; }
+.nav__mcta { display: flex; width: 100%; margin: 40px 0 0; } /* full width, 40 under the cards */
 html.nav-open, html.nav-open body { overflow: hidden; }
 
 /* --- hero (393 × 862 image; the grey fold covers its last 30px, the tab rises from 832) -------------- */
@@ -129,7 +129,6 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .folders--lifecycle .fcard, .folders--lifecycle .fcard.is-open { height: 680px; }
 .folders--lifecycle .ltile__title { white-space: nowrap; }
 .ltile { left: 45px !important; right: 45px; top: auto !important; width: auto !important; height: 45px !important; border-radius: 0; box-shadow: none; border-top: 1px solid rgba(255, 255, 255, .4); }
-.ltile:hover { background: none; }
 .ltile:nth-last-of-type(1) { bottom: 88px; }
 .ltile:nth-last-of-type(2) { bottom: 133px; }
 .ltile:nth-last-of-type(3) { bottom: 178px; }
