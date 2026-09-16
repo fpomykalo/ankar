@@ -111,7 +111,7 @@ export function initLifeSciences() {
     folders.style.pointerEvents = '';
     open = false;
     stopWatch();
-    ScrollTrigger.refresh(); // the page is shorter now: the triggers below move up with it (about 1ms)
+    if (mobile) setTimeout(() => ScrollTrigger.refresh(), 800); else ScrollTrigger.refresh(); // the page is shorter now: the triggers below move up with it
   }
 
   // Out of view: reset everything in one frame. Below the viewport only the space under the fold gives way.
@@ -125,23 +125,31 @@ export function initLifeSciences() {
     if (above) shiftScroll(-extra);
     finishClose();
   }
-  // While open, a 120ms watch folds it once it is fully out of view and the scroll position has held still twice
-  // in a row: no event plumbing to miss, and the compensating shift lands on a resting scroll.
+  // While open, a 120ms watch folds it once it is fully out of view. Below the viewport that is immediate: only the
+  // space under the fold gives way. Above it the section shrinks by `extra` above the screen, so the scroll is shifted
+  // by the same amount in the same frame; that lands cleanly once the scroll rests (two ticks within 2px), and a
+  // thumb that never rests gets it after 1.5s out of view anyway (a momentum flick may pause for a frame then).
   let watch = 0;
   let lastY = -1;
   let still = 0;
-  function stopWatch() { clearInterval(watch); watch = 0; still = 0; lastY = -1; }
+  let outSince = 0;
+  function stopWatch() { clearInterval(watch); watch = 0; still = 0; lastY = -1; outSince = 0; }
   function startWatch() {
     stopWatch();
     watch = setInterval(() => {
       if (!open || !tl || tl.reversed() || tl.progress() < 1) { debugShow(`waiting open:${open} tl:${tl ? tl.progress().toFixed(2) : 'none'} rev:${tl ? tl.reversed() : '-'}`); return; }
       const r = takeover.getBoundingClientRect();
-      const out = r.top >= vh() || r.bottom <= 0;
+      const above = r.bottom <= 0;
+      const out = r.top >= vh() || above;
       const y = Math.round(window.scrollY);
-      still = out && y === lastY ? still + 1 : 0;
+      still = out && Math.abs(y - lastY) <= 2 ? still + 1 : 0;
       lastY = y;
-      debugShow(`open:${open} tl:${tl.progress().toFixed(2)} top:${Math.round(r.top)} bottom:${Math.round(r.bottom)} vh:${vh()} y:${y} lenis:${Math.round(lenis.animatedScroll)} still:${still} out:${out}`);
-      if (out && still >= 2) { debugLog(`fold ${r.bottom <= 0 ? 'above' : 'below'} at y ${y}`); foldAway(r.bottom <= 0); }
+      if (out && !outSince) outSince = performance.now();
+      if (!out) outSince = 0;
+      const outFor = outSince ? Math.round(performance.now() - outSince) : 0;
+      debugShow(`open:${open} tl:${tl.progress().toFixed(2)} top:${Math.round(r.top)} bottom:${Math.round(r.bottom)} vh:${vh()} y:${y} still:${still} out:${out} outFor:${outFor}`);
+      if (!out) return;
+      if (!above || still >= 2 || outFor >= 1500) { debugLog(`fold ${above ? 'above' : 'below'} at y ${y} (${still >= 2 ? 'rest' : !above ? 'below' : 'timeout'})`); foldAway(above); }
     }, 120);
   }
 
