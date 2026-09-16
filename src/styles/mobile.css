@@ -124,16 +124,23 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .lcard__sub { position: static; width: auto !important; margin: 20px 45px 0 45px; }
 .lcard__rule, .lcard__body { display: none; }
 .lcard[data-slug="invent"] .lcard__sub { font-size: 24px; line-height: 26px; } /* two-line title and a five-line subtitle: this one has to shrink to clear its four rows */
-.lcard__more { top: 493px; }
+.lcard__more { top: auto; bottom: 40px; }
+.folders--lifecycle { height: 680px; } /* seven and eight workflows: 45px rows from the bottom, the link 40 above it */
+.folders--lifecycle .fcard, .folders--lifecycle .fcard.is-open { height: 680px; }
+.folders--lifecycle .ltile__title { white-space: nowrap; }
 .ltile { left: 45px !important; right: 45px; top: auto !important; width: auto !important; height: 45px !important; border-radius: 0; box-shadow: none; border-top: 1px solid rgba(255, 255, 255, .4); }
 .ltile:hover { background: none; }
 .ltile:nth-last-of-type(1) { bottom: 88px; }
 .ltile:nth-last-of-type(2) { bottom: 133px; }
 .ltile:nth-last-of-type(3) { bottom: 178px; }
 .ltile:nth-last-of-type(4) { bottom: 223px; }
+.ltile:nth-last-of-type(5) { bottom: 268px; }
+.ltile:nth-last-of-type(6) { bottom: 313px; }
+.ltile:nth-last-of-type(7) { bottom: 358px; }
+.ltile:nth-last-of-type(8) { bottom: 403px; }
 .ltile__n { left: 0; top: 9px; }
-.ltile__title { left: 38px; top: 9px; bottom: auto; }
-.ltile__icon { left: auto; right: 0; top: 9px; width: 13px; height: 13px; transform: none; object-fit: contain; }
+.ltile__title { left: 38px; top: 9px; bottom: auto; font: 400 16px/22px var(--font-body); } /* Figma mobile rows: 16px serif */
+.ltile__icon { left: auto; right: 0; top: 9px; width: auto; height: 13px; max-width: 22px; transform: none; object-fit: contain; }
 
 /* industries card: title, the story button, the caption at the bottom */
 .fcard__cta { position: relative; left: 0; top: 0; margin: 20px 0 0 45px; }

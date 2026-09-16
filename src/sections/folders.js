@@ -1,9 +1,11 @@
 import { gsap, lenis } from '../lib/scroll.js';
 import { industries, lifecycle, people, quotes } from '../data/content.js';
+import { productGroups } from '../data/product.js';
 import { isMobile } from '../lib/mobile.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); // product page item ids
+const productItems = new Set(productGroups.flatMap((g) => g.items.map((it) => slug(it.title)))); // workflows the product page describes
 
 const LOGO_SIZES = {
   palantir: [92, 22], helsing: [97, 23], nlo: [55, 27], gsk: [70, 21], 'astra-zeneca': [122, 31],
@@ -67,10 +69,10 @@ export function initLifecycleCards() {
         <p class="t-body lcard__body" style="width:${c.bodyWidth}px">${c.body}</p>
         <a class="t-mono lcard__more" href="${BASE}/product/#${c.slug}"><u>View more details &gt;</u></a>
         ${c.tiles.map((t) => `
-        <a class="ltile" href="${BASE}/product/#${slug(t.title)}" style="left:${t.rect[0]}px;top:${t.rect[1]}px;width:${t.rect[2]}px;height:${t.rect[3]}px">
+        <a class="ltile" href="${BASE}/product/#${productItems.has(slug(t.title)) ? slug(t.title) : c.slug}" style="left:${t.rect[0]}px;top:${t.rect[1]}px;width:${t.rect[2]}px;height:${t.rect[3]}px">
           <span class="t-mono ltile__n">${t.n}</span>
-          <img class="ltile__icon" src="${BASE}/assets/svg/icons/${t.n}-white.svg" alt="" />
-          <span class="t-body ltile__title">${t.title}</span>
+          <img class="ltile__icon" src="${BASE}/assets/svg/icons/${t.icon}.svg" alt="" />
+          <span class="t-mono ltile__title">${t.title}</span>
         </a>`).join('')}
       </div>
       <div class="fcard__closed"><h3 class="t-h3 fcard__vtitle">${c.title}</h3></div>
