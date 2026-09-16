@@ -58,7 +58,7 @@ body { min-width: 0; font-size: 16px; line-height: 22px; }
 .nav__mcases .nav__case-logo { top: 20px; }
 .nav__mcases .nav__case-line { top: 104px; width: 210px; }
 .nav__mcases .nav__case-title { top: 114px; width: 210px; }
-.nav__mcta { display: flex; width: 100%; margin: 40px 0 0; } /* full width, 40 under the cards */
+.nav__mcta { display: flex; width: calc(100% + 40px); margin: 40px -20px 0; } /* gutter to gutter (Figma: x 16, 361 wide), 40 under the cards */
 html.nav-open, html.nav-open body { overflow: hidden; }
 
 /* --- hero (393 × 862 image; the grey fold covers its last 30px, the tab rises from 832) -------------- */
