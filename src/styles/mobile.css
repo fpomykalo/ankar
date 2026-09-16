@@ -108,6 +108,7 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .folders::after { content: ''; flex: 0 0 16px; }
 .fcard, .folders .fcard.is-open, .folders--stories .fcard, .folders--wide .fcard, .folders--press .fcard, .folders--grid .fcard, .scard--post { --tab-top: 58px; width: calc(100vw - 32px); flex: 0 0 calc(100vw - 32px); height: 540px; margin-left: -25px; scroll-snap-align: start; transition: none; }
 .folders .fcard:first-child, .folders .fcard.is-open:first-child, .folders--grid .fcard:first-child { margin-left: 0; }
+.folders--stories .fcard:nth-child(2) { width: calc(100vw - 32px); flex-basis: calc(100vw - 32px); }
 .fcard .tab-label, .folders--bios .tab-label { --label-bottom: 188px; --dot-top: 198px; }
 .fcard__open, .fcard:not(.is-open) .fcard__open { opacity: 1; pointer-events: auto; transition: none; }
 .fcard__closed { display: none; }
@@ -288,7 +289,7 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .folders--wide { margin-top: 40px; }
 .scard--wide .scard__title { top: 50px; width: 271px; font-size: 30px; line-height: 30px; }
 .scard--wide .scard__author { top: auto; bottom: 88px; }
-.csec--e { padding-bottom: 0; }
+.csec--e { padding-bottom: 130px; }
 .csec__joinbody { position: static; width: auto; margin-top: 30px; }
 .jobs { padding-top: 50px; }
 .jobdept > .rule, .job > .rule { width: auto; right: 0; }
@@ -323,7 +324,8 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .pcard { position: relative; left: 0; top: 0; width: auto; height: 300px; margin-top: 40px; }
 .pcard__title { top: 50px; white-space: normal; }
 .pcard__sub { top: 93px; }
-.pcard--article { height: 240px; }
+.pcard--article { height: 300px; } /* room for the 180px tab under the 58 lead, like the letter card */
+.pcard .tab-label { --label-bottom: 188px; --dot-top: 198px; }
 .lrows { padding-top: 60px; }
 .lrow { padding: 20px 0 40px; }
 .lrow > .rule { width: auto; right: 0; }
@@ -335,10 +337,17 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .rsec .folders, .rsec--stories .folders--stories, .rsec--blog .folders--grid { top: 0; margin-top: 40px; }
 .rsec--blog .folders--grid { margin-top: 30px; }
 .rsec__pager, .pager { display: none; }
+.rsec--blog .rsec__pager { display: block; position: static; width: auto; height: 8px; margin-top: 20px; }
+.rsec--blog .pager { display: block; position: static; width: auto; height: 8px; }
+.rsec--blog .pager__dots { position: static; justify-content: center; gap: 11.33px; }
 .strip { overflow-x: auto; }
 .strip__track { transform: none !important; }
 .strip__page, .folders--grid .strip__page { display: flex; flex: 0 0 auto; width: auto; height: 540px; column-gap: 0; row-gap: 0; }
-.strip__page:not(:first-child) { display: none; } /* the strips repeat their page until more stories arrive */
+.strip__page:not(.is-current) { display: none; } /* one page at a time; the dots (blog) switch it */
+.folders--grid { height: 300px; }
+.folders--grid .strip__page { height: 300px; }
+.folders--grid .fcard, .folders--grid .fcard.is-open { height: 300px; }
+.folders--grid .scard--post .scard__text { top: 50px; right: 45px; width: auto; }
 .scard__title { top: 50px; width: 271px; }
 .scard__text { top: 50px; width: 271px; }
 .scard__author { top: auto; bottom: 88px; }
@@ -359,7 +368,7 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .brandbox { position: relative; top: 0; width: auto; height: auto; margin-top: 30px; padding: 30px 20px; border-radius: 20px; }
 .brandbox__text, .brandbox__logo, .brandbox__cta { position: relative; left: 0; top: 0; }
 .brandbox__text { width: auto; }
-.brandbox__logo { display: block; width: 100%; margin-top: 60px; }
+.brandbox__logo { display: block; width: 70%; margin: 60px auto 0; }
 .brandbox__cta { margin-top: 30px; }
 
 /* article */
@@ -369,8 +378,10 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .asec__title { position: static; width: auto; margin-top: 30px; }
 .vcard { position: relative; left: 0; top: 0; width: auto; height: auto; aspect-ratio: 740 / 416; margin-top: 40px; border-radius: 20px; }
 .vcard__poster { position: absolute; inset: 0; }
-.asec__author { position: relative; top: 0; width: auto; margin-top: 30px; }
-.asec__read { left: auto; right: 0; }
+.asec__author { position: relative; top: 0; width: auto; height: auto; margin-top: 30px; display: flex; align-items: center; gap: 10px; }
+.asec__avatar { position: static; flex: 0 0 36px; }
+.asec__text { flex: 1; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.asec__byline, .asec__read { position: static; transform: none; }
 .asec__rule2 { position: static; width: auto; margin-top: 30px; }
 .asec__side { position: static; width: auto; margin-top: 40px; order: 99; }
 .newsletter, .newsletter__input { width: 100%; }
