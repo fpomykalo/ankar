@@ -131,7 +131,7 @@ export const industries = [
   },
   {
     label: 'Case Study — 2',
-    title: 'Aerospace and<br>defense',
+    title: 'Aeronautics and<br>defense',
     image: `${BASE}/assets/images/industries/aerospace.jpg`,
     caption: 'A client used Ankar to explore <b>4 distinct invention directions in a single session</b>, selecting <b>3 to take forward</b>.',
   },
