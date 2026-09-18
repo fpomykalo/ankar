@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Vorys and Ankar:<br>A Collaborative Approach to Patent Law Innovation",
+    "label": "Case study",
+    "image": "/assets/images/pages/vorys-story.avif",
+    "logo": "vorys",
+    "logoSize": [
+      126,
+      17
+    ],
+    "meta": "November 10, 2025 / 3 min read"
+  },
+  {
+    "title": "Valeo and Ankar: Amplifying Patent Expertise with AI",
+    "label": "Case study",
+    "image": "/assets/images/people/alain-durand.webp",
+    "logo": "valeo",
+    "logoSize": [
+      84,
+      36
+    ],
+    "meta": "November 15, 2025 / 4 min read"
+  },
+  {
+    "title": "L’Oréal and Ankar: Seeing and safeguarding innovation",
+    "label": "Case study",
+    "image": "/assets/images/people/jean-yves-legendre.avif",
+    "logo": "loreal",
+    "logoSize": [
+      122,
+      22
+    ],
+    "meta": "November 10, 2025 / 4 min read"
+  }
+]

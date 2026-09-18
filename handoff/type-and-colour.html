@@ -1,0 +1,288 @@
+<title>Ankar Type and Colour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@200;300&family=Crimson+Text:wght@400;600&family=DM+Mono:wght@300;400&display=swap">
+<style>
+  :root {
+    --bg: #eef2f6;
+    --ink: #000000;
+    --ink-soft: rgba(0,0,0,.6);
+    --rule: #cdd9e5;
+    --blue: #94b9eb;
+    --paper: #ffffff;
+    --swatch-edge: rgba(0,0,0,.08);
+    --display: 'Crimson Pro', Georgia, 'Times New Roman', serif;
+    --body: 'Crimson Text', Georgia, 'Times New Roman', serif;
+    --mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #182553;
+      --ink: #eef2f6;
+      --ink-soft: rgba(238,242,246,.6);
+      --rule: rgba(238,242,246,.25);
+      --paper: #101a3a;
+      --swatch-edge: rgba(255,255,255,.12);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #182553;
+    --ink: #eef2f6;
+    --ink-soft: rgba(238,242,246,.6);
+    --rule: rgba(238,242,246,.25);
+    --paper: #101a3a;
+    --swatch-edge: rgba(255,255,255,.12);
+  }
+  body { background: var(--bg); color: var(--ink); font: 400 18px/26px var(--body); padding-inline: 24px; padding-block: 48px 96px; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1100px; margin: 0 auto; display: grid; gap: 72px; }
+  a { color: inherit; }
+  .mono { font: 400 12px/14px var(--mono); letter-spacing: 0; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; }
+  .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); flex: 0 0 auto; }
+  h1 { font: 200 80px/70px var(--display); letter-spacing: -2px; margin: 24px 0 20px; text-wrap: balance; }
+  h2 { font: 200 52px/46px var(--display); letter-spacing: -1px; margin: 20px 0 8px; text-wrap: balance; }
+  h3 { font: 200 36px/36px var(--display); letter-spacing: -1px; margin: 0 0 8px; }
+  p { margin: 0; max-width: 62ch; }
+  p + p { margin-top: 12px; }
+  .rule { height: 1px; background: var(--rule); }
+  .lede { color: var(--ink-soft); }
+  section { display: grid; gap: 24px; }
+  .intro { display: grid; gap: 8px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 24px 40px; color: var(--ink-soft); }
+
+  /* typeface specimens */
+  .faces { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .face { background: var(--paper); border-radius: 20px; padding: 28px 28px 24px; display: grid; gap: 18px; align-content: start; }
+  .face__sample { font-size: 64px; line-height: 1; letter-spacing: -1px; overflow-wrap: anywhere; }
+  .face--display .face__sample { font-family: var(--display); font-weight: 200; }
+  .face--body .face__sample { font-family: var(--body); font-weight: 400; font-size: 40px; line-height: 1.1; letter-spacing: 0; }
+  .face--mono .face__sample { font-family: var(--mono); font-weight: 400; font-size: 28px; letter-spacing: 0; }
+  .face dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; }
+  .face dt { color: var(--ink-soft); }
+  .face dd { margin: 0; }
+
+  /* type scale */
+  .scale { display: grid; gap: 0; }
+  .row { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--rule); align-items: baseline; }
+  .row:last-child { border-bottom: 1px solid var(--rule); }
+  .row__spec { display: grid; gap: 6px; align-content: start; }
+  .row__spec strong { font-weight: 400; display: block; }
+  .row__use { color: var(--ink-soft); font: 400 15px/20px var(--body); }
+  .sample { overflow-wrap: anywhere; }
+  .s-display { font: 200 130px/110px var(--display); letter-spacing: -4px; }
+  .s-h2 { font: 200 80px/70px var(--display); letter-spacing: -2px; }
+  .s-h3 { font: 200 52px/46px var(--display); letter-spacing: -1px; }
+  .s-h4 { font: 200 36px/36px var(--display); letter-spacing: -1px; }
+  .s-lead { font: 200 30px/32px var(--display); letter-spacing: -1px; }
+  .s-quote { font: 200 86px/36px var(--display); letter-spacing: -1px; }
+  .s-body { font: 400 18px/26px var(--body); max-width: 60ch; }
+  .s-body b { font-weight: 600; }
+  .s-body-sm { font: 400 18px/20px var(--body); }
+  .s-body-xs { font: 400 10px/12px var(--body); max-width: 320px; }
+  .s-mono { font: 400 12px/14px var(--mono); }
+  .s-mono-lg { font: 400 20px/14px var(--mono); }
+  .s-mono-light { font: 300 36px/14px var(--mono); }
+  .s-mono-light, .s-mono-lg { line-height: 1; }
+  .s-mono u { text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  .pill { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 20px; border-radius: 20px; background: var(--ink); color: var(--bg); font: 400 12px/14px var(--mono); }
+  @media (max-width: 720px) {
+    .row { grid-template-columns: 1fr; gap: 12px; }
+    .s-display { font-size: 72px; line-height: 64px; letter-spacing: -2px; }
+    .s-h2 { font-size: 52px; line-height: 48px; }
+    h1 { font-size: 56px; line-height: 52px; }
+  }
+
+  /* colour */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; }
+  .sw { display: grid; gap: 12px; }
+  .sw__chip { height: 96px; border-radius: 14px; box-shadow: inset 0 0 0 1px var(--swatch-edge); }
+  .sw__name { display: grid; gap: 4px; }
+  .sw__name b { font-weight: 400; }
+  .sw__name .mono { color: var(--ink-soft); }
+  .sw__use { color: var(--ink-soft); font: 400 15px/20px var(--body); }
+
+  /* overlays table */
+  table { border-collapse: collapse; width: 100%; font: 400 16px/22px var(--body); }
+  th, td { text-align: left; vertical-align: top; padding: 12px 16px 12px 0; border-top: 1px solid var(--rule); }
+  tr:last-child td { border-bottom: 1px solid var(--rule); }
+  th { font: 400 12px/14px var(--mono); color: var(--ink-soft); padding-top: 0; border-top: 0; }
+  td .mono { white-space: nowrap; }
+  .tablewrap { overflow-x: auto; }
+
+  .note { background: var(--paper); border-radius: 20px; padding: 24px 28px; display: grid; gap: 10px; }
+  .note p { max-width: 70ch; }
+  ul { margin: 0; padding-left: 22px; }
+  li + li { margin-top: 6px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <p class="eyebrow mono"><span class="dot"></span>Ankar website, desktop build</p>
+    <h1>Type and colour</h1>
+    <p class="lede">Everything below is read from the shipped stylesheets of the v02 build, so it is what the browser renders today. Measurements are in CSS pixels at the 1440px desktop artboard.</p>
+    <div class="meta mono">
+      <span>Source: src/styles on the v02 branch</span>
+      <span>Fonts served from Fontsource packages, version 5.3.0</span>
+      <span>September 2026</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="rule"></div>
+    <p class="eyebrow mono"><span class="dot"></span>Typefaces</p>
+    <h2>Three families, five cuts</h2>
+    <div class="faces">
+      <article class="face face--display">
+        <div class="face__sample">Crimson Pro</div>
+        <dl class="mono">
+          <dt>Role</dt><dd>Display. Every heading from the 130px page title down to 30px row titles.</dd>
+          <dt>Cut</dt><dd>ExtraLight, weight 200, upright only.</dd>
+          <dt>Source</dt><dd>Variable font, wght axis 200 to 900, loaded from the @fontsource-variable/crimson-pro package.</dd>
+          <dt>Fallback</dt><dd>'Crimson Pro', Georgia, serif</dd>
+        </dl>
+      </article>
+      <article class="face face--body">
+        <div class="face__sample">Crimson Text</div>
+        <dl class="mono">
+          <dt>Role</dt><dd>Body copy, captions, the small footer paragraph.</dd>
+          <dt>Cuts</dt><dd>Regular 400. SemiBold 600 for emphasised phrases inside captions.</dd>
+          <dt>Source</dt><dd>Static fonts from @fontsource/crimson-text, files 400.css and 600.css.</dd>
+          <dt>Fallback</dt><dd>'Crimson Text', Georgia, serif</dd>
+        </dl>
+      </article>
+      <article class="face face--mono">
+        <div class="face__sample">DM Mono</div>
+        <dl class="mono">
+          <dt>Role</dt><dd>Labels, eyebrows, navigation, buttons, tabs, metadata, footer links.</dd>
+          <dt>Cuts</dt><dd>Regular 400 everywhere. Light 300 is loaded and defined as a 36px style but not placed anywhere yet.</dd>
+          <dt>Source</dt><dd>Static fonts from @fontsource/dm-mono, files 300.css and 400.css.</dd>
+          <dt>Fallback</dt><dd>'DM Mono', ui-monospace, SFMono-Regular, Menlo, monospace</dd>
+        </dl>
+      </article>
+    </div>
+    <div class="note">
+      <p><b>Cap-height trimming.</b> Headings, labels and button text are set with <span class="mono">text-box-trim: trim-both; text-box-edge: cap alphabetic</span>. The line box is cut to the cap height, so a value like "title top at 20px" means the top of the capitals sits 20px below the rule. Without this property the same text renders about 3px lower on 12px labels and more on large headings.</p>
+      <p><b>Smoothing.</b> Body text uses <span class="mono">-webkit-font-smoothing: antialiased</span>, which is what makes the 200-weight display face read as light as it does on macOS.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="rule"></div>
+    <p class="eyebrow mono"><span class="dot"></span>Type scale</p>
+    <h2>Sizes, leading and tracking</h2>
+    <p class="lede">Size over line-height in pixels, then letter-spacing. Class names are the ones in the code, in case the developer wants to grep for them.</p>
+    <div class="scale">
+      <div class="row">
+        <div class="row__spec mono"><strong>Display · .t-display</strong>Crimson Pro 200<br>130 / 110<br>tracking −4px<span class="row__use">Page titles on the inner pages, the homepage hero.</span></div>
+        <div class="sample s-display">Careers</div>
+      </div>
+      <div class="row">
+        <div class="row__spec mono"><strong>Heading 2 · .t-h2</strong>Crimson Pro 200<br>80 / 70<br>tracking −2px<span class="row__use">Section titles, product group titles, the closing "What could your team invent next?"</span></div>
+        <div class="sample s-h2">For the teams shaping what comes next.</div>
+      </div>
+      <div class="row">
+        <div class="row__spec mono"><strong>Heading 3 · .t-h3</strong>Crimson Pro 200<br>52 / 46<br>tracking −1px<span class="row__use">Names on people cards, wide story titles, article title, "Our Principles" and "Benefits &amp; perks".</span></div>
+        <div class="sample s-h3">Wiem Gharbi</div>
+      </div>
+      <div class="row">
+        <div class="row__spec mono"><strong>Heading 4 · .t-h4</strong>Crimson Pro 200<br>36 / 36<br>tracking −1px<span class="row__use">Accordion and workflow titles, story card titles, job titles, news headlines, security items.</span></div>
+        <div class="sample s-h4">Strict No-Data Sharing and Training Policy</div>
+      </div>
+      <div class="row">
+        <div class="row__spec mono"><strong>Lead · .t-lead</strong>Crimson Pro 200<br>30 / 32<br>tracking −1px<span class="row__use">Row titles on the founders' letter.</span></div>
+        <div class="sample s-lead">Security from Day One</div>
+      </div>
+      <div class="row">
+        <div class="row__spec mono"><strong>Quote mark · .fcard__quote-mark</strong>Crimson Pro 200<br>86 / 36<br>tracking −1px<span class="row__use">The opening quotation mark on team quote cards.</span></div>
+        <div class="sample s-quote">“</div>
+      </div>
+      <div class="row">
+        <div class="row__spec mono"><strong>Body · .t-body</strong>Crimson Text 400<br>18 / 26<br>tracking 0<span class="row__use">All running copy. Bold phrases inside captions switch to Crimson Text 600.</span></div>
+        <div class="sample s-body">Ankar works alongside your teams to connect existing systems, configure high-value workflows, onboard users and drive adoption. Capacity to assess <b>100 to 150 more disclosures annually</b> at 50% additional cost.</div>
+      </div>
+      <div class="row">
+        <div class="row__spec mono"><strong>Body, tight · .nav__case-title</strong>Crimson Text 400<br>18 / 20<br>tracking 0<span class="row__use">Titles on the two case-study cards inside the mega-menu.</span></div>
+        <div class="sample s-body-sm">Emerging technology<br>assessment success.</div>
+      </div>
+      <div class="row">
+        <div class="row__spec mono"><strong>Body, small · .footer__about</strong>Crimson Text 400<br>10 / 12<br>tracking 0<span class="row__use">The company paragraph in the footer columns.</span></div>
+        <div class="sample s-body-xs">Ankar is the AI operating system built for patent and R&amp;D professionals. We offer a comprehensive suite of AI-powered tools that can be tailored to your workflows.</div>
+      </div>
+      <div class="row">
+        <div class="row__spec mono"><strong>Label · .t-mono</strong>DM Mono 400<br>12 / 14<br>tracking 0<span class="row__use">Eyebrows with the blue dot, navigation, buttons, tabs, card labels and metadata, footer links, form fields. Sentence case. Inline links underline at 1px with a 2px offset; the current page in the nav underlines with a 3px offset.</span></div>
+        <div class="sample s-mono">Built for consequential R&amp;D &nbsp;·&nbsp; November 7, 2025 / 7 min read &nbsp;·&nbsp; <u>Note from our founders on security</u> &gt;</div>
+      </div>
+      <div class="row">
+        <div class="row__spec mono"><strong>Button · .btn</strong>DM Mono 400<br>12 / 14<br>40px tall, 20px side padding, 20px radius<span class="row__use">Every pill button and every tab. Hover lifts the button 1px and swaps the fill.</span></div>
+        <div class="sample"><span class="pill">Book a Demo</span></div>
+      </div>
+      <div class="row">
+        <div class="row__spec mono"><strong>Label, large · .t-mono-lg</strong>DM Mono 400<br>20 / 14<br>tracking 0<span class="row__use">The single "Book a Demo" button inside the footer's "Invention reinvented." line.</span></div>
+        <div class="sample s-mono-lg">Book a Demo</div>
+      </div>
+      <div class="row">
+        <div class="row__spec mono"><strong>Defined, unused</strong>Crimson Pro 200 · 140 / 140 · tracking −10px (.t-num)<br>DM Mono 300 · 36 / 14 (.t-mono-light)<span class="row__use">Both exist in the stylesheet from earlier layouts and are not placed on any page right now.</span></div>
+        <div class="sample s-mono-light">36 / 14 light</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rule"></div>
+    <p class="eyebrow mono"><span class="dot"></span>Colour</p>
+    <h2>Palette</h2>
+    <p class="lede">Solid colours first. Tokens are the CSS custom properties in base.css; the three lifecycle tones are set per card in the content data.</p>
+    <div class="swatches">
+      <div class="sw"><div class="sw__chip" style="background:#eef2f6"></div><div class="sw__name"><b>Ground</b><span class="mono">#EEF2F6 · --bg</span></div><div class="sw__use">Page background. Also the ink on the dark footer and on photo cards, where it is called --footer-ink.</div></div>
+      <div class="sw"><div class="sw__chip" style="background:#000000"></div><div class="sw__name"><b>Ink</b><span class="mono">#000000 · --ink</span></div><div class="sw__use">All text on light surfaces, the black button, active tabs, the lines inside the mega-menu.</div></div>
+      <div class="sw"><div class="sw__chip" style="background:#ffffff"></div><div class="sw__name"><b>Paper</b><span class="mono">#FFFFFF · --paper</span></div><div class="sw__use">Text on photos and dark panels, the white button, hover fill of the blue and glass buttons.</div></div>
+      <div class="sw"><div class="sw__chip" style="background:#cdd9e5"></div><div class="sw__name"><b>Rule</b><span class="mono">#CDD9E5 · --rule</span></div><div class="sw__use">Every 1px divider on light ground. Doubles as the muted text colour.</div></div>
+      <div class="sw"><div class="sw__chip" style="background:#bcccdc"></div><div class="sw__name"><b>Rule, footer</b><span class="mono">#BCCCDC</span></div><div class="sw__use">The column dividers in the footer, where the columns sit at 30% opacity.</div></div>
+      <div class="sw"><div class="sw__chip" style="background:#94b9eb"></div><div class="sw__name"><b>Blue</b><span class="mono">#94B9EB · --blue</span></div><div class="sw__use">The accent. Eyebrow dots, the blue "Explore the platform" button, the take-over panel behind the Antheros story.</div></div>
+      <div class="sw"><div class="sw__chip" style="background:#182553"></div><div class="sw__name"><b>Footer</b><span class="mono">#182553</span></div><div class="sw__use">Solid ground of the footer under its gradient image.</div></div>
+      <div class="sw"><div class="sw__chip" style="background:#0d1d4a"></div><div class="sw__name"><b>Hero fallback</b><span class="mono">#0D1D4A</span></div><div class="sw__use">Painted behind the inner-page hero while its gradient photo loads.</div></div>
+      <div class="sw"><div class="sw__chip" style="background:#ba484f"></div><div class="sw__name"><b>Explore</b><span class="mono">#BA484F · --red</span></div><div class="sw__use">Lifecycle card 1 on the homepage.</div></div>
+      <div class="sw"><div class="sw__chip" style="background:#2f3d86"></div><div class="sw__name"><b>Invent &amp; Experiment</b><span class="mono">#2F3D86 · --indigo</span></div><div class="sw__use">Lifecycle card 2.</div></div>
+      <div class="sw"><div class="sw__chip" style="background:#162247"></div><div class="sw__name"><b>Protect</b><span class="mono">#162247 · --navy</span></div><div class="sw__use">Lifecycle card 3.</div></div>
+      <div class="sw"><div class="sw__chip" style="background:#894c6b"></div><div class="sw__name"><b>Plum</b><span class="mono">#894C6B · --purple</span></div><div class="sw__use">Declared as a token, not used on any surface yet.</div></div>
+    </div>
+
+    <h3>Gradients</h3>
+    <p>The large colour fields are photographs of gradients, not CSS gradients. They live in <span class="mono">public/assets/images/gradients/</span>: <span class="mono">gradient-hero.jpg</span> behind every inner-page hero, <span class="mono">gradient-2-landscape.jpg</span> inside the brand box on Resources and the security panel, <span class="mono">gradient-1.jpg</span>, <span class="mono">gradient-2.jpg</span> and <span class="mono">gradient-3.jpg</span> behind the homepage hero, footer and closing section. Each carries a film-grain overlay from the noise texture at 15% with the overlay blend mode.</p>
+
+    <h3>Glass, shades and overlays</h3>
+    <p class="lede">Translucent values, all over photos or the page ground.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Where</th><th>Fill</th><th>Blur</th><th>Highlight</th></tr></thead>
+        <tbody>
+          <tr><td>Navigation bar, mega-menu, tabs, filter pills, the email field</td><td><span class="mono">rgba(255,255,255,.5)</span></td><td>3px (10px when the mega-menu is open)</td><td>inset 0 2px 2px and inset 0 −2px 2px <span class="mono">rgba(255,255,255,.4)</span></td></tr>
+          <tr><td>Glass buttons on photos and gradients</td><td><span class="mono">rgba(255,255,255,.3)</span>, hover <span class="mono">.38</span></td><td>1.5px</td><td>same inset pair</td></tr>
+          <tr><td>Interface screenshot frames on the product page</td><td><span class="mono">rgba(255,255,255,.49)</span></td><td>1.5px</td><td>same inset pair</td></tr>
+          <tr><td>Footer "Book a Demo" pill</td><td><span class="mono">rgba(222,229,237,.3)</span>, hover <span class="mono">#FFFFFF</span></td><td>1.5px</td><td>same inset pair</td></tr>
+          <tr><td>Hairlines on photos and dark panels</td><td><span class="mono">rgba(255,255,255,.4)</span>, in the mega-menu cards <span class="mono">rgba(238,242,246,.4)</span></td><td></td><td></td></tr>
+          <tr><td>Photo shade, card open</td><td><span class="mono">rgba(0,0,0,.2)</span>; people cards <span class="mono">.1</span>; expanded bio <span class="mono">.7</span>; mega-menu cards <span class="mono">.4</span> and <span class="mono">.6</span></td><td></td><td></td></tr>
+          <tr><td>Photo gradient, right edge</td><td><span class="mono">rgba(0,0,0,.5)</span> to transparent over the last 30% of the card, 270°</td><td></td><td></td></tr>
+          <tr><td>Photo gradient, bottom</td><td><span class="mono">rgba(0,0,0,.5)</span> at 20% to transparent at 40%, 0°</td><td></td><td></td></tr>
+          <tr><td>Mega-menu card vignette</td><td><span class="mono">#000</span> to transparent over the top 20% and bottom 20%</td><td></td><td></td></tr>
+          <tr><td>Hover on text links</td><td>opacity <span class="mono">.6</span>, or <span class="mono">rgba(0,0,0,.6)</span> inside the mega-menu</td><td></td><td></td></tr>
+          <tr><td>Inactive pager dots</td><td><span class="mono">rgba(0,0,0,.2)</span>, active <span class="mono">#000</span></td><td></td><td></td></tr>
+          <tr><td>Input placeholder</td><td><span class="mono">rgba(0,0,0,.3)</span></td><td></td><td></td></tr>
+          <tr><td>Photos at rest</td><td>grayscale(1); colour returns on the open card over 0.7s</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="rule"></div>
+    <p class="eyebrow mono"><span class="dot"></span>Constants worth knowing</p>
+    <h2>Shape and rhythm</h2>
+    <ul>
+      <li>Container 1280px inside 80px gutters on the 1440px artboard. Sections are 120px apart, measured from the previous content to the next divider.</li>
+      <li>Corner radius 30px on every large panel, card and glass bar; 20px on buttons and tabs; 10px on the mega-menu cards.</li>
+      <li>Eyebrow dot 8px, 10px gap to its label. Section head: divider, eyebrow 20px below, title 58px below.</li>
+      <li>Folder cards are 480px tall with a 25px tab on the left; labels read bottom to top inside the tab.</li>
+      <li>Easing: <span class="mono">cubic-bezier(.22,1,.36,1)</span> for arrivals, <span class="mono">cubic-bezier(.65,0,.35,1)</span> for in-out moves.</li>
+    </ul>
+  </section>
+</div>

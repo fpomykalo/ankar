@@ -110,16 +110,3 @@
   background-size: 512px 512px;
 }
 
-/* --- arrows (9x17 chevrons from Figma) --------------------------------------- */
-.arrow {
-  display: inline-flex;
-  width: 24px;
-  height: 24px;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.3s var(--ease-out);
-}
-.arrow svg { width: 10px; height: 18px; }
-.arrow:hover { transform: translateX(2px); }
-.arrow--prev:hover { transform: translateX(-2px); }

@@ -53,44 +53,71 @@ export const pillGroups = [
   },
 ];
 
+/** Lifecycle cards. Each open card: title, subtitle (its own width), rule, body (its own width),
+ *  the "View more details" link to the product group, and a 412 × 380 grid of workflow tiles at
+ *  474/60 (tile rects from Figma, card-local). A tile links to its workflow on the product page. */
 export const lifecycle = [
   {
-    label: 'Sup.E. — 1',
+    label: 'Lifecycle — 1',
+    slug: 'explore',
     color: '#ba484f',
-    // Figma card 265 is titled "Experiment" but its copy is the landscape/whitespace phase.
-    // Using "Explore" so the four phases are distinct. Flagged in the handoff notes.
     title: 'Explore',
-    subtitle: 'See the landscape before choosing a direction.',
+    subtitle: 'See the landscape before<br>choosing a direction.',
+    subWidth: 319,
     body: 'Connect internal knowledge with scientific literature, patents, competitive activity and adjacent fields to uncover whitespace, emerging technologies and new routes forward.',
+    bodyWidth: 368,
     listTitle: 'Workflows:',
-    list: ['Technology landscaping', 'Whitespace analysis', 'Competitive and technical intelligence', 'Emerging-technology monitoring', 'Opportunity discovery'],
+    list: ['Portfolio Mapping', 'Landscape Monitoring', 'Technology Scouting', 'Whitespace analysis'],
+    tiles: [
+      { n: '1.1', title: 'Portfolio<br>Mapping', rect: [474, 60, 184, 187] },
+      { n: '1.2', title: 'Landscape<br>Monitoring', rect: [668, 60, 218, 187] },
+      { n: '1.3', title: 'Technology<br>Scouting', rect: [474, 257, 215, 183] },
+      { n: '1.4', title: 'Whitespace<br>analysis', rect: [699, 257, 187, 183] },
+    ],
   },
   {
-    label: 'Sup.E. — 2',
-    color: '#894c6b',
-    title: 'Invent',
-    subtitle: 'Turn possibilities into stronger, testable concepts.',
-    body: 'Bring relevant science, prior work and alternative approaches into the creative process so teams can develop concepts with more context and spend more time testing the most promising ideas.',
-    listTitle: 'Potential workflows:',
-    list: ['Concept generation', 'Alternative approach generation', 'Design-around exploration', 'Technical problem solving', 'Cross-domain inspiration'],
-  },
-  {
-    label: 'Sup.E. — 3',
+    label: 'Lifecycle — 2',
+    slug: 'invent',
     color: '#2f3d86',
-    title: 'Experiment',
-    subtitle: 'Make every iteration compound.',
-    body: 'Preserve experimental context, decisions, results and failed approaches so teams can learn across projects, avoid repeating work and sharpen the next attempt.',
-    listTitle: 'Potential workflows:',
-    list: ['Experimental knowledge capture', 'Lab knowledge bases', 'Result synthesis', 'Failure analysis', 'Cross-project learning'],
+    title: 'Invent &amp;<br>Experiment',
+    openTitle: 'Invent &amp; Experiment',
+    subtitle: 'Make every iteration compound by turning possibilities into stronger, testable concepts.',
+    subWidth: 404,
+    body: 'Bring relevant science, prior work and alternative approaches into the creative process so teams can develop concepts with more context and spend more time testing the most promising ideas.',
+    bodyWidth: 413,
+    listTitle: 'Workflows:',
+    list: ['Concept Generation', 'Reformulation', 'Result synthesis', 'Knowledge Capture', 'Design acceleration', 'Stage Gate Preparation', 'Experiment design'],
+    tiles: [
+      { n: '2.1', title: 'Concept<br>Generation', rect: [474, 60, 167, 120] },
+      { n: '2.2', title: 'Reformulation', rect: [651, 60, 235, 120] },
+      { n: '2.3', title: 'Result<br>synthesis', rect: [474, 190, 113, 120] },
+      { n: '2.4', title: 'Knowledge<br>Capture', rect: [597, 190, 166, 120] },
+      { n: '2.5', title: 'Design<br>acceleration', rect: [773, 190, 113, 120] },
+      { n: '2.6', title: 'Stage Gate<br>Preparation', rect: [474, 320, 235, 120] },
+      { n: '2.7', title: 'Experiment<br>design', rect: [719, 320, 167, 120] },
+    ],
   },
   {
-    label: 'Sup.E. — 4',
+    label: 'Lifecycle — 3',
+    slug: 'protect',
     color: '#162247',
     title: 'Protect',
     subtitle: 'Turn technical progress into defensible value.',
-    body: 'Identify inventions earlier, evaluate what is worth protecting and move from complex R&D to stronger patent assets with less wasted expert time.',
-    listTitle: 'Potential workflows:',
-    list: ['Invention capture', 'Patentability and novelty analysis', 'Invention evaluation', 'Patent drafting', 'Portfolio and protection decisions'],
+    subWidth: 351,
+    body: 'Identify inventions earlier, evaluate what is worth protecting and move from complex R&amp;D to stronger patent assets with less wasted expert time.',
+    bodyWidth: 362,
+    listTitle: 'Workflows:',
+    list: ['Prosecution', 'Patent Drafting', 'Invalidity', 'Infringement Detection', 'Invention Disclosure', 'Freedom to Operate', 'Continuation', 'Portfolio Pruning'],
+    tiles: [
+      { n: '3.1', title: 'Prosecution', rect: [474, 60, 113, 120] },
+      { n: '3.2', title: 'Patent<br>Drafting', rect: [597, 60, 166, 120] },
+      { n: '3.3', title: 'Invalidity', rect: [773, 60, 113, 120] },
+      { n: '3.4', title: 'Infringement<br>Detection', rect: [474, 190, 235, 120] },
+      { n: '3.5', title: 'Invention<br>Disclosure', rect: [719, 190, 167, 120] },
+      { n: '3.6', title: 'Freedom<br>to Operate', rect: [474, 320, 113, 120] },
+      { n: '3.7', title: 'Continuation', rect: [597, 320, 166, 120] },
+      { n: '3.8', title: 'Portfolio<br>Pruning', rect: [773, 320, 113, 120] },
+    ],
   },
 ];
 
@@ -98,12 +125,13 @@ export const industries = [
   {
     label: 'Case Study — 1',
     title: 'Life sciences',
+    cta: 'Watch the Antheros story',
     image: `${BASE}/assets/images/industries/life-sciences.jpg`,
-    caption: 'Capacity to assess or strengthen <b>100-150 more disclosures annually</b> at 50% adoption.',
+    caption: 'A client used Ankar to generate a targeted genus across 648 compounds, closely matching the result of 3+ hours of manual expert analysis.',
   },
   {
     label: 'Case Study — 2',
-    title: 'Aerospace and<br>defense',
+    title: 'Aeronautics and<br>defense',
     image: `${BASE}/assets/images/industries/aerospace.jpg`,
     caption: 'A client used Ankar to explore <b>4 distinct invention directions in a single session</b>, selecting <b>3 to take forward</b>.',
   },
@@ -134,8 +162,6 @@ export const partnerships = [
   { n: '2.', title: 'Workflow configuration', body: 'Every organization works differently. We configure Ankar around your templates, your standards, and the judgement of your most experienced people. The more your teams use it, the more precisely the platform reflects how you work. That’s how the value compounds.' },
   { n: '3.', title: 'Onboarding and enablement', body: 'Adoption is central to our partnership. We onboard every user on their real work Ankar feels like home from the first session. This is how we ensure organizational change sticks after the pilot is over.' },
   { n: '4.', title: 'Forward-deployed support', body: 'We deploy alongside you to ensure we truly understand your organization. Our Deployment Strategists listen, synthesize and solve your challenges — configuring, fixing, and feeding what we learn straight into your product experience. When your usage surfaces a need, we can ship it fast.' },
-  { n: '5.', title: 'Hands-on customer success', body: 'Regular working sessions keep your teams learning from each other while you sharpen the platform to adapt to your ways of working. The experience will feel customized, never generic.' },
-  { n: '6.', title: 'Ongoing product partnership', body: 'We have a clear view of where this platform is going. Deploying with us means your workflows directly inform that roadmap. Through aggregated partner feedback, we apply our team’s deep product and engineering experience to build the platform our partners need.' },
 ];
 
 const basePeople = [
@@ -149,9 +175,16 @@ const basePeople = [
   {
     name: 'Tamar<br>Gomez',
     image: `${BASE}/assets/images/people/tamar-gomez.avif`,
-    role: 'Co-Founder<br>Past: Palantir, Helsing',
-    logos: ['helsing', 'palantir'],
-    bio: 'Tamar Gomez is Co-Founder of Ankar, an AI platform helping R&D teams make better technology decisions and accelerate innovation.<br><br>She spent nearly a decade building and deploying advanced AI software for enterprises and governments at Palantir and Helsing, working at the frontier of science, technology and complex decision-making. Tamar holds a PhD in Game Theory from Imperial College London.<br><br>Through that work, she saw first-hand that while technical progress was accelerating, the systems behind innovation remained fragmented, manual and disconnected. She co-founded Ankar in 2024 to change that.<br><br>Today, Ankar connects an organisation’s internal R&D knowledge with external technical change, AI models and purpose-built workflows, helping researchers and innovators explore new possibilities, develop stronger ideas and build on everything their organisation has learned before.',
+    role: 'Co-Founder<br>Past: Palantir',
+    logos: ['palantir'],
+    bio: 'Tamar Gomez is Co-Founder of Ankar, an AI platform helping R&D teams make better technology decisions and accelerate innovation.<br><br>She spent nearly a decade building and deploying advanced AI software for enterprises and governments at Palantir, working at the frontier of science, technology and complex decision-making. Tamar holds a PhD in Game Theory from Imperial College London.<br><br>Through that work, she saw first-hand that while technical progress was accelerating, the systems behind innovation remained fragmented, manual and disconnected. She co-founded Ankar in 2024 to change that.<br><br>Today, Ankar connects an organisation’s internal R&D knowledge with external technical change, AI models and purpose-built workflows, helping researchers and innovators explore new possibilities, develop stronger ideas and build on everything their organisation has learned before.',
+  },
+  {
+    name: 'Nick<br>Denman',
+    image: `${BASE}/assets/images/people/nick-denman.jpg`,
+    role: 'Head of Engineering<br>Past: Palantir',
+    logos: ['palantir'],
+    bio: 'With a background in Computer Science, Nick spent four years at Palantir, working on large-scale data engineering problems and leading the NHS R&D hub. There, he developed new technology for hospitals that was used nationwide, bringing new technical capabilities into some of the UK’s most complex operational environments.<br><br>This gave him a first-hand view of how to build products that turn complex technical and commercial information into better decisions at scale.',
   },
   {
     name: 'Harm<br>van der Heijden',
@@ -278,7 +311,12 @@ const advisors = [
   },
 ];
 
-export const people = [...basePeople, ...advisors].map((p, i) => ({ ...p, label: `People — ${i + 1}` }));
+// the strip shows these eight, in this order; the other entries above stay on file but are not shown
+const ORDER = ['Wiem', 'Tamar', 'Nick', 'Jean-Christophe', 'Giulia', 'Robert', 'Helene', 'Dan', 'Kimiya'];
+const all = [...basePeople, ...advisors];
+export const people = ORDER
+  .map((n) => all.find((p) => p.name.startsWith(n)))
+  .map((p, i) => ({ ...p, label: `People — ${i + 1}` }));
 
 export const quotes = [
   {

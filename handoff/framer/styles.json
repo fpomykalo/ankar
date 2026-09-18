@@ -1,0 +1,54 @@
+{
+  "fonts": {
+    "display": { "family": "Crimson Pro", "weights": [200], "source": "Google Fonts", "fallback": "Georgia, serif" },
+    "body": { "family": "Crimson Text", "weights": [400, 600], "source": "Google Fonts", "fallback": "Georgia, serif" },
+    "mono": { "family": "DM Mono", "weights": [400], "source": "Google Fonts", "fallback": "ui-monospace, Menlo, monospace" }
+  },
+  "textStyles": [
+    { "name": "Display", "font": "Crimson Pro", "weight": 200, "size": 130, "lineHeight": 110, "letterSpacing": -4, "tag": "h1", "use": "Page titles, homepage hero" },
+    { "name": "Heading 2", "font": "Crimson Pro", "weight": 200, "size": 80, "lineHeight": 70, "letterSpacing": -2, "tag": "h2", "use": "Section titles, product group titles, closing title" },
+    { "name": "Heading 3", "font": "Crimson Pro", "weight": 200, "size": 52, "lineHeight": 46, "letterSpacing": -1, "tag": "h3", "use": "People names, wide story titles, article title" },
+    { "name": "Heading 4", "font": "Crimson Pro", "weight": 200, "size": 36, "lineHeight": 36, "letterSpacing": -1, "tag": "h3", "use": "Accordion and workflow titles, story cards, jobs, news, security items" },
+    { "name": "Lead", "font": "Crimson Pro", "weight": 200, "size": 30, "lineHeight": 32, "letterSpacing": -1, "tag": "h3", "use": "Row titles on the founders' letter" },
+    { "name": "Quote mark", "font": "Crimson Pro", "weight": 200, "size": 86, "lineHeight": 36, "letterSpacing": -1, "tag": "p", "use": "Opening quote glyph on team cards" },
+    { "name": "Body", "font": "Crimson Text", "weight": 400, "size": 18, "lineHeight": 26, "letterSpacing": 0, "tag": "p", "use": "All running copy" },
+    { "name": "Body bold", "font": "Crimson Text", "weight": 600, "size": 18, "lineHeight": 26, "letterSpacing": 0, "tag": "p", "use": "Emphasised phrases inside captions" },
+    { "name": "Body tight", "font": "Crimson Text", "weight": 400, "size": 18, "lineHeight": 20, "letterSpacing": 0, "tag": "p", "use": "Mega-menu case-study card titles" },
+    { "name": "Body small", "font": "Crimson Text", "weight": 400, "size": 10, "lineHeight": 12, "letterSpacing": 0, "tag": "p", "use": "Footer company paragraph" },
+    { "name": "Label", "font": "DM Mono", "weight": 400, "size": 12, "lineHeight": 14, "letterSpacing": 0, "tag": "p", "use": "Eyebrows, nav, buttons, tabs, card labels, metadata, footer links, form fields. Sentence case" },
+    { "name": "Label large", "font": "DM Mono", "weight": 400, "size": 20, "lineHeight": 14, "letterSpacing": 0, "tag": "p", "use": "Footer Book a Demo pill" }
+  ],
+  "colorStyles": [
+    { "name": "Ground", "hex": "#EEF2F6", "use": "Page background; ink on the footer and on photo cards" },
+    { "name": "Ink", "hex": "#000000", "use": "Text on light surfaces, black button, active tabs" },
+    { "name": "Paper", "hex": "#FFFFFF", "use": "Text on photos and dark panels, white button, hover fills" },
+    { "name": "Rule", "hex": "#CDD9E5", "use": "1px dividers on light ground; muted text" },
+    { "name": "Rule footer", "hex": "#BCCCDC", "use": "Footer column dividers" },
+    { "name": "Blue", "hex": "#94B9EB", "use": "Accent: eyebrow dots, blue button, take-over panel" },
+    { "name": "Footer", "hex": "#182553", "use": "Solid ground under the footer gradient" },
+    { "name": "Hero fallback", "hex": "#0D1D4A", "use": "Behind the inner-page hero while the gradient loads" },
+    { "name": "Explore", "hex": "#BA484F", "use": "Lifecycle card 1" },
+    { "name": "Invent", "hex": "#2F3D86", "use": "Lifecycle card 2" },
+    { "name": "Protect", "hex": "#162247", "use": "Lifecycle card 3" },
+    { "name": "Plum", "hex": "#894C6B", "use": "Reserved, unused" },
+    { "name": "Glass fill", "rgba": "rgba(255,255,255,0.5)", "use": "Nav bar, mega-menu, tabs, filter pills, email field (blur 3px, 10px with the menu open)" },
+    { "name": "Glass button", "rgba": "rgba(255,255,255,0.3)", "use": "Glass buttons on photos and gradients (blur 1.5px); hover 0.38" },
+    { "name": "Glass frame", "rgba": "rgba(255,255,255,0.49)", "use": "Product screenshot frames (blur 1.5px)" },
+    { "name": "Glass highlight", "rgba": "rgba(255,255,255,0.4)", "use": "Inset 0 2px 2px and inset 0 -2px 2px on every glass surface; hairlines on photos" },
+    { "name": "Photo shade closed", "rgba": "rgba(0,0,0,0.7)", "use": "Closed folder cards" },
+    { "name": "Photo shade open", "rgba": "rgba(0,0,0,0.2)", "use": "Open folder cards; people cards 0.1" },
+    { "name": "Hover fade", "rgba": "rgba(0,0,0,0.6)", "use": "Text links on hover (or opacity 0.6)" },
+    { "name": "Placeholder", "rgba": "rgba(0,0,0,0.3)", "use": "Input placeholder" },
+    { "name": "Dot inactive", "rgba": "rgba(0,0,0,0.2)", "use": "Pager dots" }
+  ],
+  "layout": {
+    "artboard": 1440,
+    "container": 1280,
+    "gutter": 80,
+    "sectionGap": 120,
+    "radius": { "panel": 30, "button": 20, "menuCard": 10 },
+    "eyebrow": { "dot": 8, "gap": 10, "belowRule": 20, "titleBelowRule": 58 },
+    "folderCard": { "height": 480, "tab": [25, 180], "closedWidth": 212, "openWidths": { "story": 452, "industry": 557, "person": 744, "lifecycle": 931, "wide": 1305 } },
+    "easing": { "out": "cubic-bezier(0.22, 1, 0.36, 1)", "inOut": "cubic-bezier(0.65, 0, 0.35, 1)" }
+  }
+}

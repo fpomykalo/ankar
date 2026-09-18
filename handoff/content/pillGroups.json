@@ -1,0 +1,49 @@
+[
+  {
+    "title": "Internal R&D knowledge",
+    "items": [
+      "Experimental and laboratory data",
+      "Technical reports and documents",
+      "PLM and product records",
+      "Transcripts and meeting knowledge",
+      "User and customer feedback",
+      "Existing inventions and IP",
+      "Previous concepts and failed approaches",
+      "Expert knowledge and business rules"
+    ]
+  },
+  {
+    "title": "External information",
+    "items": [
+      "Scientific and technical publications",
+      "Prior art and patent data",
+      "Competitive and technology signals",
+      "Consumer and market trends",
+      "Geopolitical context",
+      "Academic networks",
+      "Partners, skills and open-innovation ecosystems"
+    ]
+  },
+  {
+    "title": "Models and workflows",
+    "items": [
+      "AI models",
+      "Technical reasoning",
+      "R&D-specific tools",
+      "Collaborative workflows",
+      "Agentic actions"
+    ]
+  },
+  {
+    "title": "Outputs",
+    "items": [
+      "Technical landscapes",
+      "New hypotheses and concepts",
+      "Alternative approaches",
+      "Experimental learning",
+      "Opportunity evaluations",
+      "Invention capture",
+      "Patent and IP outputs"
+    ]
+  }
+]

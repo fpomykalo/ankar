@@ -1,7 +1,9 @@
 import { gsap, lenis } from '../lib/scroll.js';
-import { industries, people, quotes } from '../data/content.js';
+import { industries, lifecycle, people, quotes } from '../data/content.js';
+import { isMobile } from '../lib/mobile.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); // product page item ids
 
 const LOGO_SIZES = {
   palantir: [92, 22], helsing: [97, 23], nlo: [55, 27], gsk: [70, 21], 'astra-zeneca': [122, 31],
@@ -21,7 +23,7 @@ function bindAccordion(container, onOpen) {
     cards.forEach((c) => c.classList.toggle('is-open', c === card));
     onOpen?.(cards.indexOf(card));
   };
-  cards.forEach((c) => c.addEventListener('mouseenter', () => open(c)));
+  if (!isMobile()) cards.forEach((c) => c.addEventListener('mouseenter', () => open(c)));
   return open;
 }
 
@@ -38,6 +40,7 @@ export function initIndustries() {
       <div class="fcard__line"></div>
       <div class="fcard__open">
         <h3 class="t-h3 fcard__title">${c.openTitle || c.title.replace(/<br>/g, ' ')}</h3>
+        ${c.cta ? `<a class="btn btn--glass fcard__cta" href="#" data-ls-open><span>${c.cta}</span></a>` : ''}
         <div class="fcard__line fcard__line--bottom"></div>
         <p class="t-body fcard__caption">${c.caption}</p>
       </div>
@@ -47,10 +50,37 @@ export function initIndustries() {
   bindAccordion(root);
 }
 
-// --- bios (one viewport-wide strip, paged by 4; click a card for the full bio) -----
+// --- lifecycle (three coloured folder cards, hover opens) ------------------------
+export function initLifecycleCards() {
+  const root = document.getElementById('lifecycle-folders');
+  if (!root) return;
+  root.innerHTML = lifecycle.map((c, i) => `
+    <article class="fcard folder lcard${i === 0 ? ' is-open' : ''}" data-slug="${c.slug}" style="--card:${c.color}">
+      <div class="lcard__bg"></div>
+      <div class="fcard__ui">
+      ${label(c.label)}
+      <div class="fcard__line"></div>
+      <div class="fcard__open">
+        <h3 class="t-h3 lcard__title">${c.openTitle || c.title}</h3>
+        <p class="t-h4 lcard__sub" style="width:${c.subWidth}px">${c.subtitle}</p>
+        <div class="lcard__rule"></div>
+        <p class="t-body lcard__body" style="width:${c.bodyWidth}px">${c.body}</p>
+        <a class="t-mono lcard__more" href="${BASE}/product/#${c.slug}"><u>View more details &gt;</u></a>
+        ${c.tiles.map((t) => `
+        <div class="ltile" style="left:${t.rect[0]}px;top:${t.rect[1]}px;width:${t.rect[2]}px;height:${t.rect[3]}px">
+          <span class="t-mono ltile__n">${t.n}</span>
+          <span class="t-body ltile__title">${t.title}</span>
+        </div>`).join('')}
+      </div>
+      <div class="fcard__closed"><h3 class="t-h3 fcard__vtitle">${c.title}</h3></div>
+      </div>
+    </article>`).join('');
+  bindAccordion(root);
+}
+
+// --- bios (one viewport-wide strip, paged by 4 with dots; click a card for the full bio) -----
 export function initBios() {
   const track = document.getElementById('bios-track');
-  const counter = document.getElementById('bios-counter');
   const dotsEl = document.getElementById('bios-dots');
   if (!track) return;
   const PER = 4;
@@ -82,7 +112,7 @@ export function initBios() {
   cards.forEach((c) => {
     const full = c.querySelector('.fcard__full');
     const thumb = c.querySelector('.fcard__thumb');
-    const trackH = 253;
+    const trackH = isMobile() ? 322 : 253; // the bar's height (Figma: 253 on desktop, 342 on the phone card)
     const update = () => {
       const ratio = full.clientHeight / full.scrollHeight;
       const h = ratio >= 1 ? trackH : Math.max(30, Math.round(trackH * ratio));
@@ -107,9 +137,24 @@ export function initBios() {
     thumb.addEventListener('pointerup', endThumb);
     thumb.addEventListener('pointercancel', endThumb);
     // while the pointer is over an open bio the page scroller pauses, so the wheel only moves the text
+    if (isMobile()) return; // the phone scrolls natively: stopping Lenis would lock the page
     c.addEventListener('mouseenter', () => { if (c.classList.contains('is-expanded')) lenis.stop(); });
     c.addEventListener('mouseleave', () => lenis.start());
   });
+  if (isMobile()) { // the strip scrolls natively; a tap on a card opens its full bio, another closes it; one dot per card follows the scroll
+    cards.forEach((c) => c.addEventListener('click', (e) => {
+      if (e.target.closest('.fcard__full')) return;
+      const open = c.classList.toggle('is-expanded');
+      c.toggleAttribute('data-lenis-prevent', open);
+      c.querySelector('.fcard__full').dispatchEvent(new Event('scroll'));
+    }));
+    dotsEl.innerHTML = cards.map((_, i) => `<button class="bios__dot${i === 0 ? ' is-active' : ''}" type="button" aria-label="Person ${i + 1}"></button>`).join('');
+    const dots = Array.from(dotsEl.children);
+    const pitch = () => cards[0].offsetWidth - 25;
+    dots.forEach((d, i) => d.addEventListener('click', () => track.scrollTo({ left: i * pitch(), behavior: 'smooth' })));
+    track.addEventListener('scroll', () => { const i = Math.round(track.scrollLeft / pitch()); dots.forEach((d, j) => d.classList.toggle('is-active', j === i)); }, { passive: true });
+    return;
+  }
   const wheelDelta = (e) => (e.deltaMode === 1 ? e.deltaY * 40 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY);
   // document-level, capture phase: nothing else can see the wheel before the bio does
   document.addEventListener('wheel', (e) => {
@@ -140,7 +185,6 @@ export function initBios() {
     active = (i + n) % n;
     cards.forEach((c, j) => { c.classList.toggle('is-open', j === active); if (j !== active) { c.classList.remove('is-expanded'); c.removeAttribute('data-lenis-prevent'); } });
     lenis.start();
-    counter.textContent = `${active + 1} / ${n}`;
     const p = pageOf(active);
     if (paging && p !== page) showPage(p);
     // keep the page anchored when a card that sits before it (off to the left) just shrank
@@ -148,8 +192,6 @@ export function initBios() {
   }
 
   cards.forEach((c, i) => c.addEventListener('mouseenter', () => { if (i !== active && !dragging) setActive(i, { paging: false }); }));
-  document.getElementById('bios-prev')?.addEventListener('click', () => setActive(active - 1));
-  document.getElementById('bios-next')?.addEventListener('click', () => setActive(active + 1));
   dots.forEach((d, p) => d.addEventListener('click', () => { showPage(p); }));
 
   // drag / horizontal wheel moves the strip (snapping to pages); a plain click toggles the full bio
