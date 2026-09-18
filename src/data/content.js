@@ -184,7 +184,7 @@ const basePeople = [
     image: `${BASE}/assets/images/people/nick-denman.jpg`,
     role: 'Head of Engineering<br>Past: Palantir',
     logos: ['palantir'],
-    bio: 'Nick Denman is Head of Engineering at Ankar, leading the team that builds the platform.<br><br>He joined Ankar from Palantir, where he built and deployed software for enterprises and governments. Full bio to come.', // placeholder until the real bio arrives
+    bio: 'With a background in Computer Science, Nick spent four years at Palantir, working on large-scale data engineering problems and leading the NHS R&D hub. There, he developed new technology for hospitals that was used nationwide, bringing new technical capabilities into some of the UK’s most complex operational environments.<br><br>This gave him a first-hand view of how to build products that turn complex technical and commercial information into better decisions at scale.',
   },
   {
     name: 'Harm<br>van der Heijden',
