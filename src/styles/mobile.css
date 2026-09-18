@@ -138,8 +138,7 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 .ltile:nth-last-of-type(7) { bottom: 358px; }
 .ltile:nth-last-of-type(8) { bottom: 403px; }
 .ltile__n { left: 0; top: 9px; }
-.ltile__title { left: 38px; top: 9px; bottom: auto; font: 400 16px/22px var(--font-body); } /* Figma mobile rows: 16px serif */
-.ltile__icon { left: auto; right: 0; top: 9px; width: auto; height: 13px; max-width: 22px; transform: none; object-fit: contain; }
+.ltile__title { left: 38px; right: 0; top: 9px; transform: none; text-align: left; font: 400 16px/22px var(--font-body); } /* Figma mobile rows: 16px serif */
 
 /* industries card: title, the story button, the caption at the bottom */
 .fcard__cta { position: relative; left: 0; top: 0; margin: 20px 0 0 45px; }

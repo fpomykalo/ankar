@@ -69,8 +69,7 @@ export function initLifecycleCards() {
         ${c.tiles.map((t) => `
         <div class="ltile" style="left:${t.rect[0]}px;top:${t.rect[1]}px;width:${t.rect[2]}px;height:${t.rect[3]}px">
           <span class="t-mono ltile__n">${t.n}</span>
-          <img class="ltile__icon" src="${BASE}/assets/svg/icons/${t.icon}.svg" alt="" />
-          <span class="t-mono ltile__title">${t.title}</span>
+          <span class="t-body ltile__title">${t.title}</span>
         </div>`).join('')}
       </div>
       <div class="fcard__closed"><h3 class="t-h3 fcard__vtitle">${c.title}</h3></div>

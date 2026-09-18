@@ -6,7 +6,9 @@ export const isMobile = () => mq.matches;
 export function stripBreaks(root = document) {
   if (!isMobile()) return;
   root.querySelectorAll('br').forEach((br) => {
-    if (br.parentElement.closest('.t-mono')) return; // mono labels (roles, bylines) keep their lines
+    // mono labels (roles, bylines) keep their lines; the lifecycle tile titles are the exception,
+    // since the phone lays them out as single-line rows
+    if (br.parentElement.closest('.t-mono') && !br.parentElement.closest('.ltile__title')) return;
     const skip = (n, dir) => { while (n && n.nodeType === 3 && !n.textContent.trim()) n = n[dir]; return n; }; // whitespace between two breaks
     if (skip(br.previousSibling, 'previousSibling')?.nodeName === 'BR' || skip(br.nextSibling, 'nextSibling')?.nodeName === 'BR') return;
     br.replaceWith(' ');
